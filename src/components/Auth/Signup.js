@@ -5,47 +5,61 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
       rePassword: '',
     }
 
-    this.onChange = this.onChange.bind(this);
+    this.change = this.change.bind(this);
   }
 
-  onChange({ target }) {
+  change({ target }) {
     const nextState = {};
     nextState[target.name] = target.value;
     this.setState(nextState);
+  }
+
+  submit(e) {
+    e.preventDefault();
+    if (this.state.password && this.state.password === this.state.rePassword) {
+      this.props.signup(this.state.email, this.state.password);
+      this.setState({ email: '', password: '', rePassword: '' });
+    } else {
+      console.log('passwords don\'t match');
+    }
   }
 
   render() {
     return (
       <div>
         Sign Up
-        <form>
+        <form
+          onSubmit={this.submit.bind(this)}
+        >
           <input
             type="text"
-            placeholder="Username"
-            value={this.state.username}
-            name="username"
-            onChange={this.onChange}
+            placeholder="Email"
+            value={this.state.email}
+            name="email"
+            onChange={this.change}
           />
           <input
             type="password"
             placeholder="Password"
             value={this.state.password}
             name="password"
-            onChange={this.onChange}
+            onChange={this.change}
           />
           <input
             type="password"
             placeholder="Re-enter Password"
             value={this.state.rePassword}
             name="rePassword"
-            onChange={this.onChange}
+            onChange={this.change}
           />
+          <button type="submit" />
         </form>
+        <p>{ this.props.error.message }</p>
       </div>
     );
   }

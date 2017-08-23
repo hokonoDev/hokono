@@ -5,11 +5,16 @@ import PropTypes from 'prop-types';
 //a list of redirect links to petprofile /pet/:id
 //url is an image of the pet
 //link is the redirect to the pet's profile page
-const PetList = ({petData, onPetClick}) => {
+const PetList = ({petData}) => {
+  {console.log("Hello is anybody there", petData)}
   return (
     <div>
       {petData.map(data => (
-        <PetListEntry name={data.name} id={data.id} imgUrl={data.url} link={data.link} onClick={() => onPetClick(data.link)}/>
+        <PetListEntry
+          name={data.name}
+          id={data.pet_}
+          imgUrl={data.url}
+        />
       ))}
     </div>
   );
@@ -19,12 +24,10 @@ PetList.propTypes = {
   petData: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  onPetClick: PropTypes.func.isRequired
 };
 
 export default PetList;

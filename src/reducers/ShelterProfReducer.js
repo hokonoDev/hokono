@@ -8,6 +8,8 @@ const fakeData = {
 
 export default (state = {}, action) => {
   switch (action.type) {
+    case 'EDIT_PROFILE' :
+      return { ...state, ...action.edit };
     default :
       return state;
   }

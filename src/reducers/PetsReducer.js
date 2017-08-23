@@ -26,7 +26,7 @@ export default (state = [], action) => {
       return [...state, { ...action.pet, id: _.uniqueId('pet_') }];
     case 'EDIT_PET' :
       return state.map(pet => (
-        pet.id === action.id ? { ...pet, action.edit } : pet
+        pet.id === action.id ? { ...pet, ...action.edit } : pet
       ));
     default :
       return state;

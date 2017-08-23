@@ -7,7 +7,6 @@ import _ from 'lodash';
 //url is an image of the pet
 //link is the redirect to the pet's profile page
 const PetList = ({petData}) => {
-  {console.log("Hello is anybody there", petData)}
   return (
     <div>
       {petData.map(data => (

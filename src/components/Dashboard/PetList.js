@@ -21,7 +21,7 @@ PetList.propTypes = {
       name: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
-      id: PropTypes.num.isRequired,
+      id: PropTypes.number.isRequired,
     }).isRequired
   ).isRequired,
   onPetClick: PropTypes.func.isRequired

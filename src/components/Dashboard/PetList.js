@@ -1,6 +1,7 @@
 import React from 'react';
 import PetListEntry from './PetList/PetListEntry.js';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 //a list of redirect links to petprofile /pet/:id
 //url is an image of the pet
@@ -11,8 +12,9 @@ const PetList = ({petData}) => {
     <div>
       {petData.map(data => (
         <PetListEntry
+          key={_.uniqueId()}
           name={data.name}
-          id={data.pet_}
+          id={data.id}
           imgUrl={data.url}
         />
       ))}

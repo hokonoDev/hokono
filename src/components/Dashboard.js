@@ -26,7 +26,7 @@ const Dashboard = (props) => {
 
 const mapStateToProps = state => {
   return {
-    petData: state.Pets
+    petData: state.pets
   }
 };
 

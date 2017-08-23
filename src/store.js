@@ -4,13 +4,9 @@ import ShelterProfReducer from './reducers/ShelterProfReducer';
 import AuthReducer from './reducers/AuthReducer';
 
 const comboReducer = combineReducers({
-  Pets: PetsReducer,
-  ShelterProf: ShelterProfReducer,
-  Auth: AuthReducer,
+  pets: PetsReducer,
+  shelterProf: ShelterProfReducer,
+  auth: AuthReducer,
 });
 
-export default createStore(comboReducer, {
-  Auth: {},
-  Pets: [],
-  ShelterProf: {},
-});
+export default createStore(comboReducer);

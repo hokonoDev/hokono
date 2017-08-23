@@ -15,7 +15,7 @@ const PetListEntry = ({name, id, imgUrl, link, onClick}) => {
 
 PetListEntry.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.num.isRequired,
+  id: PropTypes.number.isRequired,
   imgUrl: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,

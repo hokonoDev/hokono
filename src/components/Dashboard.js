@@ -3,6 +3,7 @@ import FilterBar from './Dashboard/FilterBar.js';
 import Nav from './Dashboard/Nav.js';
 import PetList from './Dashboard/PetList.js';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const Dashboard = (props) => {
 
@@ -16,9 +17,20 @@ const Dashboard = (props) => {
   return (
     <div>
       Dashboard
-      <Nav/>
-      <PetList petData={props.petData}/>
-      <FilterBar top={topVotedData} popular={topPopularData} new={topNewData} petData={props.petData}/>
+      <Nav {...props}/>
+      <Route
+        exact path={`${props.match.path}`}
+        render={(renderProps)=> (<PetList petData={props.petData}/>)}
+      />
+      <Route
+        exact path={`${props.match.path}`}
+        render={(renderProps)=> (<FilterBar
+          petData={props.petData}
+          top={topVotedData}
+          popular={topPopularData}
+          new={topNewData}
+        />)}
+      />
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PetListEntryPost from './PetListEntry/PetListEntryPost.js';
 //link to single petpage
 const PetListEntry = ({name, id, imgUrl, link, onClick}) => {
   return (
-    <Link to=`/pet/${id}`>
+    <Link to={`/pet/${id}`}>
       <div onClick={onClick}>
         <div>{name}</div>
         <img src={imgUrl}/>

@@ -11,21 +11,20 @@ const PetList = ({petData, onPetClick}) => {
       {petData.map(data => (
         <PetListEntry name={data.name} id={data.id} imgUrl={data.url} link={data.link} onClick={() => onPetClick(data.link)}/>
       ))}
-    <div>
+    </div>
   );
 }
 
 PetList.propTypes = {
   petData: PropTypes.arrayOf(
-  PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    id: PropTypes.num.isRequired,
-  }).isRequired,
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      id: PropTypes.num.isRequired,
+    }).isRequired
   ).isRequired,
-
-  onPetClick.func.isRequired;
+  onPetClick: PropTypes.func.isRequired
 };
 
 export default PetList;

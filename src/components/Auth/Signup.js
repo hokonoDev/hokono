@@ -8,6 +8,7 @@ export default class extends React.Component {
       email: '',
       password: '',
       rePassword: '',
+      error: '',
     }
 
     this.change = this.change.bind(this);
@@ -19,13 +20,23 @@ export default class extends React.Component {
     this.setState(nextState);
   }
 
+  verifySubmit() {
+    return this.state.email &&
+      this.state.password &&
+      this.state.password === this.state.rePassword;
+  }
+
   submit(e) {
     e.preventDefault();
-    if (this.state.password && this.state.password === this.state.rePassword) {
+    if (this.verifySubmit()) {
+      this.state.error = '';
       this.props.signup(this.state.email, this.state.password);
-      this.setState({ email: '', password: '', rePassword: '' });
-    } else {
-      console.log('passwords don\'t match');
+    } else if (!this.state.email) {
+      this.setState({ error: 'Enter a username' });
+    } else if (!this.state.password){
+      this.setState({ error: 'Enter a password' });
+    } else if (this.state.password !== this.state.rePassword) {
+      this.setState({ error: 'Passwords don\'t match' });
     }
   }
 
@@ -59,7 +70,7 @@ export default class extends React.Component {
           />
           <button type="submit" />
         </form>
-        <p>{ this.props.error.message }</p>
+        <p>{ this.state.error || this.props.error.message }</p>
       </div>
     );
   }

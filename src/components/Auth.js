@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Login from './Auth/Login';
 import Signup from './Auth/Signup';
 import AuthNav from './Auth/AuthNav';
 import firebase from '../firebase/index';
+import store from '../store';
 
 const Auth = class extends React.Component {
   constructor(props) {
@@ -13,6 +14,9 @@ const Auth = class extends React.Component {
       signupError: ''
     };
 
+    console.log(this.props.loggedIn);
+    console.log(firebase.auth().currentUser);
+
     this.signup = this.signup.bind(this);
   }
 
@@ -21,7 +25,10 @@ const Auth = class extends React.Component {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch(err => this.setState({ signupError: err }))
       .then(() => {
-        if(!this.state.signupError) this.setState({ signupError: { message: 'success' }});
+        if(!this.state.signupError) {
+          this.setState({ signupError: { message: 'success' }});
+          this.dispatchSignin();
+        }
       });
   }
 
@@ -29,6 +36,14 @@ const Auth = class extends React.Component {
     return (
       <Router>
         <div>
+          {
+            this.props.loggedIn ?
+              <Redirect
+                to="/dashboard"
+              />
+              :
+              null
+          }
           <AuthNav {...this.props} />
           <Route
             path={`${this.props.match.path}/login`}

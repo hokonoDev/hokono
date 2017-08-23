@@ -43,7 +43,12 @@ class App extends Component {
           />
           <Route
             path="/auth"
-            component={Auth}
+            render={renderProps =>
+              <Auth
+                {...renderProps}
+                loggedIn={this.props.auth.loggedIn}
+              />
+            }
           />
           <Route
             path="/pet/:id"

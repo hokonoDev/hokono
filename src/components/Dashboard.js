@@ -63,30 +63,31 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    <div>
-      Dashboard
-      <Nav
-        {...props}
-        authData={props.authData}
-      />
-        <Route
-          exact path={`${this.props.match.path}`}
-          render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
+    return (
+      <div>
+        Dashboard
+        <Nav
+          {...this.props}
+          authData={this.props.authData}
         />
-        <Route
-          exact path={`${this.props.match.path}`}
-          render={(renderProps)=> (<FilterBar
-            petData={this.props.petData}
-            top={this.mostLikesData}
-            low={this.leastLikesData}
-            pop={this.mostPopularData}
-            lessPop={this.leastPopularData}
-            new={this.sortNewData}
-            old={this.sortOldData}
-            original={this.originalData}
-            setFilter={this.setFilter}
-          />)}
-        />
+          <Route
+            exact path={`${this.props.match.path}`}
+            render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
+          />
+          <Route
+            exact path={`${this.props.match.path}`}
+            render={(renderProps)=> (<FilterBar
+              petData={this.props.petData}
+              top={this.mostLikesData}
+              low={this.leastLikesData}
+              pop={this.mostPopularData}
+              lessPop={this.leastPopularData}
+              new={this.sortNewData}
+              old={this.sortOldData}
+              original={this.originalData}
+              setFilter={this.setFilter}
+            />)}
+          />
       </div>
     )
   };

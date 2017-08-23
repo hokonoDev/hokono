@@ -5,6 +5,8 @@ import Dashboard from '../components/Dashboard.js';
 import PetProfile from '../components/PetProfile.js';
 import Auth from '../components/Auth.js';
 import Home from '../components/Home.js';
+import AddPet from  '../components/Dashboard/Nav/AddPet.js';
+import ShelterProfile from '../components/Dashboard/Nav/ShelterProfile.js';
 
 
 class App extends Component {
@@ -42,6 +44,12 @@ class App extends Component {
                 pet={this.getPetData(props)}
               />
             )}
+          />
+          <Route path={`/addPet`}
+            component={AddPet}
+          />
+          <Route path={`/profile`}
+            component={ShelterProfile}
           />
         </div>
       </Router>

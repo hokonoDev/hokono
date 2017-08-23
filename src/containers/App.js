@@ -14,9 +14,18 @@ class App extends Component {
     super(props);
   }
 
+  parsePath(path) {
+    return path.split('/');
+  }
+
   getPetData({ location }) {
-    const petId = location.pathname.slice(5);
+    const petId = this.parsePath(location.pathname)[2];
     return this.props.pets.filter(pet => pet.id === petId)[0];
+  }
+
+  getProfileData({ location }) {
+    const profileId = this.parsePath(location.pathname)[2];
+    return this.props.auth.username === profileId ? {...this.props.profile, owner: true} : {owner: false};
   }
 
   render() {
@@ -45,11 +54,17 @@ class App extends Component {
               />
             )}
           />
-          <Route path={`/addPet`}
+          <Route path="/addPet"
             component={AddPet}
           />
-          <Route path={`/profile`}
-            component={ShelterProfile}
+          <Route
+            path="/profile/:id"
+            render={props => (
+              <ShelterProfile
+                {...props}
+                profile={this.getProfileData(props)}
+              />
+            )}
           />
         </div>
       </Router>
@@ -58,7 +73,11 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { pets: state.pets };
+  return {
+    pets: state.pets,
+    auth: state.auth,
+    profile: state.profile,
+  };
 }
 
 export default connect(mapStateToProps)(App);

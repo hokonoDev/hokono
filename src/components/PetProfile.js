@@ -4,7 +4,7 @@ const PetProfile = (props) => {
   return (
     <div>
       PetProfile
-      <pre>{JSON.stringify(props.pet)}</pre>
+      <pre>{JSON.stringify(props.match)}</pre>
     </div>
   );
 }

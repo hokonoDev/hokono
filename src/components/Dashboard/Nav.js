@@ -1,14 +1,12 @@
 import React from 'react';
-import ShelterProfile from './Nav/ShelterProfile.js';
-import AddPet from './Nav/AddPet.js';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import NavBar from './Nav/NavBar.js';
+import { Link } from 'react-router-dom';
 
 const Nav = (props) => {
   return (
-      <div>
-        <NavBar {...props} />
-      </div>
+    <div>
+      <Link to={`/profile/${props.authData.username}`}>My Shelter Profile</Link>
+      <Link to={`/addPet`}>Add Pet</Link>
+    </div>
   );
 }
 

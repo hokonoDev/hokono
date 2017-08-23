@@ -10,14 +10,20 @@ const Dashboard = (props) => {
   const topVotedData = props.petData.sort((a, b)=> {
     return b.likes - a.likes;
   });
+
   const topPopularData = props.petData;
+
   const topNewData = props.petData.sort((a,b)=> {
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
+
   return (
     <div>
       Dashboard
-      <Nav {...props}/>
+      <Nav
+        {...props}
+        authData={props.authData}
+      />
       <Route
         exact path={`${props.match.path}`}
         render={(renderProps)=> (<PetList petData={props.petData}/>)}
@@ -38,7 +44,8 @@ const Dashboard = (props) => {
 
 const mapStateToProps = state => {
   return {
-    petData: state.pets
+    petData: state.pets,
+    authData: state.auth,
   }
 };
 

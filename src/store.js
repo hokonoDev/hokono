@@ -5,7 +5,7 @@ import AuthReducer from './reducers/AuthReducer';
 
 const comboReducer = combineReducers({
   pets: PetsReducer,
-  shelterProf: ShelterProfReducer,
+  profile: ShelterProfReducer,
   auth: AuthReducer,
 });
 

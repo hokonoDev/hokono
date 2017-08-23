@@ -5,42 +5,92 @@ import PetList from './Dashboard/PetList.js';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-const Dashboard = (props) => {
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log("this is props coming in", props);
+    this.state = {
+      filter: this.props.petData,
+    };
+    this.setFilter = this.setFilter.bind(this);
+    this.mostLikesData = this.mostLikesData.bind(this);
+    this.leastLikesData = this.leastLikesData.bind(this);
+    this.mostPopularData = this.mostPopularData.bind(this);
+    this.leastPopularData = this.leastPopularData.bind(this);
+    this.sortNewData = this.sortNewData.bind(this);
+    this.sortOldData = this.sortOldData.bind(this);
+    this.originalData = this.originalData.bind(this);
+  }
 
-  const topVotedData = props.petData.sort((a, b)=> {
-    return b.likes - a.likes;
-  });
+//make sure i have time stamps for petData
+  mostLikesData() {
+    let arr = this.props.petData;
+    return arr.sort((a, b)=> {
+      return b.likes - a.likes;
+    });
+  }
+  leastLikesData() {
+    let arr = this.props.petData;
+    return arr.sort((a, b)=> {
+      return a.likes - b.likes;
+    });
+  }
+  //todo once timestamp comes through
+  mostPopularData() {
+    return this.props.petData;
+  }
+  leastPopularData() {
+    return this.props.petData;
+  }
+  sortNewData () {
+    let arr = this.props.petData;
+    return arr.sort((a,b)=> {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+  }
+  sortOldData () {
+    let arr = this.props.petData;
+    return arr.sort((a,b)=> {
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    });
+  }
+  originalData () {
+    let arr = this.props.petData;
+    return arr;
+  }
+  setFilter(input) {
+    this.setState({filter: input});
+  }
 
-  const topPopularData = props.petData;
-
-  const topNewData = props.petData.sort((a,b)=> {
-    return new Date(b.createdAt) - new Date(a.createdAt);
-  });
-
-  return (
+  render() {
     <div>
       Dashboard
       <Nav
         {...props}
         authData={props.authData}
       />
-      <Route
-        exact path={`${props.match.path}`}
-        render={(renderProps)=> (<PetList petData={props.petData}/>)}
-      />
-      <Route
-        exact path={`${props.match.path}`}
-        render={(renderProps)=> (<FilterBar
-          petData={props.petData}
-          top={topVotedData}
-          popular={topPopularData}
-          new={topNewData}
-        />)}
-      />
-    </div>
-  );
+        <Route
+          exact path={`${this.props.match.path}`}
+          render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
+        />
+        <Route
+          exact path={`${this.props.match.path}`}
+          render={(renderProps)=> (<FilterBar
+            petData={this.props.petData}
+            top={this.mostLikesData}
+            low={this.leastLikesData}
+            pop={this.mostPopularData}
+            lessPop={this.leastPopularData}
+            new={this.sortNewData}
+            old={this.sortOldData}
+            original={this.originalData}
+            setFilter={this.setFilter}
+          />)}
+        />
+      </div>
+    )
+  };
 };
-
 
 const mapStateToProps = state => {
   return {

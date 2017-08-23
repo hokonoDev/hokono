@@ -21,15 +21,28 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="/" component={Home}/>
-          <Route path="/dashboard" component={Dashboard}/>
-          <Route path="/auth" component={Auth}/>
-          <Route path="/pet/:id" render={props => (
+          <Route
+            exact
+            path="/"
+            component={Home}
+          />
+          <Route
+            path="/dashboard"
+            component={Dashboard}
+          />
+          <Route
+            path="/auth"
+            component={Auth}
+          />
+          <Route
+            path="/pet/:id"
+            render={props => (
               <PetProfile
                 {...props}
                 pet={this.getPetData(props)}
               />
-          )}/>
+            )}
+          />
         </div>
       </Router>
     );

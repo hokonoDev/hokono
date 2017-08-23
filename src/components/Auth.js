@@ -14,9 +14,6 @@ const Auth = class extends React.Component {
       signupError: ''
     };
 
-    console.log(this.props.loggedIn);
-    console.log(firebase.auth().currentUser);
-
     this.signup = this.signup.bind(this);
   }
 
@@ -41,8 +38,7 @@ const Auth = class extends React.Component {
               <Redirect
                 to="/dashboard"
               />
-              :
-              null
+              : null
           }
           <AuthNav {...this.props} />
           <Route

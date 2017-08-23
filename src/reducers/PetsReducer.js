@@ -6,21 +6,18 @@ const fakeData = [
     name: 'fido',
     profilePic: '',
     likes: 10,
-    pet_: 1
   },
   {
     id: 'pet_2',
     name: 'bandit',
     profilePic: '',
     likes: 5,
-    pet_: 2
   },
   {
     id: 'pet_3',
     name: 'willy',
     profilePic: '',
     likes: 9001,
-    pet_: 3,
   }
 ];
 

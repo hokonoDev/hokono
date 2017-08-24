@@ -1,4 +1,5 @@
 export const addPet = (input) => {
+  console.log(input);
   return {
     type:'ADD_PET',
     pet: {

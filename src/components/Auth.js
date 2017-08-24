@@ -13,7 +13,8 @@ const Auth = class extends React.Component {
     super(props);
 
     this.state = {
-      signupError: ''
+      signupError: '',
+      loginError: '',
     };
 
     console.log(this.props.loggedIn);
@@ -21,7 +22,7 @@ const Auth = class extends React.Component {
     this.signup = this.signup.bind(this);
   }
 
-  signin() {
+  dispathSignin() {
     this.props.dispatch(signin());
   }
 
@@ -32,7 +33,19 @@ const Auth = class extends React.Component {
       .then(() => {
         if(!this.state.signupError) {
           this.setState({ signupError: { message: 'success' }});
-          this.signin();
+          this.dispatchSignin();
+        }
+      });
+  }
+
+  login(email, password) {
+    this.state.loginError = '';
+    firebase.auth.signInWithEmailAndPassword(email, password)
+      .catch(err => this.setState({ loginError: err }))
+      .then(() => {
+        if(!this.state.loginError) {
+          this.setState({ loginError: { message: 'success' }});
+          this.dispatchSignin();
         }
       });
   }

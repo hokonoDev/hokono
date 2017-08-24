@@ -23,5 +23,5 @@ const fakeAuth = {
   };
 
 export default createStore(comboReducer, {
-  auth: fakeAuth,
+  auth: auth,
 });

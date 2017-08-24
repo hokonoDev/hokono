@@ -1,5 +1,4 @@
 export const addPet = (input) => {
-  {console.log("dispatch received in actions", input)}
   return {
     type:'ADD_PET',
     pet: {

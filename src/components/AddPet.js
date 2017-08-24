@@ -35,6 +35,7 @@ const AddPet = ({ dispatch, history, auth }) => {
         <input type="file"
           accept="image/*"
           capture="camera"
+          id="imgBlob"
           ref={node2 => {
             input2 = node2
           }}

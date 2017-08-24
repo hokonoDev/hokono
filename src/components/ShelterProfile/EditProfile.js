@@ -1,18 +1,17 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import IfRedirect from '../helpers/ConditionalRedirect';
 
 export default (props) => (
   <div>
-    {props.authorized ?
-      <form>
-        <input
-          type="text"
-        />
-      </form>
-      :
-      <Redirect
-        to={props.match.url.replace('/edit', '')}
+    <IfRedirect
+      if={props.authorized}
+      ifFalse={props.match.url.replace('/edit', '')}
+    />
+    <form>
+      <input
+        type="text"
       />
-    }
+    </form>
   </div>
 );

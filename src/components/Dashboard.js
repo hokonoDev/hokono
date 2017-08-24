@@ -1,17 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import FilterBar from './Dashboard/FilterBar.js';
 import Nav from './Dashboard/Nav.js';
 import PetList from './Dashboard/PetList.js';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import IfRedirect from './helpers/ConditionalRedirect';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log("this is props coming in", props);
+
     this.state = {
       filter: this.props.petData,
     };
+
     this.setFilter = this.setFilter.bind(this);
     this.mostLikesData = this.mostLikesData.bind(this);
     this.leastLikesData = this.leastLikesData.bind(this);
@@ -65,10 +67,14 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
+        <IfRedirect
+          if={this.props.auth.loggedIn}
+          ifFalse="/auth/login"
+        />
         Dashboard
         <Nav
           {...this.props}
-          authData={this.props.authData}
+          authData={this.props.auth}
         />
           <Route
             exact path={`${this.props.match.path}`}
@@ -96,7 +102,7 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     petData: state.pets,
-    authData: state.auth,
+    auth: state.auth,
   }
 };
 

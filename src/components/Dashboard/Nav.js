@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Nav = (props) => {
   const imgStyle = {
-    width: '50px',
-    height: '50px',
+    width: '20px',
+    height: '20px',
     margin: '20px',
   };
   const barStyle = {

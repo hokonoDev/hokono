@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Login from './Auth/Login';
 import Signup from './Auth/Signup';
 import AuthNav from './Auth/AuthNav';
 import firebase from '../firebase/index';
 import store from '../store';
+import { signin } from '../actions/AuthActions';
 
 const Auth = class extends React.Component {
   constructor(props) {
@@ -15,9 +17,12 @@ const Auth = class extends React.Component {
     };
 
     console.log(this.props.loggedIn);
-    console.log(firebase.auth().currentUser);
 
     this.signup = this.signup.bind(this);
+  }
+
+  signin() {
+    this.props.dispatch(signin());
   }
 
   signup(email, password) {
@@ -27,42 +32,40 @@ const Auth = class extends React.Component {
       .then(() => {
         if(!this.state.signupError) {
           this.setState({ signupError: { message: 'success' }});
-          this.dispatchSignin();
+          this.signin();
         }
       });
   }
 
   render() {
     return (
-      <Router>
-        <div>
-          {
-            this.props.loggedIn ?
-              <Redirect
-                to="/dashboard"
-              />
-              :
-              null
-          }
-          <AuthNav {...this.props} />
-          <Route
-            path={`${this.props.match.path}/login`}
-            component={Login}
-          />
-          <Route
-            path={`${this.props.match.path}/signup`}
-            render={renderProps => (
-              <Signup
-                {...renderProps}
-                signup={this.signup}
-                error={this.state.signupError}
-              />
-            )}
-          />
-        </div>
-      </Router>
+      <div>
+        {
+          this.props.loggedIn ?
+            <Redirect
+              push
+              to="/dashboard"
+            />
+            : null
+        }
+        <AuthNav {...this.props} />
+        <Route
+          path={`${this.props.match.path}/login`}
+          component={Login}
+        />
+        <Route
+          path={`${this.props.match.path}/signup`}
+          render={renderProps => (
+            <Signup
+              {...renderProps}
+              signup={this.signup}
+              error={this.state.signupError}
+            />
+          )}
+        />
+      </div>
     );
   }
 }
 
-export default Auth;
+export default connect()(Auth);

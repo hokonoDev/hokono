@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addPet } from '../actions/PetsActions';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Nav from './Dashboard/Nav';
 
-const AddPet = ({ dispatch }) => {
+const AddPet = ({ dispatch, history, auth }) => {
   let input;
   let input2;
   let input3;
   return (
     <div>
-      <Link to='/dashboard'>dashboardlink</Link>
+      <Nav
+        authData={auth}
+      />
       <form
         onSubmit={e => {
           e.preventDefault()

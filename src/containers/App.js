@@ -57,11 +57,17 @@ class App extends Component {
               <PetProfile
                 {...props}
                 pet={this.getPetData(props)}
+                auth={this.props.auth}
               />
             )}
           />
           <Route path="/addPet"
-            component={AddPet}
+            render={props => (
+              <AddPet
+                {...props}
+                auth={this.props.auth}
+              />
+            )}
           />
           <Route
             path="/profile/:id"
@@ -69,6 +75,7 @@ class App extends Component {
               <ShelterProfile
                 {...props}
                 profile={this.getProfileData(props)}
+                auth={this.props.auth}
               />
             )}
           />

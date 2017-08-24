@@ -5,6 +5,7 @@ import FilterBar from './Dashboard/FilterBar.js';
 import Nav from './Dashboard/Nav.js';
 import PetList from './Dashboard/PetList.js';
 import IfRedirect from './helpers/ConditionalRedirect';
+import { signout } from '../actions/AuthActions';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -71,28 +72,39 @@ class Dashboard extends React.Component {
           if={this.props.auth.loggedIn}
           ifFalse="/auth/login"
         />
-        Dashboard
         <Nav
           {...this.props}
           authData={this.props.auth}
         />
+        Dashboard
+          <button
+            onClick={() => this.props.dispatch(signout())}
+          >
+            Logout
+          </button>
           <Route
             exact path={`${this.props.match.path}`}
-            render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
+            render={renderProps => (
+              <FilterBar
+                petData={this.props.petData}
+                top={this.mostLikesData}
+                low={this.leastLikesData}
+                pop={this.mostPopularData}
+                lessPop={this.leastPopularData}
+                new={this.sortNewData}
+                old={this.sortOldData}
+                original={this.originalData}
+                setFilter={this.setFilter}
+              />
+            )}
           />
           <Route
             exact path={`${this.props.match.path}`}
-            render={(renderProps)=> (<FilterBar
-              petData={this.props.petData}
-              top={this.mostLikesData}
-              low={this.leastLikesData}
-              pop={this.mostPopularData}
-              lessPop={this.leastPopularData}
-              new={this.sortNewData}
-              old={this.sortOldData}
-              original={this.originalData}
-              setFilter={this.setFilter}
-            />)}
+            render={renderProps=> (
+              <PetList
+                petData={this.state.filter}
+              />
+            )}
           />
       </div>
     )

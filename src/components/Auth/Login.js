@@ -58,7 +58,11 @@ export default class extends React.Component {
             name="password"
             onChange={this.change}
           />
-          <button type="submit" />
+          <button
+            type="submit"
+          >
+            Login
+          </button>
         </form>
         <p>{ this.state.error || this.props.error.message }</p>
       </div>

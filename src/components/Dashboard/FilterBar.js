@@ -54,7 +54,6 @@ class FilterBar extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-
         <select value={this.state.dropFilter} onChange={this.handleDropFilter}>
           <option value="Most likes" list="1">Most likes</option>
           <option value="Least likes" list="2">Least likes</option>

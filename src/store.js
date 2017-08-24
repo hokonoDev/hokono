@@ -17,6 +17,11 @@ const auth = !user ? { loggedIn: false } :
     username: user.email,
   };
 
+const fakeAuth = {
+    loggedIn: true,
+    username: 'draymore26@gmail.com',
+  };
+
 export default createStore(comboReducer, {
-  auth,
+  auth: auth,
 });

@@ -5,7 +5,7 @@ import { addPet } from '../actions/PetsActions';
 import { Nav } from './index';
 import firebase from '../firebase/index.js';
 
-const AddPet = ({ dispatch, history, auth }) => {
+const AddPet = ({ dispatch, history }) => {
   let input;
   let input2;
 
@@ -22,9 +22,6 @@ const AddPet = ({ dispatch, history, auth }) => {
 
   return (
     <div>
-      <Nav
-        authData={auth}
-      />
       <form
         onSubmit={e => {
           e.preventDefault()

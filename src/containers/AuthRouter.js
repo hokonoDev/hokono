@@ -1,15 +1,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Login }from './index';
-import { Signup } from './index';
-import { AuthNav } from './index';
-import { IfRedirect } from './index';
 import firebase from '../firebase/index';
 import store from '../store';
-import { signin } from '../actions/AuthActions';
+import { signinAction } from '../actions/AuthActions';
+import {
+  Login,
+  Signup,
+  AuthNav,
+  IfRedirect,
+  } from '../components/index';
 
-const Auth = class extends React.Component {
+const AuthRouter = class extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,10 +24,6 @@ const Auth = class extends React.Component {
     this.login = this.login.bind(this);
   }
 
-  dispatchSignin() {
-    this.props.dispatch(signin());
-  }
-
   signup(email, password) {
     this.state.signupError = '';
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -33,7 +31,7 @@ const Auth = class extends React.Component {
       .then(() => {
         if(!this.state.signupError) {
           this.setState({ signupError: { message: 'Success' }});
-          this.dispatchSignin();
+          signinAction();
         }
       });
   }
@@ -47,7 +45,7 @@ const Auth = class extends React.Component {
       .then(() => {
         if(!this.state.loginError) {
           this.setState({ loginError: { message: 'Success' }});
-          this.dispatchSignin();
+          signinAction();
         }
       });
   }
@@ -57,7 +55,7 @@ const Auth = class extends React.Component {
       <div>
         <IfRedirect
           if={this.props.loggedIn}
-          ifTrue="/dashboard"
+          ifTrue="/shelter/dashboard"
         />
         <AuthNav {...this.props} />
         <Route
@@ -85,4 +83,10 @@ const Auth = class extends React.Component {
   }
 }
 
-export default Auth;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+}
+
+export default connect(mapStateToProps)(AuthRouter);

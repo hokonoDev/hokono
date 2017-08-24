@@ -108,7 +108,11 @@ class Dashboard extends React.Component {
           />
           <Route
             exact path={`${this.props.match.path}`}
-            render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
+            render={renderProps=> (
+              <PetList
+                petData={this.state.filter}
+              />
+            )}
           />
       </div>
     )

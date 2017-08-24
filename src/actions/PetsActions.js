@@ -4,7 +4,7 @@ export const addPet = (input) => {
     type:'ADD_PET',
     pet: {
       name: input.name,
-      profilePic: input.img,
+      filePath: input.img,
       likes: 0,
     }
   }

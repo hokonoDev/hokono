@@ -13,8 +13,11 @@ export const signin = () => {
 };
 
 export const signout = () => {
+  firebase.auth().signOut();
   return {
     type: 'SIGNOUT',
-    loggedIn: false,
+    userInfo: {
+      loggedIn: false,
+    },
   }
 };

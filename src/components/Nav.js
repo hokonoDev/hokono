@@ -1,5 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, Link } from 'react-router-dom';
+import {
+  Dashboard,
+  PetProfile,
+  AddPet,
+  ShelterProfile,
+  } from './index';
 
 const Nav = (props) => {
   const imgStyle = {
@@ -10,23 +17,23 @@ const Nav = (props) => {
   const barStyle = {
     width: '100%',
     display: 'flex',
-    'justify-content': 'space-around',
+    'justifyContent': 'space-around',
   };
   return (
     <div style={barStyle}>
-      <Link to={`/dashboard`}>
+      <Link to={`/shelter/dashboard`}>
         <img
           style={imgStyle}
           src="/images/home.png"
         />
       </Link>
-      <Link to={`/addPet`}>
+      <Link to={`/shelter/addPet`}>
         <img
           style={imgStyle}
           src="/images/plus-button.png"
         />
       </Link>
-      <Link to={`/profile/${props.authData.username}`}>
+      <Link to={`/shelter/profile/${props.auth.username}`}>
         <img
           style={imgStyle}
           src="/images/profile.png"
@@ -36,4 +43,12 @@ const Nav = (props) => {
   );
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+  return {
+    pets: state.pets,
+    auth: state.auth,
+    profile: state.profile,
+  };
+}
+
+export default connect(mapStateToProps)(Nav);

@@ -6,10 +6,6 @@ import { Nav } from './index';
 const ShelterProfile = (props) => {
   return (
     <div>
-      <Nav
-        {...this.props}
-        authData={props.auth}
-      />
       <div>
         {props.profile.owner ?
           'My Profile'

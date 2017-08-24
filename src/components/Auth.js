@@ -17,12 +17,11 @@ const Auth = class extends React.Component {
       loginError: '',
     };
 
-    console.log(this.props.loggedIn);
-
     this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this);
   }
 
-  dispathSignin() {
+  dispatchSignin() {
     this.props.dispatch(signin());
   }
 
@@ -40,8 +39,11 @@ const Auth = class extends React.Component {
 
   login(email, password) {
     this.state.loginError = '';
-    firebase.auth.signInWithEmailAndPassword(email, password)
-      .catch(err => this.setState({ loginError: err }))
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .catch(err => {
+        this.setState({ loginError: err })
+        console.log(err);
+      })
       .then(() => {
         if(!this.state.loginError) {
           this.setState({ loginError: { message: 'success' }});
@@ -64,7 +66,13 @@ const Auth = class extends React.Component {
         <AuthNav {...this.props} />
         <Route
           path={`${this.props.match.path}/login`}
-          component={Login}
+          render={renderProps => (
+            <Login
+              {...renderProps}
+              login={this.login}
+              error={this.state.loginError}
+            />
+          )}
         />
         <Route
           path={`${this.props.match.path}/signup`}

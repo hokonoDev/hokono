@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addPet } from '../actions/PetsActions';
 import Nav from './Dashboard/Nav';
+import firebase from '../firebase/index.js';
 
 const AddPet = ({ dispatch, history, auth }) => {
   let input;

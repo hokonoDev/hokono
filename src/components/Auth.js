@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Login from './Auth/Login';
-import Signup from './Auth/Signup';
-import AuthNav from './Auth/AuthNav';
-import IfRedirect from './helpers/ConditionalRedirect';
+import { Login }from './index';
+import { Signup } from './index';
+import { AuthNav } from './index';
+import { IfRedirect } from './index';
 import firebase from '../firebase/index';
 import store from '../store';
 import { signin } from '../actions/AuthActions';

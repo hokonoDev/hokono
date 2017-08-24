@@ -1,5 +1,5 @@
 import React from 'react';
-import PetListEntry from './PetList/PetListEntry.js';
+import { PetListEntry } from './index';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 

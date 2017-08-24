@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import FilterBar from './Dashboard/FilterBar.js';
-import Nav from './Dashboard/Nav.js';
-import PetList from './Dashboard/PetList.js';
-import IfRedirect from './helpers/ConditionalRedirect';
+import { FilterBar } from './index';
+import { Nav } from './index';
+import { PetList } from './index';
+import { IfRedirect } from './index';
 import { signout } from '../actions/AuthActions';
 
 class Dashboard extends React.Component {

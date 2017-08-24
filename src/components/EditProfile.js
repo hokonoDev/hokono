@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import IfRedirect from '../helpers/ConditionalRedirect';
+import { IfRedirect } from './index';
 
 export default (props) => (
   <div>

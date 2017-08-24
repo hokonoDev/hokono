@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Login from './Auth/Login';
 import Signup from './Auth/Signup';
 import AuthNav from './Auth/AuthNav';
+import IfRedirect from './helpers/ConditionalRedirect';
 import firebase from '../firebase/index';
 import store from '../store';
 import { signin } from '../actions/AuthActions';
@@ -31,7 +32,7 @@ const Auth = class extends React.Component {
       .catch(err => this.setState({ signupError: err }))
       .then(() => {
         if(!this.state.signupError) {
-          this.setState({ signupError: { message: 'success' }});
+          this.setState({ signupError: { message: 'Success' }});
           this.dispatchSignin();
         }
       });
@@ -42,11 +43,10 @@ const Auth = class extends React.Component {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch(err => {
         this.setState({ loginError: err })
-        console.log(err);
       })
       .then(() => {
         if(!this.state.loginError) {
-          this.setState({ loginError: { message: 'success' }});
+          this.setState({ loginError: { message: 'Success' }});
           this.dispatchSignin();
         }
       });
@@ -55,14 +55,10 @@ const Auth = class extends React.Component {
   render() {
     return (
       <div>
-        {
-          this.props.loggedIn ?
-            <Redirect
-              push
-              to="/dashboard"
-            />
-            : null
-        }
+        <IfRedirect
+          if={this.props.loggedIn}
+          ifTrue="/dashboard"
+        />
         <AuthNav {...this.props} />
         <Route
           path={`${this.props.match.path}/login`}
@@ -89,4 +85,4 @@ const Auth = class extends React.Component {
   }
 }
 
-export default connect()(Auth);
+export default Auth;

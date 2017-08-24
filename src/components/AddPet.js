@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPet } from '../../../actions/index.js';
+import { addPet } from '../actions/PetsActions';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const AddPet = ({ dispatch }) => {

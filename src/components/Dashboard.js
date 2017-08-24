@@ -71,10 +71,14 @@ class Dashboard extends React.Component {
     return (
       <div>
         <IfRedirect
+          if={this.props.auth.displayName}
+          ifFalse={`/shelter/init`}
+        />
+        <IfRedirect
           if={this.props.auth.loggedIn}
           ifFalse="/auth/login"
         />
-        Dashboard
+        {`${this.props.auth.displayName}'s Dashboard`}
           <button
             onClick={signoutAction}
           >
@@ -104,6 +108,7 @@ class Dashboard extends React.Component {
               />
             )}
           />
+          <pre>{ JSON.stringify(this.props.auth) }</pre>
       </div>
     )
   };

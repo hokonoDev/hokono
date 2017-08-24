@@ -11,17 +11,24 @@ const comboReducer = combineReducers({
 });
 
 const user = firebase.auth().currentUser;
+
 const auth = !user ? { loggedIn: false } :
   {
     loggedIn: true,
     username: user.email,
+    uid: user.uid,
+    userObj: user,
   };
 
-const fakeAuth = {
-    loggedIn: true,
-    username: 'draymore26@gmail.com',
+const profile = !user ? {} :
+  {
+    displayName: user.displayName,
+    email: user.email,
+    address: user.address,
+    phone: user.phoneNumber,
   };
 
 export default createStore(comboReducer, {
-  auth: fakeAuth,
+  auth,
+  profile,
 });

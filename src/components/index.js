@@ -14,6 +14,7 @@ import PetPostList from './PetPostList';
 import PetProfile from './PetProfile';
 import ShelterProfile from './ShelterProfile';
 import Signup from './Signup';
+import ShelterInit from './ShelterInit';
 
 export {
   AddPet,
@@ -32,5 +33,6 @@ export {
   PetProfile,
   ShelterProfile,
   Signup,
+  ShelterInit,
 };
 

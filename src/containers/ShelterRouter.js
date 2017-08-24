@@ -8,6 +8,7 @@ import {
   ShelterProfile,
   Nav,
   IfRedirect,
+  ShelterInit,
   } from '../components/index';
 
 
@@ -32,7 +33,7 @@ const ShelterRouter = (props) => (
       if={window.location.pathname === '/shelter'}
       ifTrue="/shelter/dashboard"
     />
-    <Nav/>
+    <Nav />
     <Route
       path="/shelter/dashboard"
       render={routerProps => (
@@ -67,6 +68,15 @@ const ShelterRouter = (props) => (
         <ShelterProfile
           {...routerProps}
           profile={getProfileData(props)}
+          auth={props.auth}
+        />
+      )}
+    />
+    <Route
+      path="/shelter/init"
+      render={routerProps => (
+        <ShelterInit
+          {...routerProps}
           auth={props.auth}
         />
       )}

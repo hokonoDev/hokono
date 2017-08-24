@@ -1,7 +1,6 @@
 import firebase from '../firebase/index';
 import store from '../store';
 
-
 export const signinAction = () => {
   const user = firebase.auth().currentUser;
   const action = {
@@ -9,6 +8,9 @@ export const signinAction = () => {
     userInfo: {
       loggedIn: true,
       username: user.email,
+      displayName: user.displayName,
+      uid: user.uid,
+      userObj: user,
     },
   };
   store.dispatch(action);

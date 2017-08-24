@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import EditProfile from './ShelterProfile/EditProfile';
-import Nav from './Dashboard/Nav';
+import { EditProfile } from './index';
+import { Nav } from './index';
 
 const ShelterProfile = (props) => {
   return (

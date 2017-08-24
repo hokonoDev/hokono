@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Dashboard from '../components/Dashboard.js';
-import PetProfile from '../components/PetProfile.js';
-import Auth from '../components/Auth.js';
-import Home from '../components/Home.js';
-import AddPet from  '../components/AddPet.js';
-import ShelterProfile from '../components/ShelterProfile.js';
+import { Dashboard } from '../components/index';
+import { PetProfile } from '../components/index';
+import { Auth } from '../components/index';
+import { Home } from '../components/index';
+import { AddPet } from '../components/index';
+import { ShelterProfile } from '../components/index';
 
 
 class App extends Component {

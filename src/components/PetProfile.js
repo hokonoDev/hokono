@@ -1,6 +1,6 @@
 import React from 'react';
-import PetPostList from './PetProfile/PetPostList.js';
-import Nav from './Dashboard/Nav';
+import { PetPostList } from './index';
+import { Nav } from './index';
 
 const PetProfile = (props) => {
   return (

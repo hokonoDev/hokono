@@ -47,6 +47,7 @@ class App extends Component {
               <Auth
                 {...renderProps}
                 loggedIn={this.props.auth.loggedIn}
+                dispatch={this.props.dispatch}
               />
             }
           />

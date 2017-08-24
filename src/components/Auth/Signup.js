@@ -32,7 +32,7 @@ export default class extends React.Component {
       this.state.error = '';
       this.props.signup(this.state.email, this.state.password);
     } else if (!this.state.email) {
-      this.setState({ error: 'Enter a username' });
+      this.setState({ error: 'Enter an email' });
     } else if (!this.state.password){
       this.setState({ error: 'Enter a password' });
     } else if (this.state.password !== this.state.rePassword) {

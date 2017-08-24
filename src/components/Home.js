@@ -5,9 +5,7 @@ const Home = () => {
   return (
     <div>
       Home Hokono
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/pet/pet_1">Pet 1</Link>
-      <Link to="/auth">Login</Link>
+      <Link to="/auth/login">Login</Link>
     </div>
   );
 }

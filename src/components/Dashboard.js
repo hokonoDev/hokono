@@ -72,14 +72,6 @@ class Dashboard extends React.Component {
           ifFalse="/auth/login"
         />
         Dashboard
-        <Nav
-          {...this.props}
-          authData={this.props.auth}
-        />
-          <Route
-            exact path={`${this.props.match.path}`}
-            render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
-          />
           <Route
             exact path={`${this.props.match.path}`}
             render={(renderProps)=> (<FilterBar
@@ -94,6 +86,14 @@ class Dashboard extends React.Component {
               setFilter={this.setFilter}
             />)}
           />
+          <Route
+            exact path={`${this.props.match.path}`}
+            render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
+          />
+        <Nav
+          {...this.props}
+          authData={this.props.auth}
+        />
       </div>
     )
   };

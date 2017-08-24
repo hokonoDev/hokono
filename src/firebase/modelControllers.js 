@@ -1,0 +1,2 @@
+import firebase from './index.js';
+var database = firebase.database();

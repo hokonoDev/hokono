@@ -4,6 +4,7 @@ const fakeData = {
   phone: '(123)456-7890',
   email: 'shelter@gmail.com',
   profilePicUrl: 'img.jpg',
+  pets: [],
 };
 
 export default (state = fakeData, action) => {

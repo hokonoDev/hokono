@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { FilterBar } from './index';
-import { Nav } from './index';
-import { PetList } from './index';
-import { IfRedirect } from './index';
-import { signout } from '../actions/AuthActions';
+import { signoutAction } from '../actions/AuthActions';
+import {
+  FilterBar,
+  Nav,
+  PetList,
+  IfRedirect
+} from './index';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -69,16 +71,16 @@ class Dashboard extends React.Component {
     return (
       <div>
         <IfRedirect
+          if={this.props.auth.displayName}
+          ifFalse={`/shelter/init`}
+        />
+        <IfRedirect
           if={this.props.auth.loggedIn}
           ifFalse="/auth/login"
         />
-        <Nav
-          {...this.props}
-          authData={this.props.auth}
-        />
-        Dashboard
+        {`${this.props.auth.displayName}'s Dashboard`}
           <button
-            onClick={() => this.props.dispatch(signout())}
+            onClick={signoutAction}
           >
             Logout
           </button>
@@ -106,16 +108,10 @@ class Dashboard extends React.Component {
               />
             )}
           />
+          <pre>{ JSON.stringify(this.props.auth) }</pre>
       </div>
     )
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    petData: state.pets,
-    auth: state.auth,
-  }
-};
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;

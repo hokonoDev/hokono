@@ -1,5 +1,4 @@
 import AddPet from './AddPet';
-import Auth from './Auth';
 import AuthNav from './AuthNav';
 import IfRedirect from './IfRedirect';
 import Dashboard from './Dashboard';
@@ -15,10 +14,10 @@ import PetPostList from './PetPostList';
 import PetProfile from './PetProfile';
 import ShelterProfile from './ShelterProfile';
 import Signup from './Signup';
+import ShelterInit from './ShelterInit';
 
 export {
   AddPet,
-  Auth,
   AuthNav,
   IfRedirect,
   Dashboard,
@@ -33,6 +32,7 @@ export {
   PetPostList,
   PetProfile,
   ShelterProfile,
-  Signup
+  Signup,
+  ShelterInit,
 };
 

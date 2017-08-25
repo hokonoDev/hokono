@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import firebase from '../firebase/index';
-import store from '../store';
 import { signinAction } from '../actions/AuthActions';
 import {
   Login,

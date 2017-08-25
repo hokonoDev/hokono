@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { EditProfile } from './index';
-import { Nav } from './index';
+import { Route, Link } from 'react-router-dom';
+import { EditProfile} from './index';
 
 const ShelterProfile = class extends React.Component {
   constructor(props) {
@@ -12,7 +11,17 @@ const ShelterProfile = class extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(JSON.stringify(prevProps.profile) !== JSON.stringify(this.props.profile)){
+      this.setProfileData();
+    }
+  }
+
   componentDidMount() {
+    this.setProfileData();
+  }
+
+  setProfileData() {
     if (!this.props.profile.owner){
       this.props.profile.profilePromise
         .then(item =>

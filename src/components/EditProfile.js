@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { IfRedirect } from './index';
 import { editProfileAction } from '../actions/ShelterProfileActions';
 
@@ -26,6 +25,8 @@ export default class extends React.Component {
   submit(e) {
     e.preventDefault();
     if(this.verify()) {
+      const url = this.props.match.url;
+      this.props.history.push(url.slice(0, url.length - 5));
       editProfileAction(this.state);
     }
   }

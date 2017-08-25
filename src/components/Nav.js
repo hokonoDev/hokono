@@ -1,12 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
-import {
-  Dashboard,
-  PetProfile,
-  AddPet,
-  ShelterProfile,
-  } from './index';
+import { Link } from 'react-router-dom';
 
 const Nav = (props) => {
   const imgStyle = {
@@ -25,18 +19,21 @@ const Nav = (props) => {
         <img
           style={imgStyle}
           src="/images/home.png"
+          alt=""
         />
       </Link>
       <Link to={`/shelter/addPet`}>
         <img
           style={imgStyle}
           src="/images/plus-button.png"
+          alt=""
         />
       </Link>
       <Link to={`/shelter/profile/${props.auth.uid}`}>
         <img
           style={imgStyle}
           src="/images/profile.png"
+          alt=""
         />
       </Link>
     </div>

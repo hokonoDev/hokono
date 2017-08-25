@@ -1,23 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addPet } from '../actions/PetsActions';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Nav } from './index';
+import firebase from '../firebase/index.js';
 
-const AddPet = ({ dispatch }) => {
+const AddPet = ({ dispatch, history }) => {
   let input;
   let input2;
-  let input3;
+
   return (
     <div>
-      <Link to='/dashboard'>dashboardlink</Link>
       <form
         onSubmit={e => {
           e.preventDefault()
           if (!input.value.trim() || !input2.value.trim()) {
             return
           }
-
-          dispatch(addPet({name: input.value, img: input2.value}))
+          console.log("thisis input2", input2.files)
+          addPet({name: input.value, img: input2.files})
           input.value = ''
           input2.value = ''
         }}
@@ -36,7 +37,6 @@ const AddPet = ({ dispatch }) => {
             input2 = node2
           }}
         />
-
         <button type="submit">
           Add Pet
         </button>

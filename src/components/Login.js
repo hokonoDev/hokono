@@ -7,11 +7,11 @@ export default class extends React.Component {
     this.state = {
       email: '',
       password: '',
-      rePassword: '',
       error: '',
     }
 
     this.change = this.change.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   change({ target }) {
@@ -22,30 +22,27 @@ export default class extends React.Component {
 
   verifySubmit() {
     return this.state.email &&
-      this.state.password &&
-      this.state.password === this.state.rePassword;
+      this.state.password;
   }
 
   submit(e) {
     e.preventDefault();
     if (this.verifySubmit()) {
       this.state.error = '';
-      this.props.signup(this.state.email, this.state.password);
+      this.props.login(this.state.email, this.state.password);
     } else if (!this.state.email) {
-      this.setState({ error: 'Enter a username' });
+      this.setState({ error: 'Enter a email' });
     } else if (!this.state.password){
       this.setState({ error: 'Enter a password' });
-    } else if (this.state.password !== this.state.rePassword) {
-      this.setState({ error: 'Passwords don\'t match' });
     }
   }
 
   render() {
     return (
       <div>
-        Sign Up
+        Login
         <form
-          onSubmit={this.submit.bind(this)}
+          onSubmit={this.submit}
         >
           <input
             type="text"
@@ -61,14 +58,11 @@ export default class extends React.Component {
             name="password"
             onChange={this.change}
           />
-          <input
-            type="password"
-            placeholder="Re-enter Password"
-            value={this.state.rePassword}
-            name="rePassword"
-            onChange={this.change}
-          />
-          <button type="submit" />
+          <button
+            type="submit"
+          >
+            Login
+          </button>
         </form>
         <p>{ this.state.error || this.props.error.message }</p>
       </div>

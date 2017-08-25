@@ -1,21 +1,42 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import EditProfile from './ShelterProfile/EditProfile';
+import { EditProfile } from './index';
+import { Nav } from './index';
 
-const ShelterProfile = (props) => {
-  return (
-    <Router>
+const ShelterProfile = class extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      profile: {},
+    };
+  }
+
+  componentDidMount() {
+    if (!this.props.profile.owner){
+      this.props.profile.profilePromise
+        .then(item =>
+          this.setState({ profile: { ...item.val(), owner: false }})
+        );
+    } else {
+      this.setState({ profile: this.props.profile });
+    }
+  }
+
+  render() {
+    return (
       <div>
         <div>
-          {props.profile.owner ?
+          {
+            this.props.profile.owner ?
             'My Profile'
             :
             'Not My Profile'
           }
         </div>
         <div>
-          {props.profile.owner ?
-            <Link to={`${props.match.url}/edit`}>
+          {this.props.profile.owner ?
+            <Link to={`${this.props.match.url}/edit`}>
               <button>
               Edit Profile
               </button>
@@ -25,18 +46,18 @@ const ShelterProfile = (props) => {
           }
         </div>
         <Route
-          path={`${props.match.path}/edit`}
+          path={`${this.props.match.path}/edit`}
           render={renderProps => (
             <EditProfile
               {...renderProps}
-              authorized={props.profile.owner}
+              authorized={this.props.profile.owner}
             />
           )}
         />
-        <pre>{ JSON.stringify(props.profile) }</pre>
+        <pre>Profile: { JSON.stringify(this.state.profile) }</pre>
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
 export default ShelterProfile;

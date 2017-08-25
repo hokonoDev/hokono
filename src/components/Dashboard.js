@@ -1,17 +1,22 @@
 import React from 'react';
-import FilterBar from './Dashboard/FilterBar.js';
-import Nav from './Dashboard/Nav.js';
-import PetList from './Dashboard/PetList.js';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { signoutAction } from '../actions/AuthActions';
+import {
+  FilterBar,
+  Nav,
+  PetList,
+  IfRedirect
+} from './index';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log("this is props coming in", props);
+
     this.state = {
       filter: this.props.petData,
     };
+
     this.setFilter = this.setFilter.bind(this);
     this.mostLikesData = this.mostLikesData.bind(this);
     this.leastLikesData = this.leastLikesData.bind(this);
@@ -65,39 +70,48 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        Dashboard
-        <Nav
-          {...this.props}
-          authData={this.props.authData}
+        <IfRedirect
+          if={this.props.auth.displayName}
+          ifFalse={`/shelter/init`}
         />
+        <IfRedirect
+          if={this.props.auth.loggedIn}
+          ifFalse="/auth/login"
+        />
+        {`${this.props.auth.displayName}'s Dashboard`}
+          <button
+            onClick={signoutAction}
+          >
+            Logout
+          </button>
           <Route
             exact path={`${this.props.match.path}`}
-            render={(renderProps)=> (<PetList petData={this.state.filter}/>)}
+            render={renderProps => (
+              <FilterBar
+                petData={this.props.petData}
+                top={this.mostLikesData}
+                low={this.leastLikesData}
+                pop={this.mostPopularData}
+                lessPop={this.leastPopularData}
+                new={this.sortNewData}
+                old={this.sortOldData}
+                original={this.originalData}
+                setFilter={this.setFilter}
+              />
+            )}
           />
           <Route
             exact path={`${this.props.match.path}`}
-            render={(renderProps)=> (<FilterBar
-              petData={this.props.petData}
-              top={this.mostLikesData}
-              low={this.leastLikesData}
-              pop={this.mostPopularData}
-              lessPop={this.leastPopularData}
-              new={this.sortNewData}
-              old={this.sortOldData}
-              original={this.originalData}
-              setFilter={this.setFilter}
-            />)}
+            render={renderProps=> (
+              <PetList
+                petData={this.state.filter}
+              />
+            )}
           />
+          <pre>Auth: { JSON.stringify(this.props.auth) }</pre>
       </div>
     )
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    petData: state.pets,
-    authData: state.auth,
-  }
-};
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;

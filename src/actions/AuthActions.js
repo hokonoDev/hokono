@@ -1,20 +1,29 @@
 import firebase from '../firebase/index';
+import store from '../store';
+import { updateFromDBAction } from './ShelterProfileActions';
 
-
-export const signin = () => {
+export const signinAction = () => {
   const user = firebase.auth().currentUser;
-  return {
+  const action = {
     type: 'SIGNIN',
-    userInfo: {
+    payload: {
       loggedIn: true,
       username: user.email,
+      displayName: user.displayName,
+      uid: user.uid,
     },
-  }
+  };
+  updateFromDBAction();
+  store.dispatch(action);
 };
 
-export const signout = () => {
-  return {
+export const signoutAction = () => {
+  firebase.auth().signOut();
+  const action = {
     type: 'SIGNOUT',
-    loggedIn: false,
-  }
+    payload: {
+      loggedIn: false,
+    },
+  };
+  store.dispatch(action);
 };

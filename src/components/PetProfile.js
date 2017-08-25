@@ -1,5 +1,7 @@
 import React from 'react';
-import PetPostList from './PetProfile/PetPostList.js';
+import { PetPostList } from './index';
+import { Nav } from './index';
+
 const PetProfile = (props) => {
   return (
     <div>

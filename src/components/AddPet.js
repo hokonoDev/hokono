@@ -18,7 +18,7 @@ const AddPet = ({ dispatch, history }) => {
             return
           }
           console.log("thisis input2", input2.files)
-          dispatch(addPet({name: input.value, img: input2.files}))
+          addPet({name: input.value, img: input2.files})
           input.value = ''
           input2.value = ''
         }}

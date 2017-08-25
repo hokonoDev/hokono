@@ -33,7 +33,7 @@ const Nav = (props) => {
           src="/images/plus-button.png"
         />
       </Link>
-      <Link to={`/shelter/profile/${props.auth.username}`}>
+      <Link to={`/shelter/profile/${props.auth.uid}`}>
         <img
           style={imgStyle}
           src="/images/profile.png"

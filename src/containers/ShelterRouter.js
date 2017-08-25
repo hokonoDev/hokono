@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
+import firebase from '../firebase/index';
 import {
   Dashboard,
   PetProfile,
@@ -18,9 +19,18 @@ const getPetData = ({ location, pets }) => {
   return pets.filter(pet => pet.id === petId)[0];
 }
 
+const getProfilePromise = (uid) => {
+  return firebase.database().ref(`/shelters/${uid}`).once('value');
+}
+
 const getProfileData = ({ location, auth, profile }) => {
   const profileId = parsePath(location.pathname)[3];
-  return auth.username === profileId ? {...profile, owner: true} : {owner: false};
+  return auth.uid === profileId ?
+    {...profile, owner: true} :
+    {
+      profilePromise: getProfilePromise(profileId),
+      owner: false,
+    };
 }
 
 const parsePath = (path) => {

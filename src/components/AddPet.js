@@ -9,17 +9,6 @@ const AddPet = ({ dispatch, history }) => {
   let input;
   let input2;
 
-  this.createFile = (path) => {
-    console.log("path file", path);
-    const file = new File([''], path);
-    //var selectedFile = document.getElementById('imgBlob').files[0];
-    //store a file and access it's img using the fedback ref url
-    const currUser = firebase.auth().currentUser;
-    const storageRef = firebase.storage().ref('/testfolder/testimg');
-    //upload a file
-    const uploadTask = storageRef.put(file);
-  }
-
   return (
     <div>
       <form
@@ -28,8 +17,8 @@ const AddPet = ({ dispatch, history }) => {
           if (!input.value.trim() || !input2.value.trim()) {
             return
           }
-          this.createFile(input2.value)
-          dispatch(addPet({name: input.value, img: input2.value}))
+          console.log("thisis input2", input2.files)
+          dispatch(addPet({name: input.value, img: input2.files}))
           input.value = ''
           input2.value = ''
         }}
@@ -44,7 +33,6 @@ const AddPet = ({ dispatch, history }) => {
         <input type="file"
           accept="image/*"
           capture="camera"
-          id="imgBlob"
           ref={node2 => {
             input2 = node2
           }}

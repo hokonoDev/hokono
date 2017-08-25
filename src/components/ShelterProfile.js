@@ -7,7 +7,8 @@ const ShelterProfile = (props) => {
   return (
     <div>
       <div>
-        {props.profile.owner ?
+        {
+          props.profile.owner ?
           'My Profile'
           :
           'Not My Profile'
@@ -33,7 +34,7 @@ const ShelterProfile = (props) => {
           />
         )}
       />
-      <pre>{ JSON.stringify(props.profile) }</pre>
+      <pre>Profile: { JSON.stringify(props.profile) }</pre>
     </div>
   );
 }

@@ -108,7 +108,7 @@ class Dashboard extends React.Component {
               />
             )}
           />
-          <pre>{ JSON.stringify(this.props.auth) }</pre>
+          <pre>Auth: { JSON.stringify(this.props.auth) }</pre>
       </div>
     )
   };

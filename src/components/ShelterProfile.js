@@ -3,39 +3,61 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { EditProfile } from './index';
 import { Nav } from './index';
 
-const ShelterProfile = (props) => {
-  return (
-    <div>
+const ShelterProfile = class extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      profile: {},
+    };
+  }
+
+  componentDidMount() {
+    if (!this.props.profile.owner){
+      this.props.profile.profilePromise
+        .then(item =>
+          this.setState({ profile: { ...item.val(), owner: false }})
+        );
+    } else {
+      this.setState({ profile: this.props.profile });
+    }
+  }
+
+  render() {
+    return (
       <div>
-        {props.profile.owner ?
-          'My Profile'
-          :
-          'Not My Profile'
-        }
+        <div>
+          {
+            this.props.profile.owner ?
+            'My Profile'
+            :
+            'Not My Profile'
+          }
+        </div>
+        <div>
+          {this.props.profile.owner ?
+            <Link to={`${this.props.match.url}/edit`}>
+              <button>
+              Edit Profile
+              </button>
+            </Link>
+            :
+            null
+          }
+        </div>
+        <Route
+          path={`${this.props.match.path}/edit`}
+          render={renderProps => (
+            <EditProfile
+              {...renderProps}
+              authorized={this.props.profile.owner}
+            />
+          )}
+        />
+        <pre>Profile: { JSON.stringify(this.state.profile) }</pre>
       </div>
-      <div>
-        {props.profile.owner ?
-          <Link to={`${props.match.url}/edit`}>
-            <button>
-            Edit Profile
-            </button>
-          </Link>
-          :
-          null
-        }
-      </div>
-      <Route
-        path={`${props.match.path}/edit`}
-        render={renderProps => (
-          <EditProfile
-            {...renderProps}
-            authorized={props.profile.owner}
-          />
-        )}
-      />
-      <pre>{ JSON.stringify(props.profile) }</pre>
-    </div>
-  );
+    );
+  }
 }
 
 export default ShelterProfile;

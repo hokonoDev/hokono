@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 //link to single petpage
 const PetListEntry = ({name, id, imgUrl}) => {
   return (
-    <Link to={`/pet/${id}`}>
+    <Link to={`/shelter/pet/${id}`}>
       <div>
         <div>{name}</div>
         <img src={imgUrl}/>

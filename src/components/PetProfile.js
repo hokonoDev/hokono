@@ -5,10 +5,6 @@ import { Nav } from './index';
 const PetProfile = (props) => {
   return (
     <div>
-      <Nav
-        {...this.props}
-        authData={props.auth}
-      />
       PetProfile
       <pre>{JSON.stringify(props.match)}</pre>
     </div>

@@ -18,7 +18,7 @@ export const initAction = (payload) => {
 
   payload = {
     ...payload,
-    pets: [],
+    pets: {},
     blurb: '',
     profPic: '',
     uid: user.uid,

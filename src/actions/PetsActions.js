@@ -43,17 +43,20 @@ export const addPet = (input) => {
     const uid = firebase.auth().currentUser.uid;
     const key = firebase.database().ref(`/shelters/${uid}/pets`).push().key;
     var updates = {};
-    const temp = action.pet;
-    temp.id = key;
-    action.pet = {};
-    action.pet[key] = temp;
+    action.pet.ownerUid = uid;
+    action.pet.id = key;
 
     //add pet to /shelter/user in firebase
-    updates[`/shelters/${uid}/pets` + key] = action.pet;
+    updates[`/shelters/${uid}/pets/` + key] = action.pet;
     firebase.database().ref().update(updates);
 
     //add pet to global pet array in firebase
     firebase.database().ref(`pets`).push(action.pet);
+
+    const temp = action.pet;
+    temp.id = key;
+    action.pet = {};
+    action.pet[key] = temp;
 
     store.dispatch(action);
 

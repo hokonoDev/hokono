@@ -1,51 +1,47 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Dashboard } from '../components/index';
-import { PetProfile } from '../components/index';
 import { Home } from '../components/index';
-import { AddPet } from '../components/index';
-import { ShelterProfile } from '../components/index';
-import { Nav } from '../components/index';
 import {
   AuthRouter,
   ShelterRouter,
+  GuestRouter,
   } from './index';
 
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <Router>
-        <div>
-          <Route
-            exact
-            path="/"
-            component={Home}
+const App = props => (
+  <Router>
+    <div>
+      <Route
+        exact
+        path="/"
+        render={renderProps => (
+          <Home
+            auth={props.auth}
           />
-          <Route
-            path="/auth"
-            render={renderProps =>
-              <AuthRouter
-                {...renderProps}
-                loggedIn={this.props.auth.loggedIn}
-                dispatch={this.props.dispatch}
-              />
-            }
+        )}
+      />
+      <Route
+        path="/auth"
+        render={renderProps =>
+          <AuthRouter
+            {...renderProps}
+            loggedIn={props.auth.loggedIn}
+            dispatch={props.dispatch}
           />
-          <Route
-            path="/shelter"
-            component={ShelterRouter}
-          />
-        </div>
-      </Router>
-    );
-  }
-}
+        }
+      />
+      <Route
+        path="/shelter"
+        component={ShelterRouter}
+      />
+      <Route
+        path="/guest"
+        component={GuestRouter}
+      />
+    </div>
+  </Router>
+);
 
 const mapStateToProps = (state) => {
   return {

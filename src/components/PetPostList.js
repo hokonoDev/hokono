@@ -4,6 +4,7 @@ import { PetPost } from './index';
 const PetPostList = () => {
   return (
     <div>
+      <PetPost />
     </div>
   );
 }

@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { signoutAction } from '../actions/AuthActions';
 import {
   FilterBar,
-  Nav,
   PetList,
   IfRedirect
 } from './index';

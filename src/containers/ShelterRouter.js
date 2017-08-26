@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import firebase from '../firebase/index';
 import {
   Dashboard,

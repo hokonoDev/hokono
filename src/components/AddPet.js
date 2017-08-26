@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { addPet } from '../actions/PetsActions';
-import { Nav } from './index';
-import firebase from '../firebase/index.js';
 
 const AddPet = ({ dispatch, history }) => {
   let input;

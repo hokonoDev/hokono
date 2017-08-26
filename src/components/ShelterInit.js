@@ -13,8 +13,6 @@ export default class extends React.Component{
       error: '',
     };
 
-    console.log(this.props.auth);
-
     this.change = this.change.bind(this);
     this.submit = this.submit.bind(this);
   }

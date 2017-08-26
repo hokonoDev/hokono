@@ -2,6 +2,12 @@ import firebase from '../firebase/index';
 import store from '../store';
 import { updateFromDBAction } from './ShelterProfileActions';
 
+export const getPets = (payload) => {
+  const action = {type:'GETPETS'};
+  action.payload = payload.pets;
+  store.dispatch(action);
+}
+
 export const signinAction = () => {
   const user = firebase.auth().currentUser;
   const action = {

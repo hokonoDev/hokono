@@ -29,14 +29,16 @@ const compressFile = (files) => {
 //base64Url the image
 }
 
-export default (state = fakeData, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case 'ADD_PET' :
-      return [...state, { ...action.pet }];
+      return {...state,  ...action.pet };
     case 'EDIT_PET' :
       return state.map(pet => (
         pet.id === action.id ? { ...pet, ...action.edit } : pet
       ));
+    case 'GETPETS' :
+      return {...state, ...action.payload};
     default :
       return state;
   }

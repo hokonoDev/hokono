@@ -16,7 +16,8 @@ export const userFollowedPet(pet) {
   firebase.database().ref(`/pets/${petID}/followers`).push(uid);
 
   //petowner.pet adds new userfollower to his pets followers
-
+  const owner = pet.ownerUid
+  firebase.database().ref(`/accounts/owner/pets`).push(petID);
 
 
 

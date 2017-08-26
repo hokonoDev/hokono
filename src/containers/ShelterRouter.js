@@ -19,7 +19,8 @@ const getPets = ({pets}) => {
 
 const getPetData = ({ location, pets }) => {
   const petId = parsePath(location.pathname)[3];
-  return pets.filter(pet => pet.id === petId)[0];
+  console.log(pets);
+  return Object.values(pets).filter(pet => pet.id === petId)[0];
 }
 
 const getProfilePromise = (uid) => {

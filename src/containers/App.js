@@ -5,6 +5,7 @@ import { Home } from '../components/index';
 import {
   AuthRouter,
   ShelterRouter,
+  GuestRouter,
   } from './index';
 
 
@@ -14,7 +15,11 @@ const App = props => (
       <Route
         exact
         path="/"
-        component={Home}
+        render={renderProps => (
+          <Home
+            auth={props.auth}
+          />
+        )}
       />
       <Route
         path="/auth"
@@ -29,6 +34,10 @@ const App = props => (
       <Route
         path="/shelter"
         component={ShelterRouter}
+      />
+      <Route
+        path="/guest"
+        component={GuestRouter}
       />
     </div>
   </Router>

@@ -15,6 +15,10 @@ import PetProfile from './PetProfile';
 import ShelterProfile from './ShelterProfile';
 import Signup from './Signup';
 import ShelterInit from './ShelterInit';
+import IfRender from './IfRender';
+import GlobalPetFeed from './GlobalPetFeed';
+import Feed from './Feed';
+import FeedEntry from './FeedEntry';
 
 export {
   AddPet,
@@ -34,5 +38,10 @@ export {
   ShelterProfile,
   Signup,
   ShelterInit,
+  IfRender,
+  GlobalPetFeed,
+  Feed,
+  FeedEntry,
+
 };
 

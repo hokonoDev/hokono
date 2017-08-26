@@ -49,7 +49,7 @@ export const initAction = (payload) => {
 export const editProfileAction = (payload) => {
   const user = firebase.auth().currentUser;
 
-  firebase.database().ref(`shelters/${user.uid}`).update(payload)
+  firebase.database().ref(`accounts/${user.uid}`).update(payload)
     .then(() => {
       updateFromDBAction();
     });

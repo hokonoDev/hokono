@@ -102,7 +102,7 @@ class Dashboard extends React.Component {
             exact path={`${this.props.match.path}`}
             render={renderProps=> (
               <PetList
-                petData={this.state.filter}
+                petData={this.props.petData}
               />
             )}
           />

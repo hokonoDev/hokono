@@ -36,6 +36,18 @@ export const addPet = (input) => {
     //the download url for the newly added pet
     //save the firebase hosted profile pic to pet.filepath
     action.pet.filePath = uploadTask.snapshot.downloadURL;
+
+    const uid = firebase.auth().currentUser.uid;
+    const key = firebase.database().ref(`/shelters/${uid}/pets`).push().key;
+    var updates = {};
+    updates[`/shelters/${uid}/pets` + key] = action.pet;
+    firebase.database().ref().update(updates);
+    console.log("is key right? ", key);
+    //firebase.database().ref(`shelters/${uid}/pets`).push(action.pet);
+    const temp = action.pet;
+    action.pet = {};
+    action.pet[key] = temp;
+    console.log("is this key correct or is it uid ", action.pet);
     store.dispatch(action);
   });
 }

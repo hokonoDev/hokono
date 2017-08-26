@@ -10,7 +10,7 @@ export const addPet = (input) => {
       likes: 0,
     }
   }
-  const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.email}/${action.pet.id}`);
+  const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.uid}/${action.pet.id}`);
 
   /*action.pet.filePath.item(0) should be COMPRESSED Base64 HERE
   *COMPRESS COMPRESS

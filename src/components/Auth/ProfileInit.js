@@ -4,7 +4,7 @@ import {
   IfRender,
   ShelterInit,
   UserInit,
-} from './index';
+} from '../index';
 
 export default class extends React.Component{
   constructor(props) {

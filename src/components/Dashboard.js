@@ -70,7 +70,7 @@ class Dashboard extends React.Component {
       <div>
         <IfRedirect
           if={this.props.auth.displayName}
-          ifFalse={`/shelter/init`}
+          ifFalse={`/auth/init`}
         />
         <IfRedirect
           if={this.props.auth.loggedIn}

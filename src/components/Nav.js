@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { IfRender } from './index';
 
 const Nav = (props) => {
   const imgStyle = {
@@ -15,27 +16,43 @@ const Nav = (props) => {
   };
   return (
     <div style={barStyle}>
-      <Link to={`/shelter/dashboard`}>
-        <img
-          style={imgStyle}
-          src="/images/home.png"
-          alt=""
-        />
-      </Link>
-      <Link to={`/shelter/addPet`}>
-        <img
-          style={imgStyle}
-          src="/images/plus-button.png"
-          alt=""
-        />
-      </Link>
-      <Link to={`/shelter/profile/${props.auth.uid}`}>
-        <img
-          style={imgStyle}
-          src="/images/profile.png"
-          alt=""
-        />
-      </Link>
+      <IfRender
+        if={props.auth.loggedIn}
+        ifTrue={() => (
+          <div>
+            <Link to={`/shelter/dashboard`}>
+              <img
+                style={imgStyle}
+                src="/images/home.png"
+                alt=""
+              />
+            </Link>
+            <Link to={`/shelter/addPet`}>
+              <img
+                style={imgStyle}
+                src="/images/plus-button.png"
+                alt=""
+              />
+            </Link>
+            <Link to={`/shelter/profile/${props.auth.uid}`}>
+              <img
+                style={imgStyle}
+                src="/images/profile.png"
+                alt=""
+              />
+            </Link>
+          </div>
+        )}
+        ifFalse={() => (
+          <Link to={`/`}>
+              <img
+                style={imgStyle}
+                src="/images/home.png"
+                alt=""
+              />
+          </Link>
+        )}
+      />
     </div>
   );
 }

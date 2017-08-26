@@ -15,6 +15,7 @@ export default class extends React.Component {
   }
 
   change({ target }) {
+    target.name = target.name || 'acctType';
     const nextState = {};
     nextState[target.name] = target.value;
     this.setState(nextState);

@@ -19,6 +19,8 @@ import IfRender from './IfRender';
 import GlobalPetFeed from './GlobalPetFeed';
 import Feed from './Feed';
 import FeedEntry from './FeedEntry';
+import ProfileInit from './ProfileInit';
+import UserInit from './UserInit';
 
 export {
   AddPet,
@@ -42,6 +44,7 @@ export {
   GlobalPetFeed,
   Feed,
   FeedEntry,
-
+  ProfileInit,
+  UserInit,
 };
 

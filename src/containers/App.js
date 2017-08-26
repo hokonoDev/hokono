@@ -6,6 +6,7 @@ import {
   AuthRouter,
   ShelterRouter,
   GuestRouter,
+  PetRouter,
   } from './index';
 
 
@@ -38,6 +39,10 @@ const App = props => (
       <Route
         path="/"
         component={GuestRouter}
+      />
+      <Route
+        path="/pet"
+        component={PetRouter}
       />
     </div>
   </Router>

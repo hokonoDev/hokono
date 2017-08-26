@@ -17,12 +17,6 @@ const getPets = ({pets}) => {
   return pets;
 }
 
-const getPetData = ({ location, pets }) => {
-  const petId = parsePath(location.pathname)[3];
-  console.log(pets);
-  return Object.values(pets).filter(pet => pet.id === petId)[0];
-}
-
 const getProfilePromise = (uid) => {
   return firebase.database().ref(`/shelters/${uid}`).once('value');
 }
@@ -54,16 +48,6 @@ const ShelterRouter = (props) => (
         <Dashboard
           {...routerProps}
           petData={getPets(props)}
-          auth={props.auth}
-        />
-      )}
-    />
-    <Route
-      path="/shelter/pet/:id"
-      render={routerProps => (
-        <PetProfile
-          {...routerProps}
-          pet={getPetData(props)}
           auth={props.auth}
         />
       )}

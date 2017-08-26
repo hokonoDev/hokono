@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IfRender } from './index';
+import { IfRender, IfRedirect } from './index';
 import { getAllPets } from '../actions/GlobalPetsActions';
-import firebase from '../firebase/index';
 
 const Home = (props) => {
   return (
@@ -16,9 +15,14 @@ const Home = (props) => {
             <Link to="/allpets" onClick={getAllPets}>Continue as a Guest</Link>
           </div>
         )}
-        ifTrue={() => (
-          <Link to="/shelter/dashboard">Dashboard</Link>
-        )}
+      />
+      <IfRedirect
+        if={props.profile.acctType && props.profile.acctType === 'user'}
+        ifTrue="/user/dashboard"
+      />
+      <IfRedirect
+        if={props.profile.acctType && props.profile.acctType === 'shelter'}
+        ifTrue="/shelter/dashboard"
       />
     </div>
   );

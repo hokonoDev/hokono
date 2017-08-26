@@ -1,6 +1,5 @@
 import firebase from '../firebase/index';
 import store from '../store';
-import _ from 'lodash';
 
 export const addPet = (input) => {
   const action = {
@@ -11,7 +10,7 @@ export const addPet = (input) => {
       likes: 0,
     }
   }
-  const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.email}/${action.pet.id}`);
+  const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.uid}/${action.pet.id}`);
 
   /*action.pet.filePath.item(0) should be COMPRESSED Base64 HERE
   *COMPRESS COMPRESS
@@ -41,7 +40,7 @@ export const addPet = (input) => {
     action.pet.filePath = uploadTask.snapshot.downloadURL;
 
     const uid = firebase.auth().currentUser.uid;
-    const key = firebase.database().ref(`/shelters/${uid}/pets`).push().key;
+    const key = firebase.database().ref(`/accounts/${uid}/pets`).push().key;
     var updates = {};
     action.pet.ownerUid = uid;
     action.pet.id = key;
@@ -49,7 +48,7 @@ export const addPet = (input) => {
     //add pet to /shelter/user in firebase
     //add pet to global pet array in firebase
     updates['/pets/' + key] = action.pet;
-    updates[`/shelters/${uid}/pets/` + key] = action.pet;
+    updates[`/accounts/${uid}/pets/` + key] = action.pet;
     firebase.database().ref().update(updates);
 
     const temp = action.pet;

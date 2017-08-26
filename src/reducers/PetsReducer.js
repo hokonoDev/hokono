@@ -4,27 +4,6 @@ import firebase from '../firebase/index.js';
 const storage = firebase.storage();
 const database = firebase.database();
 
-const fakeData = [
-  {
-    id: _.uniqueId('pet_'),
-    name: 'fido',
-    profilePic: '',
-    likes: 10,
-  },
-  {
-    id: _.uniqueId('pet_'),
-    name: 'bandit',
-    profilePic: '',
-    likes: 5,
-  },
-  {
-    id: _.uniqueId('pet_'),
-    name: 'willy',
-    profilePic: '',
-    likes: 9001,
-  }
-];
-
 const compressFile = (files) => {
 //base64Url the image
 }
@@ -39,6 +18,8 @@ export default (state = {}, action) => {
       ));
     case 'GETPETS' :
       return {...state, ...action.payload};
+    case 'CLEAR_PETS' :
+      return {};
     default :
       return state;
   }

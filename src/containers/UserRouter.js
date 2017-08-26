@@ -8,7 +8,6 @@ import {
   ShelterProfile,
   Nav,
   IfRedirect,
-  ShelterInit,
   } from '../components/index';
 
 
@@ -17,7 +16,7 @@ const getPets = ({pets}) => {
 }
 
 const getProfilePromise = (uid) => {
-  return firebase.database().ref(`/shelters/${uid}`).once('value');
+  return firebase.database().ref(`/users/${uid}`).once('value');
 }
 
 const getProfileData = ({ location, auth, profile }) => {
@@ -37,12 +36,12 @@ const parsePath = (path) => {
 const ShelterRouter = (props) => (
   <div>
     <IfRedirect
-      if={window.location.pathname === '/shelter'}
-      ifTrue="/shelter/dashboard"
+      if={window.location.pathname === '/user'}
+      ifTrue="/user/dashboard"
     />
     <Nav />
     <Route
-      path="/shelter/dashboard"
+      path="/user/dashboard"
       render={routerProps => (
         <Dashboard
           {...routerProps}
@@ -51,7 +50,7 @@ const ShelterRouter = (props) => (
         />
       )}
     />
-    <Route path="/shelter/addPet"
+    <Route path="/user/addPet"
       render={routerProps => (
         <AddPet
           {...routerProps}
@@ -60,20 +59,11 @@ const ShelterRouter = (props) => (
       )}
     />
     <Route
-      path="/shelter/profile/:id"
+      path="/user/profile/:id"
       render={routerProps => (
         <ShelterProfile
           {...routerProps}
           profile={getProfileData(props)}
-          auth={props.auth}
-        />
-      )}
-    />
-    <Route
-      path="/shelter/init"
-      render={routerProps => (
-        <ShelterInit
-          {...routerProps}
           auth={props.auth}
         />
       )}

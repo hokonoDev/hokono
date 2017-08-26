@@ -8,11 +8,30 @@ export const updateFromDBAction = () => {
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`/shelters/${uid}`).once('value')
     .then(snapshot => {
-      action.payload = snapshot.val();
-      if(snapshot.val()) {
+      if (snapshot.val()) return snapshot.val();
+      throw new Error('no profile');
+    })
+    .then(val => {
+      action.payload = val;
+      if(val) {
         getPets(action.payload);
       }
       store.dispatch(action);
+    })
+    .catch(err => {
+      if (err.toString() !== 'Error: no profile') return console.error(err);
+      firebase.database().ref(`/users/${uid}`).once('value')
+        .then(snapshot => {
+          if (snapshot.val()) return snapshot.val();
+          throw new Error('no profile');
+        })
+        .then(val => {
+          action.payload = val;
+          if(val) {
+            getPets(action.payload);
+          }
+          store.dispatch(action);
+        })
     });
 }
 

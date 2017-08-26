@@ -32,4 +32,5 @@ export const signoutAction = () => {
     },
   };
   store.dispatch(action);
+  store.dispatch({ type: 'CLEAR_PETS' })
 };

@@ -1,23 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPet } from '../../../actions/index.js';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { addPet } from '../actions/PetsActions';
 
-const AddPet = ({ dispatch }) => {
+const AddPet = ({ dispatch, history }) => {
   let input;
   let input2;
-  let input3;
+
   return (
     <div>
-      <Link to='/dashboard'>dashboardlink</Link>
       <form
         onSubmit={e => {
           e.preventDefault()
           if (!input.value.trim() || !input2.value.trim()) {
             return
           }
-
-          dispatch(addPet({name: input.value, img: input2.value}))
+          addPet({name: input.value, img: input2.files})
           input.value = ''
           input2.value = ''
         }}
@@ -36,7 +33,6 @@ const AddPet = ({ dispatch }) => {
             input2 = node2
           }}
         />
-
         <button type="submit">
           Add Pet
         </button>

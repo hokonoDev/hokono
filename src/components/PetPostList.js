@@ -1,9 +1,10 @@
 import React from 'react';
-import PetPost from './PetPostList/PetPost.js';
+import { PetPost } from './index';
 
 const PetPostList = () => {
   return (
     <div>
+      <PetPost />
     </div>
   );
 }

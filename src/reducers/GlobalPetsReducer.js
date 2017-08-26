@@ -1,7 +1,7 @@
 export default (state = {}, action) => {
   switch (action.type) {
-    case 'UPDATE_PROFILE' :
-      return { ...state, ...action.payload };
+    case 'GET_ALL_PETS' :
+      return { ...state, ...action.allPets };
     default :
       return state;
   }

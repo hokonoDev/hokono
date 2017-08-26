@@ -71,8 +71,5 @@ const ShelterProfile = class extends React.Component {
   }
 }
 
-// <PetList
-//   petData={this.state.profile.pets || {}}
-// />
 
 export default ShelterProfile;

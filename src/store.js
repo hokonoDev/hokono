@@ -2,12 +2,14 @@ import { createStore, combineReducers } from 'redux';
 import PetsReducer from './reducers/PetsReducer';
 import ShelterProfReducer from './reducers/ShelterProfReducer';
 import AuthReducer from './reducers/AuthReducer';
+import GlobalPetsReducer from './reducers/GlobalPetsReducer';
 import firebase from './firebase/index';
 
 const comboReducer = combineReducers({
   pets: PetsReducer,
   profile: ShelterProfReducer,
   auth: AuthReducer,
+  gPets: GlobalPetsReducer,
 });
 
 const user = firebase.auth().currentUser;

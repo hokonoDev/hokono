@@ -43,7 +43,6 @@ const parsePath = (path) => {
 
 const ShelterRouter = (props) => (
   <div>
-  {console.log("thisshould be pets from db in shelterrouter ", props)}
     <IfRedirect
       if={window.location.pathname === '/shelter'}
       ifTrue="/shelter/dashboard"

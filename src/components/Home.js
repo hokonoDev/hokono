@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IfRender } from './index';
+import { getAllPets } from '../actions/GlobalPetsActions';
+import firebase from '../firebase/index';
 
 const Home = (props) => {
   return (
@@ -11,7 +13,7 @@ const Home = (props) => {
         ifFalse={()=> (
           <div>
             <Link to="/auth/login">Login</Link>
-            <Link to="/guest/pets">Continue as a Guest</Link>
+            <Link to="/allpets" onClick={getAllPets}>Continue as a Guest</Link>
           </div>
         )}
         ifTrue={() => (

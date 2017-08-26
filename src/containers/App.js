@@ -36,7 +36,7 @@ const App = props => (
         component={ShelterRouter}
       />
       <Route
-        path="/guest"
+        path="/"
         component={GuestRouter}
       />
     </div>

@@ -4,7 +4,7 @@ import { signinAction } from './AuthActions';
 import { getPets } from './AuthActions';
 
 export const updateFromDBAction = () => {
-  const action = { type: 'UPDATE' };
+  const action = { type: 'UPDATE_PROFILE' };
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`/shelters/${uid}`).once('value')
     .then(snapshot => {
@@ -26,10 +26,9 @@ export const initAction = (payload) => {
     profPic: '',
     uid: user.uid,
     email: user.email,
-    acctType: 'shelter',
   };
 
-  firebase.database().ref(`shelters/${user.uid}`).set(payload);
+  firebase.database().ref(`${payload.acctType}s/${user.uid}`).set(payload);
 
   user.updateProfile({
     displayName: payload.displayName,
@@ -40,7 +39,7 @@ export const initAction = (payload) => {
     });
 
   const action = {
-    type: 'UPDATE',
+    type: 'UPDATE_PROFILE',
     payload,
   };
   store.dispatch(action);

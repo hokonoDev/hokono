@@ -9,7 +9,6 @@ export const updateFromDBAction = () => {
   firebase.database().ref(`/shelters/${uid}`).once('value')
     .then(snapshot => {
       action.payload = snapshot.val();
-      console.log(action);
       getPets(action.payload);
       store.dispatch(action);
     });

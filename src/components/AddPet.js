@@ -14,7 +14,6 @@ const AddPet = ({ dispatch, history }) => {
           if (!input.value.trim() || !input2.value.trim()) {
             return
           }
-          console.log("thisis input2", input2.files)
           addPet({name: input.value, img: input2.files})
           input.value = ''
           input2.value = ''

@@ -6,11 +6,12 @@ import { GlobalPetFeed } from '../components/index';
 const GuestRouter = (props) => (
   <div>
     <Route
-      path="/guest/pets"
+      path="/allpets"
       render={renderProps => (
         <GlobalPetFeed
           {...renderProps}
           auth={props.auth}
+          gPets={props.gPets}
         />
       )}
     />
@@ -20,6 +21,7 @@ const GuestRouter = (props) => (
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    gPets: state.gPets,
   };
 }
 

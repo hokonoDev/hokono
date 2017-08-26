@@ -14,6 +14,7 @@ export default ({data}) => (
       'alignItems': 'center',
     }}
   >
+  {console.log("data into feed entry, ",data)}
     <h4>{data.name}</h4>
     <div
       style={{

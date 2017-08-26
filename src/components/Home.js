@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { IfRender, IfRedirect } from './index';
 import { getAllPets } from '../actions/GlobalPetsActions';
-import firebase from '../firebase/index';
 
 const Home = (props) => {
   return (

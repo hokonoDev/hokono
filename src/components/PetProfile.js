@@ -5,7 +5,7 @@ const PetProfile = (props) => {
   return (
     <div>
       <h4>{props.pet.name}</h4>
-      <p>Profile pic placeholder. url: {props.pet.profilePic}</p>
+      <p>Profile pic placeholder. url: {props.pet.filePath}</p>
       <p>Likes: {props.pet.likes}</p>
       <pre>{JSON.stringify(props.pet)}</pre>
       <PetPostList />

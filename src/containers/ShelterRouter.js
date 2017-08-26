@@ -13,6 +13,9 @@ import {
   } from '../components/index';
 
 
+const getPets = ({pets}) => {
+  return pets;
+}
 
 const getPetData = ({ location, pets }) => {
   const petId = parsePath(location.pathname)[3];
@@ -39,6 +42,7 @@ const parsePath = (path) => {
 
 const ShelterRouter = (props) => (
   <div>
+  {console.log("thisshould be pets from db in shelterrouter ", props)}
     <IfRedirect
       if={window.location.pathname === '/shelter'}
       ifTrue="/shelter/dashboard"
@@ -49,7 +53,7 @@ const ShelterRouter = (props) => (
       render={routerProps => (
         <Dashboard
           {...routerProps}
-          petData={props.pets}
+          petData={getPets(props)}
           auth={props.auth}
         />
       )}

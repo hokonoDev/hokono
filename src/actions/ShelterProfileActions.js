@@ -1,6 +1,7 @@
 import firebase from '../firebase/index';
 import store from '../store';
 import { signinAction } from './AuthActions';
+import { getPets } from './AuthActions';
 
 export const updateFromDBAction = () => {
   const action = { type: 'UPDATE' };
@@ -9,6 +10,7 @@ export const updateFromDBAction = () => {
     .then(snapshot => {
       action.payload = snapshot.val();
       console.log(action);
+      getPets(action.payload);
       store.dispatch(action);
     });
 }

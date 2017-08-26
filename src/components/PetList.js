@@ -9,14 +9,15 @@ import _ from 'lodash';
 const PetList = ({petData}) => {
   return (
     <div>
-      {petData.map(data => (
+    {console.log("data into petlist", petData)}
+      {Object.keys(petData).length>0 ? Object.values(petData).map(data => (
         <PetListEntry
           key={_.uniqueId()}
           name={data.name}
           id={data.id}
           imgUrl={data.url}
         />
-      ))}
+      )): null}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import {
   ShelterRouter,
   GuestRouter,
   PetRouter,
+  UserRouter
   } from './index';
 
 
@@ -19,6 +20,7 @@ const App = props => (
         render={renderProps => (
           <Home
             auth={props.auth}
+            profile={props.profile}
           />
         )}
       />
@@ -43,6 +45,10 @@ const App = props => (
       <Route
         path="/pet"
         component={PetRouter}
+      />
+      <Route
+        path='/user'
+        component={UserRouter}
       />
     </div>
   </Router>

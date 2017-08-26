@@ -9,7 +9,6 @@ import _ from 'lodash';
 const PetList = ({petData}) => {
   return (
     <div>
-    {console.log("data into petlist", petData)}
       {Object.keys(petData).length>0 ? Object.values(petData).map(data => (
         <PetListEntry
           key={_.uniqueId()}

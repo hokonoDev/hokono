@@ -9,7 +9,6 @@ export const addPet = (input) => {
       name: input.name,
       filePath: input.img,
       likes: 0,
-      id: _.uniqueId('pet_'),
     }
   }
   const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.email}/${action.pet.id}`);
@@ -49,6 +48,7 @@ export const addPet = (input) => {
     console.log("is key right? ", key);
     //firebase.database().ref(`shelters/${uid}/pets`).push(action.pet);
     const temp = action.pet;
+    temp.id = key;
     action.pet = {};
     action.pet[key] = temp;
     console.log("is this key correct or is it uid ", action.pet);

@@ -1,11 +1,7 @@
 export default (state = {}, action) => {
   switch (action.type) {
     case 'GET_ALL_PETS' :
-      if (action.payload === "success") {
-
-      } else {
-        return { ...state };
-      }
+      return { ...state, ...action.allPets };
     default :
       return state;
   }

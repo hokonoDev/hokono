@@ -27,6 +27,7 @@ export const userFollowedPet = (pet) => {
     updates[`/accounts/${owner}/pets/${pet.id}/followers` + key3] = uid;
     firebase.database().ref().update(updates).then(results=> {
       console.log("Successfully updated user following pet to db", results);
+      action.data = { following: pet.id };
       action.payload("success");
       return results;
     }).catch(err=> {

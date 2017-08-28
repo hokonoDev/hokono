@@ -1,7 +1,8 @@
 import React from 'react';
 import { userFollowedPet } from '../actions/UserFollowsPet';
+import { connect } from 'react-redux';
 
-export default ({data}) => (
+const FeedEntry = (props) => (
   <div
     style={{
       height: '400px',
@@ -15,11 +16,11 @@ export default ({data}) => (
       'alignItems': 'center',
     }}
   >
-  {console.log("data into feed entry, ",data)}
-    <h4>{data.name}</h4>
+  {console.log("data into feed entry, ",props.data)}
+    <h4>{props.data.name}</h4>
     <div
       style={{
-        'backgroundImage': `url(${data.filePath})`,
+        'backgroundImage': `url(${props.data.filePath})`,
         width: '300px',
         height: '200px',
         'backgroundSize': 'contain',
@@ -28,16 +29,24 @@ export default ({data}) => (
       }}
     />
     <div>
-      <button onClick={userFollowedPet(data)}>
-        <img
-          style={{
-            width: '20px',
+      <button
+        style={{
+            width: '60px',
             height: '20px',
-          }}
-          src="/images/heart.png"
-        />
+        }}
+        onClick={userFollowedPet(props.data)}
+      >
+      'Follow'
       </button>
     </div>
-    <p>{data.likes} Likes</p>
+    <p>{props.data.likes} Likes</p>
   </div>
 );
+
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile,
+  }
+}
+//{props.profile.following[props.data.id] ? 'Followed' : 'Follow'}
+export default connect(mapStateToProps)(FeedEntry);

@@ -2,7 +2,7 @@ import firebase from '../firebase/index';
 import store from '../store';
 import _ from 'lodash';
 
-export const userFollowedPet(pet) {
+export const userFollowedPet = (pet) => {
   const action = { type: 'FOLLOW_A_PET' };
   //pet has to be pet object
   //assume this is correct way to get user id and not shelterId
@@ -27,13 +27,12 @@ export const userFollowedPet(pet) {
     updates[`/accounts/${owner}/pets/${pet.id}/followers` + key3] = uid;
     firebase.database().ref().update(updates).then(results=> {
       console.log("Successfully updated user following pet to db", results);
+      action.payload("success");
       return results;
     }).catch(err=> {
       console.log("ERROR updating user follows pet", err);
+      action.payload("err");
       throw err;
     });
   store.dispatch(action);
-
-
-
 }

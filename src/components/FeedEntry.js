@@ -1,5 +1,5 @@
 import React from 'react';
-import userFollowedPet from '../actions/UserFollowsPet';
+import { userFollowedPet } from '../actions/UserFollowsPet';
 
 export default ({data}) => (
   <div

@@ -1,5 +1,6 @@
 import React from 'react';
-import { PetPostList } from './index';
+import { PetPostList, IfRender } from './index';
+import { userFollowedPet } from '../actions/UserFollowsPet';
 
 const PetProfile = class extends React.Component {
   constructor(props) {
@@ -34,8 +35,42 @@ const PetProfile = class extends React.Component {
     return (
       <div>
         <h4>{this.state.pet.name}</h4>
-        <p>Profile pic placeholder. url: {this.state.pet.filePath}</p>
+        <img
+          src={this.state.pet.filePath}
+          alt=""
+          style={{
+            height: '200px',
+            width: '200px',
+            imagePosition: 'center',
+            objectFit: 'contain',
+          }}
+        />
         <p>Likes: {this.state.pet.likes}</p>
+        <p>Followers: {this.state.pet.followersCount}</p>
+        <IfRender
+        if={this.props.auth.uid === this.state.pet.ownerUid}
+        ifFalse={() => (
+          <button
+            style={{
+                width: '60px',
+                height: '20px',
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (this.props.auth.loggedIn) {
+                userFollowedPet(this.state.pet)
+              } else {
+                alert('Please log in to follow');
+              }
+            }}
+            disabled={!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id]}
+          >
+          {!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id] ? 'Followed': 'Follow'}
+          </button>
+        )}
+      />
+          {console.log(this.props.profile)}
+          {console.log(this.props.pet)}
         <pre>{JSON.stringify(this.state.pet)}</pre>
         <PetPostList />
       </div>

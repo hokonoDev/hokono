@@ -42,7 +42,7 @@ const FeedEntry = (props) => (
               if (props.auth.loggedIn) {
                 userFollowedPet(props.data)
               } else {
-                alert('Please loggin to follow');
+                alert('Please log in to follow');
               }
             }}
             disabled={!!props.profile.following && !!props.profile.following[props.data.id]}

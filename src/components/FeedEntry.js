@@ -28,7 +28,6 @@ const FeedEntry = (props) => (
       }}
     />
     <div>
-      {console.log(props)}
       <button
         style={{
             width: '60px',
@@ -36,7 +35,11 @@ const FeedEntry = (props) => (
         }}
         onClick={(e) => {
           e.preventDefault();
-          userFollowedPet(props.data)
+          if (props.auth.loggedIn) {
+            userFollowedPet(props.data)
+          } else {
+            alert('Please loggin to follow');
+          }
         }}
         disabled={props.profile.following && props.profile.following[props.data.id] === true}
       >
@@ -50,6 +53,7 @@ const FeedEntry = (props) => (
 const mapStateToProps = (state) => {
   return {
     profile: state.profile,
+    auth: state.auth,
   }
 }
 //{props.profile.following[props.data.id] ? 'Followed' : 'Follow'}

@@ -1,4 +1,5 @@
 import React from 'react';
+import userFollowedPet from '../actions/UserFollowsPet';
 
 export default ({data}) => (
   <div
@@ -27,7 +28,7 @@ export default ({data}) => (
       }}
     />
     <div>
-      <button>
+      <button onClick={userFollowedPet(data)}>
         <img
           style={{
             width: '20px',

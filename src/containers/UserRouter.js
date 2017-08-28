@@ -35,6 +35,7 @@ const parsePath = (path) => {
 
 const ShelterRouter = (props) => (
   <div>
+    {console.log(props.profile)}
     <IfRedirect
       if={window.location.pathname === '/user'}
       ifTrue="/user/dashboard"
@@ -47,6 +48,7 @@ const ShelterRouter = (props) => (
           {...routerProps}
           petData={getPets(props)}
           auth={props.auth}
+          profile={props.profile}
         />
       )}
     />

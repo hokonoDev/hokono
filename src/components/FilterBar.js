@@ -1,11 +1,12 @@
 import React from 'react';
+import { sortPetsAction } from '../actions/PetsActions';
 
 class FilterBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      dropFilter: '',
+      searchTerm: '',
+      filter: props.filter || '<.createdSort',
     };
     //handles name change into searchbar
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -15,7 +16,8 @@ class FilterBar extends React.Component {
   }
 
   handleNameChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({searchTerm: event.target.value});
+    sortPetsAction(this.state.filter, event.target.value);
   }
 
   //May change later to autofilter without submit
@@ -26,43 +28,47 @@ class FilterBar extends React.Component {
 
   //
   handleDropFilter(event) {
-    this.setState({dropFilter: event.target.value});
-    if (event.target.value === "Most likes") {
-      this.props.setFilter(this.props.top());
-    } else if (event.target.value === "Least likes") {
-      this.props.setFilter(this.props.low());
-    } else if (event.target.value === "Least Popular") {
-      this.props.setFilter(this.props.lessPop());
-    } else if (event.target.value === "Popular") {
-      this.props.setFilter(this.props.pop());
-    } else if (event.target.value === "New") {
-      this.props.setFilter(this.props.new());
-    }  else if (event.target.value === "Old") {
-      this.props.setFilter(this.props.old());
-    }else {
-      this.props.setFilter(this.props.original());
-    }
+    this.setState({ filter: event.target.value })
+    sortPetsAction(event.target.value, this.state.searchTerm);
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleNameSubmit}>
-          <label>
-            Filter Pet by Name doesnt work yet:
-            <input type="text" value={this.state.value} onChange={this.handleNameChange} />
-          </label>
+        <form
+          onSubmit={this.handleNameSubmit}
+        >
+          Filter Pet by Name doesnt work yet:
+          <input
+            type="text"
+            value={this.state.searchTerm}
+            onChange={this.handleNameChange}
+          />
           <input type="submit" value="Submit" />
+          <select
+            onChange={this.handleDropFilter}
+            value={this.state.filter}
+          >
+            <option
+              value=">.likeSort"
+            >Most likes</option>
+            <option
+              value="<.likeSort"
+            >Least likes</option>
+            <option
+              value=">.trendSort"
+            >Trending</option>
+            <option
+              value="<.trendSort"
+            >Lagging</option>
+            <option
+              value=">.createdSort"
+            >Newest</option>
+            <option
+              value="<.createdSort"
+            >Oldest</option>
+          </select>
         </form>
-        <select value={this.state.dropFilter} onChange={this.handleDropFilter}>
-          <option value="Most likes" list="1">Most likes</option>
-          <option value="Least likes" list="2">Least likes</option>
-          <option value="Popular" list="3"> Popular </option>
-          <option value="Least Popular" list="4">Least Popular</option>
-          <option value="New" list="5"> New </option>
-          <option value="Old" list="6"> Old </option>
-          <option value="Original" list="7"> Original </option>
-        </select>
       </div>
     );
   }

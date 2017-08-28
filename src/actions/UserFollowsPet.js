@@ -13,15 +13,8 @@ export const userFollowedPet = (pet) => {
   //these three API calls can be reduced with serverside cloud code
   //indented here to remember to go back to reduce API calls
     //user adds pet to his list of following
-    //make sure pet is the correct pet has petID
-    var key1 = firebase.database().ref(`/accounts/${uid}/following`).push().key;
-
-    //pet adds user to his list of followers
-    var key2 = firebase.database().ref(`/pets/${pet.id}/followers`).push().key;
-
     //petowner.pet adds new userfollower to his pets followers
     const owner = pet.ownerUid;
-    var key3 = firebase.database().ref(`/accounts/${owner}/pets/${pet.id}/followers`).push().key;
 
     var obj1 = {};
     obj1[pet.id] = true;

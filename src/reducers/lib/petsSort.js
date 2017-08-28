@@ -25,7 +25,6 @@ const searchSort = (pets, term, results = []) => {
   return searchSort(pets, term.slice(0, -1), results);
 }
 
-
 const likeSort = (pet1, pet2) => {
   return pet1[1].likes - pet2[1].likes;
 }
@@ -34,7 +33,12 @@ const createdSort = (pet1, pet2) => {
   return pet1[1].timeStamp - pet2[1].timeStamp;
 }
 
+const popularSort = (pet1, pet2) => {
+  return pet1[1].followersCount - pet2[1].followersCount;
+}
+
 const sortTypes = {
   likeSort,
   createdSort,
+  popularSort,
 }

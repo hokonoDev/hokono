@@ -18,11 +18,11 @@ export const getAllPets = (input) => {
 
 }
 
-export const sortGlobalPetsAction = (sortType, searchTerm) => {
+export const sortGlobalPetsAction = (sortType, sortDirection, searchTerm) => {
   const action = {
     type: 'SORT_GLOBAL_PETS',
-    sortType: sortType.split('.')[1],
-    lToG: sortType.split('.')[0] === '<',
+    sortType: sortType,
+    lToG: sortDirection === 'Least',
     searchTerm,
   }
   store.dispatch(action);

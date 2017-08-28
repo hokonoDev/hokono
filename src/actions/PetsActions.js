@@ -62,7 +62,7 @@ export const addPet = (input) => {
   });
 }
 
-export const sortPetsAction = (sortType, searchTerm) => {
+export const sortUsersPetsAction = (sortType, searchTerm) => {
   const action = {
     type: 'SORT_MY_PETS',
     sortType: sortType.split('.')[1],

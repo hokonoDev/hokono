@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { userFollowedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
 import { IfRender } from './index';
@@ -17,7 +18,9 @@ const FeedEntry = (props) => (
       'alignItems': 'center',
     }}
   >
-    <h4>{props.data.name}</h4>
+    <Link
+      to={`pet/${props.data.id}`}
+    >{props.data.name}</Link>
     <div
       style={{
         'backgroundImage': `url(${props.data.filePath})`,
@@ -42,7 +45,7 @@ const FeedEntry = (props) => (
               if (props.auth.loggedIn) {
                 userFollowedPet(props.data)
               } else {
-                alert('Please loggin to follow');
+                alert('Please log in to follow');
               }
             }}
             disabled={!!props.profile.following && !!props.profile.following[props.data.id]}

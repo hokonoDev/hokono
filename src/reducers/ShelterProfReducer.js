@@ -4,7 +4,7 @@ export default (state = {}, action) => {
       return { ...state, ...action.payload };
     case 'FOLLOW_A_PET' :
       if (action.payload === 'success') {
-        return { ...state, ...action.data };
+        return { ...state, following: {...state.following, ...action.data.following} };
         //if success following, i don't need to read from db, just update store and trust that db and store will be the same
       } else {
         return { ...state };

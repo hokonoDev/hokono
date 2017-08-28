@@ -16,7 +16,6 @@ const FeedEntry = (props) => (
       'alignItems': 'center',
     }}
   >
-  {console.log("data into feed entry, ",props.data)}
     <h4>{props.data.name}</h4>
     <div
       style={{
@@ -34,9 +33,13 @@ const FeedEntry = (props) => (
             width: '60px',
             height: '20px',
         }}
-        onClick={userFollowedPet(props.data)}
+        onClick={(e) => {
+          e.preventDefault();
+          userFollowedPet(props.data)
+        }}
+        disabled={props.profile.following[props.data.id] === true}
       >
-      'Follow'
+      {props.profile.following[props.data.id] === true ? 'Followed': 'Follow'}
       </button>
     </div>
     <p>{props.data.likes} Likes</p>

@@ -27,6 +27,7 @@ export const initAction = (payload) => {
     profPic: '',
     uid: user.uid,
     email: user.email,
+    following: {},
   };
 
   firebase.database().ref(`accounts/${user.uid}`).set(payload);

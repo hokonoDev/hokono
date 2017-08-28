@@ -28,6 +28,7 @@ const FeedEntry = (props) => (
       }}
     />
     <div>
+      {console.log(props)}
       <button
         style={{
             width: '60px',
@@ -37,9 +38,9 @@ const FeedEntry = (props) => (
           e.preventDefault();
           userFollowedPet(props.data)
         }}
-        disabled={props.profile.following[props.data.id] === true}
+        disabled={props.profile.following && props.profile.following[props.data.id] === true}
       >
-      {props.profile.following[props.data.id] === true ? 'Followed': 'Follow'}
+      {props.profile.following && props.profile.following[props.data.id] === true ? 'Followed': 'Follow'}
       </button>
     </div>
     <p>{props.data.likes} Likes</p>

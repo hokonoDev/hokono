@@ -1,5 +1,5 @@
 import React from 'react';
-import { sortPetsAction } from '../actions/PetsActions';
+import { IfRender } from './index';
 
 class FilterBar extends React.Component {
   constructor(props) {
@@ -10,41 +10,36 @@ class FilterBar extends React.Component {
     };
     //handles name change into searchbar
     this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleNameSubmit = this.handleNameSubmit.bind(this);
     //handles dropdown input change
     this.handleDropFilter = this.handleDropFilter.bind(this);
   }
 
   handleNameChange(event) {
     this.setState({searchTerm: event.target.value});
-    sortPetsAction(this.state.filter, event.target.value);
+    this.props.sortAction(this.state.filter, event.target.value);
   }
 
-  //May change later to autofilter without submit
-  handleNameSubmit(event) {
-    //alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  //
   handleDropFilter(event) {
     this.setState({ filter: event.target.value })
-    sortPetsAction(event.target.value, this.state.searchTerm);
+    this.props.sortAction(event.target.value, this.state.searchTerm);
   }
 
   render() {
     return (
       <div>
-        <form
-          onSubmit={this.handleNameSubmit}
-        >
-          Filter Pet by Name doesnt work yet:
-          <input
-            type="text"
-            value={this.state.searchTerm}
-            onChange={this.handleNameChange}
+        <form>
+          Search by name:
+          <IfRender
+            if={this.props.searchBar}
+            ifTrue={() => (
+              <input
+                type="text"
+                value={this.state.searchTerm}
+                onChange={this.handleNameChange}
+              />
+            )}
           />
-          <input type="submit" value="Submit" />
+          Sort:
           <select
             onChange={this.handleDropFilter}
             value={this.state.filter}

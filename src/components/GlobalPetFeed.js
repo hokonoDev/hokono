@@ -1,10 +1,16 @@
 import React from 'react';
-import { Feed, Nav } from './index';
+import { Feed, Nav, FilterBar } from './index';
+import { sortGlobalPetsAction } from '../actions/GlobalPetsActions';
 
 export default (props) => (
   <div>
     Global Pet Feed
     <Nav />
+    <FilterBar
+      filter={props.gPets.sort}
+      sortAction={sortGlobalPetsAction}
+      searchBar={true}
+    />
     <Feed
       feedData={props.gPets}
     />

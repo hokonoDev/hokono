@@ -1,5 +1,5 @@
 import React from 'react';
-import { userFollowedPet } from '../actions/UserFollowsPet';
+import { userFollowedPet, userLikedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
 import { IfRender } from './index';
 
@@ -48,6 +48,19 @@ const FeedEntry = (props) => (
             disabled={!!props.profile.following && !!props.profile.following[props.data.id]}
           >
           {!!props.profile.following && !!props.profile.following[props.data.id] ? 'Followed': 'Follow'}
+          </button>
+          <button
+            onClick={(e) => {
+            e.preventDefault();
+            userLikedPet(props.data)
+          }}>
+            <img
+              style={{
+                width: '20px',
+                height: '20px',
+              }}
+              src="/images/heart.png"
+            />
           </button>
         )}
       />

@@ -38,3 +38,9 @@ export const userFollowedPet = (pet) => {
       throw err;
     });
 }
+
+export const userLikedPet = (pet) => {
+  const action = {
+    type: 'LIKED_A_PET'
+  }
+}

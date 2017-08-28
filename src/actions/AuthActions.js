@@ -1,6 +1,7 @@
 import firebase from '../firebase/index';
 import store from '../store';
 import { updateFromDBAction } from './ShelterProfileActions';
+import { getAllPets } from './GlobalPetsActions';
 
 export const getPets = (payload) => {
   const action = {type:'GETPETS'};
@@ -20,6 +21,7 @@ export const signinAction = () => {
     },
   };
   updateFromDBAction();
+  getAllPets();
   store.dispatch(action);
 };
 

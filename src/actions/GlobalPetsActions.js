@@ -1,6 +1,5 @@
 import firebase from '../firebase/index';
 import store from '../store';
-import _ from 'lodash';
 
 export const getAllPets = (input) => {
   const action = {
@@ -17,4 +16,14 @@ export const getAllPets = (input) => {
       throw err;
     });
 
+}
+
+export const sortGlobalPetsAction = (sortType, searchTerm) => {
+  const action = {
+    type: 'SORT_GLOBAL_PETS',
+    sortType: sortType.split('.')[1],
+    lToG: sortType.split('.')[0] === '<',
+    searchTerm,
+  }
+  store.dispatch(action);
 }

@@ -8,6 +8,7 @@ export const addPet = (input) => {
       name: input.name,
       filePath: input.img,
       likes: 0,
+      timeStamp: Date.now(),
     }
   }
   const uid = firebase.auth().currentUser.uid;
@@ -59,4 +60,14 @@ export const addPet = (input) => {
 
     //
   });
+}
+
+export const sortUsersPetsAction = (sortType, searchTerm) => {
+  const action = {
+    type: 'SORT_MY_PETS',
+    sortType: sortType.split('.')[1],
+    lToG: sortType.split('.')[0] === '<',
+    searchTerm,
+  }
+  store.dispatch(action);
 }

@@ -10,7 +10,7 @@ export default (props) => (
     }}
   >
     {
-      Object.values(props.feedData).map(data => (
+      Object.values(props.feedData).filter(data => !!data.name).map(data => (
         <FeedEntry
           data={data}
         />

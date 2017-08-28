@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import firebase from '../firebase/index.js';
+import petsSort from './lib/petsSort';
 
 const storage = firebase.storage();
 const database = firebase.database();
@@ -20,6 +20,8 @@ export default (state = {}, action) => {
       return {...state, ...action.payload};
     case 'CLEAR_PETS' :
       return {};
+    case 'SORT_MY_PETS' :
+      return petsSort(state, action.sortType, action.lToG, action.searchTerm);
     default :
       return state;
   }

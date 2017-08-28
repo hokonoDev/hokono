@@ -8,7 +8,16 @@ const PetListEntry = ({name, id, imgUrl}) => {
     <Link to={`/pet/${id}`}>
       <div>
         <div>{name}</div>
-        <img src={imgUrl} alt="" />
+        <img
+          src={imgUrl}
+          alt=""
+          style={{
+            height: '200px',
+            width: '200px',
+            imagePosition: 'center',
+            objectFit: 'contain',
+          }}
+        />
       </div>
     </Link>
   );

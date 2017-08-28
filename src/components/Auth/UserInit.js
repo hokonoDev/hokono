@@ -1,5 +1,5 @@
 import React from 'react';
-import { initAction } from '../actions/ShelterProfileActions';
+import { initAction } from '../../actions/ShelterProfileActions';
 
 export default class extends React.Component{
   constructor(props) {

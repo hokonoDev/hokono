@@ -20,24 +20,31 @@ const Nav = (props) => {
         if={props.auth.loggedIn}
         ifTrue={() => (
           <div>
-            <Link to={`/shelter/dashboard`}>
+            <Link to={`/${props.profile.acctType}/dashboard`}>
               <img
                 style={imgStyle}
                 src="/images/home.png"
                 alt=""
               />
             </Link>
-            <Link to={`/shelter/addPet`}>
+            <Link to={`/${props.profile.acctType}/addPet`}>
               <img
                 style={imgStyle}
                 src="/images/plus-button.png"
                 alt=""
               />
             </Link>
-            <Link to={`/shelter/profile/${props.auth.uid}`}>
+            <Link to={`/${props.profile.acctType}/profile/${props.auth.uid}`}>
               <img
                 style={imgStyle}
                 src="/images/profile.png"
+                alt=""
+              />
+            </Link>
+            <Link to={`/allpets`}>
+              <img
+                style={imgStyle}
+                src="/images/magnifier.png"
                 alt=""
               />
             </Link>

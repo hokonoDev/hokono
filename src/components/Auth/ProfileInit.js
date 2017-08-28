@@ -4,7 +4,7 @@ import {
   IfRender,
   ShelterInit,
   UserInit,
-} from './index';
+} from '../index';
 
 export default class extends React.Component{
   constructor(props) {
@@ -26,7 +26,6 @@ export default class extends React.Component{
     e.preventDefault();
     let error = '';
     if(this.verify()) {
-      console.log('setting acctType to', e.target.value)
       this.setState({ acctType: e.target.value });
     }
     this.setState({ error });
@@ -53,9 +52,7 @@ export default class extends React.Component{
         <IfRender
           if={!!this.state.acctType}
           ifFalse={() => (
-            <form
-              onSubmit={this.submit.bind(this)}
-            >
+            <form>
               <button
                 value="shelter"
                 onClick={this.submit}

@@ -9,6 +9,7 @@ export const addPet = (input) => {
       filePath: input.img,
       likes: 0,
       timeStamp: Date.now(),
+      followers: {},
     }
   }
   const uid = firebase.auth().currentUser.uid;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { userFollowedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
+import { IfRender } from './index';
 
 const FeedEntry = (props) => (
   <div
@@ -28,23 +29,28 @@ const FeedEntry = (props) => (
       }}
     />
     <div>
-      <button
-        style={{
-            width: '60px',
-            height: '20px',
-        }}
-        onClick={(e) => {
-          e.preventDefault();
-          if (props.auth.loggedIn) {
-            userFollowedPet(props.data)
-          } else {
-            alert('Please loggin to follow');
-          }
-        }}
-        disabled={props.profile.following && props.profile.following[props.data.id] === true}
-      >
-      {props.profile.following && props.profile.following[props.data.id] === true ? 'Followed': 'Follow'}
-      </button>
+      <IfRender
+        if={props.auth.uid === props.data.ownerUid}
+        ifFalse={() => (
+          <button
+            style={{
+                width: '60px',
+                height: '20px',
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (props.auth.loggedIn) {
+                userFollowedPet(props.data)
+              } else {
+                alert('Please loggin to follow');
+              }
+            }}
+            disabled={!!props.profile.following && !!props.profile.following[props.data.id]}
+          >
+          {!!props.profile.following && !!props.profile.following[props.data.id] ? 'Followed': 'Follow'}
+          </button>
+        )}
+      />
     </div>
     <p>{props.data.likes} Likes</p>
   </div>

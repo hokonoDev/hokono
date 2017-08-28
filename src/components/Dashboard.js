@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { signoutAction } from '../actions/AuthActions';
 import { sortUsersPetsAction } from '../actions/PetsActions';
 import {
   FilterBar,
   PetList,
-  IfRedirect
+  IfRedirect,
+  FollowingList,
+  IfRender,
 } from './index';
 
 export default props => (
@@ -24,6 +26,14 @@ export default props => (
       >
         Logout
       </button>
+      <IfRender
+        if={props.match.path.split('/')[1] === 'user'}
+        ifTrue={renderProps => (
+          <Link
+            to="/user/dashboard/following"
+          >Following: {props.profile.followingCount ? props.profile.followingCount : '0'}</Link>
+        )}
+      />
       <Route
         exact path={`${props.match.path}`}
         render={renderProps => (
@@ -39,6 +49,14 @@ export default props => (
         render={renderProps=> (
           <PetList
             petData={props.petData}
+          />
+        )}
+      />
+      <Route
+        exact path={'/user/dashboard/following'}
+        render={renderProps=> (
+          <FollowingList
+            following={props.profile.following}
           />
         )}
       />

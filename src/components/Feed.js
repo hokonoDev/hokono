@@ -1,5 +1,6 @@
 import React from 'react';
 import { FeedEntry } from './index';
+import _ from 'lodash';
 
 export default (props) => (
   <div
@@ -12,6 +13,7 @@ export default (props) => (
     {
       Object.values(props.feedData).filter(data => !!data.name).map(data => (
         <FeedEntry
+          key={_.uniqueId()}
           data={data}
         />
       ))

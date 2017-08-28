@@ -2,8 +2,10 @@ import firebase from '../firebase/index';
 import store from '../store';
 import _ from 'lodash';
 
-export const userFollowedPet(pet) {
-  const action = { type: 'FOLLOW_A_PET' };
+export const userFollowedPet = (pet) => {
+  const action = {
+    type: 'FOLLOW_A_PET'
+  };
   //pet has to be pet object
   //assume this is correct way to get user id and not shelterId
   const uid = firebase.auth().currentUser.uid;
@@ -21,19 +23,25 @@ export const userFollowedPet(pet) {
     const owner = pet.ownerUid;
     var key3 = firebase.database().ref(`/accounts/${owner}/pets/${pet.id}/followers`).push().key;
 
-    //we need to use update to receive a promise (as opposed to push)
-    updates[`/accounts/${uid}/following` + key1] = pet.id;
-    updates[`/pets/${pet.id}/followers` + key2] = uid;
-    updates[`/accounts/${owner}/pets/${pet.id}/followers` + key3] = uid;
-    firebase.database().ref().update(updates).then(results=> {
-      console.log("Successfully updated user following pet to db", results);
-      return results;
-    }).catch(err=> {
-      console.log("ERROR updating user follows pet", err);
+    var obj1 = {};
+    obj1[pet.id] = true;
+
+    //followers and following user ids updated in following:{userid:{}, userid:{}} format
+    updates[`/accounts/${uid}/following/` + pet.id] = true;
+    updates[`/pets/${pet.id}/followers/` + uid] = true;
+    updates[`/accounts/${owner}/pets/${pet.id}/followers/` + uid] = true;
+
+    //counts for followers and following
+    updates[`/accounts/${uid}/followingCount/`] =  store.getState().profile.followingCount + 1 || 1;
+    updates[`/pets/${pet.id}/followersCount/`] = pet.followersCount + 1 || 1;
+    updates[`/accounts/${owner}/pets/${pet.id}/followersCount/`] = pet.followersCount + 1 || 1;
+
+    firebase.database().ref().update(updates).then(() => {
+      action.data = { following: obj1 };
+      action.payload = "success";
+      store.dispatch(action);
+    }, (err) => {
+      action.payload = "err";
       throw err;
     });
-  store.dispatch(action);
-
-
-
 }

@@ -7,19 +7,31 @@ export const userFollowedPet(pet) {
   //pet has to be pet object
   //assume this is correct way to get user id and not shelterId
   const uid = firebase.auth().currentUser.uid;
-
+  var updates = {};
   //these three API calls can be reduced with serverside cloud code
+  //indented here to remember to go back to reduce API calls
     //user adds pet to his list of following
     //make sure pet is the correct pet has petID
-    firebase.database().ref(`/accounts/${uid}/following`).push(pet.id);
+    var key1 = firebase.database().ref(`/accounts/${uid}/following`).push().key;
 
     //pet adds user to his list of followers
-    firebase.database().ref(`/pets/${pet.id}/followers`).push(uid);
+    var key2 = firebase.database().ref(`/pets/${pet.id}/followers`).push().key;
 
     //petowner.pet adds new userfollower to his pets followers
     const owner = pet.ownerUid;
-    firebase.database().ref(`/accounts/${owner}/pets/${pet.id}/followers`).push(uid);
+    var key3 = firebase.database().ref(`/accounts/${owner}/pets/${pet.id}/followers`).push().key;
 
+    //we need to use update to receive a promise (as opposed to push)
+    updates[`/accounts/${uid}/following` + key1] = pet.id;
+    updates[`/pets/${pet.id}/followers` + key2] = uid;
+    updates[`/accounts/${owner}/pets/${pet.id}/followers` + key3] = uid;
+    firebase.database().ref().update(updates).then(results=> {
+      console.log("Successfully updated user following pet to db", results);
+      return results;
+    }).catch(err=> {
+      console.log("ERROR updating user follows pet", err);
+      throw err;
+    });
   store.dispatch(action);
 
 

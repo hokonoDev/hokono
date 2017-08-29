@@ -54,14 +54,11 @@ const FeedEntry = (props) => (
           e.preventDefault();
           if (props.auth.loggedIn) {
             if (typeof props.data.likedBy === 'undefined') {
-              console.log("a");
               userLikedPet(props.data);
             }
             else if (props.data.likedBy[props.auth.uid]) {
-              console.log("b");
               userUnlikedPet(props.data);
             } else {
-              console.log("c");
               userLikedPet(props.data);
             }
           } else {

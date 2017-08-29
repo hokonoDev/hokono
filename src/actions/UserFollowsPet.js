@@ -38,6 +38,37 @@ export const userFollowedPet = (pet) => {
     });
 }
 
+export const userUnfollowedPet = (pet) => {
+  const action = {
+    type: 'UNFOLLOW_A_PET'
+  };
+  const user = firebase.auth().currentUser;
+  var updates = {};
+  const owner = pet.ownerUid;
+
+  var obj1 = {};
+  obj1[pet.id] = null;
+
+  //unfollow nulls
+  updates[`/accounts/${user.uid}/following/` + pet.id] = null;
+  updates[`/pets/${pet.id}/followers/` + user.uid] = null;
+  updates[`/accounts/${owner}/pets/${pet.id}/followers/` + user.uid] = null;
+
+  //counts for followers and following
+  updates[`/accounts/${user.uid}/followingCount/`] =  store.getState().profile.followingCount - 1 || 0;
+  updates[`/pets/${pet.id}/followersCount/`] = pet.followersCount - 1 || 0;
+  updates[`/accounts/${owner}/pets/${pet.id}/followersCount/`] = pet.followersCount - 1 || 0;
+
+  firebase.database().ref().update(updates).then(() => {
+    action.data = { following: obj1 };
+    action.payload = "success";
+    store.dispatch(action);
+  }, (err) => {
+    action.payload = "err";
+    throw err;
+  });
+}
+
 export const userLikedPet = (pet) => {
   const action = {
     type: 'LIKED_A_PET'

@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { IfRender } from './index';
+import { getAllPets } from '../actions/GlobalPetsActions';
+import { updateFromDBAction } from '../actions/ShelterProfileActions';
 
 const Nav = (props) => {
   const imgStyle = {
@@ -20,7 +22,10 @@ const Nav = (props) => {
         if={props.auth.loggedIn}
         ifTrue={() => (
           <div>
-            <Link to={`/${props.profile.acctType}/dashboard`}>
+            <Link
+              to={`/${props.profile.acctType}/dashboard`}
+              onClick={updateFromDBAction}
+            >
               <img
                 style={imgStyle}
                 src="/images/home.png"
@@ -41,7 +46,10 @@ const Nav = (props) => {
                 alt=""
               />
             </Link>
-            <Link to={`/allpets`}>
+            <Link
+              to={`/allpets`}
+              onClick={getAllPets}
+            >
               <img
                 style={imgStyle}
                 src="/images/magnifier.png"

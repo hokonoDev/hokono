@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default props => (
   <div>
+    {console.log(props.following)}
     {
       props.following ? Object.entries(props.following).map(userInfo => (
         <Link

@@ -1,6 +1,5 @@
 import firebase from '../firebase/index';
 import store from '../store';
-import _ from 'lodash';
 
 export const userFollowedPet = (pet) => {
   const action = {

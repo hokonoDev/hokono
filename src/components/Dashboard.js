@@ -7,7 +7,7 @@ import {
   PetList,
   IfRedirect,
   FollowingList,
-  IfRender,
+  // IfRender,
 } from './index';
 
 export default props => (
@@ -26,14 +26,9 @@ export default props => (
       >
         Logout
       </button>
-      <IfRender
-        if={props.match.path.split('/')[1] === 'user'}
-        ifTrue={renderProps => (
-          <Link
-            to="/user/dashboard/following"
-          >Following: {props.profile.followingCount ? props.profile.followingCount : '0'}</Link>
-        )}
-      />
+      <Link
+        to="/user/dashboard/following"
+      >Following: {props.profile.followingCount ? props.profile.followingCount : '0'}</Link>
       <Route
         exact path={`${props.match.path}`}
         render={renderProps => (

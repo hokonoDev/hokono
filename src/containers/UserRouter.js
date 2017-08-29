@@ -35,7 +35,6 @@ const parsePath = (path) => {
 
 const ShelterRouter = (props) => (
   <div>
-    {console.log(props.profile)}
     <IfRedirect
       if={window.location.pathname === '/user'}
       ifTrue="/user/dashboard"

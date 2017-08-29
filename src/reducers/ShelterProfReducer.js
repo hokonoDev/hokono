@@ -22,11 +22,16 @@ export default (state = {}, action) => {
         //this myLikes property is so user can see what pets hes liked.
         return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
       }
+      return state;
     case 'UNLIKED_A_PET' :
       if (action.payload === 'success') {
         //this myLikes property is so user can see what pets hes liked.
         return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
       }
+      return state;
+    case 'UPDATE_POSTS' :
+      state.pets[action.petId].posts = { ...state.pets[action.petId].posts, ...action.payload };
+      return state;
     default :
       return state;
   }

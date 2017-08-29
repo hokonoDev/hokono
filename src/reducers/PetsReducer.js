@@ -22,6 +22,9 @@ export default (state = {}, action) => {
       return {};
     case 'SORT_MY_PETS' :
       return petsSort(state, action.sortType, action.lToG, action.searchTerm);
+    case 'UPDATE_POSTS' :
+      state[action.petId].posts = { ...state[action.petId].posts, ...action.payload };
+      return state;
     default :
       return state;
   }

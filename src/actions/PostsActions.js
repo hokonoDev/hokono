@@ -1,0 +1,65 @@
+import firebase from '../firebase/index';
+import store from '../store';
+
+export const fetchPostsAction = () => {
+  firebase.database().ref('posts').once('value')
+    .then(snapshot => {
+      const posts = snapshot.val();
+      store.dispatch({
+        type: 'POPULATE_POSTS',
+        payload: posts,
+      });
+    });
+};
+
+export const addPostAction = (postData, petId) => {
+  const user = firebase.auth().currentUser;
+  const newPostKey = firebase.database().ref('/posts').push().key;
+  const storageRef = firebase.storage().ref(`${user.uid}/${petId}/${newPostKey}`);
+
+  // Upload image to FB storage
+  const uploadTask = storageRef.put(postData.image);
+  uploadTask.on('state_changed', function(snapshot){
+
+  }, function(error) {
+    // Handle unsuccessful uploads
+    switch (error.code) {
+      case 'storage/unauthorized':
+        // User doesn't have permission to access the object
+        break;
+
+      case 'storage/canceled':
+        // User canceled the upload
+        break;
+
+      case 'storage/unknown':
+        // Unknown error occurred, inspect error.serverResponse
+        break;
+    }
+  }, function() {
+    // Add reference to FB storage of image
+    postData.image = uploadTask.snapshot.downloadURL;
+
+    // Adding post default information
+    postData.likesCount = 0;
+    postData.commentsCount = 0;
+
+    // updating firebase DB
+    const updates = {};
+    updates[`/posts/${newPostKey}`] = postData;
+    updates[`/pets/${petId}/posts/${newPostKey}`] = postData;
+    updates[`/accounts/${user.uid}/pets/${petId}/posts/${newPostKey}`] = postData;
+
+    firebase.database().ref().update(updates);
+
+    // updating redux store
+    const action = {
+      type: 'UPDATE_POSTS',
+      payload: {
+        [newPostKey]: postData,
+      },
+      petId: petId,
+    };
+    store.dispatch(action);
+  });
+};

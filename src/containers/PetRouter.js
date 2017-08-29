@@ -43,6 +43,7 @@ const ShelterRouter = (props) => (
       render={routerProps => (
         <AddPetPost
           {...routerProps}
+          pet={getPetData(props)}
         />
       )}
     />

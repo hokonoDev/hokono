@@ -9,6 +9,14 @@ export default (state = {}, action) => {
       } else {
         return { ...state };
       }
+    case 'UNFOLLOW_A_PET' :
+      if (action.payload === 'success') {
+        console.log("wdf",{ ...state, following: {...state.following, ...action.data.following} });
+        return { ...state, following: {...state.following, ...action.data.following} };
+        //if success unfollowing, i don't need to read from db, just update store and trust that db and store will be the same
+      } else {
+        return { ...state };
+      }
     case 'LIKED_A_PET' :
       if (action.payload === 'success') {
         //this myLikes property is so user can see what pets hes liked.

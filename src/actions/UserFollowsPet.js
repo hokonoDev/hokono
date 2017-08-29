@@ -40,12 +40,12 @@ export const userFollowedPet = (pet) => {
 }
 
 export const userLikedPet = (pet) => {
-  console.log("likesLIEKES ACTION is firing!");
   const action = {
     type: 'LIKED_A_PET'
   };
 
   const user = firebase.auth().currentUser;
+  const userid = user.uid;
   var updates = {};
   const owner = pet.ownerUid;
 
@@ -62,7 +62,17 @@ export const userLikedPet = (pet) => {
   updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
 
   firebase.database().ref().update(updates).then(() => {
+    //updates the users likes in state/store
     action.data = { myLikes: obj1 };
+    pet.likes = pet.likes + 1 || 1;
+    const emptyObj = {};
+    emptyObj[user.uid] = { displayName: user.displayName, createdAt: currTime };
+    pet.likedBy = emptyObj;
+    const emptyObj2 = {};
+    emptyObj2[pet.id] = pet;
+
+    //updates the globalpetfeed state/store with likes
+    action.dataPet = { emptyObj2 };
     action.payload = "success";
     store.dispatch(action);
   }, (err) => {
@@ -72,7 +82,6 @@ export const userLikedPet = (pet) => {
 }
 
 export const userUnlikedPet = (pet) => {
-  console.log("unlikes actiojn is firing!");
   const action = {
     type: 'UNLIKED_A_PET'
   };
@@ -93,7 +102,17 @@ export const userUnlikedPet = (pet) => {
   updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
 
   firebase.database().ref().update(updates).then(() => {
+    //updates a users unlikes in state/store
     action.data = { myLikes: obj1 };
+    pet.likes = pet.likes - 1 || 0;
+    const emptyObj = {};
+    emptyObj[user.uid] = null;
+    pet.likedBy = emptyObj;
+    const emptyObj2 = {};
+    emptyObj2[pet.id] = pet;
+
+    //updates a pets unlikes in state/store
+    action.dataPet = { emptyObj2 };
     action.payload = "success";
     store.dispatch(action);
   }, (err) => {

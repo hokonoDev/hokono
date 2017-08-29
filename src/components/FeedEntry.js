@@ -40,7 +40,7 @@ const FeedEntry = (props) => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if (!!props.profile.following[props.data.id]) {
+            if(!!props.profile.following && !!props.profile.following[props.data.id]) {
               userUnfollowedPet(props.data);
             } else {
               userFollowedPet(props.data);
@@ -49,8 +49,9 @@ const FeedEntry = (props) => (
             alert('Please loggin to follow');
           }
         }}
+
       >
-      {!!props.profile.following && !!props.profile.following[props.data.id] ? 'Followed': 'Follow'}
+      {!!props.profile.following && !!props.profile.following[props.data.id] ? 'Unfollow': 'Follow'}
       </button>
       <button
         onClick={(e) => {

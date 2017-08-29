@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IfRender, IfRedirect } from './index';
+import {
+  IfRender,
+  IfRedirect
+} from './index';
 import { getAllPets } from '../actions/GlobalPetsActions';
 
 const Home = (props) => {

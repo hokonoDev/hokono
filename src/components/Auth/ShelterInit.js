@@ -1,4 +1,5 @@
 import React from 'react';
+import Geosuggest from 'react-geosuggest';
 import { initAction } from '../../actions/ShelterProfileActions';
 
 export default class extends React.Component{
@@ -9,11 +10,19 @@ export default class extends React.Component{
       phone: '',
       address: '',
       diaplayName: '',
+      suggest: '',
+      firstSuggest: '',
       error: '',
     };
 
     this.change = this.change.bind(this);
     this.submit = this.submit.bind(this);
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.address !== nextState.address) {
+      this._geoSuggest.update(nextState.address);
+    }
   }
 
   change({ target }) {
@@ -28,6 +37,15 @@ export default class extends React.Component{
 
   submit(e) {
     e.preventDefault();
+    if (this.state.suggest !== this.state.address) {
+      const confirmed = false; // confirm(`You entered an invalid address. Did you mean "${this.state.firstSuggest}"?`);
+      if (confirmed) {
+        this.setState({ address: this.state.firstSuggest, suggest: this.state.firstSuggest});
+      } else {
+        alert('Please select an address from the dropdown menu');
+        return;
+      }
+    }
     let error = '';
     if(this.verify()) {
       initAction({
@@ -63,12 +81,20 @@ export default class extends React.Component{
             value={this.state.displayName}
             onChange={this.change}
           />
-          <input
-            type="text"
-            name="address"
+          <Geosuggest
+            ref={el => this._geoSuggest = el}
             placeholder="Address"
-            value={this.state.address}
-            onChange={this.change}
+            onChange={val => this.setState({ address: val })}
+            initialValue={this.state.address}
+            autoActivateFirstSuggest={true}
+            onActivateSuggest={suggest =>
+              this.state.suggest !== this.state.address ?
+                this.setState({ firstSuggest: suggest.label }) :
+                null
+            }
+            onSuggestSelect={suggest =>
+              this.setState({ address: suggest.label, suggest: suggest.label })
+            }
           />
           <input
             type="text"

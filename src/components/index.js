@@ -22,6 +22,7 @@ import FeedEntry from './FeedEntry';
 import ProfileInit from './Auth/ProfileInit';
 import UserInit from './Auth/UserInit';
 import FollowingList from './FollowingList';
+import PopUp from './PopUp';
 
 export {
   AddPet,
@@ -48,5 +49,6 @@ export {
   ProfileInit,
   UserInit,
   FollowingList,
+  PopUp,
 };
 

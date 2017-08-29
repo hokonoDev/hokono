@@ -48,6 +48,7 @@ const ShelterRouter = (props) => (
           {...routerProps}
           petData={getPets(props)}
           auth={props.auth}
+          profile={props.profile}
         />
       )}
     />

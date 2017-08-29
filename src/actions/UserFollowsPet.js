@@ -38,3 +38,66 @@ export const userFollowedPet = (pet) => {
       throw err;
     });
 }
+
+export const userLikedPet = (pet) => {
+  console.log("likesLIEKES ACTION is firing!");
+  const action = {
+    type: 'LIKED_A_PET'
+  };
+
+  const user = firebase.auth().currentUser;
+  var updates = {};
+  const owner = pet.ownerUid;
+
+  var obj1 = {};
+  obj1[pet.id] = { nameDisplay: user.displayName };
+  const currTime = Date.now();
+
+  updates[`/accounts/${user.uid}/myLikes/` + pet.id] = { name: pet.name };
+  updates[`/pets/${pet.id}/likedBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
+  updates[`/accounts/${owner}/pets/${pet.id}/likedBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
+
+  //counts for followers and following
+  updates[`/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
+  updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
+
+  firebase.database().ref().update(updates).then(() => {
+    action.data = { myLikes: obj1 };
+    action.payload = "success";
+    store.dispatch(action);
+  }, (err) => {
+    action.payload = "err";
+    throw err;
+  });
+}
+
+export const userUnlikedPet = (pet) => {
+  console.log("unlikes actiojn is firing!");
+  const action = {
+    type: 'UNLIKED_A_PET'
+  };
+
+  const user = firebase.auth().currentUser;
+  var updates = {};
+  const owner = pet.ownerUid;
+
+  const obj1 = {};
+  obj1[pet.id] = null;
+
+  updates[`/accounts/${user.uid}/myLikes/` + pet.id] = null;
+  updates[`/pets/${pet.id}/likedBy/` + user.uid] = null;
+  updates[`/accounts/${owner}/pets/${pet.id}/likedBy/` + user.uid] = null;
+
+  //counts for followers and following
+  updates[`/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
+  updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
+
+  firebase.database().ref().update(updates).then(() => {
+    action.data = { myLikes: obj1 };
+    action.payload = "success";
+    store.dispatch(action);
+  }, (err) => {
+    action.payload = "err";
+    throw err;
+  });
+}

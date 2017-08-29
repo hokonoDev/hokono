@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { userFollowedPet, userLikedPet, userUnlikedPet } from '../actions/UserFollowsPet';
+import { userFollowedPet, userLikedPet, userUnlikedPet, userUnfollowedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
 import { IfRender } from './index';
 
@@ -40,12 +40,15 @@ const FeedEntry = (props) => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            userFollowedPet(props.data)
+            if (!!props.profile.following[props.data.id]) {
+              userUnfollowedPet(props.data);
+            } else {
+              userFollowedPet(props.data);
+            }
           } else {
             alert('Please loggin to follow');
           }
         }}
-        disabled={!!props.profile.following && !!props.profile.following[props.data.id]}
       >
       {!!props.profile.following && !!props.profile.following[props.data.id] ? 'Followed': 'Follow'}
       </button>

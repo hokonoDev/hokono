@@ -5,6 +5,7 @@ import firebase from '../firebase/index';
 import {
   PetProfile,
   Nav,
+  AddPetPost,
   } from '../components/index';
 
 const getPetDataPromise = (id) => {
@@ -25,6 +26,7 @@ const ShelterRouter = (props) => (
   <div>
     <Nav />
     <Route
+      exact
       path="/pet/:id"
       render={routerProps => (
         <PetProfile
@@ -32,6 +34,15 @@ const ShelterRouter = (props) => (
           pet={getPetData(props)}
           auth={props.auth}
           profile={props.profile}
+        />
+      )}
+    />
+    <Route
+      exact
+      path="/pet/:id/newpost"
+      render={routerProps => (
+        <AddPetPost
+          {...routerProps}
         />
       )}
     />

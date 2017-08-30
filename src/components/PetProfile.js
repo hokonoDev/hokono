@@ -1,6 +1,7 @@
 import React from 'react';
 import { PetPostList } from './index';
-import { userFollowedPet, userLikedPet, userUnlikedPet } from '../actions/UserFollowsPet';
+import { userFollowedPet } from '../actions/UserFollowsPet';
+import { fetchPostsByPetIdAction } from '../actions/PostsActions'
 
 const PetProfile = class extends React.Component {
   constructor(props) {
@@ -8,6 +9,10 @@ const PetProfile = class extends React.Component {
     this.state = {
       pet: {},
     }
+  }
+
+  componentWillMount() {
+    fetchPostsByPetIdAction(this.props.match.params.id);
   }
 
   componentDidMount() {
@@ -63,7 +68,6 @@ const PetProfile = class extends React.Component {
           disabled={!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id]}
         >{!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id] ? 'Followed': 'Follow'}
         </button>
-        <pre>{JSON.stringify(this.state.pet)}</pre>
         <PetPostList
           pet={this.state.pet}
           auth={this.props.auth}

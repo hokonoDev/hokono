@@ -21,7 +21,7 @@ const PetProfile = class extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(JSON.stringify(prevProps.pet) !== JSON.stringify(this.props.pet)){
-      this.setProfileData();
+      this.setPetData();
     }
   }
 

@@ -21,11 +21,10 @@ export default class extends React.Component {
   submit(e) {
     e.preventDefault();
     if (this.validate()) {
-      console.log(this.state)
       addPostAction({
         image: this.state.image,
         description: this.state.description,
-      }, this.props.pet.id);
+      }, this.props.pet.id, this.props.pet.ownerId);
 
       this.setState({
         image: '',

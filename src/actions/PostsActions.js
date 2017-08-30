@@ -23,7 +23,7 @@ export const fetchPostsByPetIdAction = (petId) => {
     });
 }
 
-export const addPostAction = (postData, petId) => {
+export const addPostAction = (postData, petId, ownerId) => {
   const user = firebase.auth().currentUser;
   const newPostKey = firebase.database().ref('/posts').push().key;
   const storageRef = firebase.storage().ref(`${user.uid}/${petId}/${newPostKey}`);
@@ -59,7 +59,7 @@ export const addPostAction = (postData, petId) => {
     const updates = {};
     updates[`/posts/${newPostKey}`] = postData;
     updates[`/pets/${petId}/posts/${newPostKey}`] = postData;
-    updates[`/accounts/${user.uid}/pets/${petId}/posts/${newPostKey}`] = postData;
+    updates[`/accounts/${ownerId}/pets/${petId}/posts/${newPostKey}`] = postData;
 
     firebase.database().ref().update(updates);
 
@@ -75,7 +75,7 @@ export const addPostAction = (postData, petId) => {
   });
 };
 
-export const likePostAction = (postId, petId) => {
+export const likePostAction = (postId, petId, ownerId) => {
   const user = firebase.auth().currentUser;
 
   // get current likesCount and likes from firebase
@@ -91,12 +91,12 @@ export const likePostAction = (postId, petId) => {
       const updates = {};
       updates[`/posts/${postId}/likesCount`] = newCount;
       updates[`/pets/${petId}/posts/${postId}/likesCount`] = newCount;
-      updates[`/accounts/${user.uid}/pets/${petId}/posts/${postId}/likesCount`] = newCount;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likesCount`] = newCount;
 
       // updates to firebase DB: new likes
       updates[`/posts/${postId}/likes`] = newLikes;
       updates[`/pets/${petId}/posts/${postId}/likes`] = newLikes;
-      updates[`/accounts/${user.uid}/pets/${petId}/posts/${postId}/likes`] = newLikes;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likes`] = newLikes;
 
       firebase.database().ref().update(updates);
 
@@ -112,5 +112,44 @@ export const likePostAction = (postId, petId) => {
       };
       store.dispatch(action);
     });
+}
 
+
+export const unlikePostAction = (postId, petId, ownerId) => {
+  const user = firebase.auth().currentUser;
+
+  // get current likesCount and likes from firebase
+  firebase.database().ref(`/posts/${postId}`).once('value')
+    .then(snapshot => {
+      const current = snapshot.val();
+      if (!!current.likes && !current.likes[user.uid]) return;
+      const newCount = current.likesCount - 1;
+      delete current.likes[user.uid];
+      const newLikes = current.likes;
+
+      // updates to firebase DB: new likesCount
+      const updates = {};
+      updates[`/posts/${postId}/likesCount`] = newCount;
+      updates[`/pets/${petId}/posts/${postId}/likesCount`] = newCount;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likesCount`] = newCount;
+
+      // updates to firebase DB: new likes
+      updates[`/posts/${postId}/likes`] = newLikes;
+      updates[`/pets/${petId}/posts/${postId}/likes`] = newLikes;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likes`] = newLikes;
+
+      firebase.database().ref().update(updates);
+
+      // updating redux store
+      const action = {
+        type: 'LIKE_POST',
+        payload: {
+          likesCount: newCount,
+          likes: newLikes,
+        },
+        petId,
+        postId,
+      };
+      store.dispatch(action);
+    });
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { likePostAction } from '../actions/PostsActions';
+import { likePostAction, unlikePostAction } from '../actions/PostsActions';
 
 const PetPost = props => (
   <div
@@ -30,10 +30,10 @@ const PetPost = props => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if (props.post.likes ? props.post.likes[props.auth.uid] : true) {
-              likePostAction(props.postId, props.petId);
+            if (!!props.post.likes ? !props.post.likes[props.auth.uid] : true) {
+              likePostAction(props.postId, props.petId, props.ownerId);
             } else {
-              alert('You already Liked this post');
+              unlikePostAction(props.postId, props.petId, props.ownerId);
             }
           } else {
             alert('Please login to like');
@@ -45,7 +45,7 @@ const PetPost = props => (
             width: '20px',
             height: '20px',
           }}
-          src="/images/heart.png"
+          src={!!props.post.likes ? !!props.post.likes[props.auth.uid] ? '/images/full-heart.png' : '/images/heart.png' : '/images/heart.png'}
           alt=""
         />
       </button>

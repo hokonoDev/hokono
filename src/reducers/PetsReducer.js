@@ -26,6 +26,7 @@ export default (state = {}, action) => {
       state[action.petId].posts = { ...state[action.petId].posts, ...action.payload };
       return state;
     case 'LIKE_POST' :
+      if (!state[action.petId]) return state;
       const stateCopy = {...state};
       stateCopy[action.petId].posts[action.postId].likesCount = action.payload.likesCount;
       stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;

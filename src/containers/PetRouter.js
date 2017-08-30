@@ -12,9 +12,10 @@ const getPetDataPromise = (id) => {
   return firebase.database().ref(`/pets/${id}`).once('value');
 }
 
-const getPetData = ({ location, pets }) => {
+const getPetData = ({ location, pets, gPets }) => {
   const petId = parsePath(location.pathname)[2];
-  let petData = Object.values(pets).filter(pet => pet.id === petId)[0];
+  let petData = pets[petId];
+  petData = petData || gPets[petId];
   return petData ? petData : { petPromise: getPetDataPromise(petId) };
 }
 
@@ -52,6 +53,7 @@ const ShelterRouter = (props) => (
 
 const mapStateToProps = (state) => {
   return {
+    gPets: state.gPets,
     pets: state.pets,
     auth: state.auth,
     profile: state.profile,

@@ -52,9 +52,10 @@ export const addPostAction = (postData, petId, ownerId) => {
     postData.image = uploadTask.snapshot.downloadURL;
 
     // Adding post default information
-    postData.likesCount = 0;
-    postData.commentsCount = 0;
+    postData.likes = 0;
+    postData.comments = 0;
 
+    console.log(postData);
     // updating firebase DB
     const updates = {};
     updates[`/posts/${newPostKey}`] = postData;
@@ -78,25 +79,36 @@ export const addPostAction = (postData, petId, ownerId) => {
 export const likePostAction = (postId, petId, ownerId) => {
   const user = firebase.auth().currentUser;
 
-  // get current likesCount and likes from firebase
-  firebase.database().ref(`/posts/${postId}`).once('value')
-    .then(snapshot => {
-      const current = snapshot.val();
-      if (!!current.likes && !!current.likes[user.uid]) return;
-      const newCount = current.likesCount + 1;
-      const newLike = { [user.uid]: { timeStamp: Date.now() }};
-      const newLikes = current.likes ? { ...current.likes, ...newLike} : newLike;
+  // get current ..
+  Promise.all([
+    firebase.database().ref(`/posts/${postId}`).once('value'),
+    firebase.database().ref(`/accounts/${user.uid}/myPostLikes`).once('value')
+  ])
+    .then(snapshots => {
+      const current = snapshots[0].val();
+      console.log(current);
+      if (!!current.likedBy && !!current.likedBy[user.uid]) return;
+      const newCount = current.likes + 1;
+      const newLikedBy = { [user.uid]: { timeStamp: Date.now() }};
+      const likedBy = current.likedBy ? { ...current.likedBy, ...newLikedBy} : newLikedBy;
 
-      // updates to firebase DB: new likesCount
-      const updates = {};
-      updates[`/posts/${postId}/likesCount`] = newCount;
-      updates[`/pets/${petId}/posts/${postId}/likesCount`] = newCount;
-      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likesCount`] = newCount;
+      const myPostLikes = { ...snapshots[1].val(), [postId]: { petId: petId }};
 
       // updates to firebase DB: new likes
-      updates[`/posts/${postId}/likes`] = newLikes;
-      updates[`/pets/${petId}/posts/${postId}/likes`] = newLikes;
-      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likes`] = newLikes;
+      const updates = {};
+      updates[`/posts/${postId}/likes`] = newCount;
+      updates[`/pets/${petId}/posts/${postId}/likes`] = newCount;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likes`] = newCount;
+
+      // updates to firebase DB: new likes
+      updates[`/posts/${postId}/likedBy`] = likedBy;
+      updates[`/pets/${petId}/posts/${postId}/likedBy`] = likedBy;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likedBy`] = likedBy;
+
+      //updates to firebase DB: new myPostLikes
+      updates[`/accounts/${user.uid}/myPostLikes`] = myPostLikes;
+
+      console.log(updates);
 
       firebase.database().ref().update(updates);
 
@@ -104,8 +116,9 @@ export const likePostAction = (postId, petId, ownerId) => {
       const action = {
         type: 'LIKE_POST',
         payload: {
-          likesCount: newCount,
-          likes: newLikes,
+          likes: newCount,
+          likedBy: likedBy,
+
         },
         petId,
         postId,
@@ -118,25 +131,35 @@ export const likePostAction = (postId, petId, ownerId) => {
 export const unlikePostAction = (postId, petId, ownerId) => {
   const user = firebase.auth().currentUser;
 
-  // get current likesCount and likes from firebase
-  firebase.database().ref(`/posts/${postId}`).once('value')
-    .then(snapshot => {
-      const current = snapshot.val();
-      if (!!current.likes && !current.likes[user.uid]) return;
-      const newCount = current.likesCount - 1;
-      delete current.likes[user.uid];
-      const newLikes = current.likes;
+  // get current likes and likedBy from firebase
+  Promise.all([
+    firebase.database().ref(`/posts/${postId}`).once('value'),
+    firebase.database().ref(`/accounts/${user.uid}/myPostLikes`).once('value')
+  ])
+    .then(snapshots => {
+      const current = snapshots[0].val();
+      if (!!current.likedBy && !current.likedBy[user.uid]) return;
+      console.log('unliking');
+      const newCount = current.likes - 1;
+      delete current.likedBy[user.uid];
+      const newLikedBy = current.likedBy;
 
-      // updates to firebase DB: new likesCount
-      const updates = {};
-      updates[`/posts/${postId}/likesCount`] = newCount;
-      updates[`/pets/${petId}/posts/${postId}/likesCount`] = newCount;
-      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likesCount`] = newCount;
+      const myPostLikes = snapshots[1].val();
+      delete myPostLikes[postId];
 
       // updates to firebase DB: new likes
-      updates[`/posts/${postId}/likes`] = newLikes;
-      updates[`/pets/${petId}/posts/${postId}/likes`] = newLikes;
-      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likes`] = newLikes;
+      const updates = {};
+      updates[`/posts/${postId}/likes`] = newCount;
+      updates[`/pets/${petId}/posts/${postId}/likes`] = newCount;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likes`] = newCount;
+
+      // updates to firebase DB: new likedBy
+      updates[`/posts/${postId}/likedBy`] = newLikedBy;
+      updates[`/pets/${petId}/posts/${postId}/likedBy`] = newLikedBy;
+      updates[`/accounts/${ownerId}/pets/${petId}/posts/${postId}/likedBy`] = newLikedBy;
+
+      //updates to firebase DB: new myPostLikes
+      updates[`/accounts/${user.uid}/myPostLikes`] = myPostLikes;
 
       firebase.database().ref().update(updates);
 
@@ -144,8 +167,9 @@ export const unlikePostAction = (postId, petId, ownerId) => {
       const action = {
         type: 'LIKE_POST',
         payload: {
-          likesCount: newCount,
-          likes: newLikes,
+          likes: newCount,
+          likedBy: newLikedBy,
+          myPostLikes,
         },
         petId,
         postId,

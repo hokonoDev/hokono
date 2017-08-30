@@ -2,13 +2,13 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import firebase from '../firebase/index';
-import store from '../store';
 import { signinAction } from '../actions/AuthActions';
 import {
   Login,
   Signup,
   AuthNav,
   IfRedirect,
+  ProfileInit,
   } from '../components/index';
 
 const AuthRouter = class extends React.Component {
@@ -55,7 +55,7 @@ const AuthRouter = class extends React.Component {
       <div>
         <IfRedirect
           if={this.props.loggedIn}
-          ifTrue="/shelter/dashboard"
+          ifTrue="/auth/init"
         />
         <AuthNav {...this.props} />
         <Route
@@ -75,6 +75,15 @@ const AuthRouter = class extends React.Component {
               {...renderProps}
               signup={this.signup}
               error={this.state.signupError}
+            />
+          )}
+        />
+        <Route
+          path={`${this.props.match.path}/init`}
+          render={renderProps => (
+            <ProfileInit
+              {...renderProps}
+              auth={this.props.auth}
             />
           )}
         />

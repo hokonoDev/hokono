@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { addPet } from '../actions/PetsActions';
-import { Nav } from './index';
-import firebase from '../firebase/index.js';
 
 const AddPet = ({ dispatch, history }) => {
   let input;
@@ -17,7 +14,6 @@ const AddPet = ({ dispatch, history }) => {
           if (!input.value.trim() || !input2.value.trim()) {
             return
           }
-          console.log("thisis input2", input2.files)
           addPet({name: input.value, img: input2.files})
           input.value = ''
           input2.value = ''

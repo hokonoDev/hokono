@@ -1,68 +1,80 @@
 import React from 'react';
+import { IfRender } from './index';
 
 class FilterBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      dropFilter: '',
+      searchTerm: '',
+      sortDirection: 'Least',
+      filter: props.filter || 'createdSort',
     };
     //handles name change into searchbar
     this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleNameSubmit = this.handleNameSubmit.bind(this);
     //handles dropdown input change
     this.handleDropFilter = this.handleDropFilter.bind(this);
+    //handles sort direction button click
+    this.toggleSortDirection = this.toggleSortDirection.bind(this);
   }
 
   handleNameChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({searchTerm: event.target.value});
+    this.props.sortAction(this.state.filter, this.state.sortDirection, event.target.value);
   }
 
-  //May change later to autofilter without submit
-  handleNameSubmit(event) {
-    //alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  //
   handleDropFilter(event) {
-    this.setState({dropFilter: event.target.value});
-    if (event.target.value === "Most likes") {
-      this.props.setFilter(this.props.top());
-    } else if (event.target.value === "Least likes") {
-      this.props.setFilter(this.props.low());
-    } else if (event.target.value === "Least Popular") {
-      this.props.setFilter(this.props.lessPop());
-    } else if (event.target.value === "Popular") {
-      this.props.setFilter(this.props.pop());
-    } else if (event.target.value === "New") {
-      this.props.setFilter(this.props.new());
-    }  else if (event.target.value === "Old") {
-      this.props.setFilter(this.props.old());
-    }else {
-      this.props.setFilter(this.props.original());
+    this.setState({ filter: event.target.value })
+    this.props.sortAction(event.target.value, this.state.sortDirection, this.state.searchTerm);
+  }
+
+  toggleSortDirection(e) {
+    e.preventDefault();
+    if (this.state.sortDirection === 'Least') {
+      this.setState({ sortDirection: 'Most' })
+      this.props.sortAction(this.state.filter, 'Most', this.state.searchTerm);
+    } else {
+      this.setState({ sortDirection: 'Least' })
+      this.props.sortAction(this.state.filter, 'Least', this.state.searchTerm);
     }
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleNameSubmit}>
-          <label>
-            Filter Pet by Name doesnt work yet:
-            <input type="text" value={this.state.value} onChange={this.handleNameChange} />
-          </label>
-          <input type="submit" value="Submit" />
+        <form>
+          Search by name:
+          <IfRender
+            if={this.props.searchBar}
+            ifTrue={() => (
+              <input
+                type="text"
+                value={this.state.searchTerm}
+                onChange={this.handleNameChange}
+              />
+            )}
+          />
+          Sort:
+          <button
+            onClick={this.toggleSortDirection}
+          >{this.state.sortDirection}</button>
+          <select
+            onChange={this.handleDropFilter}
+            value={this.state.filter}
+          >
+            <option
+              value="likeSort"
+            >likes</option>
+            <option
+              value="trendSort"
+            >Trending</option>
+            <option
+              value="popularSort"
+            >Popular</option>
+            <option
+              value="createdSort"
+            >Recent</option>
+          </select>
         </form>
-        <select value={this.state.dropFilter} onChange={this.handleDropFilter}>
-          <option value="Most likes" list="1">Most likes</option>
-          <option value="Least likes" list="2">Least likes</option>
-          <option value="Popular" list="3"> Popular </option>
-          <option value="Least Popular" list="4">Least Popular</option>
-          <option value="New" list="5"> New </option>
-          <option value="Old" list="6"> Old </option>
-          <option value="Original" list="7"> Original </option>
-        </select>
       </div>
     );
   }

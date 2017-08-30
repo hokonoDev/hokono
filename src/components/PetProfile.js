@@ -64,7 +64,10 @@ const PetProfile = class extends React.Component {
         >{!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id] ? 'Followed': 'Follow'}
         </button>
         <pre>{JSON.stringify(this.state.pet)}</pre>
-        <PetPostList />
+        <PetPostList
+          pet={this.state.pet}
+          auth={this.props.auth}
+        />
       </div>
     );
   }

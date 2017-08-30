@@ -31,9 +31,9 @@ const PetPost = props => (
           e.preventDefault();
           if (props.auth.loggedIn) {
             if (!!props.post.likes ? !props.post.likes[props.auth.uid] : true) {
-              likePostAction(props.postId, props.petId);
+              likePostAction(props.postId, props.petId, props.ownerId);
             } else {
-              unlikePostAction(props.postId, props.petId);
+              unlikePostAction(props.postId, props.petId, props.ownerId);
             }
           } else {
             alert('Please login to like');
@@ -45,7 +45,7 @@ const PetPost = props => (
             width: '20px',
             height: '20px',
           }}
-          src="/images/heart.png"
+          src={!!props.post.likes ? !!props.post.likes[props.auth.uid] ? '/images/full-heart.png' : '/images/heart.png' : '/images/heart.png'}
           alt=""
         />
       </button>

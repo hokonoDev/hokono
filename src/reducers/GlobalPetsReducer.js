@@ -13,8 +13,8 @@ export default (state = {}, action) => {
     case 'LIKE_POST' :
       if (!state[action.petId]) return state;
       const stateCopy = {...state};
-      stateCopy[action.petId].posts[action.postId].likesCount = action.payload.likesCount;
       stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;
+      stateCopy[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
     default :
       return state;

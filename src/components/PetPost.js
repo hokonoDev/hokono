@@ -1,5 +1,5 @@
 import React from 'react';
-import { likePostAction } from '../actions/PostsActions';
+import { likePostAction, unlikePostAction } from '../actions/PostsActions';
 
 const PetPost = props => (
   <div
@@ -30,10 +30,10 @@ const PetPost = props => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if (props.post.likes ? props.post.likes[props.auth.uid] : true) {
+            if (!!props.post.likes ? !props.post.likes[props.auth.uid] : true) {
               likePostAction(props.postId, props.petId);
             } else {
-              alert('You already Liked this post');
+              unlikePostAction(props.postId, props.petId);
             }
           } else {
             alert('Please login to like');

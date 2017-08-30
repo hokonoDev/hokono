@@ -59,13 +59,25 @@ const Nav = (props) => {
           </div>
         )}
         ifFalse={() => (
-          <Link to={`/`}>
+          <div>
+            <Link to={`/`}>
+                <img
+                  style={imgStyle}
+                  src="/images/home.png"
+                  alt=""
+                />
+            </Link>
+            <Link
+              to={`/allpets`}
+              onClick={getAllPets}
+            >
               <img
                 style={imgStyle}
-                src="/images/home.png"
+                src="/images/magnifier.png"
                 alt=""
               />
-          </Link>
+            </Link>
+          </div>
         )}
       />
     </div>

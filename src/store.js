@@ -3,6 +3,7 @@ import PetsReducer from './reducers/PetsReducer';
 import ShelterProfReducer from './reducers/ShelterProfReducer';
 import AuthReducer from './reducers/AuthReducer';
 import GlobalPetsReducer from './reducers/GlobalPetsReducer';
+import PostsReducer from './reducers/PostsReducer';
 import firebase from './firebase/index';
 
 const comboReducer = combineReducers({
@@ -10,6 +11,7 @@ const comboReducer = combineReducers({
   profile: ShelterProfReducer,
   auth: AuthReducer,
   gPets: GlobalPetsReducer,
+  posts: PostsReducer,
 });
 
 const user = firebase.auth().currentUser;

@@ -22,6 +22,14 @@ export default (state = {}, action) => {
       return {};
     case 'SORT_MY_PETS' :
       return petsSort(state, action.sortType, action.lToG, action.searchTerm);
+    case 'UPDATE_POSTS' :
+      state[action.petId].posts = { ...state[action.petId].posts, ...action.payload };
+      return state;
+    case 'LIKE_POST' :
+      const stateCopy = {...state};
+      stateCopy[action.petId].posts[action.postId].likesCount = action.payload.likesCount;
+      stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;
+      return stateCopy;
     default :
       return state;
   }

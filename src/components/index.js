@@ -23,6 +23,7 @@ import ProfileInit from './Auth/ProfileInit';
 import UserInit from './Auth/UserInit';
 import FollowingList from './FollowingList';
 import PopUp from './PopUp';
+import AddPetPost from './AddPetPost';
 
 export {
   AddPet,
@@ -50,5 +51,6 @@ export {
   UserInit,
   FollowingList,
   PopUp,
+  AddPetPost,
 };
 

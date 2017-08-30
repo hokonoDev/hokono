@@ -1,10 +1,27 @@
 import React from 'react';
+import _ from 'lodash';
 import { PetPost } from './index';
 
-const PetPostList = () => {
+const PetPostList = props => {
   return (
-    <div>
-      <PetPost />
+    <div
+      style={{
+        display: 'flex',
+        'flexWrap': 'wrap',
+        'justifyContent': 'center',
+      }}
+    >
+      {
+        props.pet.posts ? Object.entries(props.pet.posts).map(postData => (
+          <PetPost
+            key={_.uniqueId()}
+            post={postData[1]}
+            postId={postData[0]}
+            auth={props.auth}
+            petId={props.pet.id}
+          />
+        )) : null
+      }
     </div>
   );
 }

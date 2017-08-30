@@ -24,9 +24,9 @@ export const userFollowedPet = (pet) => {
     updates[`/accounts/${owner}/pets/${pet.id}/followers/` + user.uid] = { displayName: user.displayName };
 
     //counts for followers and following
-    updates[`/accounts/${user.uid}/followingCount/`] =  store.getState().profile.followingCount + 1 || 1;
-    updates[`/pets/${pet.id}/followersCount/`] = pet.followersCount + 1 || 1;
-    updates[`/accounts/${owner}/pets/${pet.id}/followersCount/`] = pet.followersCount + 1 || 1;
+    //updates[`/accounts/${user.uid}/followingCount/`] =  store.getState().profile.followingCount + 1 || 1;
+    //updates[`/pets/${pet.id}/followersCount/`] = pet.followersCount + 1 || 1;
+    //updates[`/accounts/${owner}/pets/${pet.id}/followersCount/`] = pet.followersCount + 1 || 1;
 
     firebase.database().ref().update(updates).then(() => {
       action.data = { following: obj1 };
@@ -55,9 +55,9 @@ export const userUnfollowedPet = (pet) => {
   updates[`/accounts/${owner}/pets/${pet.id}/followers/` + user.uid] = null;
 
   //counts for followers and following
-  updates[`/accounts/${user.uid}/followingCount/`] =  store.getState().profile.followingCount - 1 || 0;
-  updates[`/pets/${pet.id}/followersCount/`] = pet.followersCount - 1 || 0;
-  updates[`/accounts/${owner}/pets/${pet.id}/followersCount/`] = pet.followersCount - 1 || 0;
+  //updates[`/accounts/${user.uid}/followingCount/`] =  store.getState().profile.followingCount - 1 || 0;
+  //updates[`/pets/${pet.id}/followersCount/`] = pet.followersCount - 1 || 0;
+  //updates[`/accounts/${owner}/pets/${pet.id}/followersCount/`] = pet.followersCount - 1 || 0;
 
   firebase.database().ref().update(updates).then(() => {
     action.data = { following: obj1 };
@@ -88,8 +88,8 @@ export const userLikedPet = (pet) => {
   updates[`/accounts/${owner}/pets/${pet.id}/likedBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
 
   //counts for followers and following
-  updates[`/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
-  updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
+  //updates[`/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
+  //updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
 
   firebase.database().ref().update(updates).then(() => {
     //updates the users likes in state/store
@@ -128,8 +128,8 @@ export const userUnlikedPet = (pet) => {
   updates[`/accounts/${owner}/pets/${pet.id}/likedBy/` + user.uid] = null;
 
   //counts for followers and following
-  updates[`/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
-  updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
+  //updates[`/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
+  //updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
 
   firebase.database().ref().update(updates).then(() => {
     //updates a users unlikes in state/store

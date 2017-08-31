@@ -15,6 +15,7 @@ export default class extends React.Component {
   }
 
   change({ target }) {
+    target.name = target.name || 'acctType';
     const nextState = {};
     nextState[target.name] = target.value;
     this.setState(nextState);
@@ -32,7 +33,7 @@ export default class extends React.Component {
       this.state.error = '';
       this.props.signup(this.state.email, this.state.password);
     } else if (!this.state.email) {
-      this.setState({ error: 'Enter a username' });
+      this.setState({ error: 'Enter an email' });
     } else if (!this.state.password){
       this.setState({ error: 'Enter a password' });
     } else if (this.state.password !== this.state.rePassword) {
@@ -68,7 +69,11 @@ export default class extends React.Component {
             name="rePassword"
             onChange={this.change}
           />
-          <button type="submit" />
+          <button
+            type="submit"
+          >
+            Sign Up
+          </button>
         </form>
         <p>{ this.state.error || this.props.error.message }</p>
       </div>

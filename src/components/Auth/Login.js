@@ -5,39 +5,66 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
+      error: '',
     }
 
-    this.onChange = this.onChange.bind(this);
+    this.change = this.change.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
-  onChange({ target }) {
+  change({ target }) {
     const nextState = {};
     nextState[target.name] = target.value;
     this.setState(nextState);
+  }
+
+  verifySubmit() {
+    return this.state.email &&
+      this.state.password;
+  }
+
+  submit(e) {
+    e.preventDefault();
+    if (this.verifySubmit()) {
+      this.state.error = '';
+      this.props.login(this.state.email, this.state.password);
+    } else if (!this.state.email) {
+      this.setState({ error: 'Enter a email' });
+    } else if (!this.state.password){
+      this.setState({ error: 'Enter a password' });
+    }
   }
 
   render() {
     return (
       <div>
         Login
-        <form>
+        <form
+          onSubmit={this.submit}
+        >
           <input
             type="text"
-            placeholder="Username"
-            value={this.state.username}
-            name="username"
-            onChange={this.onChange}
+            placeholder="Email"
+            value={this.state.email}
+            name="email"
+            onChange={this.change}
           />
           <input
             type="password"
             placeholder="Password"
             value={this.state.password}
             name="password"
-            onChange={this.onChange}
+            onChange={this.change}
           />
+          <button
+            type="submit"
+          >
+            Login
+          </button>
         </form>
+        <p>{ this.state.error || this.props.error.message }</p>
       </div>
     );
   }

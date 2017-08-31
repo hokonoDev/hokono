@@ -1,5 +1,5 @@
 import React from 'react';
-import PetListEntry from './PetList/PetListEntry.js';
+import { PetListEntry } from './index';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
@@ -9,14 +9,14 @@ import _ from 'lodash';
 const PetList = ({petData}) => {
   return (
     <div>
-      {petData.map(data => (
+      {Object.keys(petData).length>0 ? Object.values(petData).filter(data => !!data.name).map(data => (
         <PetListEntry
           key={_.uniqueId()}
           name={data.name}
           id={data.id}
-          imgUrl={data.url}
+          imgUrl={data.filePath}
         />
-      ))}
+      )): null}
     </div>
   );
 }

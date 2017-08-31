@@ -129,6 +129,7 @@ exports.updateUnfollowCount2 = functions.database.ref(`/accounts/{pushId}/follow
 exports.updateFollowingCount = functions.database.ref(`/accounts/{userId}/following/{petId}`)
   .onCreate(event => {
     // Grab the current value of what was written to the Realtime Database.
+    const userId = event.params.userId;
     const petId = event.params.petId; //gets the petid from the {petId} url
     // You must return a Promise when performing asynchronous tasks inside a Functions such as
     // writing to the Firebase Realtime Database.
@@ -144,6 +145,7 @@ exports.updateFollowingCount = functions.database.ref(`/accounts/{userId}/follow
 exports.updateUnfollowingCount = functions.database.ref(`/accounts/{userId}/following/{petId}`)
   .onDelete(event => {
     // Grab the current value of what was written to the Realtime Database.
+    const userId = event.params.userId;
     const petId = event.params.petId; //gets the petid from the {petId} url
     return admin.database().ref(`/accounts/${userId}/followingCount/`).transaction( likes => {
       if (likes) {

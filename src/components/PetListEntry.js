@@ -11,7 +11,7 @@ const imgStyle = {
 const PetListEntry = props => {
   return (
     <div>
-      <Link to={`/pet/${props.id}`}>
+      <Link to={`/pet/${props.id}/profile`}>
         <div>{props.name}</div>
       </Link>
       <img

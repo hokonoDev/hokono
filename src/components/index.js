@@ -24,6 +24,7 @@ import UserInit from './Auth/UserInit';
 import FollowingList from './FollowingList';
 import PopUp from './PopUp';
 import AddPetPost from './AddPetPost';
+import EditPet from './EditPet';
 
 export {
   AddPet,
@@ -52,5 +53,6 @@ export {
   FollowingList,
   PopUp,
   AddPetPost,
+  EditPet,
 };
 

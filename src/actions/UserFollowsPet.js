@@ -61,6 +61,7 @@ export const userUnfollowedPet = (pet) => {
 
   firebase.database().ref().update(updates).then(() => {
     action.data = { following: obj1 };
+    action.petId = pet.id;
     action.payload = "success";
     store.dispatch(action);
   }, (err) => {

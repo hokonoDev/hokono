@@ -11,8 +11,9 @@ export default (state = {}, action) => {
       }
     case 'UNFOLLOW_A_PET' :
       if (action.payload === 'success') {
-        console.log("wdf",{ ...state, following: {...state.following, ...action.data.following} });
-        return { ...state, following: {...state.following, ...action.data.following} };
+        let copy = {...state, following: {...state.following, ...action.data.following}};
+        delete copy.following[action.petId];
+        return copy;
         //if success unfollowing, i don't need to read from db, just update store and trust that db and store will be the same
       } else {
         return { ...state };

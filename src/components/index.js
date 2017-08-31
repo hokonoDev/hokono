@@ -17,14 +17,15 @@ import Signup from './Auth/Signup';
 import ShelterInit from './Auth/ShelterInit';
 import IfRender from './IfRender';
 import GlobalPetFeed from './GlobalPetFeed';
-import Feed from './Feed';
-import FeedEntry from './FeedEntry';
+import GlobalFeedEntry from './GlobalFeedEntry';
 import ProfileInit from './Auth/ProfileInit';
 import UserInit from './Auth/UserInit';
 import FollowingList from './FollowingList';
 import PopUp from './PopUp';
 import AddPetPost from './AddPetPost';
 import EditPet from './EditPet';
+import FollowFeed from './FollowFeed';
+import FollowFeedEntry from './FollowFeedEntry';
 
 export {
   AddPet,
@@ -46,13 +47,14 @@ export {
   ShelterInit,
   IfRender,
   GlobalPetFeed,
-  Feed,
-  FeedEntry,
+  GlobalFeedEntry,
   ProfileInit,
   UserInit,
   FollowingList,
   PopUp,
   AddPetPost,
   EditPet,
+  FollowFeed,
+  FollowFeedEntry,
 };
 

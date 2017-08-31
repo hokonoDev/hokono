@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { IfRender } from './index';
 import { getAllPets } from '../actions/GlobalPetsActions';
 import { updateFromDBAction } from '../actions/ShelterProfileActions';
+import { fetchFollowingPostsAction } from '../actions/PostsActions';
 
 const Nav = (props) => {
   const imgStyle = {
@@ -29,6 +30,19 @@ const Nav = (props) => {
               <img
                 style={imgStyle}
                 src="/images/home.png"
+                alt=""
+              />
+            </Link>
+            <Link
+              to={`/${props.profile.acctType}/followfeed`}
+              onClick={() => {
+                updateFromDBAction()
+                fetchFollowingPostsAction(props.profile.following ? Object.keys(props.profile.following) : []);
+              }}
+            >
+              <img
+                style={imgStyle}
+                src="/images/pets.png"
                 alt=""
               />
             </Link>

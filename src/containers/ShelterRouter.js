@@ -9,6 +9,7 @@ import {
   Nav,
   IfRedirect,
   ShelterInit,
+  FollowFeed,
   } from '../components/index';
 
 
@@ -79,6 +80,16 @@ const ShelterRouter = (props) => (
         />
       )}
     />
+    <Route
+      path="/shelter/followfeed"
+      render={routerProps => (
+        <FollowFeed
+          {...routerProps}
+          auth={props.auth}
+          posts={props.following.posts ? props.following.posts : {}}
+        />
+      )}
+    />
   </div>
 );
 
@@ -87,6 +98,7 @@ const mapStateToProps = (state) => {
     pets: state.pets,
     auth: state.auth,
     profile: state.profile,
+    following: state.following,
   };
 }
 

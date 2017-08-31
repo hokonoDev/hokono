@@ -1,5 +1,10 @@
 import React from 'react';
-import { PetPostList } from './index';
+import { Route, Link } from 'react-router-dom';
+import {
+  PetPostList,
+  IfRender,
+  EditPet,
+} from './index';
 import { userFollowedPet, userStaredPet, userUnstaredPet } from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
 
@@ -9,6 +14,7 @@ const PetProfile = class extends React.Component {
     this.state = {
       pet: {},
     }
+    console.log(props)
   }
 
   componentWillMount() {
@@ -50,6 +56,28 @@ const PetProfile = class extends React.Component {
             objectFit: 'contain',
           }}
         />
+        <IfRender
+          if={this.state.pet.ownerUid === this.props.auth.uid}
+          ifTrue={() =>
+            <Link
+              to={`${this.props.match.url}/edit`}
+            >
+              <button>Edit</button>
+            </Link>
+          }
+        />
+        <Route
+          exact
+          path={`${this.props.match.path}/edit`}
+          render={routerProps => (
+            <EditPet
+              {...routerProps}
+              auth={this.props.auth}
+              pet={this.state.pet}
+            />
+          )}
+        />
+        <p>{this.state.pet.description || ''}</p>
         <p>Stars: {this.state.pet.stars}</p>
         <button
           onClick={(e) => {

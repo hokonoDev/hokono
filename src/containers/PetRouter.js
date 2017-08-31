@@ -28,6 +28,15 @@ const ShelterRouter = (props) => (
     <Nav />
     <Route
       exact
+      path="/pet/:id/newpost"
+      render={routerProps => (
+        <AddPetPost
+          {...routerProps}
+          pet={getPetData(props)}
+        />
+      )}
+    />
+    <Route
       path="/pet/:id"
       render={routerProps => (
         <PetProfile
@@ -35,16 +44,6 @@ const ShelterRouter = (props) => (
           pet={getPetData(props)}
           auth={props.auth}
           profile={props.profile}
-        />
-      )}
-    />
-    <Route
-      exact
-      path="/pet/:id/newpost"
-      render={routerProps => (
-        <AddPetPost
-          {...routerProps}
-          pet={getPetData(props)}
         />
       )}
     />

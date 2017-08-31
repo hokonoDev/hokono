@@ -7,7 +7,7 @@ export const addPet = (input) => {
     pet: {
       name: input.name,
       filePath: input.img,
-      likes: 0,
+      stars: 0,
       timeStamp: Date.now(),
       followers: {},
     }

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { userFollowedPet, userLikedPet, userUnlikedPet, userUnfollowedPet } from '../actions/UserFollowsPet';
+import { userFollowedPet, userStaredPet, userUnstaredPet, userUnfollowedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
-import { IfRender } from './index';
 
 const FeedEntry = (props) => (
   <div
@@ -57,16 +56,16 @@ const FeedEntry = (props) => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if (typeof props.data.likedBy === 'undefined') {
-              userLikedPet(props.data);
+            if (typeof props.data.staredBy === 'undefined') {
+              userStaredPet(props.data);
             }
-            else if (props.data.likedBy[props.auth.uid]) {
-              userUnlikedPet(props.data);
+            else if (props.data.staredBy[props.auth.uid]) {
+              userUnstaredPet(props.data);
             } else {
-              userLikedPet(props.data);
+              userStaredPet(props.data);
             }
           } else {
-            alert('Please login to like');
+            alert('Please login to star');
           }
         }}
       >
@@ -75,11 +74,11 @@ const FeedEntry = (props) => (
             width: '20px',
             height: '20px',
           }}
-          src="/images/heart.png"
+          src={props.data.staredBy && props.data.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
         />
       </button>
     </div>
-    <p>{props.data.likes} Likes</p>
+    <p>Stars: {props.data.stars}</p>
   </div>
 );
 

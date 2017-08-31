@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { userFollowedPet, userStaredPet, userUnstaredPet, userUnfollowedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
-import { IfRender } from './index';
 
 const FeedEntry = (props) => (
   <div
@@ -75,7 +74,7 @@ const FeedEntry = (props) => (
             width: '20px',
             height: '20px',
           }}
-          src={!props.data.staredBy || props.data.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+          src={props.data.staredBy && props.data.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
         />
       </button>
     </div>

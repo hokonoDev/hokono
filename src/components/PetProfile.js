@@ -1,6 +1,6 @@
 import React from 'react';
 import { PetPostList } from './index';
-import { userFollowedPet } from '../actions/UserFollowsPet';
+import { userFollowedPet, userStaredPet, userUnstaredPet } from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
 
 const PetProfile = class extends React.Component {
@@ -50,8 +50,33 @@ const PetProfile = class extends React.Component {
             objectFit: 'contain',
           }}
         />
-        <p>Likes: {this.state.pet.likes}</p>
-        <p>Followers: {this.state.pet.followersCount}</p>
+        <p>Stars: {this.state.pet.stars}</p>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            if (this.props.auth.loggedIn) {
+              if (typeof this.props.pet.staredBy === 'undefined') {
+                userStaredPet(this.props.pet);
+              }
+              else if (this.props.pet.staredBy[this.props.auth.uid]) {
+                userUnstaredPet(this.props.pet);
+              } else {
+                userStaredPet(this.props.pet);
+              }
+            } else {
+              alert('Please login to star');
+            }
+          }}
+        >
+          <img
+            style={{
+              width: '20px',
+              height: '20px',
+            }}
+            src={this.props.pet.staredBy && this.props.pet.staredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+          />
+        </button>
+        <p>Followers: {this.state.pet.followersCount || 0}</p>
         <button
           style={{
               width: '60px',

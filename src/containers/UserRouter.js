@@ -34,7 +34,7 @@ const parsePath = (path) => {
   return path.split('/');
 }
 
-const ShelterRouter = (props) => (
+const ShelterRouter = props => (
   <div>
     <IfRedirect
       if={window.location.pathname === '/user'}

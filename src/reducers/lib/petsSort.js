@@ -6,7 +6,7 @@ export default (obj, sortType, lToG, searchTerm) => {
   sortedPets = sortedPets.reduce((pets, pet) => {
     pets[pet[0]] = pet[1];
     return pets;
-  }, { sort });
+  }, { Sort: [lToG ? 'Least' : 'Most', sortType] });
   return sortedPets;
 }
 

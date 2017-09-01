@@ -56,6 +56,7 @@ export const addPostAction = (postData, petId, ownerId) => {
     postData.comments = 0;
     postData.petId = petId;
     postData.ownerUid = ownerId;
+    postData.timeStamp = Date.now();
 
     // console.log(postData);
     // updating firebase DB
@@ -80,7 +81,6 @@ export const addPostAction = (postData, petId, ownerId) => {
 
 export const likePostAction = (postId, petId, ownerId) => {
   const user = firebase.auth().currentUser;
-  console.log('likePostAciton', arguments);
 
   // get current ..
   Promise.all([
@@ -132,7 +132,6 @@ export const likePostAction = (postId, petId, ownerId) => {
 
 export const unlikePostAction = (postId, petId, ownerId) => {
   const user = firebase.auth().currentUser;
-  console.log('unlikePostAciton', arguments);
 
   // get current likes and likedBy from firebase
   Promise.all([
@@ -192,4 +191,14 @@ export const fetchFollowingPostsAction = petIds => {
         payload,
       });
     });
+}
+
+export const sortFollowingPostsAction = (sortType, sortDirection, searchTerm) => {
+  const action = {
+    type: 'SORT_FOLLOWING_POSTS',
+    sortType: sortType,
+    lToG: sortDirection === 'Least',
+    searchTerm,
+  }
+  store.dispatch(action);
 }

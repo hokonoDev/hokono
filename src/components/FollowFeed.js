@@ -1,14 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
-import { FollowFeedEntry, Nav, FilterBar } from './index';
-// import { sortGlobalPetsAction } from '../actions/GlobalPetsActions';
+import { FollowFeedEntry, FilterBar } from './index';
+import { sortFollowingPostsAction } from '../actions/PostsActions';
 
 export default (props) => (
   <div>
+    {console.log('new props')}
     Follow Post Feed
     <FilterBar
-      filter={props.posts.sort}
-      // sortAction={sortGlobalPetsAction}
+      sort={props.sort}
+      sortAction={sortFollowingPostsAction}
       searchBar={true}
     />
     <div

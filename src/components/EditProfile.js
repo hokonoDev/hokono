@@ -44,7 +44,7 @@ export default class extends React.Component {
           <input
             type="text"
             name="displayName"
-            placeholder="Shelter's Name"
+            placeholder="Name"
             value={this.state.displayName}
             onChange={this.change}
           />
@@ -65,7 +65,7 @@ export default class extends React.Component {
           <input
             type="text"
             name="blurb"
-            placeholder="Describe Your Shelter"
+            placeholder="Description"
             value={this.state.blurd}
             onChange={this.change}
           />

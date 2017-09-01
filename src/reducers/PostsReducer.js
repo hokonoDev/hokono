@@ -7,6 +7,7 @@ export default (state = {}, action) => {
     case 'UPDATE_POSTS' :
       return { ...state, ...action.payload }
     case 'LIKE_POST' :
+      if (!state[action.postId]) return state;
       const stateCopy = {...state};
       stateCopy[action.postId].likes = action.payload.likes;
       stateCopy[action.postId].likedBy = action.payload.likedBy;

@@ -5,7 +5,12 @@ import {
   IfRender,
   EditPet,
 } from './index';
-import { userFollowedPet, userStaredPet, userUnstaredPet } from '../actions/UserFollowsPet';
+import {
+    userFollowedPet,
+    userStaredPet,
+    userUnstaredPet,
+    userUnfollowedPet
+} from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
 
 const PetProfile = class extends React.Component {
@@ -113,13 +118,17 @@ const PetProfile = class extends React.Component {
           onClick={(e) => {
             e.preventDefault();
             if (this.props.auth.loggedIn) {
-              userFollowedPet(this.state.pet)
+              if(!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id]) {
+                userUnfollowedPet(this.props.pet);
+              } else {
+                userFollowedPet(this.props.pet);
+              }
             } else {
-              alert('Please log in to follow');
+              alert('Please loggin to follow');
             }
           }}
-          disabled={!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id]}
-        >{!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id] ? 'Followed': 'Follow'}
+        >
+        {!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id] ? 'Unfollow': 'Follow'}
         </button>
         <PetPostList
           pet={this.state.pet}

@@ -18,11 +18,11 @@ const FeedEntry = (props) => (
     }}
   >
     <Link
-      to={`pet/${props.data.id}`}
-    >{props.data.name}</Link>
+      to={`pet/${props.pet.id}/profile`}
+    >{props.pet.name}</Link>
     <div
       style={{
-        'backgroundImage': `url(${props.data.filePath})`,
+        'backgroundImage': `url(${props.pet.filePath})`,
         width: '300px',
         height: '200px',
         'backgroundSize': 'contain',
@@ -39,10 +39,10 @@ const FeedEntry = (props) => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if(!!props.profile.following && !!props.profile.following[props.data.id]) {
-              userUnfollowedPet(props.data);
+            if(!!props.profile.following && !!props.profile.following[props.pet.id]) {
+              userUnfollowedPet(props.pet);
             } else {
-              userFollowedPet(props.data);
+              userFollowedPet(props.pet);
             }
           } else {
             alert('Please loggin to follow');
@@ -50,19 +50,19 @@ const FeedEntry = (props) => (
         }}
 
       >
-      {!!props.profile.following && !!props.profile.following[props.data.id] ? 'Unfollow': 'Follow'}
+      {!!props.profile.following && !!props.profile.following[props.pet.id] ? 'Unfollow': 'Follow'}
       </button>
       <button
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if (typeof props.data.staredBy === 'undefined') {
-              userStaredPet(props.data);
+            if (typeof props.pet.staredBy === 'undefined') {
+              userStaredPet(props.pet);
             }
-            else if (props.data.staredBy[props.auth.uid]) {
-              userUnstaredPet(props.data);
+            else if (props.pet.staredBy[props.auth.uid]) {
+              userUnstaredPet(props.pet);
             } else {
-              userStaredPet(props.data);
+              userStaredPet(props.pet);
             }
           } else {
             alert('Please login to star');
@@ -74,11 +74,11 @@ const FeedEntry = (props) => (
             width: '20px',
             height: '20px',
           }}
-          src={props.data.staredBy && props.data.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+          src={props.pet.staredBy && props.pet.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
         />
       </button>
     </div>
-    <p>Stars: {props.data.stars}</p>
+    <p>Stars: {props.pet.stars}</p>
   </div>
 );
 
@@ -88,5 +88,5 @@ const mapStateToProps = (state) => {
     auth: state.auth,
   }
 }
-//{props.profile.following[props.data.id] ? 'Followed' : 'Follow'}
+//{props.profile.following[props.pet.id] ? 'Followed' : 'Follow'}
 export default connect(mapStateToProps)(FeedEntry);

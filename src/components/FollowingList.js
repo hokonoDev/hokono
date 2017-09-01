@@ -8,7 +8,7 @@ export default props => (
     {
       props.following ? Object.entries(props.following).map(userInfo => (
         <Link
-          to={`/pet/${userInfo[0]}`}
+          to={`/pet/${userInfo[0]}/profile`}
           key={_.uniqueId()}
         >{ userInfo[1].name }</Link>
       )) : null

@@ -33,11 +33,12 @@ const ShelterRouter = (props) => (
         <AddPetPost
           {...routerProps}
           pet={getPetData(props)}
+          auth={props.auth}
         />
       )}
     />
     <Route
-      path="/pet/:id"
+      path="/pet/:id/profile"
       render={routerProps => (
         <PetProfile
           {...routerProps}

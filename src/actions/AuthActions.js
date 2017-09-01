@@ -36,3 +36,14 @@ export const signoutAction = () => {
   store.dispatch(action);
   store.dispatch({ type: 'CLEAR_PETS' })
 };
+
+export const setDisplayNameUndefined = () => {
+  const user = firebase.auth().currentUser;
+  const action = {
+    type: 'FACEBOOKLOGIN',
+    payload:{
+      displayName: undefined,
+    }
+  }
+  store.dispatch(action);
+}

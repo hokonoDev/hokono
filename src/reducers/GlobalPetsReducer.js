@@ -14,6 +14,12 @@ export default (state = {}, action) => {
       return {...state, ...action.dataPet};
     case 'UNSTARED_A_PET' :
       return {...state, ...action.dataPet};
+    case 'LIKE_POST' :
+      if (!state[action.petId]) return state;
+      const stateCopy = {...state};
+      stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;
+      stateCopy[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
+      return stateCopy;
     default :
       return state;
   }

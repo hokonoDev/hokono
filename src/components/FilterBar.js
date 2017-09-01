@@ -6,8 +6,8 @@ class FilterBar extends React.Component {
     super(props);
     this.state = {
       searchTerm: '',
-      sortDirection: 'Least',
-      filter: props.filter || 'createdSort',
+      sortDirection: props.sort ? props.sort[0] : 'Least',
+      filter: props.sort ? props.sort[1] : 'createdSort',
     };
     //handles name change into searchbar
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -15,6 +15,12 @@ class FilterBar extends React.Component {
     this.handleDropFilter = this.handleDropFilter.bind(this);
     //handles sort direction button click
     this.toggleSortDirection = this.toggleSortDirection.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.sort) {
+      this.props.sortAction(this.state.filter, this.state.sortDirection, this.state.searchTerm);
+    }
   }
 
   handleNameChange(event) {

@@ -87,6 +87,7 @@ const ShelterRouter = (props) => (
           {...routerProps}
           auth={props.auth}
           posts={props.following.posts ? props.following.posts : {}}
+          sort={props.following.postsSort}
         />
       )}
     />

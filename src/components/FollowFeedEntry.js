@@ -15,7 +15,6 @@ const PetPost = props => (
     'alignItems': 'center',
   }}
   >
-    {console.log(props)}
     <div
       style={{
         'backgroundImage': `url(${props.post.image})`,

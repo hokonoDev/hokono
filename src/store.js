@@ -37,4 +37,5 @@ const profile = !user ? {} :
 export default createStore(comboReducer, {
   auth,
   profile,
+  profile: { got: false},
 });

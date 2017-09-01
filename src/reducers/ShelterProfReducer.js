@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { got: false }, action) => {
   switch (action.type) {
     case 'UPDATE_PROFILE' :
       return { ...state, ...action.payload };

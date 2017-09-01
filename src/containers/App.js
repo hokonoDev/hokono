@@ -19,6 +19,7 @@ const App = props => (
         path="/"
         render={renderProps => (
           <Home
+            {...renderProps}
             auth={props.auth}
             profile={props.profile}
           />

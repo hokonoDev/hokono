@@ -8,7 +8,8 @@ export const updateFromDBAction = () => {
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`/accounts/${uid}`).once('value')
     .then(snapshot => {
-      action.payload = snapshot.val();
+      action.payload = snapshot.val() || {};
+      action.payload.got = true;
       if(snapshot.val()) {
         getPets(action.payload);
       }

@@ -26,15 +26,21 @@ const searchSort = (pets, term, results = []) => {
 }
 
 const likeSort = (pet1, pet2) => {
-  return pet1[1].likes - pet2[1].likes;
+  return pet1[1].stars - pet2[1].stars;
 }
 
 const createdSort = (pet1, pet2) => {
   return pet1[1].timeStamp - pet2[1].timeStamp;
 }
 
+const trendingSort = (pet1, pet2) => {
+  const pet1Rank = Math.log(10, pet1[1].stars + (pet1[1].timeStamp)/45000);
+  const pet2Rank = Math.log(10, pet2[1].stars + (pet2[1].timeStamp)/45000);
+  return pet1Rank - pet2Rank;
+}
+
 const popularSort = (pet1, pet2) => {
-  return pet1[1].followersCount - pet2[1].followersCount;
+  return pet1[1].followersCount || 0 - pet2[1].followersCount || 0;
 }
 
 const sortTypes = {

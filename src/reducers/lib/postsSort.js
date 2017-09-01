@@ -38,6 +38,12 @@ const popularSort = (post1, post2) => {
   return post1[1].likes - post2[1].likes;
 }
 
+const trendingSort = (post1, post2) => {
+  const post1Rank = Math.log(10, post1[1].likes + (post1[1].timeStamp)/45000);
+  const post2Rank = Math.log(10, post2[1].likes + (post2[1].timeStamp)/45000);
+  return post1Rank - post2Rank;
+}
+
 const sortTypes = {
   likeSort,
   createdSort,

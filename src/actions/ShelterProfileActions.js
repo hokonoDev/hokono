@@ -57,3 +57,28 @@ export const editProfileAction = (payload) => {
     });
 
 }
+
+export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {
+  const user = firebase.auth().currentUser;
+  const now = Date.now();
+  const action = {
+    type: 'NEW_ADOPT_REQUEST',
+    payload: {
+      ...currentRequests,
+      [petId]: now,
+    },
+  };
+
+  firebase.database().ref(`accounts/${ownerUid}/adoptRequests/${petId}`).once('value')
+    .then(snapshot => {
+      const requests = snapshot.val() || {};
+      firebase.database().ref().update({
+        [`accounts/${ownerUid}/adoptRequests/${petId}`]: {...requests, [user.uid]: now},
+      });
+    });
+
+  firebase.database().ref().update({
+    [`accounts/${user.uid}/adoptRequests`]: action.payload,
+  });
+  store.dispatch(action);
+}

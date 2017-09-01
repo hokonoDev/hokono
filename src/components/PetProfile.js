@@ -12,6 +12,7 @@ import {
     userUnfollowedPet
 } from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
+import { adoptRequestAction } from '../actions/ShelterProfileActions';
 
 const PetProfile = class extends React.Component {
   constructor(props) {
@@ -74,11 +75,9 @@ const PetProfile = class extends React.Component {
         <IfRender
           if={this.state.pet.ownerUid !== this.props.auth.uid && this.state.pet.adopt}
           ifTrue={() =>
-            <Link
-              to={`${this.props.match.url}`}
-            >
-              <button>Adopt Me!!!</button>
-            </Link>
+              <button
+                onClick={() => adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid)}
+              >Adopt Me!!!</button>
           }
         />
         <Route

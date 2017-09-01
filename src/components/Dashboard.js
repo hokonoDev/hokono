@@ -7,11 +7,13 @@ import {
   PetList,
   IfRedirect,
   FollowingList,
+  AdoptRequestList,
   // IfRender,
 } from './index';
 
 export default props => (
   <div>
+    {console.log(props)}
     <IfRedirect
       if={props.auth.displayName}
       ifFalse={`/auth/init`}
@@ -27,7 +29,7 @@ export default props => (
         Logout
       </button>
       <Link
-        to="/user/dashboard/following"
+        to={`${props.match.url}/following`}
       >Following: {props.profile.followingCount ? props.profile.followingCount : '0'}</Link>
       <Route
         exact path={`${props.match.path}`}
@@ -48,10 +50,19 @@ export default props => (
         )}
       />
       <Route
-        exact path={'/user/dashboard/following'}
+        exact path={`${props.match.path}/following`}
         render={renderProps=> (
           <FollowingList
             following={props.profile.following}
+          />
+        )}
+      />
+      <Route
+        exact path={`${props.match.path}/adopt`}
+        render={renderProps=> (
+          <AdoptRequestList
+            {...renderProps}
+            requests={props.profile.adoptRequests || {}}
           />
         )}
       />

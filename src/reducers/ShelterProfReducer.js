@@ -39,6 +39,8 @@ export default (state = { got: false }, action) => {
       stateCopy.pets[action.petId].posts[action.postId].likes = action.payload.likes;
       stateCopy.pets[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
+    case 'NEW_ADOPT_REQUEST' :
+      return {...state, ...action.payload};
     default :
       return state;
   }

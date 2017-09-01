@@ -71,6 +71,16 @@ const PetProfile = class extends React.Component {
             </Link>
           }
         />
+        <IfRender
+          if={this.state.pet.ownerUid !== this.props.auth.uid && this.state.pet.adopt}
+          ifTrue={() =>
+            <Link
+              to={`${this.props.match.url}`}
+            >
+              <button>Adopt Me!!!</button>
+            </Link>
+          }
+        />
         <Route
           exact
           path={`${this.props.match.path}/edit`}

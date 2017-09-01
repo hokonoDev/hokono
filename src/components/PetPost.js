@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { likePostAction, unlikePostAction } from '../actions/PostsActions';
 
 const PetPost = props => (
@@ -15,6 +16,9 @@ const PetPost = props => (
     'alignItems': 'center',
   }}
   >
+    <Link to={`/pet/${props.petId}/profile`}>
+        {props.name}
+    </Link>
     <div
       style={{
         'backgroundImage': `url(${props.post.image})`,

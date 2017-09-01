@@ -3,6 +3,9 @@ import postsSort from './lib/postsSort';
 export default (state = {}, action) => {
   switch (action.type) {
     case 'POPULATE_FOLLOWING_POSTS' :
+      if (state.postsSort) {
+        return postsSort({ ...state, posts: action.payload }, state.postsSort[1], state.postsSort[0] === 'Least', '');
+      }
       return { ...state, posts: action.payload };
     case 'LIKE_POST' :
       if (!state.posts[action.postId]) return state;

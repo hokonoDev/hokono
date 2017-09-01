@@ -11,28 +11,20 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
   }
-  //accounts for first time login with facebook
-  componentDidMount () {
+  // accounts for first time login with facebook
+
+  componentDidUpdate () {
     if (this.props.auth.loggedIn) {
-      console.log("i am logged in in home...");
-      if (!this.props.profile.acctType) {
-        console.log("im in facebook login HOME and its TRIGGERED");
+      if (this.props.profile.got && !this.props.profile.acctType) {
         setDisplayNameUndefined();
         this.props.history.push('/auth/init');
       }
     }
   }
 
-  componentDidUpdate () {
-    if(!this.props.auth.displayName) {
-      this.props.history.push('/auth/init');
-    }
-  }
-
   render () {
     return (
       <div>
-        {console.log('home', this.props)}
         Home Hokono
         <IfRender
           if={this.props.auth.loggedIn}

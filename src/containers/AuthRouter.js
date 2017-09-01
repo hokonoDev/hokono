@@ -54,6 +54,7 @@ const AuthRouter = class extends React.Component {
 
   fblogin () {
     var provider = new fb.auth.FacebookAuthProvider();
+    provider.addScope('email');
     this.state.loginError = '';
     firebase.auth().signInWithPopup(provider).then((result)=> {
     // This gives you a Facebook Access Token. You can use it to access the Facebook API.

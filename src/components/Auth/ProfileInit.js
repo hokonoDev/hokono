@@ -41,6 +41,7 @@ export default class extends React.Component{
   render() {
     return (
       <div>
+        {console.log('auth init props', this.props)}
         <IfRedirect
           if={this.props.auth.displayName}
           ifTrue="/"

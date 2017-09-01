@@ -7,7 +7,6 @@ export default (props) => (
   <div>
     Global Pet Feed
     <Nav />
-    {console.log(props)}
     <FilterBar
       filter={props.gPets.sort}
       sortAction={sortGlobalPetsAction}

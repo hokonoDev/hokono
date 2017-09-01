@@ -5,12 +5,11 @@ import { sortFollowingPostsAction } from '../actions/PostsActions';
 
 export default (props) => (
   <div>
-    {console.log('new props')}
     Follow Post Feed
     <FilterBar
       sort={props.sort}
       sortAction={sortFollowingPostsAction}
-      searchBar={true}
+      searchBar={false}
     />
     <div
       style={{

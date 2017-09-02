@@ -1,12 +1,12 @@
-import firebase from '../firebase/index.js';
+// import firebase from '../firebase/index.js';
 import petsSort from './lib/petsSort';
 
-const storage = firebase.storage();
-const database = firebase.database();
+// const storage = firebase.storage();
+// const database = firebase.database();
 
-const compressFile = (files) => {
-//base64Url the image
-}
+// const compressFile = (files) => {
+// //base64Url the image
+// }
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -16,7 +16,7 @@ export default (state = {}, action) => {
       const copy = { ...state };
       copy[action.petId] = { ...copy[action.petId], ...action.payload };
       return copy;
-    case 'GETPETS' :
+    case 'GET_PETS' :
       return {...state, ...action.payload};
     case 'CLEAR_PETS' :
       return {};

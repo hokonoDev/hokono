@@ -46,6 +46,9 @@ export const addPostAction = (postData, petId, ownerId) => {
       case 'storage/unknown':
         // Unknown error occurred, inspect error.serverResponse
         break;
+
+      default:
+        break;
     }
   }, function() {
     // Add reference to FB storage of image

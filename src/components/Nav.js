@@ -19,9 +19,9 @@ const Nav = (props) => {
   };
   return (
     <div style={barStyle}>
-      <IfRender
-        if={props.auth.loggedIn}
-        ifTrue={() => (
+      {console.log(props)}
+      {props.auth.loggedIn ?
+        (
           <div>
             <Link
               to={`/${props.profile.acctType}/dashboard`}
@@ -80,8 +80,8 @@ const Nav = (props) => {
               />
             </Link>
           </div>
-        )}
-        ifFalse={() => (
+        ) :
+        (
           <div>
             <Link to={`/`}>
                 <img

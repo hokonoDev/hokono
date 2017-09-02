@@ -18,16 +18,16 @@ export default (state = { got: false }, action) => {
       } else {
         return { ...state };
       }
-    case 'STARED_A_PET' :
+    case 'STARRED_A_PET' :
       if (action.payload === 'success') {
-        //this myLikes property is so user can see what pets hes liked.
-        return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
+        //this myStars property is so user can see what pets hes liked.
+        return {...state, myStars: {...state.myStars, ...action.data.myStars} };
       }
       return state;
-    case 'UNSTARED_A_PET' :
+    case 'UNSTARRED_A_PET' :
       if (action.payload === 'success') {
-        //this myLikes property is so user can see what pets hes liked.
-        return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
+        //this myStars property is so user can see what pets hes liked.
+        return {...state, myStars: {...state.myStars, ...action.data.myStars} };
       }
       return state;
     case 'UPDATE_POSTS' :
@@ -39,6 +39,8 @@ export default (state = { got: false }, action) => {
       stateCopy.pets[action.petId].posts[action.postId].likes = action.payload.likes;
       stateCopy.pets[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
+    case 'NEW_ADOPT_REQUEST' :
+      return {...state, ...action.payload};
     default :
       return state;
   }

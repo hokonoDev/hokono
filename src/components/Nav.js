@@ -70,6 +70,15 @@ const Nav = (props) => {
                 alt=""
               />
             </Link>
+            <Link
+              to={`/${props.profile.acctType}/dashboard/adopt`}
+            >
+              <img
+                style={imgStyle}
+                src="/images/list.png"
+                alt=""
+              />
+            </Link>
           </div>
         )}
         ifFalse={() => (

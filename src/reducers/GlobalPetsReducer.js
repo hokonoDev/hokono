@@ -10,9 +10,9 @@ export default (state = {}, action) => {
       return copy;
     case 'SORT_GLOBAL_PETS' :
       return petsSort(state, action.sortType, action.lToG, action.searchTerm);
-    case 'STARED_A_PET' :
+    case 'STARRED_A_PET' :
       return {...state, ...action.dataPet};
-    case 'UNSTARED_A_PET' :
+    case 'UNSTARRED_A_PET' :
       return {...state, ...action.dataPet};
     case 'LIKE_POST' :
       if (!state[action.petId]) return state;

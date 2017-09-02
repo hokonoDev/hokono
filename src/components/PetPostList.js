@@ -20,6 +20,7 @@ const PetPostList = props => {
             auth={props.auth}
             petId={props.pet.id}
             ownerId={props.pet.ownerUid}
+            name ={props.pet.name}
           />
         )) : null
       }

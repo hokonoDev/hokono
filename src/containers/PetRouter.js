@@ -6,6 +6,7 @@ import {
   PetProfile,
   Nav,
   AddPetPost,
+  PetPost,
   } from '../components/index';
 
 const getPetDataPromise = (id) => {
@@ -19,11 +20,23 @@ const getPetData = ({ location, pets, gPets }) => {
   return petData ? petData : { petPromise: getPetDataPromise(petId) };
 }
 
+const getPetPostPromise = (id, postId) => {
+  return firebase.database().ref(`/pets/${id}/posts/${postId}`).once('value');
+}
+
+const getPostData = ({location, pets, gPets}) => {
+  const petId = parsePath(location.pathname)[2];
+  const postId = parsePath(location.pathname)[4];
+  let petData = pets[petId];
+  petData = petData || gPets[petId];
+  return petData ? petData['posts'][postId] : { petPromise: getPetPostPromise(petId, postId) }; //else we make an api call and return a promise to the rendered post promise
+}
+
 const parsePath = (path) => {
   return path.split('/');
 }
 
-const ShelterRouter = (props) => (
+const PetRouter = (props) => (
   <div>
     <Nav />
     <Route
@@ -48,6 +61,21 @@ const ShelterRouter = (props) => (
         />
       )}
     />
+    <Route
+      exact
+      path="/pet/:id/post/:postid"
+      render={routerProps => (
+        <PetPost
+          {...routerProps}
+          post={getPostData(props)}
+          postId={parsePath(props.location.pathname)[4]}
+          auth={props.auth}
+          petId={parsePath(props.location.pathname)[2]}
+          ownerId={''}
+          name={''}
+        />
+      )}
+    />
   </div>
 );
 
@@ -60,4 +88,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps)(ShelterRouter);
+export default connect(mapStateToProps)(PetRouter);

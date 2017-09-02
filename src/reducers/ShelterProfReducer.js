@@ -20,14 +20,14 @@ export default (state = { got: false }, action) => {
       }
     case 'STARRED_A_PET' :
       if (action.payload === 'success') {
-        //this myLikes property is so user can see what pets hes liked.
-        return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
+        //this myStars property is so user can see what pets hes liked.
+        return {...state, myStars: {...state.myStars, ...action.data.myStars} };
       }
       return state;
     case 'UNSTARRED_A_PET' :
       if (action.payload === 'success') {
-        //this myLikes property is so user can see what pets hes liked.
-        return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
+        //this myStars property is so user can see what pets hes liked.
+        return {...state, myStars: {...state.myStars, ...action.data.myStars} };
       }
       return state;
     case 'UPDATE_POSTS' :

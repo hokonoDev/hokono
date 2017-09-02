@@ -106,7 +106,7 @@ const PetProfile = class extends React.Component {
               width: '20px',
               height: '20px',
             }}
-            src={this.props.pet.staredBy && this.props.pet.staredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+            src={this.props.pet.staredBy && this.props.pet.staredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'} alt="pic of starred by"
           />
         </button>
         <p>Followers: {this.state.pet.followersCount || 0}</p>

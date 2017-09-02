@@ -41,6 +41,9 @@ export const addPet = (input) => {
       case 'storage/unknown':
         // Unknown error occurred, inspect error.serverResponse
         break;
+
+      default:
+        break;
     }
   }, function() {
     //save the firebase hosted profile pic to pet.filepath

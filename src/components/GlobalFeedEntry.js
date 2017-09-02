@@ -74,7 +74,7 @@ const FeedEntry = (props) => (
             width: '20px',
             height: '20px',
           }}
-          src={props.pet.staredBy && props.pet.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+          src={props.pet.staredBy && props.pet.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'} alt="pic of starred by"
         />
       </button>
     </div>

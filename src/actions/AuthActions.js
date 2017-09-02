@@ -4,7 +4,7 @@ import { updateFromDBAction } from './ShelterProfileActions';
 import { getAllPets } from './GlobalPetsActions';
 
 export const getPets = (payload) => {
-  const action = {type:'GETPETS'};
+  const action = {type:'GET_PETS'};
   action.payload = payload.pets;
   store.dispatch(action);
 }
@@ -38,7 +38,7 @@ export const signoutAction = () => {
 };
 
 export const setDisplayNameUndefined = () => {
-  const user = firebase.auth().currentUser;
+  //const user = firebase.auth().currentUser;
   const action = {
     type: 'FACEBOOKLOGIN',
     payload:{

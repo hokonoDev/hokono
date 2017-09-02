@@ -21,7 +21,7 @@ export default (state = { got: false }, action) => {
     case 'STARRED_A_PET' :
       if (action.payload === 'success') {
         //this myStars property is so user can see what pets hes liked.
-        return {...state, myStars: {...state.myStars, ...action.data.myStars} };
+        return {...state, myStars: {...state.myStars, ...action.data} };
       }
       return state;
     case 'UNSTARRED_A_PET' :

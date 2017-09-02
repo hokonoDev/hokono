@@ -63,6 +63,7 @@ export default props => (
           <AdoptRequestList
             {...renderProps}
             requests={props.profile.adoptRequests || {}}
+            profile={props.profile}
           />
         )}
       />

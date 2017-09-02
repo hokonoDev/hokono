@@ -65,7 +65,10 @@ export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {
     type: 'NEW_ADOPT_REQUEST',
     payload: {
       ...currentRequests,
-      [petId]: now,
+      [petId]: {
+        timeStamp: now,
+        ownerUid,
+      },
     },
   };
 
@@ -73,7 +76,7 @@ export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {
     .then(snapshot => {
       const requests = snapshot.val() || {};
       firebase.database().ref().update({
-        [`accounts/${ownerUid}/adoptRequests/${petId}`]: {...requests, [user.uid]: now},
+        [`accounts/${ownerUid}/adoptRequests/${petId}`]: {...requests, [user.uid]: { timeStamp: now }},
       });
     });
 

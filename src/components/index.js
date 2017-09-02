@@ -27,6 +27,8 @@ import EditPet from './EditPet';
 import FollowFeed from './FollowFeed';
 import FollowFeedEntry from './FollowFeedEntry';
 import AdoptRequestList from './AdoptRequestList';
+import SentRequest from './SentRequest';
+import ReceivedRequest from './ReceivedRequest';
 
 export {
   AddPet,
@@ -58,5 +60,7 @@ export {
   FollowFeed,
   FollowFeedEntry,
   AdoptRequestList,
+  SentRequest,
+  ReceivedRequest,
 };
 

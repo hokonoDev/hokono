@@ -65,15 +65,17 @@ const PetRouter = (props) => (
       exact
       path="/pet/:id/post/:postid"
       render={routerProps => (
-        <PetPost
-          {...routerProps}
-          post={getPostData(props)}
-          postId={parsePath(props.location.pathname)[4]}
-          auth={props.auth}
-          petId={parsePath(props.location.pathname)[2]}
-          ownerId={''}
-          name={''}
-        />
+        <div>
+          <PetPost
+            {...routerProps}
+            post={getPostData(props)}
+            postId={parsePath(props.location.pathname)[4]}
+            auth={props.auth}
+            petId={parsePath(props.location.pathname)[2]}
+            ownerId={''}
+            name={''}
+          />
+        </div>
       )}
     />
   </div>

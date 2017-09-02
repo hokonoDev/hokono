@@ -75,7 +75,6 @@ const petPostRouter = (props) => (
         <PetPost
           {...routerProps}
           pet={getPetData(props)}
-          auth={props.auth}
         />
       )}
     />

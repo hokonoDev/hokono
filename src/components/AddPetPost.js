@@ -25,7 +25,7 @@ export default class extends React.Component {
       addPostAction({
         image: this.state.image,
         description: this.state.description,
-      }, this.props.pet.id, this.props.pet.ownerUid);
+      }, this.props.pet.id, this.props.pet.ownerUid,this.props.pet.name);
 
       this.setState({
         image: '',

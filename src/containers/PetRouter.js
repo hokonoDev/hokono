@@ -6,6 +6,7 @@ import {
   PetProfile,
   Nav,
   AddPetPost,
+  PetPost,
   } from '../components/index';
 
 const getPetDataPromise = (id) => {
@@ -17,6 +18,19 @@ const getPetData = ({ location, pets, gPets }) => {
   let petData = pets[petId];
   petData = petData || gPets[petId];
   return petData ? petData : { petPromise: getPetDataPromise(petId) };
+}
+
+const getPetPostPromise = (id, postId) => {
+  return firebase.database().ref(`/pets/${id}/posts/${postId}`).once('value');
+}
+
+const getPostData = ({location, pets, gPets}) => {
+  const petId = parsePath(location.pathname)[2];
+  const postId = parsePath(location.pathname)[4];
+  let petData = pets[petId];
+  petData = petData || gPets[petId];
+  let postIdData = petData[postId]; //these lines check if the pet data for the post we are navigating to already exists in redux
+  return postId ? postIdData : { petPromise: getPetPostPromise(petId, postId) }; //else we make an api call and return a promise to the rendered post promise
 }
 
 const parsePath = (path) => {
@@ -45,6 +59,25 @@ const ShelterRouter = (props) => (
           pet={getPetData(props)}
           auth={props.auth}
           profile={props.profile}
+        />
+      )}
+    />
+  </div>
+);
+
+const petPostRouter = (props) => (
+  <div>
+    <Nav />
+    <Route
+      exact
+      path="/pet/:id/post/:postid"
+      render={routerProps => (
+        <PetPost
+          {...routerProps}
+          post={getPostData(props)}
+          postId={parsePath(props.location.pathname)[4]}
+          auth={props.auth}
+          petId={parsePath(props.location.pathname)[2]}
         />
       )}
     />

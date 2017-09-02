@@ -6,8 +6,8 @@ import {
   ShareCounts,
   generateShareIcon
 } from 'react-share';
-const {FacebookShareButton} = ShareButtons;
-const {FacebookShareCount} = ShareCounts;
+const { FacebookShareButton } = ShareButtons;
+const { FacebookShareCount } = ShareCounts;
 const FacebookIcon = generateShareIcon('facebook');
 
 export default class PetPost extends React.Component {
@@ -105,4 +105,3 @@ export default class PetPost extends React.Component {
     )
   }
 }
-

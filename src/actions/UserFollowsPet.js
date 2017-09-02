@@ -70,7 +70,7 @@ export const userUnfollowedPet = (pet) => {
   });
 }
 
-export const userStaredPet = (pet) => {
+export const userStarredPet = (pet) => {
   const action = {
     type: 'STARED_A_PET'
   };
@@ -84,8 +84,8 @@ export const userStaredPet = (pet) => {
   const currTime = Date.now();
 
   updates[`/accounts/${user.uid}/myStars/` + pet.id] = { name: pet.name };
-  updates[`/pets/${pet.id}/staredBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
-  updates[`/accounts/${owner}/pets/${pet.id}/staredBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
+  updates[`/pets/${pet.id}/starredBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
+  updates[`/accounts/${owner}/pets/${pet.id}/starredBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
 
   //counts for followers and following
   //updates[`/pets/${pet.id}/stars/`] = pet.stars + 1 || 1;
@@ -97,7 +97,7 @@ export const userStaredPet = (pet) => {
     pet.stars = pet.stars + 1 || 1;
     const emptyObj = {};
     emptyObj[user.uid] = { displayName: user.displayName, createdAt: currTime };
-    pet.staredBy = emptyObj;
+    pet.starredBy = emptyObj;
     const emptyObj2 = {};
     emptyObj2[pet.id] = pet;
 
@@ -111,7 +111,7 @@ export const userStaredPet = (pet) => {
   });
 }
 
-export const userUnstaredPet = (pet) => {
+export const userUnstarredPet = (pet) => {
   const action = {
     type: 'UNSTARED_A_PET'
   };
@@ -124,8 +124,8 @@ export const userUnstaredPet = (pet) => {
   obj1[pet.id] = null;
 
   updates[`/accounts/${user.uid}/myStars/` + pet.id] = null;
-  updates[`/pets/${pet.id}/staredBy/` + user.uid] = null;
-  updates[`/accounts/${owner}/pets/${pet.id}/staredBy/` + user.uid] = null;
+  updates[`/pets/${pet.id}/starredBy/` + user.uid] = null;
+  updates[`/accounts/${owner}/pets/${pet.id}/starredBy/` + user.uid] = null;
 
   //counts for followers and following
   //updates[`/pets/${pet.id}/stars/`] = pet.stars - 1 || 0;
@@ -137,7 +137,7 @@ export const userUnstaredPet = (pet) => {
     pet.stars = pet.stars - 1 || 0;
     const emptyObj = {};
     emptyObj[user.uid] = null;
-    pet.staredBy = emptyObj;
+    pet.starredBy = emptyObj;
     const emptyObj2 = {};
     emptyObj2[pet.id] = pet;
 

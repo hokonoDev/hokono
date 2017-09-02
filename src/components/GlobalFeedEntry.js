@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { userFollowedPet, userLikedPet, userUnlikedPet, userUnfollowedPet } from '../actions/UserFollowsPet';
+import { userFollowedPet, userStaredPet, userUnstaredPet, userUnfollowedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
-import { IfRender } from './index';
 
 const FeedEntry = (props) => (
   <div
@@ -19,11 +18,11 @@ const FeedEntry = (props) => (
     }}
   >
     <Link
-      to={`pet/${props.data.id}`}
-    >{props.data.name}</Link>
+      to={`pet/${props.pet.id}/profile`}
+    >{props.pet.name}</Link>
     <div
       style={{
-        'backgroundImage': `url(${props.data.filePath})`,
+        'backgroundImage': `url(${props.pet.filePath})`,
         width: '300px',
         height: '200px',
         'backgroundSize': 'contain',
@@ -40,10 +39,10 @@ const FeedEntry = (props) => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if(!!props.profile.following && !!props.profile.following[props.data.id]) {
-              userUnfollowedPet(props.data);
+            if(!!props.profile.following && !!props.profile.following[props.pet.id]) {
+              userUnfollowedPet(props.pet);
             } else {
-              userFollowedPet(props.data);
+              userFollowedPet(props.pet);
             }
           } else {
             alert('Please loggin to follow');
@@ -51,22 +50,22 @@ const FeedEntry = (props) => (
         }}
 
       >
-      {!!props.profile.following && !!props.profile.following[props.data.id] ? 'Unfollow': 'Follow'}
+      {!!props.profile.following && !!props.profile.following[props.pet.id] ? 'Unfollow': 'Follow'}
       </button>
       <button
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if (typeof props.data.likedBy === 'undefined') {
-              userLikedPet(props.data);
+            if (typeof props.pet.staredBy === 'undefined') {
+              userStaredPet(props.pet);
             }
-            else if (props.data.likedBy[props.auth.uid]) {
-              userUnlikedPet(props.data);
+            else if (props.pet.staredBy[props.auth.uid]) {
+              userUnstaredPet(props.pet);
             } else {
-              userLikedPet(props.data);
+              userStaredPet(props.pet);
             }
           } else {
-            alert('Please login to like');
+            alert('Please login to star');
           }
         }}
       >
@@ -75,11 +74,11 @@ const FeedEntry = (props) => (
             width: '20px',
             height: '20px',
           }}
-          src="/images/heart.png"
+          src={props.pet.staredBy && props.pet.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
         />
       </button>
     </div>
-    <p>{props.data.likes} Likes</p>
+    <p>Stars: {props.pet.stars}</p>
   </div>
 );
 
@@ -89,5 +88,5 @@ const mapStateToProps = (state) => {
     auth: state.auth,
   }
 }
-//{props.profile.following[props.data.id] ? 'Followed' : 'Follow'}
+//{props.profile.following[props.pet.id] ? 'Followed' : 'Follow'}
 export default connect(mapStateToProps)(FeedEntry);

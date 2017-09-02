@@ -1,5 +1,6 @@
 import React from 'react';
-import { Feed, Nav, FilterBar } from './index';
+import _ from 'lodash';
+import { GlobalFeedEntry, Nav, FilterBar } from './index';
 import { sortGlobalPetsAction } from '../actions/GlobalPetsActions';
 
 export default (props) => (
@@ -11,9 +12,22 @@ export default (props) => (
       sortAction={sortGlobalPetsAction}
       searchBar={true}
     />
-    <Feed
-      feedData={props.gPets}
-    />
+    <div
+      style={{
+        display: 'flex',
+        'flexWrap': 'wrap',
+        'justifyContent': 'center',
+      }}
+    >
+      {
+        Object.values(props.gPets).filter(data => !!data.name).map(data => (
+          <GlobalFeedEntry
+            key={_.uniqueId()}
+            pet={data}
+          />
+        ))
+      }
+    </div>
     <pre>{JSON.stringify(props.auth)}</pre>
   </div>
 );

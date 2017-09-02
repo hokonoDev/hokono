@@ -1,6 +1,16 @@
 import React from 'react';
-import { PetPostList } from './index';
-import { userFollowedPet } from '../actions/UserFollowsPet';
+import { Route, Link } from 'react-router-dom';
+import {
+  PetPostList,
+  IfRender,
+  EditPet,
+} from './index';
+import {
+    userFollowedPet,
+    userStaredPet,
+    userUnstaredPet,
+    userUnfollowedPet
+} from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
 
 const PetProfile = class extends React.Component {
@@ -9,6 +19,7 @@ const PetProfile = class extends React.Component {
     this.state = {
       pet: {},
     }
+    console.log(props)
   }
 
   componentWillMount() {
@@ -50,8 +61,55 @@ const PetProfile = class extends React.Component {
             objectFit: 'contain',
           }}
         />
-        <p>Likes: {this.state.pet.likes}</p>
-        <p>Followers: {this.state.pet.followersCount}</p>
+        <IfRender
+          if={this.state.pet.ownerUid === this.props.auth.uid}
+          ifTrue={() =>
+            <Link
+              to={`${this.props.match.url}/edit`}
+            >
+              <button>Edit</button>
+            </Link>
+          }
+        />
+        <Route
+          exact
+          path={`${this.props.match.path}/edit`}
+          render={routerProps => (
+            <EditPet
+              {...routerProps}
+              auth={this.props.auth}
+              pet={this.state.pet}
+            />
+          )}
+        />
+        <p>{this.state.pet.description || ''}</p>
+        <p>Stars: {this.state.pet.stars}</p>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            if (this.props.auth.loggedIn) {
+              if (typeof this.props.pet.staredBy === 'undefined') {
+                userStaredPet(this.props.pet);
+              }
+              else if (this.props.pet.staredBy[this.props.auth.uid]) {
+                userUnstaredPet(this.props.pet);
+              } else {
+                userStaredPet(this.props.pet);
+              }
+            } else {
+              alert('Please login to star');
+            }
+          }}
+        >
+          <img
+            style={{
+              width: '20px',
+              height: '20px',
+            }}
+            src={this.props.pet.staredBy && this.props.pet.staredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+          />
+        </button>
+        <p>Followers: {this.state.pet.followersCount || 0}</p>
         <button
           style={{
               width: '60px',
@@ -60,13 +118,17 @@ const PetProfile = class extends React.Component {
           onClick={(e) => {
             e.preventDefault();
             if (this.props.auth.loggedIn) {
-              userFollowedPet(this.state.pet)
+              if(!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id]) {
+                userUnfollowedPet(this.props.pet);
+              } else {
+                userFollowedPet(this.props.pet);
+              }
             } else {
-              alert('Please log in to follow');
+              alert('Please loggin to follow');
             }
           }}
-          disabled={!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id]}
-        >{!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id] ? 'Followed': 'Follow'}
+        >
+        {!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id] ? 'Unfollow': 'Follow'}
         </button>
         <PetPostList
           pet={this.state.pet}

@@ -7,7 +7,7 @@ export const addPet = (input) => {
     pet: {
       name: input.name,
       filePath: input.img,
-      likes: 0,
+      stars: 0,
       timeStamp: Date.now(),
       followers: {},
     }
@@ -71,4 +71,19 @@ export const sortUsersPetsAction = (sortType, sortDirection, searchTerm) => {
     searchTerm,
   }
   store.dispatch(action);
+}
+
+export const editPetAction = (edits, pet) => {
+  const action = {
+    type: 'EDIT_PET',
+    payload: edits,
+    petId: pet.id,
+    ownerUid: pet.ownerUid,
+  }
+  store.dispatch(action);
+
+  const updates = {};
+  updates[`/pets/${pet.id}`] = { ...pet, ...edits };
+  updates[`/accounts/${pet.ownerUid}/pets/${pet.id}`] = { ...pet, ...edits };
+  firebase.database().ref().update(updates);
 }

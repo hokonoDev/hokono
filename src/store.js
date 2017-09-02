@@ -4,6 +4,7 @@ import ShelterProfReducer from './reducers/ShelterProfReducer';
 import AuthReducer from './reducers/AuthReducer';
 import GlobalPetsReducer from './reducers/GlobalPetsReducer';
 import PostsReducer from './reducers/PostsReducer';
+import FollowingReducer from './reducers/FollowingReducer';
 import firebase from './firebase/index';
 
 const comboReducer = combineReducers({
@@ -12,6 +13,7 @@ const comboReducer = combineReducers({
   auth: AuthReducer,
   gPets: GlobalPetsReducer,
   posts: PostsReducer,
+  following: FollowingReducer,
 });
 
 const user = firebase.auth().currentUser;
@@ -35,4 +37,5 @@ const profile = !user ? {} :
 export default createStore(comboReducer, {
   auth,
   profile,
+  profile: { got: false},
 });

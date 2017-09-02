@@ -31,9 +31,9 @@ const PetPost = props => (
           e.preventDefault();
           if (props.auth.loggedIn) {
             if (!!props.post.likedBy ? !props.post.likedBy[props.auth.uid] : true) {
-              likePostAction(props.postId, props.petId, props.ownerId);
+              likePostAction(props.postId, props.post.petId, props.post.ownerUid);
             } else {
-              unlikePostAction(props.postId, props.petId, props.ownerId);
+              unlikePostAction(props.postId, props.post.petId, props.post.ownerUid);
             }
           } else {
             alert('Please login to like');

@@ -13,9 +13,9 @@ export default (state = {}, action) => {
     case 'ADD_PET' :
       return {...state,  ...action.pet };
     case 'EDIT_PET' :
-      return state.map(pet => (
-        pet.id === action.id ? { ...pet, ...action.edit } : pet
-      ));
+      const copy = { ...state };
+      copy[action.petId] = { ...copy[action.petId], ...action.payload };
+      return copy;
     case 'GETPETS' :
       return {...state, ...action.payload};
     case 'CLEAR_PETS' :
@@ -28,8 +28,8 @@ export default (state = {}, action) => {
     case 'LIKE_POST' :
       if (!state[action.petId]) return state;
       const stateCopy = {...state};
-      stateCopy[action.petId].posts[action.postId].likesCount = action.payload.likesCount;
       stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;
+      stateCopy[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
     default :
       return state;

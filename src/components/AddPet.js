@@ -2,19 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addPet } from '../actions/PetsActions';
 
-const AddPet = ({ dispatch, history }) => {
+const AddPet = (props) => {
   let input;
   let input2;
 
   return (
     <div>
+      {console.log(props.match.path.slice(1, -7))}
       <form
         onSubmit={e => {
           e.preventDefault()
           if (!input.value.trim() || !input2.value.trim()) {
             return
           }
-          addPet({name: input.value, img: input2.files})
+          addPet({name: input.value, img: input2.files, adopt: props.match.path.slice(1, -7) === 'shelter'})
           input.value = ''
           input2.value = ''
         }}

@@ -10,6 +10,7 @@ export const addPet = (input) => {
       stars: 0,
       timeStamp: Date.now(),
       followers: {},
+      adopt: input.adopt,
     }
   }
   const uid = firebase.auth().currentUser.uid;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { userFollowedPet, userStaredPet, userUnstaredPet, userUnfollowedPet } from '../actions/UserFollowsPet';
+import { userFollowedPet, userStarredPet, userUnstarredPet, userUnfollowedPet } from '../actions/UserFollowsPet';
 import { connect } from 'react-redux';
 
 const FeedEntry = (props) => (
@@ -56,13 +56,13 @@ const FeedEntry = (props) => (
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
-            if (typeof props.pet.staredBy === 'undefined') {
-              userStaredPet(props.pet);
+            if (typeof props.pet.starredBy === 'undefined') {
+              userStarredPet(props.pet);
             }
-            else if (props.pet.staredBy[props.auth.uid]) {
-              userUnstaredPet(props.pet);
+            else if (props.pet.starredBy[props.auth.uid]) {
+              userUnstarredPet(props.pet);
             } else {
-              userStaredPet(props.pet);
+              userStarredPet(props.pet);
             }
           } else {
             alert('Please login to star');
@@ -74,7 +74,7 @@ const FeedEntry = (props) => (
             width: '20px',
             height: '20px',
           }}
-          src={props.pet.staredBy && props.pet.staredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'} alt="pic of starred by"
+          src={props.pet.starredBy && props.pet.starredBy[props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
         />
       </button>
     </div>

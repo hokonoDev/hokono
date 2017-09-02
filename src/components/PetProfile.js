@@ -7,11 +7,12 @@ import {
 } from './index';
 import {
     userFollowedPet,
-    userStaredPet,
-    userUnstaredPet,
+    userStarredPet,
+    userUnstarredPet,
     userUnfollowedPet
 } from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
+import { adoptRequestAction } from '../actions/ShelterProfileActions';
 
 const PetProfile = class extends React.Component {
   constructor(props) {
@@ -71,6 +72,14 @@ const PetProfile = class extends React.Component {
             </Link>
           }
         />
+        <IfRender
+          if={this.state.pet.ownerUid !== this.props.auth.uid && this.state.pet.adopt}
+          ifTrue={() =>
+              <button
+                onClick={() => adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid)}
+              >Adopt Me!!!</button>
+          }
+        />
         <Route
           exact
           path={`${this.props.match.path}/edit`}
@@ -88,13 +97,13 @@ const PetProfile = class extends React.Component {
           onClick={(e) => {
             e.preventDefault();
             if (this.props.auth.loggedIn) {
-              if (typeof this.props.pet.staredBy === 'undefined') {
-                userStaredPet(this.props.pet);
+              if (typeof this.props.pet.starredBy === 'undefined') {
+                userStarredPet(this.props.pet);
               }
-              else if (this.props.pet.staredBy[this.props.auth.uid]) {
-                userUnstaredPet(this.props.pet);
+              else if (this.props.pet.starredBy[this.props.auth.uid]) {
+                userUnstarredPet(this.props.pet);
               } else {
-                userStaredPet(this.props.pet);
+                userStarredPet(this.props.pet);
               }
             } else {
               alert('Please login to star');
@@ -106,7 +115,7 @@ const PetProfile = class extends React.Component {
               width: '20px',
               height: '20px',
             }}
-            src={this.props.pet.staredBy && this.props.pet.staredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'} alt="pic of starred by"
+            src={this.props.pet.starredBy && this.props.pet.starredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
           />
         </button>
         <p>Followers: {this.state.pet.followersCount || 0}</p>

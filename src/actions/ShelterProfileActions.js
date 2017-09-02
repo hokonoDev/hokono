@@ -20,7 +20,6 @@ export const updateFromDBAction = () => {
 export const initAction = (payload) => {
   const user = firebase.auth().currentUser;
 
-
   payload = {
     ...payload,
     pets: {},

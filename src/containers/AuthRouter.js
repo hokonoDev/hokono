@@ -56,23 +56,25 @@ const AuthRouter = class extends React.Component {
     var provider = new fb.auth.FacebookAuthProvider();
     provider.addScope('email');
     this.setState({ loginError: '' });
-    firebase.auth().signInWithPopup(provider).then((result)=> {
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      // var token = result.credential.accessToken;
-      // // The signed-in user info.
-      // var user = result.user;
-      if(!this.state.loginError) {
-        this.setState({ loginError: { message: 'Success' }});
-        signinAction();
-      }
-    }).catch((error) => {
-      // Handle Errors here.
-      // var errorCode = error.code;
-      // var errorMessage = error.message;
-      // // The email of the user's account used.
-      // var email = error.email;
-      // // The firebase.auth.AuthCredential type that was used.
-      // var credential = error.credential;
+    fb.auth().setPersistence(fb.auth.Auth.Persistence.SESSION).then(() => {
+      fb.auth().signInWithPopup(provider).then((result)=> {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        // var token = result.credential.accessToken;
+        // // The signed-in user info.
+        // var user = result.user;
+        if(!this.state.loginError) {
+          this.setState({ loginError: { message: 'Success' }});
+          signinAction();
+        }
+      }).catch((error) => {
+        // Handle Errors here.
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        // // The email of the user's account used.
+        // var email = error.email;
+        // // The firebase.auth.AuthCredential type that was used.
+        // var credential = error.credential;
+      });
     });
   }
 

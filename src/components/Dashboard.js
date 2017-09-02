@@ -13,7 +13,6 @@ import {
 
 export default props => (
   <div>
-    {console.log(props)}
     <IfRedirect
       if={props.auth.displayName}
       ifFalse={`/auth/init`}

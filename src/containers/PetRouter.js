@@ -29,15 +29,14 @@ const getPostData = ({location, pets, gPets}) => {
   const postId = parsePath(location.pathname)[4];
   let petData = pets[petId];
   petData = petData || gPets[petId];
-  let postIdData = petData[postId]; //these lines check if the pet data for the post we are navigating to already exists in redux
-  return postId ? postIdData : { petPromise: getPetPostPromise(petId, postId) }; //else we make an api call and return a promise to the rendered post promise
+  return petData ? petData['posts'][postId] : { petPromise: getPetPostPromise(petId, postId) }; //else we make an api call and return a promise to the rendered post promise
 }
 
 const parsePath = (path) => {
   return path.split('/');
 }
 
-const ShelterRouter = (props) => (
+const PetRouter = (props) => (
   <div>
     <Nav />
     <Route
@@ -62,12 +61,6 @@ const ShelterRouter = (props) => (
         />
       )}
     />
-  </div>
-);
-
-const petPostRouter = (props) => (
-  <div>
-    <Nav />
     <Route
       exact
       path="/pet/:id/post/:postid"
@@ -78,6 +71,8 @@ const petPostRouter = (props) => (
           postId={parsePath(props.location.pathname)[4]}
           auth={props.auth}
           petId={parsePath(props.location.pathname)[2]}
+          ownerId={''}
+          name={''}
         />
       )}
     />
@@ -93,4 +88,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps)(ShelterRouter);
+export default connect(mapStateToProps)(PetRouter);

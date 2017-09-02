@@ -6,18 +6,19 @@ export default class PetPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      petId: this.props.petId,
-      post: this.props.post,
-      name: this.props.name,
-      ownerId: this.props.ownerId,
-      auth: this.props.auth,
-      postId: this.props.postId,
-      key: this.props.key,
+      petId: this.props.petId || '',
+      post: this.props.post || {},
+      name: this.props.name || '',
+      ownerId: this.props.ownerId || '',
+      auth: this.props.auth || '',
+      postId: this.props.postId || '',
+      key: this.props.key || '',
     };
   }
 
   componentWillMount() {
   }
+
   componentDidMount() {
     this.setPetPost();
   }
@@ -30,6 +31,8 @@ export default class PetPost extends React.Component {
           name: pData.val().name,
         });
       });
+    } else {
+      this.setState({post: this.props.post})
     }
   }
   render() {

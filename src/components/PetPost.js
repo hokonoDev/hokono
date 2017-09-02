@@ -1,18 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { likePostAction, unlikePostAction } from '../actions/PostsActions';
+import {
+  ShareButtons,
+  ShareCounts,
+  generateShareIcon
+} from 'react-share';
+const {FacebookShareButton} = ShareButtons;
+const {FacebookShareCount} = ShareCounts;
+const FacebookIcon = generateShareIcon('facebook');
 
 export default class PetPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      petId: this.props.petId || '',
-      post: this.props.post || {},
-      name: this.props.name || '',
-      ownerId: this.props.ownerId || '',
-      auth: this.props.auth || '',
-      postId: this.props.postId || '',
-      key: this.props.key || '',
+      petId: this.props.petId,
+      post: this.props.post ,
+      name: this.props.name ,
+      ownerId: this.props.ownerId,
+      auth: this.props.auth,
+      postId: this.props.postId,
+      key: this.props.keySS,
     };
   }
 
@@ -90,6 +98,9 @@ export default class PetPost extends React.Component {
           </div>
           <p>Likes: {this.state.post.likes}</p>
           <p>{this.state.post.description}</p>
+          <FacebookShareButton url={`localhost:3000/${this.state.petId}/post/${this.state.postId}`} title={this.state.name} description={this.state.post.description}>
+            <FacebookIcon size={32} round/>
+          </FacebookShareButton>
         </div>
     )
   }

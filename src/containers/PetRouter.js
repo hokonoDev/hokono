@@ -74,7 +74,10 @@ const petPostRouter = (props) => (
       render={routerProps => (
         <PetPost
           {...routerProps}
-          pet={getPetData(props)}
+          post={getPostData(props)}
+          postId={parsePath(props.location.pathname)[4]}
+          auth={props.auth}
+          petId={parsePath(props.location.pathname)[2]}
         />
       )}
     />

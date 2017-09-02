@@ -23,7 +23,7 @@ export const fetchPostsByPetIdAction = (petId) => {
     });
 }
 
-export const addPostAction = (postData, petId, ownerId) => {
+export const addPostAction = (postData, petId, ownerId, name1) => {
   const user = firebase.auth().currentUser;
   const newPostKey = firebase.database().ref('/posts').push().key;
   const storageRef = firebase.storage().ref(`${user.uid}/${petId}/${newPostKey}`);
@@ -56,6 +56,7 @@ export const addPostAction = (postData, petId, ownerId) => {
     postData.comments = 0;
     postData.petId = petId;
     postData.ownerUid = ownerId;
+    postData.name = name1;
     postData.timeStamp = Date.now();
 
     // console.log(postData);

@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import FacebookLogin from 'react-facebook-login';
 
 export default class extends React.Component {
   constructor(props) {

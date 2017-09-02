@@ -6,6 +6,8 @@ import GlobalPetsReducer from './reducers/GlobalPetsReducer';
 import PostsReducer from './reducers/PostsReducer';
 import FollowingReducer from './reducers/FollowingReducer';
 import firebase from './firebase/index';
+import fb from 'firebase';
+import { signinAction } from './actions/AuthActions';
 
 const comboReducer = combineReducers({
   pets: PetsReducer,
@@ -15,6 +17,8 @@ const comboReducer = combineReducers({
   posts: PostsReducer,
   following: FollowingReducer,
 });
+
+
 
 const user = firebase.auth().currentUser;
 
@@ -34,7 +38,15 @@ const profile = !user ? {} :
     phone: user.phoneNumber,
   };
 
-export default createStore(comboReducer, {
+const store = createStore(comboReducer, {
   auth,
   profile: {...profile, got: false},
 });
+
+fb.auth().onAuthStateChanged((user) => {
+  if (user) {
+    signinAction();
+  }
+});
+
+export default store;

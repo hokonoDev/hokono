@@ -1,5 +1,6 @@
 import React from 'react';
 import { getDisplayNameFromUid } from './lib/helpers';
+import { adoptRequestStatusAction } from '../actions/ShelterProfileActions';
 
 export default class extends React.Component {
   constructor(props) {
@@ -24,13 +25,22 @@ export default class extends React.Component {
         <p>from {this.state.requester}</p>
         <p>Status: {this.props.status}</p>
         <button
-
+          onClick={(e) => {
+            e.preventDefault();
+            adoptRequestStatusAction('accepted', this.props.petId, this.props.uid);
+          }}
         >Accept</button>
         <button
-
+          onClick={(e) => {
+            e.preventDefault();
+            adoptRequestStatusAction('denied', this.props.petId, this.props.uid);
+          }}
         >Deny</button>
         <button
-
+          onClick={(e) => {
+            e.preventDefault();
+            adoptRequestStatusAction('pending', this.props.petId, this.props.uid);
+          }}
         >Pending</button>
       </div>
     );

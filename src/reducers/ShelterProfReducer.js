@@ -41,6 +41,20 @@ export default (state = { got: false }, action) => {
       return stateCopy;
     case 'NEW_ADOPT_REQUEST' :
       return {...state, ...action.payload};
+    case 'UPDATE_ADOPT_REQUEST_STATUS':
+      return {
+        ...state,
+        adoptRequests: {
+          ...state.adoptRequests,
+          [action.petId]: {
+            ...state.adoptRequests[action.petId],
+            [action.requesterUid]: {
+              ...state.adoptRequests[action.petId][action.requesterUid],
+              ...action.payload,
+            }
+          }
+        }
+      };
     default :
       return state;
   }

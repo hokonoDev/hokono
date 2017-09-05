@@ -85,3 +85,22 @@ export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {
   });
   store.dispatch(action);
 }
+
+export const adoptRequestStatusAction = (status, petId, requesterUid) => {
+  const user = firebase.auth().currentUser;
+  const action = {
+    type: 'UPDATE_ADOPT_REQUEST_STATUS',
+    payload: {
+      status: status,
+    },
+    petId,
+    requesterUid,
+  };
+
+  firebase.database().ref().update({
+    [`accounts/${user.uid}/adoptRequests/${petId}/${requesterUid}/status`]: status,
+    [`accounts/${requesterUid}/adoptRequests/${petId}/status`]: status,
+  });
+
+  store.dispatch(action);
+};

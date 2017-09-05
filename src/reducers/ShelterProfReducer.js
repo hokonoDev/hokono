@@ -55,6 +55,8 @@ export default (state = { got: false }, action) => {
           }
         }
       };
+    case 'SIGNOUT' :
+      return { got: false };
     default :
       return state;
   }

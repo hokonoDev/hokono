@@ -17,6 +17,8 @@ export default (state = {}, action) => {
     case 'SORT_FOLLOWING_POSTS' :
       const nextState = postsSort(state, action.sortType, action.lToG, action.searchTerm);
       return nextState;
+    case 'SIGNOUT' :
+      return {};
     default :
       return state;
   }

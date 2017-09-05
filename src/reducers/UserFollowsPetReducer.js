@@ -6,6 +6,8 @@ export default (state = {}, action) => {
 
       }
       return state;
+    case 'SIGNOUT' :
+      return {};
     default :
       return state;
   }

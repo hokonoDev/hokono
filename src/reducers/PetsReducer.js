@@ -31,6 +31,8 @@ export default (state = {}, action) => {
       stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;
       stateCopy[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
+    case 'SIGNOUT' :
+      return {};
     default :
       return state;
   }

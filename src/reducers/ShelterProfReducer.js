@@ -21,7 +21,7 @@ export default (state = { got: false }, action) => {
     case 'STARRED_A_PET' :
       if (action.payload === 'success') {
         //this myStars property is so user can see what pets hes liked.
-        return {...state, myStars: {...state.myStars, ...action.data.myStars} };
+        return {...state, myStars: {...state.myStars, ...action.data} };
       }
       return state;
     case 'UNSTARRED_A_PET' :
@@ -41,6 +41,22 @@ export default (state = { got: false }, action) => {
       return stateCopy;
     case 'NEW_ADOPT_REQUEST' :
       return {...state, ...action.payload};
+    case 'UPDATE_ADOPT_REQUEST_STATUS':
+      return {
+        ...state,
+        adoptRequests: {
+          ...state.adoptRequests,
+          [action.petId]: {
+            ...state.adoptRequests[action.petId],
+            [action.requesterUid]: {
+              ...state.adoptRequests[action.petId][action.requesterUid],
+              ...action.payload,
+            }
+          }
+        }
+      };
+    case 'SIGNOUT' :
+      return { got: false };
     default :
       return state;
   }

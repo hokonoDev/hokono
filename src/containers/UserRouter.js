@@ -17,7 +17,7 @@ const getPets = ({pets}) => {
 }
 
 const getProfilePromise = (uid) => {
-  return firebase.database().ref(`/users/${uid}`).once('value');
+  return firebase.database().ref(`/accounts/${uid}`).once('value');
 }
 
 const getProfileData = ({ location, auth, profile }) => {

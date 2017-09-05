@@ -55,7 +55,6 @@ export const editProfileAction = (payload) => {
     .then(() => {
       updateFromDBAction();
     });
-
 }
 
 export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {
@@ -68,6 +67,7 @@ export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {
       [petId]: {
         timeStamp: now,
         ownerUid,
+        status: 'open',
       },
     },
   };
@@ -76,7 +76,7 @@ export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {
     .then(snapshot => {
       const requests = snapshot.val() || {};
       firebase.database().ref().update({
-        [`accounts/${ownerUid}/adoptRequests/${petId}`]: {...requests, [user.uid]: { timeStamp: now }},
+        [`accounts/${ownerUid}/adoptRequests/${petId}`]: {...requests, [user.uid]: { timeStamp: now, status: 'open' }},
       });
     });
 

@@ -73,11 +73,26 @@ const PetProfile = class extends React.Component {
           }
         />
         <IfRender
-          if={this.state.pet.ownerUid !== this.props.auth.uid && this.state.pet.adopt}
+          if={
+            this.state.pet.ownerUid !== this.props.auth.uid
+            && this.state.pet.adopt
+            && this.props.profile.acctType !== 'shelter'}
           ifTrue={() =>
               <button
-                onClick={() => adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid)}
-              >Adopt Me!!!</button>
+                onClick={() => {
+                  this.props.auth.loggedIn ?
+                    this.props.profile.adoptRequests
+                    && this.props.profile.adoptRequests[this.state.pet.id] ?
+                      alert('Your request has been sent!') :
+                      adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid) :
+                    alert('Please login to adopt');
+                }}
+              >{
+                this.props.profile.adoptRequests
+                && this.props.profile.adoptRequests[this.state.pet.id]
+                ? 'Sent!'
+                : 'Adopt Me!!!'
+              }</button>
           }
         />
         <Route

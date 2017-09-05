@@ -20,9 +20,18 @@ export default class extends React.Component {
       <div
         style={{border: '1px solid black'}}
       >
-        {console.log('recReq props:', this.props)}
         <h4>Request to adopt {this.props.profile.pets[this.props.petId].name}!</h4>
         <p>from {this.state.requester}</p>
+        <p>Status: {this.props.status}</p>
+        <button
+
+        >Accept</button>
+        <button
+
+        >Deny</button>
+        <button
+
+        >Pending</button>
       </div>
     );
   }

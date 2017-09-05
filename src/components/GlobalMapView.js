@@ -1,12 +1,14 @@
 import React from 'react';
-import { GoogleMap } from './index';
+import {
+  GoogleMap,
+  Nav,
+} from './index';
 import { cordsFromAddress } from './lib/helpers';
 import fb from 'firebase';
 
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       center: typeof this.props.userLocation === 'string' ? undefined : this.props.userLocation,
       markers: undefined,
@@ -26,13 +28,18 @@ export default class extends React.Component {
         const accounts = snapshot.val();
         this.setState({
           markers: Object.values(accounts).map(account => {
-            return {
+            return this.props.auth.uid !== account.uid ? {
               position: account.location || account.address,
               title: account.displayName,
               animation: 'drop',
               onClick: () => {
                 this.props.history.push(`/${account.acctType}/profile/${account.uid}`);
               },
+            } : {
+              position: account.location || account.address,
+              animation: 'none',
+              onClick: () => {},
+              icon: '/images/bullseye.png',
             };
           }),
         });
@@ -46,19 +53,28 @@ export default class extends React.Component {
           .then(cords => {
             this.setState({ center: cords });
           });
+      } else {
+        this.setState({ center: this.props.userLocation })
       }
     }
   }
 
   render() {
     return (
-      <GoogleMap
-        center={this.state.center}
-        zoom={11}
-        markers={this.state.markers}
-        markerDelay={0}
-        dimensions={['500px', '800px']}
-      />
+      <div>
+        <Nav />
+        <div
+          style={{display: 'flex', justifyContent: 'center'}}
+        >
+          <GoogleMap
+            center={this.state.center}
+            zoom={11}
+            markers={this.state.markers}
+            markerDelay={0}
+            dimensions={['500px', '800px']}
+          />
+        </div>
+      </div>
     );
   }
 }

@@ -66,6 +66,5 @@ export default props => (
           />
         )}
       />
-      <pre>Auth: { JSON.stringify(props.auth) }</pre>
   </div>
 );

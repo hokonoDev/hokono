@@ -29,6 +29,8 @@ import FollowFeedEntry from './FollowFeedEntry';
 import AdoptRequestList from './AdoptRequestList';
 import SentRequest from './SentRequest';
 import ReceivedRequest from './ReceivedRequest';
+import GlobalMapView from './GlobalMapView';
+import GoogleMap from './GoogleMap';
 
 export {
   AddPet,
@@ -62,5 +64,7 @@ export {
   AdoptRequestList,
   SentRequest,
   ReceivedRequest,
+  GlobalMapView,
+  GoogleMap,
 };
 

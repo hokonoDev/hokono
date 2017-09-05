@@ -6,7 +6,7 @@ import fb from 'firebase';
 export default class extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(props);
     this.state = {
       center: typeof this.props.userLocation === 'string' ? undefined : this.props.userLocation,
       markers: undefined,
@@ -30,6 +30,9 @@ export default class extends React.Component {
               position: account.location || account.address,
               title: account.displayName,
               animation: 'drop',
+              onClick: () => {
+                this.props.history.push(`/${account.acctType}/profile/${account.uid}`);
+              },
             };
           }),
         });

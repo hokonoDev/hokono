@@ -56,8 +56,9 @@ export default class extends React.Component {
                 marker.animation === 'bounce' ?
                   window.google.maps.Animation.BOUNCE : null,
           title: marker.title,
+          label: marker.title,
           map: this.map,
-        })
+        }).addListener('click', marker.onClick)
       )
   }
 
@@ -78,8 +79,9 @@ export default class extends React.Component {
                   marker.animation === 'bounce' ?
                     window.google.maps.Animation.BOUNCE : null,
             title: marker.title,
+            label: marker.title,
             map: this.map,
-          });
+          }).addListener('click', marker.onClick);
         }, this.state.markerDelay * i);
       }
     });

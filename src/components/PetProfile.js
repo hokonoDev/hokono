@@ -13,6 +13,7 @@ import {
 } from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
 import { adoptRequestAction } from '../actions/ShelterProfileActions';
+import { getDisplayNameFromUid } from './lib/helpers';
 
 const PetProfile = class extends React.Component {
   constructor(props) {
@@ -20,7 +21,6 @@ const PetProfile = class extends React.Component {
     this.state = {
       pet: {},
     }
-    console.log(props)
   }
 
   componentWillMount() {
@@ -34,6 +34,10 @@ const PetProfile = class extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if(JSON.stringify(prevProps.pet) !== JSON.stringify(this.props.pet)){
       this.setPetData();
+    }
+    if(this.state.pet.ownerUid && prevState.pet.ownerUid !== this.state.pet.ownerUid) {
+      getDisplayNameFromUid(this.state.pet.ownerUid)
+      .then(name => this.setState({ pet: { ...this.state.pet, ownerName: name }}));
     }
   }
 
@@ -71,6 +75,13 @@ const PetProfile = class extends React.Component {
               <button>Edit</button>
             </Link>
           }
+          ifFalse={() => (
+            <Link
+              to={`/${this.state.pet.adopt ? 'shelter' : 'user'}/profile/${this.state.pet.ownerUid}`}
+            >
+              <p>Owner: {this.state.pet.ownerName}</p>
+            </Link>
+          )}
         />
         <IfRender
           if={

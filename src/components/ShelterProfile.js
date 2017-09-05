@@ -1,11 +1,10 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import { EditProfile, PetList, IfRender } from './index';
+import { EditProfile, IfRender } from './index';
 
 const ShelterProfile = class extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       profile: {},
     };
@@ -65,7 +64,6 @@ const ShelterProfile = class extends React.Component {
             ifTrue={() => <p>Phone: {this.state.profile.phone}</p>}
           />
         </div>
-        <pre>Profile: { JSON.stringify(this.state.profile) }</pre>
       </div>
     );
   }

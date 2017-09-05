@@ -1,10 +1,14 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { GlobalPetFeed } from '../components/index';
+import {
+  GlobalPetFeed,
+  GlobalMapView,
+} from '../components/index';
 
 const GuestRouter = (props) => (
   <div>
+    {console.log(props)}
     <Route
       path="/allpets"
       render={renderProps => (
@@ -15,6 +19,16 @@ const GuestRouter = (props) => (
         />
       )}
     />
+    <Route
+      path="/mapview"
+      render={renderProps => (
+        <GlobalMapView
+          {...renderProps}
+          auth={props.auth}
+          userLocation={props.profile.location || props.profile.address}
+        />
+      )}
+    />
   </div>
 );
 
@@ -22,6 +36,7 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     gPets: state.gPets,
+    profile: state.profile,
   };
 }
 

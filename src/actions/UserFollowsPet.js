@@ -72,7 +72,7 @@ export const userUnfollowedPet = (pet) => {
 
 export const userStarredPet = (pet) => {
   const action = {
-    type: 'STARED_A_PET'
+    type: 'STARRED_A_PET'
   };
 
   const user = firebase.auth().currentUser;
@@ -80,7 +80,7 @@ export const userStarredPet = (pet) => {
   const owner = pet.ownerUid;
 
   var obj1 = {};
-  obj1[pet.id] = { nameDisplay: user.displayName };
+  obj1[pet.id] = { displayName: user.displayName };
   const currTime = Date.now();
 
   updates[`/accounts/${user.uid}/myStars/` + pet.id] = { name: pet.name };
@@ -93,16 +93,24 @@ export const userStarredPet = (pet) => {
 
   firebase.database().ref().update(updates).then(() => {
     //updates the users stars in state/store
-    action.data = { myStars: obj1 };
+    action.data = {
+      [pet.id]: {
+        displayName: user.displayName
+      }
+    };
     pet.stars = pet.stars + 1 || 1;
-    const emptyObj = {};
-    emptyObj[user.uid] = { displayName: user.displayName, createdAt: currTime };
-    pet.starredBy = emptyObj;
-    const emptyObj2 = {};
-    emptyObj2[pet.id] = pet;
+    pet.starredBy = {
+      ...pet.starredBy,
+      [user.uid]: {
+        displayName: user.displayName,
+        createdAt: currTime,
+      }
+    };
 
     //updates the globalpetfeed state/store with stars
-    action.dataPet = { emptyObj2 };
+    action.dataPet = {
+      [pet.id]: pet,
+    };
     action.payload = "success";
     store.dispatch(action);
   }, (err) => {
@@ -113,7 +121,7 @@ export const userStarredPet = (pet) => {
 
 export const userUnstarredPet = (pet) => {
   const action = {
-    type: 'UNSTARED_A_PET'
+    type: 'UNSTARRED_A_PET'
   };
 
   const user = firebase.auth().currentUser;

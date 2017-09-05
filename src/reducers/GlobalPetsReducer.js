@@ -11,7 +11,8 @@ export default (state = {}, action) => {
     case 'SORT_GLOBAL_PETS' :
       return petsSort(state, action.sortType, action.lToG, action.searchTerm);
     case 'STARRED_A_PET' :
-      return {...state, ...action.dataPet};
+      const nextState = {...state, ...action.petData};
+      return nextState;
     case 'UNSTARRED_A_PET' :
       return {...state, ...action.dataPet};
     case 'LIKE_POST' :
@@ -20,6 +21,8 @@ export default (state = {}, action) => {
       stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;
       stateCopy[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
+    case 'SIGNOUT' :
+      return {};
     default :
       return state;
   }

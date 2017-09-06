@@ -102,7 +102,6 @@ const Nav = (props) => {
             </Link>
           </div>
         )}
-      />
     </div>
   );
 }

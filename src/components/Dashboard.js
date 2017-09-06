@@ -29,7 +29,9 @@ export default props => (
       </button>
       <Link
         to={`${props.match.url}/following`}
-      >Following: {props.profile.followingCount ? props.profile.followingCount : '0'}</Link>
+      >
+        Following: {props.profile.followingCount ? props.profile.followingCount : '0'}
+      </Link>
       <Route
         exact path={`${props.match.path}`}
         render={renderProps => (

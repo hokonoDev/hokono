@@ -40,7 +40,7 @@ const App = props => (
         component={ShelterRouter}
       />
       <Route
-        path="/"
+        path="/global"
         component={GuestRouter}
       />
       <Route

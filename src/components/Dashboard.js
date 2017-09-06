@@ -8,7 +8,6 @@ import {
   IfRedirect,
   FollowingList,
   AdoptRequestList,
-  // IfRender,
 } from './index';
 
 export default props => (

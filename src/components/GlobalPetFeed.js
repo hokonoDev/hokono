@@ -6,15 +6,14 @@ import { sortGlobalPetsAction } from '../actions/GlobalPetsActions';
 
 export default (props) => (
   <div>
-    Global Pet Feed
-    <Nav />
+    {console.log(props)}
     <FilterBar
       filter={props.gPets.sort}
       sortAction={sortGlobalPetsAction}
       searchBar={true}
     />
     <Link
-      to={'/mapview'}
+      to={'/global/mapview'}
     >Map View</Link>
     <div
       style={{

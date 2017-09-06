@@ -59,7 +59,7 @@ const Nav = (props) => {
               />
             </Link>
             <Link
-              to={`/allpets`}
+              to={`/global/allpets`}
               onClick={getAllPets}
             >
               <img
@@ -89,7 +89,7 @@ const Nav = (props) => {
                 />
             </Link>
             <Link
-              to={`/allpets`}
+              to={`/global/allpets`}
               onClick={getAllPets}
             >
               <img

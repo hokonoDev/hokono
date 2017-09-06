@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 import { GlobalFeedEntry, Nav, FilterBar } from './index';
 import { sortGlobalPetsAction } from '../actions/GlobalPetsActions';
 
@@ -12,6 +13,9 @@ export default (props) => (
       sortAction={sortGlobalPetsAction}
       searchBar={true}
     />
+    <Link
+      to={'/mapview'}
+    >Map View</Link>
     <div
       style={{
         display: 'flex',

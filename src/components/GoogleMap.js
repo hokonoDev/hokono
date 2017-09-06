@@ -58,6 +58,7 @@ export default class extends React.Component {
           title: marker.title,
           label: marker.title,
           map: this.map,
+          icon: marker.icon,
         }).addListener('click', marker.onClick)
       )
   }
@@ -81,6 +82,7 @@ export default class extends React.Component {
             title: marker.title,
             label: marker.title,
             map: this.map,
+            icon: marker.icon,
           }).addListener('click', marker.onClick);
         }, this.state.markerDelay * i);
       }
@@ -89,13 +91,15 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>MAP</p>
+      <div
+        style={this.props.containerStyle}
+      >
         <div
           ref='map'
           style={{
             height: this.props.dimensions ? this.props.dimensions[0] : '500px',
             width: this.props.dimensions ? this.props.dimensions[1] : '500px',
+            ...this.props.mapStyle,
           }}
         >
         </div>

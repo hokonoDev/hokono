@@ -48,4 +48,5 @@ const sortTypes = {
   likeSort,
   createdSort,
   popularSort,
+  trendingSort,
 }

@@ -48,7 +48,7 @@ class FilterBar extends React.Component {
     return (
       <div>
         <form>
-          Search by name:
+          Search pets by name:
           <IfRender
             if={this.props.searchBar}
             ifTrue={() => (
@@ -79,6 +79,9 @@ class FilterBar extends React.Component {
             <option
               value="createdSort"
             >Recent</option>
+            <option
+              value="distanceSort"
+            >Distance</option>
           </select>
         </form>
       </div>

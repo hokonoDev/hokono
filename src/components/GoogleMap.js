@@ -4,12 +4,13 @@ import { cordsFromAddress } from './lib/helpers';
 export default class extends React.Component {
   constructor(props) {
     super(props);
-
+    this.allMarkers = [];
     this.state = {
       center: this.props.center || {lat: -25.363, lng: 131.044},
       markers: this.props.markers || [],
       zoom: this.props.zoom || 3,
       markerDelay: this.props.markerDelay || 0,
+
     };
   }
 
@@ -18,6 +19,9 @@ export default class extends React.Component {
       zoom: this.state.zoom,
       center: this.state.center,
     });
+    window.google.maps.event.addListener(this.map, 'idle', () =>
+      this.props.onIdle(this.map, this.allMarkers)
+    );
     this.setMarkers();
   }
 
@@ -47,8 +51,8 @@ export default class extends React.Component {
 
   setMarkerByAddress(marker) {
     cordsFromAddress(marker.position)
-      .then(cords =>
-        new window.google.maps.Marker({
+      .then(cords => {
+        const m = new window.google.maps.Marker({
           position: cords,
           animation:
             marker.animation === 'drop' ?
@@ -56,11 +60,14 @@ export default class extends React.Component {
                 marker.animation === 'bounce' ?
                   window.google.maps.Animation.BOUNCE : null,
           title: marker.title,
-          label: marker.title,
+          label: marker.label,
           map: this.map,
           icon: marker.icon,
-        }).addListener('click', marker.onClick)
-      )
+        });
+        window.google.maps.event.addListener(m, 'click', marker.onClick);
+        this.allMarkers.push(m);
+        return m;
+      })
   }
 
   setMarkers() {
@@ -72,7 +79,7 @@ export default class extends React.Component {
       // ... if it is an object then the position is cordinates
       } else if (typeof marker.position === 'object'){
         setTimeout(() => {
-          new window.google.maps.Marker({
+          const m = new window.google.maps.Marker({
             position: marker.position,
             animation:
               marker.animation === 'drop' ?
@@ -80,10 +87,13 @@ export default class extends React.Component {
                   marker.animation === 'bounce' ?
                     window.google.maps.Animation.BOUNCE : null,
             title: marker.title,
-            label: marker.title,
+            label: marker.label,
             map: this.map,
             icon: marker.icon,
-          }).addListener('click', marker.onClick);
+          });
+          window.google.maps.event.addListener(m, 'click', marker.onClick);
+          this.allMarkers.push(m);
+          return m;
         }, this.state.markerDelay * i);
       }
     });

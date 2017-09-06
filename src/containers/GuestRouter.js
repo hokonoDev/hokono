@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import {
   GlobalPetFeed,
   GlobalMapView,
+  Nav,
 } from '../components/index';
 
 const GuestRouter = (props) => (
   <div>
-    {console.log(props)}
+    <Nav />
     <Route
-      path="/allpets"
+      path="/global/allpets"
       render={renderProps => (
         <GlobalPetFeed
           {...renderProps}
@@ -20,12 +21,13 @@ const GuestRouter = (props) => (
       )}
     />
     <Route
-      path="/mapview"
+      path="/global/mapview"
       render={renderProps => (
         <GlobalMapView
           {...renderProps}
           auth={props.auth}
           userLocation={props.profile.location || props.profile.address}
+          gPets={props.gPets}
         />
       )}
     />

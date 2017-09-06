@@ -58,6 +58,7 @@ const ShelterRouter = (props) => (
         <AddPet
           {...routerProps}
           auth={props.auth}
+          profile={props.profile}
         />
       )}
     />

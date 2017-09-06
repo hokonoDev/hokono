@@ -31,7 +31,7 @@ class Home extends React.Component {
           ifFalse={()=> (
             <div>
               <Link to="/auth/login">Login</Link>
-              <Link to="/allpets" onClick={getAllPets}>Continue as a Guest</Link>
+              <Link to="/global/allpets" onClick={getAllPets}>Continue as a Guest</Link>
             </div>
           )}
         />

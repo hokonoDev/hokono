@@ -47,18 +47,12 @@ class Chat extends React.Component {
     //listen on one location
       //update this.state.messages with listener data
   }
+
+
+
   render() {
     return (
-
-       <Launcher
-        agentProfile={{
-          teamName: 'react-live-chat',
-          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
-        }}
-        onMessageWasSent={this._onMessageWasSent.bind(this)}
-        messageList={this.state.messages}
-      />
-
+      <ChatBubble onNewMessage={this.onNewMessage} messages={this.state.messages}/>
     );
   }
 }

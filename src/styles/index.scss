@@ -41,6 +41,33 @@
 }
 
 
+  ///////////////////
+ // --- LINKS --- //
+///////////////////
+
+.link {
+	color: black;
+	text-decoration: none;
+}
+
+.logout-link {
+	@extend .link;
+	@extend .row-box-center;
+	align-items: center;
+	border: 1px solid black;
+	height: 20px;
+	width: 60px;
+	position: absolute;
+	left: 88vw;
+	top: 20px;
+}
+
+.logout-link:hover {
+	color: white;
+	background-color: black;
+}
+
+
   //////////////////////
  // --- LOGO BAR --- //
 //////////////////////

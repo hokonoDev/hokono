@@ -45,10 +45,23 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-.row-box, .row-box-center, .logo-box, .row-box-space, .nav-box, .row-box-left, .col-box, .col-box-center, .nav-background, .col-box-space {
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0; }
+
+button:focus {
+  outline: 0; }
+
+.row-box, .row-box-center, .logout-link, .logo-box, .row-box-space, .nav-box, .row-box-left, .col-box, .col-box-center, .nav-background, .col-box-space {
   display: flex; }
 
-.row-box-center, .logo-box {
+.row-box-center, .logout-link, .logo-box {
   justify-content: center; }
 
 .row-box-space, .nav-box {
@@ -65,6 +78,23 @@ table {
 
 .col-box-space {
   align-items: space-around; }
+
+.link, .logout-link {
+  color: black;
+  text-decoration: none; }
+
+.logout-link {
+  align-items: center;
+  border: 1px solid black;
+  height: 20px;
+  width: 60px;
+  position: absolute;
+  left: 88vw;
+  top: 20px; }
+
+.logout-link:hover {
+  color: white;
+  background-color: black; }
 
 .logo-box {
   align-items: center;

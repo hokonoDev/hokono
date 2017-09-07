@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import { signoutAction } from '../actions/AuthActions';
 import { sortUsersPetsAction } from '../actions/PetsActions';
 import {
   FilterBar,
@@ -21,11 +20,6 @@ export default props => (
       ifFalse="/auth/login"
     />
     {`${props.auth.displayName}'s Dashboard`}
-      <button
-        onClick={signoutAction}
-      >
-        Logout
-      </button>
       <Link
         to={`${props.match.url}/following`}
       >Following: {props.profile.followingCount ? props.profile.followingCount : '0'}</Link>

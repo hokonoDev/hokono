@@ -1,13 +1,26 @@
 import React from 'react';
+import { signoutAction } from '../actions/AuthActions';
 
 export default props => (
   <div
-    className="logo-box"
+    className="row-box-center"
   >
-    <img
-      className="logo"
-      src="/images/hokono-logo-v1.0.png"
-      alt=""
-    />
+    <div
+      className="logo-box"
+    >
+      <img
+        className="logo"
+        src="/images/hokono-logo-v1.0.png"
+        alt=""
+      />
+    </div>
+    {
+      props.auth.loggedIn ?
+        <button
+          className="logout-link"
+          onClick={signoutAction}
+        >Logout</button> :
+        null
+    }
   </div>
 )

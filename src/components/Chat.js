@@ -29,19 +29,17 @@ class Chat extends React.Component {
     })
   }
   _sendMessage(msg) {
+
     let sender = {
       author: 'me',
       type: 'text',
-      data: {
-        text: msg
-      },
+      data: { msg },
     };
     let receiver = {
       author: 'them',
       type: 'text',
-      data: {
-        text: msg
-      }
+      data: { msg },
+      uid: this.props
     }
     newChatMsg(sender, receiver);
     //dispatch action
@@ -58,7 +56,7 @@ class Chat extends React.Component {
           imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
         }}
         onMessageWasSent={this._onMessageWasSent.bind(this)}
-        messageList={this.state.messageList}
+        messageList={this.state.messages}
       />
 
     );

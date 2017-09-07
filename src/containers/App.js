@@ -78,6 +78,7 @@ const mapStateToProps = (state) => {
     pets: state.pets,
     auth: state.auth,
     profile: state.profile,
+    chat: state.chat,
   };
 }
 

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import store from '../../store';
 import { distanceBetweenLocations } from '../../components/lib/helpers';
 

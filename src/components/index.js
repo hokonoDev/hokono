@@ -32,6 +32,8 @@ import ReceivedRequest from './ReceivedRequest';
 import GlobalMapView from './GlobalMapView';
 import GoogleMap from './GoogleMap';
 import AccountList from './AccountList';
+import ProfilePetList from './ProfilePetList';
+import ProfilePetListEntry from './ProfilePetListEntry';
 
 export {
   AddPet,
@@ -68,5 +70,7 @@ export {
   GlobalMapView,
   GoogleMap,
   AccountList,
+  ProfilePetList,
+  ProfilePetListEntry,
 };
 

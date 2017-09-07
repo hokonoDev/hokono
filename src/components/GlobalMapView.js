@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   GoogleMap,
-  Nav,
-  AccountList,
   GlobalPetFeed,
 } from './index';
 import { cordsFromAddress } from './lib/helpers';

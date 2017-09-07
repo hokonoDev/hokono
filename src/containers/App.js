@@ -81,6 +81,4 @@ const mapStateToProps = (state) => {
     chat: state.chat,
   };
 }
-
-
 export default connect(mapStateToProps)(App);

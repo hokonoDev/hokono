@@ -1,19 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Home } from '../components/index';
+import { Home, LogoBar } from '../components/index';
 import {
   AuthRouter,
   ShelterRouter,
   GuestRouter,
   PetRouter,
-  UserRouter
+  UserRouter,
   } from './index';
 
 
 const App = props => (
   <Router>
     <div>
+      <LogoBar
+        auth={props.auth}
+      />
       <Route
         exact
         path="/"

@@ -1,0 +1,89 @@
+@import 'reset';
+
+
+  ///////////////////////
+ // --- CONTAINERS -- //
+///////////////////////
+
+.row-box {
+	display: flex;
+}
+
+.row-box-center {
+	@extend .row-box;
+	justify-content: center;
+}
+
+.row-box-space {
+	@extend .row-box;
+	justify-content: space-around;
+}
+
+.row-box-left {
+	@extend .row-box;
+	justify-content: flex-start;
+}
+
+.col-box {
+	@extend .row-box;
+	flex-direction: column;
+}
+
+
+.col-box-center {
+	@extend .col-box;
+	align-items: center;
+}
+
+.col-box-space {
+	@extend .row-box;
+	align-items: space-around;
+}
+
+
+  //////////////////////
+ // --- LOGO BAR --- //
+//////////////////////
+
+.logo-box {
+	@extend .row-box-center;
+	align-items: center;
+	height: 30px;
+	padding: 30px;
+	background-color: white;
+}
+
+.logo {
+	height: 30px;
+}
+
+
+  /////////////////////
+ // --- NAV BAR --- //
+/////////////////////
+
+
+
+.nav-background {
+	@extend .col-box-center;
+	background-color: whitesmoke;
+	margin-bottom: 30px;
+	align-items: center;
+	border-top: 0.1px grey solid;
+}
+.nav-box {
+	@extend .row-box-space;
+	height: 40px;
+}
+
+.nav-item {
+	width: 20px;
+	height: 20px;
+	padding: 10px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.nav-item:hover {
+	background-color: lightgrey;
+}

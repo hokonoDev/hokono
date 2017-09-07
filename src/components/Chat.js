@@ -1,44 +1,66 @@
 import React from 'react';
-import ChatBubble from 'react-chat-bubble';
+import { Launcher } from 'react-chat-window';
 import { newChatMsg } from '../actions/ChatActions';
 
 class Chat extends React.Component {
   //chat opens up when you click a button on another user's profile,
-  // take that user's profile image and pass into props
+  // take that user's profile image and ID, pass into props
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      messages: [],
+      messages: this.props.messages || [{
+        author: 'me',
+        type: 'text',
+        data: {
+          text: 'brother its been a while'
+        }
+      }, {
+        author: 'them',
+        type: 'text',
+        data: {
+          text: 'doggo issa been 2 long'
+        },
+      }],
     };
-    this.onNewMessage = this.onNewMessage.bind(this);
   }
-
-  onNewMessage(msg) {
+  _onMessageWasSent(message) {
+    this.setState({
+      messages: [...this.state.messages, message]
+    })
+  }
+  _sendMessage(msg) {
     let sender = {
-      type: 0,
-      image: '',
-      text: msg
+      author: 'me',
+      type: 'text',
+      data: {
+        text: msg
+      },
     };
     let receiver = {
-      type: 1,
-      image: this.props.img || '',
-      text: msg
-
+      author: 'them',
+      type: 'text',
+      data: {
+        text: msg
+      }
     }
-
     newChatMsg(sender, receiver);
     //dispatch action
     //write to both locations
     //listen on one location
       //update this.state.messages with listener data
   }
-
-
-
   render() {
     return (
-      <ChatBubble onNewMessage={this.onNewMessage} messages={this.state.messages}/>
+
+       <Launcher
+        agentProfile={{
+          teamName: 'react-live-chat',
+          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+        }}
+        onMessageWasSent={this._onMessageWasSent.bind(this)}
+        messageList={this.state.messageList}
+      />
+
     );
   }
 }

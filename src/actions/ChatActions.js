@@ -25,7 +25,6 @@ export const newChatMsg = (sender, receiver) => {
   firebase.database.ref(`/accounts/${uid}/chats/${receiver.uid}`).on('value')
     .then(snapshot => {
       const msgArray = snapshot.val();
-      msgArray = msgArray.slice(0, 15) || msgArray;
       store.dispatch({
         type:'NEW_CHAT_MSG',
         payload: {[receiver.uid]: msgArray},

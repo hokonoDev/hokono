@@ -34,6 +34,7 @@ import GoogleMap from './GoogleMap';
 import AccountList from './AccountList';
 import ProfilePetList from './ProfilePetList';
 import ProfilePetListEntry from './ProfilePetListEntry';
+import Chat from './Chat';
 
 export {
   AddPet,
@@ -72,5 +73,6 @@ export {
   AccountList,
   ProfilePetList,
   ProfilePetListEntry,
+  Chat
 };
 

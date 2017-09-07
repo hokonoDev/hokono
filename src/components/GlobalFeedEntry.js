@@ -18,7 +18,7 @@ const FeedEntry = (props) => (
     }}
   >
     <Link
-      to={`pet/${props.pet.id}/profile`}
+      to={`/pet/${props.pet.id}/profile`}
     >{props.pet.name}</Link>
     <div
       style={{

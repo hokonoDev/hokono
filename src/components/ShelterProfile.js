@@ -75,7 +75,7 @@ const ShelterProfile = class extends React.Component {
           />
         </div>
         <ProfilePetList
-          petData={this.props.profile.pets || {}}
+          petData={this.state.profile.pets || {}}
         >
         </ProfilePetList>
       </div>

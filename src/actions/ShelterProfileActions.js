@@ -24,7 +24,7 @@ export const initAction = (payload) => {
     ...payload,
     pets: {},
     blurb: '',
-    profPic: '',
+    profPic: '/images/edit-profile.png',
     uid: user.uid,
     email: user.email,
     following: {},

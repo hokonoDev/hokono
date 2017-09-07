@@ -84,11 +84,27 @@ export const editPetAction = (edits, pet) => {
     payload: edits,
     petId: pet.id,
     ownerUid: pet.ownerUid,
-  }
-  store.dispatch(action);
+  };
 
-  const updates = {};
-  updates[`/pets/${pet.id}`] = { ...pet, ...edits };
-  updates[`/accounts/${pet.ownerUid}/pets/${pet.id}`] = { ...pet, ...edits };
-  firebase.database().ref().update(updates);
+  if (edits.filePath) {
+    const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.uid}/${action.petId}`);
+    storageRef.put(edits.filePath).then(() => {
+      storageRef.getDownloadURL().then(filePath => {
+        action.payload.filePath = filePath;
+        store.dispatch(action);
+
+        const updates = {};
+        updates[`/pets/${pet.id}`] = { ...pet, ...action.payload };
+        updates[`/accounts/${pet.ownerUid}/pets/${pet.id}`] = { ...pet, ...action.payload };
+        firebase.database().ref().update(updates);
+      });
+    });
+  } else {
+    store.dispatch(action);
+
+    const updates = {};
+    updates[`/pets/${pet.id}`] = { ...pet, ...action.payload };
+    updates[`/accounts/${pet.ownerUid}/pets/${pet.id}`] = { ...pet, ...action.payload };
+    firebase.database().ref().update(updates);
+  }
 }

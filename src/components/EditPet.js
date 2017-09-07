@@ -18,6 +18,10 @@ export default class extends React.Component {
     this.setState(nextState);
   }
 
+  imageUpload(e) {
+    this.setState({ filePath: e.target.files.item(0) });
+  }
+
   verify() {
     return window.confirm('Are you sure you want to make these edits?');
   }
@@ -54,6 +58,11 @@ export default class extends React.Component {
             placeholder="Description"
             value={this.state.blurd}
             onChange={this.change}
+          />
+          <input type="file"
+            accept="image/*"
+            capture="camera"
+            onChange={this.imageUpload.bind(this)}
           />
           <button
             type="submit"

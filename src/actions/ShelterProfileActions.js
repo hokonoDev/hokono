@@ -24,7 +24,7 @@ export const initAction = (payload) => {
     ...payload,
     pets: {},
     blurb: '',
-    profPic: '',
+    profPic: '/images/edit-profile.png',
     uid: user.uid,
     email: user.email,
     following: {},
@@ -50,10 +50,24 @@ export const initAction = (payload) => {
 export const editProfileAction = (payload) => {
   const user = firebase.auth().currentUser;
 
-  firebase.database().ref(`accounts/${user.uid}`).update(payload)
-    .then(() => {
-      updateFromDBAction();
-    });
+  if (payload.profPic) {
+    const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.uid}/profile`);
+    storageRef.put(payload.profPic)
+      .then(snapshot => {
+        storageRef.getDownloadURL().then(profPic => {
+        payload.profPic = profPic;
+        firebase.database().ref(`accounts/${user.uid}`).update(payload)
+          .then(() => {
+            updateFromDBAction();
+          });
+        });
+      });
+  } else {
+    firebase.database().ref(`accounts/${user.uid}`).update(payload)
+      .then(() => {
+        updateFromDBAction();
+      });
+  }
 }
 
 export const adoptRequestAction = (currentRequests = {}, petId, ownerUid) => {

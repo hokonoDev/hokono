@@ -1,6 +1,10 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import { EditProfile, IfRender } from './index';
+import {
+  EditProfile,
+  IfRender,
+  ProfilePetList,
+} from './index';
 
 const ShelterProfile = class extends React.Component {
   constructor(props) {
@@ -56,7 +60,13 @@ const ShelterProfile = class extends React.Component {
           />
         </div>
         <div>
-          <div>Profile Pic Placeholder url: {this.state.profile.profPic}</div>
+          <img
+            src={this.state.profile.profPic || '/images/edit-profile.png'}
+            style={{
+              height: '200px',
+              width: '200px',
+            }}
+          />
           <p>Address: {this.state.profile.address}</p>
           <p>Email: {this.state.profile.email}</p>
           <IfRender
@@ -64,6 +74,10 @@ const ShelterProfile = class extends React.Component {
             ifTrue={() => <p>Phone: {this.state.profile.phone}</p>}
           />
         </div>
+        <ProfilePetList
+          petData={this.state.profile.pets || {}}
+        >
+        </ProfilePetList>
       </div>
     );
   }

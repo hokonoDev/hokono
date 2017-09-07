@@ -8,38 +8,29 @@ class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: this.props.messages || [{
-        author: 'me',
-        type: 'text',
-        data: {
-          text: 'brother its been a while'
-        }
-      }, {
-        author: 'them',
-        type: 'text',
-        data: {
-          text: 'doggo issa been 2 long'
-        },
-      }],
+      messages: Object.values(this.props.messages),
     };
+    this._onMessageWasSent = this._onMessageWasSent.bind(this);
+    this._sendMessage = this._sendMessage.bind(this);
   }
   _onMessageWasSent(message) {
     this.setState({
       messages: [...this.state.messages, message]
-    })
+    });
+    this._sendMessage(message);
   }
   _sendMessage(msg) {
 
     let sender = {
       author: 'me',
       type: 'text',
-      data: { msg },
+      data: { text: msg.data.text },
     };
     let receiver = {
       author: 'them',
       type: 'text',
-      data: { msg },
-      uid: this.props
+      data: { text: msg.data.text },
+      uid: this.props.chatReceiver.uid,
     }
     newChatMsg(sender, receiver);
     //dispatch action
@@ -49,15 +40,17 @@ class Chat extends React.Component {
   }
   render() {
     return (
-
+      <div>
+      {console.log("rec id in chat. ", this.props)}
        <Launcher
         agentProfile={{
-          teamName: 'react-live-chat',
-          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+          teamName: this.props.chatReceiver.name || '',
+          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png' || this.props.chatReceiver.pic,
         }}
         onMessageWasSent={this._onMessageWasSent.bind(this)}
-        messageList={this.state.messages}
+        messageList={Object.values(this.props.messages)}
       />
+      </div>
 
     );
   }

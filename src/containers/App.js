@@ -29,6 +29,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
+        { console.log("this.props in app ", this.props)}
           <Route
             exact
             path="/"
@@ -66,7 +67,7 @@ class App extends React.Component {
             path='/user'
             component={UserRouter}
           />
-          <Chat />
+          {this.props.auth.loggedIn ? <Chat chatReceiver={this.props.chat} messages={this.props.chat.messages || []}/> : null }
         </div>
       </Router>
     )

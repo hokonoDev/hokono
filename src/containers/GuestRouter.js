@@ -8,7 +8,6 @@ import {
 
 const GuestRouter = (props) => (
   <div>
-    {console.log(props)}
     <Route
       path="/allpets"
       render={renderProps => (

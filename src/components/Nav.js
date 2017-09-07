@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getAllPets } from '../actions/GlobalPetsActions';
 import { updateFromDBAction } from '../actions/ShelterProfileActions';
 import { fetchFollowingPostsAction } from '../actions/PostsActions';
+import { Overlay } from 'react-overlay-popup';
 
 const Nav = (props) => {
   const imgStyle = {
@@ -77,6 +78,11 @@ const Nav = (props) => {
                 alt=""
               />
             </Link>
+            <img
+              style={imgStyle}
+              src="/images/chatbubble.png"
+              alt=""
+            />
           </div>
         ) :
         (

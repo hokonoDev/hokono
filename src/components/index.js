@@ -31,6 +31,7 @@ import SentRequest from './SentRequest';
 import ReceivedRequest from './ReceivedRequest';
 import GlobalMapView from './GlobalMapView';
 import GoogleMap from './GoogleMap';
+import Chat from './Chat';
 
 export {
   AddPet,
@@ -66,5 +67,6 @@ export {
   ReceivedRequest,
   GlobalMapView,
   GoogleMap,
+  Chat
 };
 

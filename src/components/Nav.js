@@ -78,11 +78,15 @@ const Nav = (props) => {
                 alt=""
               />
             </Link>
-            <img
-              style={imgStyle}
-              src="/images/chatbubble.png"
-              alt=""
-            />
+            <Link
+              to={`/${props.profile.acctType}/dashboard/messages`}
+            >
+              <img
+                style={imgStyle}
+                src="/images/chatbubble.png"
+                alt=""
+              />
+            </Link>
           </div>
         ) :
         (

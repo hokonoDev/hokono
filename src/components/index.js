@@ -35,6 +35,8 @@ import AccountList from './AccountList';
 import ProfilePetList from './ProfilePetList';
 import ProfilePetListEntry from './ProfilePetListEntry';
 import Chat from './Chat';
+import MessagesList from './MessagesList';
+import MessageWithUser from './MessageWithUser';
 
 export {
   AddPet,
@@ -73,6 +75,8 @@ export {
   AccountList,
   ProfilePetList,
   ProfilePetListEntry,
-  Chat
+  Chat,
+  MessagesList,
+  MessageWithUser,
 };
 

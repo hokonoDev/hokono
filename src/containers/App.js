@@ -66,12 +66,12 @@ class App extends React.Component {
             path='/user'
             component={UserRouter}
           />
+          {this.props.auth.loggedIn ? <Chat chatReceiver={this.props.chat} messages={this.props.chat.messages || []}/> : null }
         </div>
       </Router>
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

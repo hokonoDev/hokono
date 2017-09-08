@@ -6,77 +6,72 @@ import { updateFromDBAction } from '../actions/ShelterProfileActions';
 import { fetchFollowingPostsAction } from '../actions/PostsActions';
 
 const Nav = (props) => {
-  const imgStyle = {
-    width: '20px',
-    height: '20px',
-    margin: '20px',
-  };
-  const barStyle = {
-    width: '100%',
-    display: 'flex',
-    'justifyContent': 'space-around',
-  };
   return (
-    <div style={barStyle}>
+    <div>
       {props.auth.loggedIn ?
         (
-          <div>
-            <Link
-              to={`/${props.profile.acctType}/dashboard`}
-              onClick={updateFromDBAction}
+          <div
+            className="nav-background"
+          >
+            <div
+              className="nav-box"
             >
-              <img
-                style={imgStyle}
-                src="/images/home.png"
-                alt=""
-              />
-            </Link>
-            <Link
-              to={`/${props.profile.acctType}/followfeed`}
-              onClick={() => {
-                updateFromDBAction()
-                fetchFollowingPostsAction(props.profile.following ? Object.keys(props.profile.following) : []);
-              }}
-            >
-              <img
-                style={imgStyle}
-                src="/images/pets.png"
-                alt=""
-              />
-            </Link>
-            <Link to={`/${props.profile.acctType}/addPet`}>
-              <img
-                style={imgStyle}
-                src="/images/plus-button.png"
-                alt=""
-              />
-            </Link>
-            <Link to={`/${props.profile.acctType}/profile/${props.auth.uid}`}>
-              <img
-                style={imgStyle}
-                src="/images/profile.png"
-                alt=""
-              />
-            </Link>
-            <Link
-              to={`/global/allpets`}
-              onClick={getAllPets}
-            >
-              <img
-                style={imgStyle}
-                src="/images/magnifier.png"
-                alt=""
-              />
-            </Link>
-            <Link
-              to={`/${props.profile.acctType}/dashboard/adopt`}
-            >
-              <img
-                style={imgStyle}
-                src="/images/list.png"
-                alt=""
-              />
-            </Link>
+              <Link
+                to={`/${props.profile.acctType}/dashboard`}
+                onClick={updateFromDBAction}
+              >
+                <img
+                  className="nav-item"
+                  src="/images/home.png"
+                  alt=""
+                />
+              </Link>
+              <Link
+                to={`/${props.profile.acctType}/followfeed`}
+                onClick={() => {
+                  updateFromDBAction()
+                  fetchFollowingPostsAction(props.profile.following ? Object.keys(props.profile.following) : []);
+                }}
+              >
+                <img
+                  className="nav-item"
+                  src="/images/pets.png"
+                  alt=""
+                />
+              </Link>
+              <Link to={`/${props.profile.acctType}/addPet`}>
+                <img
+                  className="nav-item"
+                  src="/images/plus-button.png"
+                  alt=""
+                />
+              </Link>
+              <Link to={`/${props.profile.acctType}/profile/${props.auth.uid}`}>
+                <img
+                  className="nav-item"
+                  src="/images/profile.png"
+                  alt=""
+                />
+              </Link>
+              <Link
+                to={`/global/allpets`}
+                onClick={getAllPets}
+              >
+                <img
+                  className="nav-item"
+                  src="/images/magnifier.png"
+                  alt=""
+                />
+              </Link>
+              <Link
+                to={`/${props.profile.acctType}/dashboard/adopt`}
+              >
+                <img
+                  className="nav-item"
+                  src="/images/list.png"
+                  alt=""
+                />
+              </Link>
             <Link
               to={`/${props.profile.acctType}/dashboard/messages`}
             >
@@ -86,27 +81,34 @@ const Nav = (props) => {
                 alt=""
               />
             </Link>
+            </div>
           </div>
         ) :
         (
-          <div>
-            <Link to={`/`}>
+          <div
+            className="nav-background"
+          >
+            <div
+              className="nav-box"
+            >
+              <Link to={`/`}>
+                  <img
+                    className="nav-item"
+                    src="/images/home.png"
+                    alt=""
+                  />
+              </Link>
+              <Link
+                to={`/global/allpets`}
+                onClick={getAllPets}
+              >
                 <img
-                  style={imgStyle}
-                  src="/images/home.png"
+                  className="nav-item"
+                  src="/images/magnifier.png"
                   alt=""
                 />
-            </Link>
-            <Link
-              to={`/global/allpets`}
-              onClick={getAllPets}
-            >
-              <img
-                style={imgStyle}
-                src="/images/magnifier.png"
-                alt=""
-              />
-            </Link>
+              </Link>
+            </div>
           </div>
         )}
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Home, Chat } from '../components/index';
+import { Home, Chat, LogoBar } from '../components/index';
 import {
   AuthRouter,
   ShelterRouter,
@@ -11,34 +11,20 @@ import {
   } from './index';
 
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toggled: false,
-    }
-    this.toggleChat = this.toggleChat.bind(this);
-  }
-
-  toggleChat(e) {
-    e.preventDefault();
-    this.setState({toggled: !this.state.toggled});
-
-  }
-  render() {
-    return (
-      <Router>
-        <div>
-          <Route
-            exact
-            path="/"
-            render={renderProps => (
-              <Home
-                {...renderProps}
-                auth={this.props.auth}
-                profile={this.props.profile}
-              />
-            )}
+const App = props => (
+  <Router>
+    <div>
+      <LogoBar
+        auth={props.auth}
+      />
+      <Route
+        exact
+        path="/"
+        render={renderProps => (
+          <Home
+            {...renderProps}
+            auth={props.auth}
+            profile={props.profile}
           />
           <Route
             path="/auth"

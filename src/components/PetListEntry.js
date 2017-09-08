@@ -2,33 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const imgStyle = {
-    width: '20px',
-    height: '20px',
-    margin: '20px',
-};
-
 const PetListEntry = props => {
   return (
-    <div>
-      <Link to={`/pet/${props.id}/profile`}>
-        <div>{props.name}</div>
+    <div
+      className="pet-list-entry-box"
+    >
+      <Link
+        className="pet-list-name"
+        to={`/pet/${props.id}/profile`}
+      >
+        <p>{props.name}</p>
       </Link>
       <img
+        className="pet-list-pic"
         src={props.imgUrl}
         alt=""
-        style={{
-          height: '200px',
-          width: '200px',
-          imagePosition: 'center',
-          objectFit: 'contain',
-        }}
       />
       <Link
+        className="add-post-link"
         to={`/pet/${props.id}/newpost`}
       >
         <img
-          style={imgStyle}
           src="/images/plus-button.png"
           alt=""
         />

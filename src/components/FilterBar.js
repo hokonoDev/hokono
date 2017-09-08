@@ -48,18 +48,26 @@ class FilterBar extends React.Component {
     return (
       <div>
         <form>
-          Search pets by name:
-          <IfRender
-            if={this.props.searchBar}
-            ifTrue={() => (
-              <input
-                type="text"
-                value={this.state.searchTerm}
-                onChange={this.handleNameChange}
-              />
-            )}
-          />
-          Sort:
+          <div
+            style={{
+              marginBottom: '10px',
+            }}
+          >
+            <IfRender
+              if={this.props.searchBar}
+              ifTrue={() => (
+                <div>
+                  <p>Search pets by name:</p>
+                  <input
+                    type="text"
+                    value={this.state.searchTerm}
+                    onChange={this.handleNameChange}
+                  />
+                </div>
+              )}
+            />
+          </div>
+          {`Sort by `}
           <button
             onClick={this.toggleSortDirection}
           >{this.state.sortDirection}</button>

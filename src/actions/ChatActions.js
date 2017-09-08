@@ -1,6 +1,7 @@
 import firebase from '../firebase/index';
 import store from '../store';
 
+//when a new chat message is created, write to sender and receiver in firebase
 export const newChatMsg = (sender, receiver, receiveruid, receiverdName) => {
   //update chat database for receiver and sender
   const uid = firebase.auth().currentUser.uid;
@@ -24,6 +25,7 @@ export const newChatMsg = (sender, receiver, receiveruid, receiverdName) => {
     })
 }
 
+//set the receiver of your chatmessages, update the chatview
 export const setCurrChat = (pic, name, receiveruid) => {
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`/accounts/${uid}/chats/${receiveruid}/${name}`).on('value', (snapshot) => {
@@ -42,6 +44,7 @@ export const setCurrChat = (pic, name, receiveruid) => {
 
 }
 
+//get objects of all the people i've talked to (displayname and uid), used to display open chats
 export const getAllMyChats = () => {
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`/accounts/${uid}/chats/`).once('value')

@@ -76,7 +76,7 @@ const Nav = (props) => {
               to={`/${props.profile.acctType}/dashboard/messages`}
             >
               <img
-                style={imgStyle}
+                className="nav-item"
                 src="/images/chatbubble.png"
                 alt=""
               />

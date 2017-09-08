@@ -2,6 +2,8 @@ import React from 'react';
 import MessageWithUser from './MessageWithUser';
 import { getAllMyChats} from '../actions/ChatActions';
 
+//MessagesList generates a list of usernames and uid's that you have talked to
+//it generates a chatlist
 class MessagesList extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,8 @@ class MessagesList extends React.Component {
     }
   }
 
+  //if there are new users that you've chatted with, update the chatlist
+  // fires get request which will eventually update our props
   componentDidUpdate(prevProps, prevState) {
     if (this.props.auth.loggedIn !== prevProps.auth.loggedIn)
     {

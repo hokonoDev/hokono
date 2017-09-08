@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addPet } from '../actions/PetsActions';
 
-const AddPet = ({ dispatch, history }) => {
+const AddPet = (props) => {
   let input;
   let input2;
 
@@ -10,13 +10,18 @@ const AddPet = ({ dispatch, history }) => {
     <div>
       <form
         onSubmit={e => {
-          e.preventDefault()
+          e.preventDefault();
           if (!input.value.trim() || !input2.value.trim()) {
-            return
+            return;
           }
-          addPet({name: input.value, img: input2.files})
-          input.value = ''
-          input2.value = ''
+          addPet({
+            name: input.value,
+            img: input2.files,
+            adopt: props.match.path.slice(1, -7) === 'shelter',
+            location: props.profile.location,
+          });
+          input.value = '';
+          input2.value = '';
         }}
       >
         Add name

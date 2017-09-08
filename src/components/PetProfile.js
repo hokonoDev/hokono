@@ -1,7 +1,19 @@
 import React from 'react';
-import { PetPostList } from './index';
-import { userFollowedPet } from '../actions/UserFollowsPet';
+import { Route, Link } from 'react-router-dom';
+import {
+  PetPostList,
+  IfRender,
+  EditPet,
+} from './index';
+import {
+    userFollowedPet,
+    userStarredPet,
+    userUnstarredPet,
+    userUnfollowedPet
+} from '../actions/UserFollowsPet';
 import { fetchPostsByPetIdAction } from '../actions/PostsActions'
+import { adoptRequestAction } from '../actions/ShelterProfileActions';
+import { getDisplayNameFromUid } from './lib/helpers';
 
 const PetProfile = class extends React.Component {
   constructor(props) {
@@ -22,6 +34,10 @@ const PetProfile = class extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if(JSON.stringify(prevProps.pet) !== JSON.stringify(this.props.pet)){
       this.setPetData();
+    }
+    if(this.state.pet.ownerUid && prevState.pet.ownerUid !== this.state.pet.ownerUid) {
+      getDisplayNameFromUid(this.state.pet.ownerUid)
+      .then(name => this.setState({ pet: { ...this.state.pet, ownerName: name }}));
     }
   }
 
@@ -50,8 +66,85 @@ const PetProfile = class extends React.Component {
             objectFit: 'contain',
           }}
         />
-        <p>Likes: {this.state.pet.likes}</p>
-        <p>Followers: {this.state.pet.followersCount}</p>
+        <IfRender
+          if={this.state.pet.ownerUid === this.props.auth.uid}
+          ifTrue={() =>
+            <Link
+              to={`${this.props.match.url}/edit`}
+            >
+              <button>Edit</button>
+            </Link>
+          }
+          ifFalse={() => (
+            <Link
+              to={`/${this.state.pet.adopt ? 'shelter' : 'user'}/profile/${this.state.pet.ownerUid}`}
+            >
+              <p>Owner: {this.state.pet.ownerName}</p>
+            </Link>
+          )}
+        />
+        <IfRender
+          if={
+            this.state.pet.ownerUid !== this.props.auth.uid
+            && this.state.pet.adopt
+            && this.props.profile.acctType !== 'shelter'}
+          ifTrue={() =>
+              <button
+                onClick={() => {
+                  this.props.auth.loggedIn ?
+                    this.props.profile.adoptRequests
+                    && this.props.profile.adoptRequests[this.state.pet.id] ?
+                      alert('Your request has been sent!') :
+                      adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid) :
+                    alert('Please login to adopt');
+                }}
+              >{
+                this.props.profile.adoptRequests
+                && this.props.profile.adoptRequests[this.state.pet.id]
+                ? 'Sent!'
+                : 'Adopt Me!!!'
+              }</button>
+          }
+        />
+        <Route
+          exact
+          path={`${this.props.match.path}/edit`}
+          render={routerProps => (
+            <EditPet
+              {...routerProps}
+              auth={this.props.auth}
+              pet={this.state.pet}
+            />
+          )}
+        />
+        <p>{this.state.pet.description || ''}</p>
+        <p>Stars: {this.state.pet.stars}</p>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            if (this.props.auth.loggedIn) {
+              if (typeof this.props.pet.starredBy === 'undefined') {
+                userStarredPet(this.props.pet);
+              }
+              else if (this.props.pet.starredBy[this.props.auth.uid]) {
+                userUnstarredPet(this.props.pet);
+              } else {
+                userStarredPet(this.props.pet);
+              }
+            } else {
+              alert('Please login to star');
+            }
+          }}
+        >
+          <img
+            style={{
+              width: '20px',
+              height: '20px',
+            }}
+            src={this.props.pet.starredBy && this.props.pet.starredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+          />
+        </button>
+        <p>Followers: {this.state.pet.followersCount || 0}</p>
         <button
           style={{
               width: '60px',
@@ -60,13 +153,17 @@ const PetProfile = class extends React.Component {
           onClick={(e) => {
             e.preventDefault();
             if (this.props.auth.loggedIn) {
-              userFollowedPet(this.state.pet)
+              if(!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id]) {
+                userUnfollowedPet(this.props.pet);
+              } else {
+                userFollowedPet(this.props.pet);
+              }
             } else {
-              alert('Please log in to follow');
+              alert('Please loggin to follow');
             }
           }}
-          disabled={!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id]}
-        >{!!this.props.profile.following && !!this.props.profile.following[this.state.pet.id] ? 'Followed': 'Follow'}
+        >
+        {!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id] ? 'Unfollow': 'Follow'}
         </button>
         <PetPostList
           pet={this.state.pet}

@@ -8,14 +8,14 @@ const imgStyle = {
     margin: '20px',
 };
 
-const PetListEntry = ({name, id, imgUrl}) => {
+const PetListEntry = props => {
   return (
     <div>
-      <Link to={`/pet/${id}`}>
-        <div>{name}</div>
+      <Link to={`/pet/${props.id}/profile`}>
+        <div>{props.name}</div>
       </Link>
       <img
-        src={imgUrl}
+        src={props.imgUrl}
         alt=""
         style={{
           height: '200px',
@@ -25,7 +25,7 @@ const PetListEntry = ({name, id, imgUrl}) => {
         }}
       />
       <Link
-        to={`/pet/${id}/newpost`}
+        to={`/pet/${props.id}/newpost`}
       >
         <img
           style={imgStyle}
@@ -33,9 +33,6 @@ const PetListEntry = ({name, id, imgUrl}) => {
           alt=""
         />
       </Link>
-      <button>
-        Edit
-      </button>
     </div>
   );
 };

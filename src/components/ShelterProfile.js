@@ -1,11 +1,15 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import { EditProfile, PetList, IfRender } from './index';
+import {
+  EditProfile,
+  IfRender,
+  ProfilePetList,
+} from './index';
+import { setCurrChat } from '../actions/ChatActions';
 
 const ShelterProfile = class extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       profile: {},
     };
@@ -24,9 +28,9 @@ const ShelterProfile = class extends React.Component {
   setProfileData() {
     if (!this.props.profile.owner){
       this.props.profile.profilePromise
-        .then(item =>
-          this.setState({ profile: { ...item.val(), owner: false }})
-        );
+        .then(item => {
+          this.setState({ profile: { ...item.val(), owner: false }});
+        });
     } else {
       this.setState({ profile: this.props.profile });
     }
@@ -57,15 +61,31 @@ const ShelterProfile = class extends React.Component {
           />
         </div>
         <div>
-          <div>Profile Pic Placeholder url: {this.state.profile.profPic}</div>
+          <img
+            src={this.state.profile.profPic || '/images/edit-profile.png'}
+            style={{
+              height: '200px',
+              width: '200px',
+            }}
+          />
           <p>Address: {this.state.profile.address}</p>
           <p>Email: {this.state.profile.email}</p>
           <IfRender
             if={this.state.profile.phone}
             ifTrue={() => <p>Phone: {this.state.profile.phone}</p>}
           />
+          {this.props.profile.owner ?
+            null
+            :
+            <button onClick={()=> { setCurrChat(this.state.profile.profPic, this.state.profile.displayName, this.state.profile.uid)} }>
+            Message Shelter
+            </button>
+          }
         </div>
-        <pre>Profile: { JSON.stringify(this.state.profile) }</pre>
+        <ProfilePetList
+          petData={this.state.profile.pets || {}}
+        >
+        </ProfilePetList>
       </div>
     );
   }

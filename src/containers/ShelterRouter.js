@@ -9,15 +9,15 @@ import {
   Nav,
   IfRedirect,
   ShelterInit,
+  FollowFeed,
   } from '../components/index';
-
 
 const getPets = ({pets}) => {
   return pets;
 }
 
 const getProfilePromise = (uid) => {
-  return firebase.database().ref(`/shelters/${uid}`).once('value');
+  return firebase.database().ref(`/accounts/${uid}`).once('value');
 }
 
 const getProfileData = ({ location, auth, profile }) => {
@@ -49,6 +49,7 @@ const ShelterRouter = (props) => (
           petData={getPets(props)}
           auth={props.auth}
           profile={props.profile}
+          chat={props.chat}
         />
       )}
     />
@@ -57,6 +58,7 @@ const ShelterRouter = (props) => (
         <AddPet
           {...routerProps}
           auth={props.auth}
+          profile={props.profile}
         />
       )}
     />
@@ -79,6 +81,17 @@ const ShelterRouter = (props) => (
         />
       )}
     />
+    <Route
+      path="/shelter/followfeed"
+      render={routerProps => (
+        <FollowFeed
+          {...routerProps}
+          auth={props.auth}
+          posts={props.following.posts ? props.following.posts : {}}
+          sort={props.following.postsSort}
+        />
+      )}
+    />
   </div>
 );
 
@@ -87,6 +100,8 @@ const mapStateToProps = (state) => {
     pets: state.pets,
     auth: state.auth,
     profile: state.profile,
+    following: state.following,
+    chat: state.chat,
   };
 }
 

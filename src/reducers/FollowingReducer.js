@@ -8,7 +8,6 @@ export default (state = {}, action) => {
       }
       return { ...state, posts: action.payload };
     case 'LIKE_POST' :
-
       if (!state.posts || !state.posts[action.postId]) return state;
       const stateCopy = {...state};
       stateCopy.posts[action.postId].likes = action.payload.likes;

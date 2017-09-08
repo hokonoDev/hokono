@@ -26,38 +26,38 @@ const App = props => (
             auth={props.auth}
             profile={props.profile}
           />
-          <Route
-            path="/auth"
-            render={renderProps =>
-              <AuthRouter
-                {...renderProps}
-                loggedIn={this.props.auth.loggedIn}
-                dispatch={this.props.dispatch}
-              />
-            }
+        )}
+      />
+      <Route
+        path="/auth"
+        render={renderProps =>
+          <AuthRouter
+            {...renderProps}
+            loggedIn={props.auth.loggedIn}
+            dispatch={props.dispatch}
           />
-          <Route
-            path="/shelter"
-            component={ShelterRouter}
-          />
-          <Route
-            path="/global"
-            component={GuestRouter}
-          />
-          <Route
-            path="/pet"
-            component={PetRouter}
-          />
-          <Route
-            path='/user'
-            component={UserRouter}
-          />
-          {this.props.auth.loggedIn ? <Chat chatReceiver={this.props.chat} messages={this.props.chat.messages || []}/> : null }
-        </div>
-      </Router>
-    )
-  }
-}
+        }
+      />
+      <Route
+        path="/shelter"
+        component={ShelterRouter}
+      />
+      <Route
+        path="/global"
+        component={GuestRouter}
+      />
+      <Route
+        path="/pet"
+        component={PetRouter}
+      />
+      <Route
+        path='/user'
+        component={UserRouter}
+      />
+      {props.auth.loggedIn ? <Chat chatReceiver={props.chat} messages={props.chat.messages || []}/> : null }
+    </div>
+  </Router>
+);
 
 const mapStateToProps = (state) => {
   return {

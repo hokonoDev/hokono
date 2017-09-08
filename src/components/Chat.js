@@ -13,12 +13,14 @@ class Chat extends React.Component {
     this._onMessageWasSent = this._onMessageWasSent.bind(this);
     this._sendMessage = this._sendMessage.bind(this);
   }
+  //updates display in Launcher (chatwindow) immediately
   _onMessageWasSent(message) {
     this.setState({
       messages: [...this.state.messages, message]
     });
     this._sendMessage(message);
   }
+  //trigger newChatMsg action which will write to firebase
   _sendMessage(msg) {
 
     let sender = {

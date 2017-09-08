@@ -30,9 +30,8 @@ class Chat extends React.Component {
       author: 'them',
       type: 'text',
       data: { text: msg.data.text },
-      uid: this.props.chatReceiver.uid,
     }
-    newChatMsg(sender, receiver);
+    newChatMsg(sender, receiver, this.props.chatReceiver.uid, this.props.chatReceiver.name);
     //dispatch action
     //write to both locations
     //listen on one location

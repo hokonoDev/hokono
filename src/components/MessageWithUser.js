@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { setCurrChat } from '../actions/ChatActions';
 
 class MessageWithUser extends React.Component {
   //chat opens up when you click a button on another user's profile,
@@ -12,12 +12,12 @@ class MessageWithUser extends React.Component {
 
   render() {
     return (
-      <div>
-
-      </div>
+      <button onClick={()=> { setCurrChat('placeholderpic.png', this.props.username, this.props.userid)} }>
+      Messages with: {this.props.username}
+      </button>
 
     );
   }
 }
 
-export default Chat;
+export default MessageWithUser;

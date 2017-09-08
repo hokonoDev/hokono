@@ -29,7 +29,6 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-        { console.log("this.props in app ", this.props)}
           <Route
             exact
             path="/"

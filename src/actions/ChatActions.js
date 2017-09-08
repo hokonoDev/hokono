@@ -3,8 +3,6 @@ import store from '../store';
 
 export const newChatMsg = (sender, receiver, receiveruid, receiverdName) => {
   //update chat database for receiver and sender
-  console.log("this is sender ", sender);
-  console.log("this is recever ", receiver);
   const uid = firebase.auth().currentUser.uid;
   const dn = firebase.auth().currentUser.displayName;
   const key = firebase.database().ref(`/accounts/${uid}/chats/${receiveruid}/${receiverdName}`).push().key;
@@ -17,7 +15,6 @@ export const newChatMsg = (sender, receiver, receiveruid, receiverdName) => {
   //listener (like a socket)
   firebase.database().ref(`/accounts/${uid}/chats/${receiveruid}/${receiverdName}`).on('value', (snapshot) => {
       const msgArray = snapshot.val();
-      console.log("Objectlist of messages", msgArray);
       const action = {
         type:'NEW_CHAT_MSG',
         payload: {messages: msgArray },
@@ -28,11 +25,9 @@ export const newChatMsg = (sender, receiver, receiveruid, receiverdName) => {
 }
 
 export const setCurrChat = (pic, name, receiveruid) => {
-  console.log("set curr chat action triggered ", pic, name, receiveruid);
   const uid = firebase.auth().currentUser.uid;
   firebase.database().ref(`/accounts/${uid}/chats/${receiveruid}/${name}`).on('value', (snapshot) => {
     const msgArray = snapshot.val();
-    console.log("Objectlist of messages", msgArray);
     const action = {
       type:'SET_CHAT_RECEIVER',
       payload: {
@@ -42,9 +37,28 @@ export const setCurrChat = (pic, name, receiveruid) => {
         uid: receiveruid,
       },
     }
-   // console.log("what is the format of this obj ", {[receiver.uid]: msgArray});
     store.dispatch(action);
   });
 
+}
+
+export const getAllMyChats = () => {
+  const uid = firebase.auth().currentUser.uid;
+  firebase.database().ref(`/accounts/${uid}/chats/`).once('value')
+    .then((snapshot)=> {
+      let msgObj = snapshot.val();
+      //let nameArray = Object.keys(Object.values(msgObj));
+      const action = {
+        type:'GET_MY_CHATUSERS',
+        payload: {
+          chatUsers: msgObj,
+          //this.props.chat.chatUsers
+        }
+      }
+      store.dispatch(action);
+    })
+    .catch((err)=> {
+      throw err;
+    });
 }
 

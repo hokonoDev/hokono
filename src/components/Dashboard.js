@@ -8,6 +8,7 @@ import {
   IfRedirect,
   FollowingList,
   AdoptRequestList,
+  MessagesList
   // IfRender,
 } from './index';
 
@@ -65,6 +66,16 @@ export default props => (
             {...renderProps}
             requests={props.profile.adoptRequests || {}}
             profile={props.profile}
+          />
+        )}
+      />
+      <Route
+        exact path={`${props.match.path}/messages`}
+        render={renderProps=> (
+          <MessagesList
+            {...renderProps}
+            chat={props.chat}
+            auth={props.auth}
           />
         )}
       />

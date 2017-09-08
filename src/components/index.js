@@ -32,6 +32,8 @@ import ReceivedRequest from './ReceivedRequest';
 import GlobalMapView from './GlobalMapView';
 import GoogleMap from './GoogleMap';
 import Chat from './Chat';
+import MessagesList from './MessagesList';
+import MessageWithUser from './MessageWithUser';
 
 export {
   AddPet,
@@ -67,6 +69,8 @@ export {
   ReceivedRequest,
   GlobalMapView,
   GoogleMap,
-  Chat
+  Chat,
+  MessagesList,
+  MessageWithUser,
 };
 

@@ -1,11 +1,12 @@
 export default (state = {}, action) => {
   switch (action.type) {
     case 'NEW_CHAT_MSG' :
-      console.log("new chat reducer? ", {...state, ...action.payload});
       return { ...state, ...action.payload };
     case 'SET_CHAT_RECEIVER' :
-      console.log("set chat reducer? ", { ...state, ...action.payload });
       return { ...state, ...action.payload };
+    case 'GET_MY_CHATUSERS' :
+      return { ...state, ...action.payload };
+      //this.props.chat.chatUsers
     default :
       return state;
   }

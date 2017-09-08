@@ -40,7 +40,6 @@ class Chat extends React.Component {
   render() {
     return (
       <div>
-      {console.log("rec id in chat. ", this.props)}
        <Launcher
         agentProfile={{
           teamName: this.props.chatReceiver.name || '',

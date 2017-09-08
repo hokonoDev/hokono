@@ -12,7 +12,6 @@ import {
   FollowFeed,
   } from '../components/index';
 
-
 const getPets = ({pets}) => {
   return pets;
 }
@@ -50,6 +49,7 @@ const ShelterRouter = (props) => (
           petData={getPets(props)}
           auth={props.auth}
           profile={props.profile}
+          chat={props.chat}
         />
       )}
     />
@@ -101,6 +101,7 @@ const mapStateToProps = (state) => {
     auth: state.auth,
     profile: state.profile,
     following: state.following,
+    chat: state.chat,
   };
 }
 

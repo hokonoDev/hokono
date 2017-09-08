@@ -1,66 +1,84 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Home } from '../components/index';
+import { Home, Chat } from '../components/index';
 import {
   AuthRouter,
   ShelterRouter,
   GuestRouter,
   PetRouter,
-  UserRouter
+  UserRouter,
   } from './index';
 
 
-const App = props => (
-  <Router>
-    <div>
-      <Route
-        exact
-        path="/"
-        render={renderProps => (
-          <Home
-            {...renderProps}
-            auth={props.auth}
-            profile={props.profile}
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggled: false,
+    }
+    this.toggleChat = this.toggleChat.bind(this);
+  }
+
+  toggleChat(e) {
+    e.preventDefault();
+    this.setState({toggled: !this.state.toggled});
+
+  }
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={renderProps => (
+              <Home
+                {...renderProps}
+                auth={this.props.auth}
+                profile={this.props.profile}
+              />
+            )}
           />
-        )}
-      />
-      <Route
-        path="/auth"
-        render={renderProps =>
-          <AuthRouter
-            {...renderProps}
-            loggedIn={props.auth.loggedIn}
-            dispatch={props.dispatch}
+          <Route
+            path="/auth"
+            render={renderProps =>
+              <AuthRouter
+                {...renderProps}
+                loggedIn={this.props.auth.loggedIn}
+                dispatch={this.props.dispatch}
+              />
+            }
           />
-        }
-      />
-      <Route
-        path="/shelter"
-        component={ShelterRouter}
-      />
-      <Route
-        path="/global"
-        component={GuestRouter}
-      />
-      <Route
-        path="/pet"
-        component={PetRouter}
-      />
-      <Route
-        path='/user'
-        component={UserRouter}
-      />
-    </div>
-  </Router>
-);
+          <Route
+            path="/shelter"
+            component={ShelterRouter}
+          />
+          <Route
+            path="/global"
+            component={GuestRouter}
+          />
+          <Route
+            path="/pet"
+            component={PetRouter}
+          />
+          <Route
+            path='/user'
+            component={UserRouter}
+          />
+          {this.props.auth.loggedIn ? <Chat chatReceiver={this.props.chat} messages={this.props.chat.messages || []}/> : null }
+        </div>
+      </Router>
+    )
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
     pets: state.pets,
     auth: state.auth,
     profile: state.profile,
+    chat: state.chat,
   };
 }
-
 export default connect(mapStateToProps)(App);

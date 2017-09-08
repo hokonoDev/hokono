@@ -7,6 +7,7 @@
     "firebase": "^4.3.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-chat-window": "^1.0.5",
     "react-dom": "^15.6.1",
     "react-geosuggest": "^2.5.0",
     "react-redux": "^5.0.6",

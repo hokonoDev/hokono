@@ -8,6 +8,8 @@ import {
   IfRedirect,
   FollowingList,
   AdoptRequestList,
+  MessagesList,
+  // IfRender,
 } from './index';
 
 export default props => (
@@ -28,7 +30,9 @@ export default props => (
       </button>
       <Link
         to={`${props.match.url}/following`}
-      >Following: {props.profile.followingCount ? props.profile.followingCount : '0'}</Link>
+      >
+        Following: {props.profile.followingCount ? props.profile.followingCount : '0'}
+      </Link>
       <Route
         exact path={`${props.match.path}`}
         render={renderProps => (
@@ -62,6 +66,16 @@ export default props => (
             {...renderProps}
             requests={props.profile.adoptRequests || {}}
             profile={props.profile}
+          />
+        )}
+      />
+      <Route
+        exact path={`${props.match.path}/messages`}
+        render={renderProps=> (
+          <MessagesList
+            {...renderProps}
+            chat={props.chat}
+            auth={props.auth}
           />
         )}
       />

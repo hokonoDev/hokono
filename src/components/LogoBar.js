@@ -17,7 +17,7 @@ export default props => (
     {
       props.auth.loggedIn ?
         <button
-          className="logout-link"
+          className="logout-bttn"
           onClick={signoutAction}
         >Logout</button> :
         null

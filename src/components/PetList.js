@@ -8,7 +8,9 @@ import _ from 'lodash';
 //link is the redirect to the pet's profile page
 const PetList = ({petData}) => {
   return (
-    <div>
+    <div
+      className="wrap-row-box-center"
+    >
       {Object.keys(petData).length>0 ? Object.values(petData).filter(data => !!data.name).map(data => (
         <PetListEntry
           key={_.uniqueId()}

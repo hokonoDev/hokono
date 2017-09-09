@@ -2,6 +2,11 @@ import React from 'react';
 import { signoutAction } from '../actions/AuthActions';
 
 export default props => (
+  <div>
+  <div
+    className="logo-bar-filler"
+  >
+  </div>
   <div
     className="row-box-center"
   >
@@ -22,5 +27,6 @@ export default props => (
         >Logout</button> :
         null
     }
+  </div>
   </div>
 )

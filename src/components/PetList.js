@@ -11,26 +11,16 @@ const PetList = ({petData}) => {
     <div
       className="wrap-row-box-center"
     >
-      {Object.keys(petData).length>0 ? Object.values(petData).filter(data => !!data.name).map(data => (
+      {Object.keys(petData).length > 1 ? Object.values(petData).filter(data => !!data.name).map(data => (
         <PetListEntry
           key={_.uniqueId()}
           name={data.name}
           id={data.id}
           imgUrl={data.filePath}
         />
-      )): null}
+      )): <p>You haven't added any pets yet!</p>}
     </div>
   );
 }
-
-PetList.propTypes = {
-  petData: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-};
 
 export default PetList;

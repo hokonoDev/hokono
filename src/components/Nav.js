@@ -8,6 +8,9 @@ import { fetchFollowingPostsAction } from '../actions/PostsActions';
 const Nav = (props) => {
   return (
     <div>
+      <div
+        className="nav-filler"
+      >
       {props.auth.loggedIn ?
         (
           <div
@@ -64,23 +67,24 @@ const Nav = (props) => {
                 />
               </Link>
               <Link
-                to={`/${props.profile.acctType}/dashboard/adopt`}
+                to={`/global/mapview`}
+                onClick={updateFromDBAction}
               >
                 <img
                   className="nav-item"
-                  src="/images/list.png"
+                  src="/images/map.png"
                   alt=""
                 />
               </Link>
-            <Link
-              to={`/${props.profile.acctType}/dashboard/messages`}
-            >
-              <img
-                className="nav-item"
-                src="/images/chatbubble.png"
-                alt=""
-              />
-            </Link>
+              <Link
+                to={`/${props.profile.acctType}/dashboard/messages`}
+              >
+                <img
+                  className="nav-item"
+                  src="/images/chatbubble.png"
+                  alt=""
+                />
+              </Link>
             </div>
           </div>
         ) :
@@ -111,6 +115,7 @@ const Nav = (props) => {
             </div>
           </div>
         )}
+      </div>
     </div>
   );
 }

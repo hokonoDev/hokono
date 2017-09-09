@@ -13,7 +13,9 @@ import {
 
 const App = props => (
   <Router>
-    <div>
+    <div
+      className="container"
+    >
       <LogoBar
         auth={props.auth}
       />

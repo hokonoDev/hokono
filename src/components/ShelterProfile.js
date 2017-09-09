@@ -78,7 +78,7 @@ const ShelterProfile = class extends React.Component {
             null
             :
             <button onClick={()=> { setCurrChat(this.state.profile.profPic, this.state.profile.displayName, this.state.profile.uid)} }>
-            Message Shelter
+            Message {this.state.profile.acctType}
             </button>
           }
         </div>

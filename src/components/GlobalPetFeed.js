@@ -6,7 +6,6 @@ import { sortGlobalPetsAction } from '../actions/GlobalPetsActions';
 
 export default (props) => (
   <div>
-    {console.log(props)}
     <FilterBar
       filter={props.gPets.sort}
       sortAction={sortGlobalPetsAction}

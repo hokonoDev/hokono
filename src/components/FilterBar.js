@@ -6,7 +6,7 @@ class FilterBar extends React.Component {
     super(props);
     this.state = {
       searchTerm: '',
-      sortDirection: props.sort ? props.sort[0] : 'Least',
+      sortDirection: props.sort ? props.sort[0] : 'Most',
       filter: props.sort ? props.sort[1] : 'createdSort',
     };
     //handles name change into searchbar
@@ -18,9 +18,7 @@ class FilterBar extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.sort) {
-      this.props.sortAction(this.state.filter, this.state.sortDirection, this.state.searchTerm);
-    }
+    this.props.sortAction(this.state.filter, this.state.sortDirection, this.state.searchTerm);
   }
 
   handleNameChange(event) {
@@ -46,7 +44,9 @@ class FilterBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        className="filter-bar-box"
+      >
         <form>
           <div
             style={{
@@ -67,30 +67,35 @@ class FilterBar extends React.Component {
               )}
             />
           </div>
-          {`Sort by `}
-          <button
-            onClick={this.toggleSortDirection}
-          >{this.state.sortDirection}</button>
-          <select
-            onChange={this.handleDropFilter}
-            value={this.state.filter}
+          <div
+            className="sort-box"
           >
-            <option
-              value="likeSort"
-            >likes</option>
-            <option
-              value="trendSort"
-            >Trending</option>
-            <option
-              value="popularSort"
-            >Popular</option>
-            <option
-              value="createdSort"
-            >Recent</option>
-            <option
-              value="distanceSort"
-            >Distance</option>
-          </select>
+            {`Sort by `}
+            <button
+              onClick={this.toggleSortDirection}
+            >{this.state.sortDirection}</button>
+            {` `}
+            <select
+              onChange={this.handleDropFilter}
+              value={this.state.filter}
+            >
+              <option
+                value="likeSort"
+              >likes</option>
+              <option
+                value="trendSort"
+              >Trending</option>
+              <option
+                value="popularSort"
+              >Popular</option>
+              <option
+                value="createdSort"
+              >Recent</option>
+              <option
+                value="distanceSort"
+              >Distance</option>
+            </select>
+          </div>
         </form>
       </div>
     );

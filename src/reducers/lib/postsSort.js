@@ -1,6 +1,6 @@
 export default (obj, sortType, lToG, searchTerm) => {
   const sort = (lToG ? ['<', sortType] : ['>', sortType]).join('.');
-  console.log('sort', sort);
+  if (!obj.posts) return obj;
   let sortedPosts = Object.entries(obj.posts).sort(sortTypes[sortType]);
   sortedPosts = lToG ? sortedPosts : sortedPosts.reverse();
   //sortedPosts = searchTerm ? searchSort(sortedPosts, searchTerm) : sortedPosts;

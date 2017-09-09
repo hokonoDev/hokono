@@ -6,8 +6,12 @@ import {
 } from './index';
 
 export default props => (
-  <div>
-    request list
+  <div
+    className="gen-box"
+  >
+    <p
+      className="title"
+    >Request List</p>
     {
       Object.entries(props.requests)
       .map(req =>

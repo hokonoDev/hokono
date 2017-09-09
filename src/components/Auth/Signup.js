@@ -30,7 +30,7 @@ export default class extends React.Component {
   submit(e) {
     e.preventDefault();
     if (this.verifySubmit()) {
-      this.state.error = '';
+      this.setState({ error: '' });
       this.props.signup(this.state.email, this.state.password);
     } else if (!this.state.email) {
       this.setState({ error: 'Enter an email' });

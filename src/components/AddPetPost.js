@@ -1,5 +1,6 @@
 import React from 'react';
 import { addPostAction } from '../actions/PostsActions';
+import { IfRedirect } from './index';
 
 export default class extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class extends React.Component {
       addPostAction({
         image: this.state.image,
         description: this.state.description,
-      }, this.props.pet.id, this.props.pet.ownerId);
+      }, this.props.pet.id, this.props.pet.ownerUid,this.props.pet.name);
 
       this.setState({
         image: '',
@@ -37,6 +38,10 @@ export default class extends React.Component {
   render() {
     return(
       <div>
+        <IfRedirect
+          if={this.props.auth.loggedIn}
+          ifFalse="/"
+        />
         Add Pet Post:
         <form
           onSubmit={this.submit}

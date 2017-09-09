@@ -9,6 +9,7 @@ export default class extends React.Component{
     this.state = {
       phone: '',
       address: '',
+      location: '',
       diaplayName: '',
       suggest: '',
       firstSuggest: '',
@@ -51,6 +52,7 @@ export default class extends React.Component{
       initAction({
         phoneNumber: this.state.phone,
         address: this.state.address,
+        location: this.state.location,
         displayName: this.state.displayName,
         acctType: 'shelter',
       });
@@ -89,11 +91,11 @@ export default class extends React.Component{
             autoActivateFirstSuggest={true}
             onActivateSuggest={suggest =>
               this.state.suggest !== this.state.address ?
-                this.setState({ firstSuggest: suggest.label }) :
+                this.setState({ firstSuggest: suggest.label, firstLocation: suggest.location }) :
                 null
             }
             onSuggestSelect={suggest =>
-              this.setState({ address: suggest.label, suggest: suggest.label })
+              this.setState({ address: suggest.label, suggest: suggest.label, location: suggest.location })
             }
           />
           <input

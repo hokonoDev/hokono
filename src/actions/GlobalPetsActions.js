@@ -9,7 +9,7 @@ export const getAllPets = (input) => {
   //get all pets from firebase
   firebase.database().ref(`/pets`).once('value')
     .then((snapshot)=> {
-      action.allPets = snapshot.val();
+      action.allPets = snapshot.val() || {};
       store.dispatch(action);
     })
     .catch((err)=> {

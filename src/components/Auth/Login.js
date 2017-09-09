@@ -28,7 +28,7 @@ export default class extends React.Component {
   submit(e) {
     e.preventDefault();
     if (this.verifySubmit()) {
-      this.state.error = '';
+      this.setState({ error: '' });
       this.props.login(this.state.email, this.state.password);
     } else if (!this.state.email) {
       this.setState({ error: 'Enter a email' });
@@ -65,6 +65,8 @@ export default class extends React.Component {
           </button>
         </form>
         <p>{ this.state.error || this.props.error.message }</p>
+       <button onClick={this.props.fblogin}>login with facebook</button>
+
       </div>
     );
   }

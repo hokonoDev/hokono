@@ -4,7 +4,12 @@ import ShelterProfReducer from './reducers/ShelterProfReducer';
 import AuthReducer from './reducers/AuthReducer';
 import GlobalPetsReducer from './reducers/GlobalPetsReducer';
 import PostsReducer from './reducers/PostsReducer';
+import FollowingReducer from './reducers/FollowingReducer';
+import ChatReducer from './reducers/ChatReducer';
 import firebase from './firebase/index';
+import fb from 'firebase';
+import { signinAction } from './actions/AuthActions';
+import { updateFromDBAction } from './actions/ShelterProfileActions';
 
 const comboReducer = combineReducers({
   pets: PetsReducer,
@@ -12,9 +17,11 @@ const comboReducer = combineReducers({
   auth: AuthReducer,
   gPets: GlobalPetsReducer,
   posts: PostsReducer,
+  following: FollowingReducer,
+  chat: ChatReducer,
 });
 
-const user = firebase.auth().currentUser;
+const user = fb.auth().currentUser;
 
 const auth = !user ? { loggedIn: false } :
   {
@@ -32,7 +39,16 @@ const profile = !user ? {} :
     phone: user.phoneNumber,
   };
 
-export default createStore(comboReducer, {
-  auth,
-  profile,
+fb.auth().onAuthStateChanged((user) => {
+  if (user) {
+    signinAction();
+    updateFromDBAction();
+  }
 });
+
+const store = createStore(comboReducer, {
+  auth,
+  profile: {...profile, got: false},
+});
+
+export default store;

@@ -7,9 +7,11 @@ export const addPet = (input) => {
     pet: {
       name: input.name,
       filePath: input.img,
-      likes: 0,
+      stars: 0,
       timeStamp: Date.now(),
       followers: {},
+      adopt: input.adopt,
+      location: input.location,
     }
   }
   const uid = firebase.auth().currentUser.uid;
@@ -41,6 +43,9 @@ export const addPet = (input) => {
       case 'storage/unknown':
         // Unknown error occurred, inspect error.serverResponse
         break;
+
+      default:
+        break;
     }
   }, function() {
     //save the firebase hosted profile pic to pet.filepath
@@ -71,4 +76,35 @@ export const sortUsersPetsAction = (sortType, sortDirection, searchTerm) => {
     searchTerm,
   }
   store.dispatch(action);
+}
+
+export const editPetAction = (edits, pet) => {
+  const action = {
+    type: 'EDIT_PET',
+    payload: edits,
+    petId: pet.id,
+    ownerUid: pet.ownerUid,
+  };
+
+  if (edits.filePath) {
+    const storageRef = firebase.storage().ref(`${firebase.auth().currentUser.uid}/${action.petId}`);
+    storageRef.put(edits.filePath).then(() => {
+      storageRef.getDownloadURL().then(filePath => {
+        action.payload.filePath = filePath;
+        store.dispatch(action);
+
+        const updates = {};
+        updates[`/pets/${pet.id}`] = { ...pet, ...action.payload };
+        updates[`/accounts/${pet.ownerUid}/pets/${pet.id}`] = { ...pet, ...action.payload };
+        firebase.database().ref().update(updates);
+      });
+    });
+  } else {
+    store.dispatch(action);
+
+    const updates = {};
+    updates[`/pets/${pet.id}`] = { ...pet, ...action.payload };
+    updates[`/accounts/${pet.ownerUid}/pets/${pet.id}`] = { ...pet, ...action.payload };
+    firebase.database().ref().update(updates);
+  }
 }

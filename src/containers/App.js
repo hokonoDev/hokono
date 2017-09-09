@@ -1,24 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Home } from '../components/index';
+import { Home, Chat, LogoBar } from '../components/index';
 import {
   AuthRouter,
   ShelterRouter,
   GuestRouter,
   PetRouter,
-  UserRouter
+  UserRouter,
   } from './index';
 
 
 const App = props => (
   <Router>
-    <div>
+    <div
+      className="container"
+    >
+      <LogoBar
+        auth={props.auth}
+      />
       <Route
         exact
         path="/"
         render={renderProps => (
           <Home
+            {...renderProps}
             auth={props.auth}
             profile={props.profile}
           />
@@ -39,7 +45,7 @@ const App = props => (
         component={ShelterRouter}
       />
       <Route
-        path="/"
+        path="/global"
         component={GuestRouter}
       />
       <Route
@@ -50,6 +56,7 @@ const App = props => (
         path='/user'
         component={UserRouter}
       />
+      {props.auth.loggedIn ? <Chat chatReceiver={props.chat} messages={props.chat.messages || []}/> : null }
     </div>
   </Router>
 );
@@ -59,7 +66,7 @@ const mapStateToProps = (state) => {
     pets: state.pets,
     auth: state.auth,
     profile: state.profile,
+    chat: state.chat,
   };
 }
-
 export default connect(mapStateToProps)(App);

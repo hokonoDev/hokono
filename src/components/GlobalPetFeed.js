@@ -1,19 +1,35 @@
 import React from 'react';
-import { Feed, Nav, FilterBar } from './index';
+import _ from 'lodash';
+import { Link } from 'react-router-dom';
+import { GlobalFeedEntry, Nav, FilterBar } from './index';
 import { sortGlobalPetsAction } from '../actions/GlobalPetsActions';
 
 export default (props) => (
   <div>
-    Global Pet Feed
-    <Nav />
+    {console.log(props)}
     <FilterBar
       filter={props.gPets.sort}
       sortAction={sortGlobalPetsAction}
       searchBar={true}
     />
-    <Feed
-      feedData={props.gPets}
-    />
-    <pre>{JSON.stringify(props.auth)}</pre>
+    <Link
+      to={'/global/mapview'}
+    >Map View</Link>
+    <div
+      style={{
+        display: 'flex',
+        'flexWrap': 'wrap',
+        'justifyContent': 'center',
+      }}
+    >
+      {
+        Object.values(props.gPets).filter(data => !!data.name).map(data => (
+          <GlobalFeedEntry
+            key={_.uniqueId()}
+            pet={data}
+          />
+        ))
+      }
+    </div>
   </div>
 );

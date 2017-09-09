@@ -4,6 +4,8 @@ export default (state = {}, action) => {
       return { ...action.payload };
     case 'SIGNOUT' :
       return { ...action.payload };
+    case 'FACEBOOKLOGIN' :
+      return {...state, ...action.payload };
     default :
       return state;
   }

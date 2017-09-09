@@ -1,5 +1,5 @@
 import React from 'react';
-import { Launcher } from 'react-chat-window';
+import  { Launcher }  from './chatwindow';
 import { newChatMsg } from '../actions/ChatActions';
 
 class Chat extends React.Component {
@@ -26,7 +26,6 @@ class Chat extends React.Component {
     let sender = {
       author: 'me',
       type: 'text',
-
       data: { text: msg.data.text },
     };
     let receiver = {
@@ -45,6 +44,7 @@ class Chat extends React.Component {
     return (
       <div>
        <Launcher
+       toggle={this.props.chatReceiver.toggle || false}
         agentProfile={{
           teamName: this.props.chatReceiver.name || '',
           imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png' || this.props.chatReceiver.pic,

@@ -11,11 +11,17 @@ class MessageWithUser extends React.Component {
     };
   }
 
+  handleClick() {
+
+  }
+
   render() {
     return (
+      <div>
       <button onClick={()=> { setCurrChat('placeholderpic.png', this.props.username, this.props.userid)} }>
       Messages with: {this.props.username}
       </button>
+      </div>
 
     );
   }

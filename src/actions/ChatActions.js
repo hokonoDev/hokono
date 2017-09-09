@@ -41,7 +41,6 @@ export const setCurrChat = (pic, name, receiveruid) => {
     }
     store.dispatch(action);
   });
-
 }
 
 //get objects of all the people i've talked to (displayname and uid), used to display open chats

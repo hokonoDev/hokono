@@ -3,7 +3,7 @@ export default (state = {}, action) => {
     case 'NEW_CHAT_MSG' :
       return { ...state, ...action.payload };
     case 'SET_CHAT_RECEIVER' :
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload, toggle: !state.toggle };
     case 'GET_MY_CHATUSERS' :
       return { ...state, ...action.payload };
       //this.props.chat.chatUsers

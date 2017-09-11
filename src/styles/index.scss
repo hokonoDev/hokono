@@ -16,6 +16,7 @@ body {
 
 	width: 90%;
 	max-width: 1500px;
+	padding: 0px;
 
 	.title {
 		margin-bottom: 20px;
@@ -28,7 +29,7 @@ body {
 }
 
 button {
-	box-shadow: 0px 0px 5px 0px grey;
+	box-shadow: 0px 0px 2px 1px lightgrey;
 	border: 1px solid black;
 	padding: 10px;
 	padding-top: 0px;
@@ -351,7 +352,7 @@ a {
 	}
 
 	input {
-		margin-bottom: 20px;
+		margin-bottom: 40px;
 	}
 
 	button {
@@ -362,5 +363,142 @@ a {
 		background-color: darkgrey;
 		color: white;
 	}
+
+}
+
+
+  ////////////////////////
+ // --- POST FEEDS --- //
+////////////////////////
+
+.post-feed-entry-box {
+	height: 450px;
+    width: 350px;
+    border: 0px solid black;
+    margin: 20px;
+    box-shadow: 0px 0px 2px 1px lightgrey;
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .likes-count {
+    	font-size: 13px;
+    	width: 100%;
+    	margin-left: 50px;
+    }
+
+	.post-feed-entry-img {
+	    width: 300px;
+	    height: 300px;
+		margin: 20px;
+		margin-bottom: 10px;
+		margin-top: 0px;
+	    image-position: center;
+		object-fit: cover;
+	}
+
+	.interactions-box{
+		@extend .row-box-center;
+		align-items: center;
+
+		.like-buttton {
+			@extend .col-box-center;
+			border: none;
+			box-shadow: none;
+			margin-left: 0px;
+			padding-left: 0px;
+
+			img {
+				height: 28px;
+				width: 28px;
+			}
+		}
+
+		margin-bottom: 10px;
+	}
+
+
+	.description {
+		margin: 30px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
+
+}
+
+  ///////////////////////
+ // --- PET FEEDS --- //
+///////////////////////
+
+.pet-feed-entry-box {
+	height: 400px;
+    width: 350px;
+    border: 0px solid black;
+    margin: 20px;
+    box-shadow: 0px 0px 2px 1px lightgrey;
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .name {
+    	width: 100%;
+    	margin-left: 50px;
+    	margin-bottom: 5px;
+    	font-size: 18px;
+    }
+
+    .star-count {
+    	font-size: 13px;
+    	width: 100%;
+    	margin-left: 50px;
+    }
+
+	.pet-feed-entry-img {
+	    width: 300px;
+	    height: 300px;
+		margin: 20px;
+		margin-bottom: 10px;
+		margin-top: 0px;
+	    image-position: center;
+		object-fit: cover;
+	}
+
+	.interactions-box{
+		@extend .row-box-center;
+		align-items: center;
+		margin-top: 5px;
+
+		button {
+			margin: 0px;
+		}
+
+		.star-buttton {
+			@extend .col-box-center;
+			border: none;
+			box-shadow: none;
+			margin-right: 20px;
+			padding: 0px;
+
+			img {
+				height: 28px;
+				width: 28px;
+			}
+		}
+
+		margin-bottom: 10px;
+	}
+
+
+	.description {
+		margin: 30px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
 
 }

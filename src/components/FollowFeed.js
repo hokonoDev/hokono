@@ -23,7 +23,6 @@ export default (props) => (
       <div
         className="wrap-row-box-center"
       >
-      {          console.log(props.posts)}
         {
           Object.keys(props.posts).length ? Object.entries(props.posts).map(data => (
             <FollowFeedEntry

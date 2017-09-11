@@ -8,10 +8,10 @@ export default props => (
     className="logo-bar-filler"
   >
   </div>
-  <div
-    className="row-box-center"
-  >
-    <Link to="/">
+  <Link to="/">
+    <div
+      className="row-box-center"
+    >
       <div
         className="logo-box"
       >
@@ -21,7 +21,6 @@ export default props => (
           alt=""
         />
       </div>
-    </Link>
     {
       props.auth.loggedIn ?
         <button
@@ -30,6 +29,7 @@ export default props => (
         >Logout</button> :
         null
     }
-  </div>
+    </div>
+   </Link>
   </div>
 )

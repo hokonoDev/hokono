@@ -51,7 +51,7 @@ const PetPost = props => (
       </button>
       <FacebookShareButton
         className="share-button"
-        url={`localhost:3000/${props.petId}/post/${props.postId}`}
+        url={`https://hokono-90da1.firebaseapp.com/${props.petId}/post/${props.postId}`}
         title={props.name}
         description={props.post.description}
       >

@@ -51,10 +51,12 @@ const PetPost = props => (
       </button>
       <FacebookShareButton
         className="share-button"
-        url={`localhost:3000/${props.post.petId}/post/${props.postId}`}
+        url={`localhost:3000/${props.petId}/post/${props.postId}`}
         title={props.name}
-        children={<FacebookIcon size={32} round/>}
-      />
+        description={props.post.description}
+      >
+        <FacebookIcon size={32} round/>
+      </FacebookShareButton>
     </div>
     <p
       className="description"

@@ -27,6 +27,7 @@ const Nav = (props) => {
                   className="nav-item"
                   src="/images/home.png"
                   alt=""
+                  title="Home"
                 />
               </Link>
               <Link
@@ -40,6 +41,7 @@ const Nav = (props) => {
                   className="nav-item"
                   src="/images/pets.png"
                   alt=""
+                  title="Following Feed"
                 />
               </Link>
               <Link to={`/${props.profile.acctType}/addPet`}>
@@ -47,6 +49,7 @@ const Nav = (props) => {
                   className="nav-item"
                   src="/images/plus-button.png"
                   alt=""
+                  title="Add A Pet"
                 />
               </Link>
               <Link to={`/${props.profile.acctType}/profile/${props.auth.uid}`}>
@@ -54,6 +57,7 @@ const Nav = (props) => {
                   className="nav-item"
                   src="/images/profile.png"
                   alt=""
+                  title="My Profile"
                 />
               </Link>
               <Link
@@ -64,6 +68,7 @@ const Nav = (props) => {
                   className="nav-item"
                   src="/images/magnifier.png"
                   alt=""
+                  title="Global Feed"
                 />
               </Link>
               <Link
@@ -74,6 +79,7 @@ const Nav = (props) => {
                   className="nav-item"
                   src="/images/map.png"
                   alt=""
+                  title="Map Search"
                 />
               </Link>
               <Link
@@ -83,6 +89,7 @@ const Nav = (props) => {
                   className="nav-item"
                   src="/images/chatbubble.png"
                   alt=""
+                  title="My Chats"
                 />
               </Link>
             </div>

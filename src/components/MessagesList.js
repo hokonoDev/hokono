@@ -30,7 +30,12 @@ class MessagesList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        className="gen-box"
+      >
+        <p
+          className="title"
+        >Chats</p>
         {
           this.props.chat.chatUsers ? Object.keys(this.props.chat.chatUsers).map(keyId=> (
             <MessageWithUser userid={ keyId } username={Object.keys(this.props.chat.chatUsers[keyId])[0]}/>

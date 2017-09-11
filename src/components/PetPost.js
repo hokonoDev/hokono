@@ -30,6 +30,7 @@ export default class PetPost extends React.Component {
   componentDidMount() {
     this.setPetPost();
   }
+
   setPetPost() {
     if (this.props.post.petPromise) {
       this.props.post.petPromise.then(pData => {
@@ -46,62 +47,51 @@ export default class PetPost extends React.Component {
   render() {
     return (
       <div
-        style={{
-          height: '400px',
-          width: '350px',
-          border: '0px solid black',
-          margin: '20px',
-          'boxShadow': '2px 2px 2px lightgrey',
-          'backgroundColor': 'whitesmoke',
-          display: 'flex',
-          'flexDirection': 'column',
-          'alignItems': 'center',
-        }}
+       className="post-feed-entry-box"
+      >
+        <Link to={`/pet/${this.state.petId}/post/${this.state.postId}`}>
+            {console.log(this.state.name)}
+            {this.state.name}
+        </Link>
+        <img
+          src={this.props.post.image}
+          alt=""
+          className="post-feed-entry-img"
+        />
+        <p
+          className="likes-count"
+        >Liked by {this.props.post.likes}</p>
+        <div
+          className="interactions-box"
         >
-          <Link to={`/pet/${this.state.petId}/post/${this.state.postId}`}>
-              {this.state.name}
-          </Link>
-          <div
-            style={{
-              'backgroundImage': `url(${this.state.post.image})`,
-              width: '300px',
-              height: '200px',
-              'backgroundSize': 'contain',
-              'backgroundRepeat': 'no-repeat',
-              'backgroundPosition': 'center',
-            }}
-          />
-          <div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                if (this.state.auth.loggedIn) {
-                  if (!!this.state.post.likedBy ? !this.state.post.likedBy[this.state.auth.uid] : true) {
-                    likePostAction(this.state.postId, this.state.petId, this.state.ownerId);
-                  } else {
-                    unlikePostAction(this.state.postId, this.state.petId, this.state.ownerId);
-                  }
+          <button
+            className="like-buttton"
+            onClick={(e) => {
+              e.preventDefault();
+              if (this.state.auth.loggedIn) {
+                if (!!this.state.post.likedBy ? !this.state.post.likedBy[this.state.auth.uid] : true) {
+                  likePostAction(this.state.postId, this.state.petId, this.state.ownerId);
                 } else {
-                  alert('Please login to like');
+                  unlikePostAction(this.state.postId, this.state.petId, this.state.ownerId);
                 }
-              }}
-            >
-              <img
-                style={{
-                  width: '20px',
-                  height: '20px',
-                }}
-                src={!!this.state.post.likedBy ? !!this.state.post.likedBy[this.state.auth.uid] ? '/images/full-heart.png' : '/images/heart.png' : '/images/heart.png'}
-                alt=""
-              />
-            </button>
-          </div>
-          <p>Likes: {this.state.post.likes}</p>
-          <p>{this.state.post.description}</p>
+              } else {
+                alert('Please login to like');
+              }
+            }}
+          >
+            <img
+              src={!!this.state.post.likedBy ? !!this.state.post.likedBy[this.state.auth.uid] ? '/images/full-heart.png' : '/images/heart.png' : '/images/heart.png'}
+              alt=""
+            />
+          </button>
           <FacebookShareButton url={`localhost:3000/${this.state.petId}/post/${this.state.postId}`} title={this.state.name} description={this.state.post.description}>
             <FacebookIcon size={32} round/>
           </FacebookShareButton>
         </div>
+        <p
+          className="description"
+        >{this.state.post.description}</p>
+      </div>
     )
   }
 }

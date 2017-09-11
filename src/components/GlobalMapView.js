@@ -79,14 +79,15 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        className="col-box-center"
+      >
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
+          className="gen-box"
         >
+          <p
+            className="title"
+          >Map Search</p>
           <GoogleMap
             center={this.state.center}
             zoom={11}

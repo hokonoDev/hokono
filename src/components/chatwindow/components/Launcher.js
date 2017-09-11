@@ -18,12 +18,9 @@ class Launcher extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.toggle !== prevProps.toggle)
-    {
       if (this.props.toggle !== prevProps.toggle) {
         this.openChat();
       }
-    }
   }
   handleClick() {
     this.setState({

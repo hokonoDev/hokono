@@ -1,32 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import {
+  ShareButtons,
+  ShareCounts,
+  generateShareIcon
+} from 'react-share';
 import { likePostAction, unlikePostAction } from '../actions/PostsActions';
+const { FacebookShareButton } = ShareButtons;
+const { FacebookShareCount } = ShareCounts;
+const FacebookIcon = generateShareIcon('facebook');
 
 const PetPost = props => (
   <div
-  style={{
-    height: '400px',
-    width: '350px',
-    border: '0px solid black',
-    margin: '20px',
-    'boxShadow': '2px 2px 2px lightgrey',
-    'backgroundColor': 'whitesmoke',
-    display: 'flex',
-    'flexDirection': 'column',
-    'alignItems': 'center',
-  }}
+    className="post-feed-entry-box"
   >
+    <Link
+      to={`/pet/${props.post.petId}/post/${props.postId}`}
+    >
+      <img
+        src={props.post.image}
+        alt=""
+        className="post-feed-entry-img"
+      />
+    </Link>
+    <p
+      className="likes-count"
+    >Liked by {props.post.likes}</p>
     <div
-      style={{
-        'backgroundImage': `url(${props.post.image})`,
-        width: '300px',
-        height: '200px',
-        'backgroundSize': 'contain',
-        'backgroundRepeat': 'no-repeat',
-        'backgroundPosition': 'center',
-      }}
-    />
-    <div>
+      className="interactions-box"
+    >
       <button
+        className="like-buttton"
         onClick={(e) => {
           e.preventDefault();
           if (props.auth.loggedIn) {
@@ -41,17 +45,22 @@ const PetPost = props => (
         }}
       >
         <img
-          style={{
-            width: '20px',
-            height: '20px',
-          }}
           src={!!props.post.likedBy ? !!props.post.likedBy[props.auth.uid] ? '/images/full-heart.png' : '/images/heart.png' : '/images/heart.png'}
           alt=""
         />
       </button>
+      <FacebookShareButton
+        className="share-button"
+        url={`localhost:3000/${props.petId}/post/${props.postId}`}
+        title={props.name}
+        description={props.post.description}
+      >
+        <FacebookIcon size={32} round/>
+      </FacebookShareButton>
     </div>
-    <p>Likes: {props.post.likes}</p>
-    <p>{props.post.description}</p>
+    <p
+      className="description"
+    >{props.post.description}</p>
   </div>
 );
 

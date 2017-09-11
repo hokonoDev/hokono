@@ -13,11 +13,7 @@ import {
 
 export default props => (
   <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    }}
+    className="col-box-center"
   >
 
 
@@ -31,44 +27,47 @@ export default props => (
     />
 
 
-    <div
-      className="dash-header"
-    >
+    {
+      props.location.pathname === '/shelter/dashboard/messages' ? null :
       <div
-        className="left"
-      >
-        <p>{props.profile.displayName}</p>
-        <img
-          src={props.profile.profPic}
-          alt=""
-        />
-      </div>
-      <div
-        className="right"
-      >
-        <Link
-          to={`${props.match.url}/following`}
+          className="dash-header"
         >
-          <div>
-            Following: {props.profile.followingCount ? props.profile.followingCount : '0'}
+          <div
+            className="left"
+          >
+            <p>{props.profile.displayName}</p>
+            <img
+              src={props.profile.profPic}
+              alt=""
+            />
           </div>
-        </Link>
-        <Link
-          to={`${props.match.url}`}
-        >
-          <div>
-            Starred: {props.profile.myStars ? Object.keys(props.profile.myStars).length : '0'}
+          <div
+            className="right"
+          >
+            <Link
+              to={`${props.match.url}/following`}
+            >
+              <div>
+                Following: {props.profile.followingCount ? props.profile.followingCount : '0'}
+              </div>
+            </Link>
+            <Link
+              to={`${props.match.url}`}
+            >
+              <div>
+                Starred: {props.profile.myStars ? Object.keys(props.profile.myStars).length : '0'}
+              </div>
+            </Link>
+            <Link
+              to={`${props.match.url}/adopt`}
+            >
+              <div>
+                Requests: {props.profile.adoptRequests ? Object.keys(props.profile.adoptRequests).length : '0'}
+              </div>
+            </Link>
           </div>
-        </Link>
-        <Link
-          to={`${props.match.url}/adopt`}
-        >
-          <div>
-            Requests: {props.profile.adoptRequests ? Object.keys(props.profile.adoptRequests).length : '0'}
-          </div>
-        </Link>
-      </div>
-    </div>
+        </div>
+      }
 
 
 
@@ -119,6 +118,7 @@ export default props => (
           />
         )}
       />
+
       <Route
         exact path={`${props.match.path}/messages`}
         render={renderProps=> (

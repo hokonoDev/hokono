@@ -64,7 +64,8 @@ body {
 
 .gen-box {
   width: 90%;
-  max-width: 1500px; }
+  max-width: 1500px;
+  padding: 0px; }
   .gen-box .title {
     margin-bottom: 20px;
     padding-bottom: 10px;
@@ -74,7 +75,7 @@ body {
     font-size: 25px; }
 
 button {
-  box-shadow: 0px 0px 5px 0px grey;
+  box-shadow: 0px 0px 2px 1px lightgrey;
   border: 1px solid black;
   padding: 10px;
   padding-top: 0px;
@@ -89,10 +90,10 @@ a {
   text-decoration: none;
   color: black; }
 
-.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .row-box-space, .nav-box, .row-box-left, .col-box, .col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .pet-list-entry-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right {
+.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .row-box-left, .col-box, .col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-list-entry-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right {
   display: flex; }
 
-.row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box {
+.row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
   justify-content: center; }
 
 .row-box-space, .nav-box {
@@ -104,11 +105,11 @@ a {
 .wrap-row-box-center {
   flex-wrap: wrap; }
 
-.col-box, .col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .pet-list-entry-box {
+.col-box, .col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-list-entry-box {
   flex-direction: column;
   flex-wrap: wrap; }
 
-.col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form {
+.col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton {
   align-items: center; }
 
 .col-box-space {
@@ -278,11 +279,97 @@ a {
 .add-pet-form p {
   margin-bottom: 5px; }
 .add-pet-form input {
-  margin-bottom: 20px; }
+  margin-bottom: 40px; }
 .add-pet-form button {
   margin-top: 20px; }
 .add-pet-form button:hover {
   background-color: darkgrey;
   color: white; }
+
+.post-feed-entry-box {
+  height: 450px;
+  width: 350px;
+  border: 0px solid black;
+  margin: 20px;
+  box-shadow: 0px 0px 2px 1px lightgrey;
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .post-feed-entry-box .likes-count {
+    font-size: 13px;
+    width: 100%;
+    margin-left: 50px; }
+  .post-feed-entry-box .post-feed-entry-img {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    image-position: center;
+    object-fit: cover; }
+  .post-feed-entry-box .interactions-box {
+    align-items: center;
+    margin-bottom: 10px; }
+    .post-feed-entry-box .interactions-box .like-buttton {
+      border: none;
+      box-shadow: none;
+      margin-left: 0px;
+      padding-left: 0px; }
+      .post-feed-entry-box .interactions-box .like-buttton img {
+        height: 28px;
+        width: 28px; }
+  .post-feed-entry-box .description {
+    margin: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px; }
+
+.pet-feed-entry-box {
+  height: 400px;
+  width: 350px;
+  border: 0px solid black;
+  margin: 20px;
+  box-shadow: 0px 0px 2px 1px lightgrey;
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .pet-feed-entry-box .name {
+    width: 100%;
+    margin-left: 50px;
+    margin-bottom: 5px;
+    font-size: 18px; }
+  .pet-feed-entry-box .star-count {
+    font-size: 13px;
+    width: 100%;
+    margin-left: 50px; }
+  .pet-feed-entry-box .pet-feed-entry-img {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    image-position: center;
+    object-fit: cover; }
+  .pet-feed-entry-box .interactions-box {
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 10px; }
+    .pet-feed-entry-box .interactions-box button {
+      margin: 0px; }
+    .pet-feed-entry-box .interactions-box .star-buttton {
+      border: none;
+      box-shadow: none;
+      margin-right: 20px;
+      padding: 0px; }
+      .pet-feed-entry-box .interactions-box .star-buttton img {
+        height: 28px;
+        width: 28px; }
+  .pet-feed-entry-box .description {
+    margin: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px; }
 
 /*# sourceMappingURL=index.css.map */

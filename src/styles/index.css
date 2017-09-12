@@ -354,7 +354,7 @@ a {
   color: white; }
 
 .logo-bar-filler {
-  height: 125px; }
+  height: 100px; }
 
 .logo-box {
   align-items: center;
@@ -363,7 +363,7 @@ a {
   padding: 30px;
   background-color: white;
   position: fixed;
-  top: 15px;
+  top: 0px;
   z-index: 10; }
 
 .logo {

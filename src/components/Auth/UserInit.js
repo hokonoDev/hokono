@@ -63,7 +63,9 @@ export default class extends React.Component{
 
   render() {
     return (
-      <div>
+      <div
+        className="account-init-box"
+      >
         <h1>Welcome To Hokono!</h1>
         <h3>You have successfully signed up for a USER account.</h3>
         <h4>
@@ -73,6 +75,7 @@ export default class extends React.Component{
         <form
           onSubmit={this.submit}
         >
+          <p>Your Display Name *</p>
           <input
             type="text"
             name="displayName"
@@ -80,6 +83,7 @@ export default class extends React.Component{
             value={this.state.displayName}
             onChange={this.change}
           />
+          <p>Your Address *</p>
           <Geosuggest
             ref={el => this._geoSuggest = el}
             placeholder="Address"

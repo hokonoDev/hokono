@@ -46,7 +46,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-button {
+button, .home-box .interactions-box a {
   background: none;
   border: 0;
   color: inherit;
@@ -56,7 +56,7 @@ button {
   overflow: visible;
   padding: 0; }
 
-button:focus {
+button:focus, .home-box .interactions-box a:focus {
   outline: 0; }
 
 body {
@@ -74,7 +74,7 @@ body {
     text-align: center;
     font-size: 25px; }
 
-button {
+button, .home-box .interactions-box a {
   box-shadow: 0px 0px 2px 1px lightgrey;
   border: 1px solid black;
   padding: 10px;
@@ -83,20 +83,20 @@ button {
   margin-left: 5px;
   margin-right: 5px; }
 
-button:hover {
+button:hover, .home-box .interactions-box a:hover {
   box-shadow: none; }
 
 a {
   text-decoration: none;
   color: black; }
 
-.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .row-box-left, .col-box, .col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-list-entry-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right {
+.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
   display: flex; }
 
 .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
   justify-content: center; }
 
-.row-box-space, .nav-box {
+.row-box-space, .nav-box, .pet-profile-header {
   justify-content: space-around; }
 
 .row-box-left {
@@ -105,15 +105,24 @@ a {
 .wrap-row-box-center {
   flex-wrap: wrap; }
 
-.col-box, .col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-list-entry-box {
+.col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .pet-list-entry-box, .pet-profile-header .pet-side-box {
   flex-direction: column;
   flex-wrap: wrap; }
 
-.col-box-center, .gen-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton {
+.col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box {
   align-items: center; }
 
 .col-box-space {
   align-items: space-around; }
+
+.home-box p {
+  margin: 50px;
+  font-size: 20px; }
+.home-box img {
+  margin-bottom: 50px; }
+.home-box .interactions-box a:hover {
+  background-color: darkgrey;
+  color: white; }
 
 .logo-bar-filler {
   height: 100px; }
@@ -260,14 +269,14 @@ a {
   margin-bottom: 10px; }
   .filter-bar-box .sort-box {
     align-items: center; }
-  .filter-bar-box button {
+  .filter-bar-box button, .filter-bar-box .home-box .interactions-box a, .home-box .interactions-box .filter-bar-box a {
     border: 1px solid black;
     padding: 10px;
     padding-top: 0px;
     padding-bottom: 0px;
     margin-left: 5px;
     margin-right: 5px; }
-  .filter-bar-box button:hover {
+  .filter-bar-box button:hover, .filter-bar-box .home-box .interactions-box a:hover, .home-box .interactions-box .filter-bar-box a:hover {
     background-color: darkgrey;
     color: white; }
   .filter-bar-box select {
@@ -280,9 +289,9 @@ a {
   margin-bottom: 5px; }
 .add-pet-form input {
   margin-bottom: 40px; }
-.add-pet-form button {
+.add-pet-form button, .add-pet-form .home-box .interactions-box a, .home-box .interactions-box .add-pet-form a {
   margin-top: 20px; }
-.add-pet-form button:hover {
+.add-pet-form button:hover, .add-pet-form .home-box .interactions-box a:hover, .home-box .interactions-box .add-pet-form a:hover {
   background-color: darkgrey;
   color: white; }
 
@@ -357,7 +366,7 @@ a {
     align-items: center;
     margin-top: 5px;
     margin-bottom: 10px; }
-    .pet-feed-entry-box .interactions-box button {
+    .pet-feed-entry-box .interactions-box button, .pet-feed-entry-box .home-box .interactions-box a, .home-box .pet-feed-entry-box .interactions-box a {
       margin: 0px; }
     .pet-feed-entry-box .interactions-box .star-buttton {
       border: none;
@@ -371,5 +380,49 @@ a {
     margin: 30px;
     margin-top: 0px;
     margin-bottom: 0px; }
+
+.pet-profile-header {
+  margin-bottom: 30px;
+  width: 700px; }
+  .pet-profile-header .pet-side-box {
+    width: 400px;
+    flex-wrap: wrap; }
+    .pet-profile-header .pet-side-box .info-box .info {
+      align-items: flex-end;
+      margin: 20px;
+      margin-left: 0px; }
+      .pet-profile-header .pet-side-box .info-box .info img {
+        width: 20px;
+        height: 20px;
+        image-position: center;
+        object-fit: cover;
+        margin-right: 10px; }
+    .pet-profile-header .pet-side-box .interaction-box {
+      justify-content: space-around;
+      margin-top: 10px; }
+      .pet-profile-header .pet-side-box .interaction-box .star-button {
+        border: none;
+        box-shadow: none;
+        padding: 0px; }
+        .pet-profile-header .pet-side-box .interaction-box .star-button img {
+          height: 25px;
+          width: 25px; }
+    .pet-profile-header .pet-side-box .description {
+      margin: 20px;
+      padding: 10px;
+      box-shadow: 0px 0px 0px 1px #d8d8d8; }
+
+.req-box {
+  border: 1px solid lightgrey;
+  box-shadow: 0px 0px 5px -2px grey;
+  width: 600px;
+  margin: 20px; }
+  .req-box .req-title {
+    margin: 10px; }
+  .req-box .req-status {
+    margin: 10px;
+    font-size: 20px; }
+  .req-box .req-interactions {
+    margin: 10px; }
 
 /*# sourceMappingURL=index.css.map */

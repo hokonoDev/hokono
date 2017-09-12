@@ -37,35 +37,45 @@ export default class extends React.Component {
 
   render() {
     return(
-      <div>
-        <IfRedirect
-          if={this.props.auth.loggedIn}
-          ifFalse="/"
-        />
-        Add Pet Post:
-        <form
-          onSubmit={this.submit}
+      <div
+        className="col-box-center"
+      >
+        <div
+          className="gen-box"
         >
-           Add img from phone camera
-          <input
-            type="file"
-            accept="image/*"
-            capture="camera"
-            onChange={(e) => this.setState({ image: e.target.files.item(0) })}
-            key={this.state.key}
+          <IfRedirect
+            if={this.props.auth.loggedIn}
+            ifFalse="/"
           />
-          <input
-            type="text"
-            placeholder="Description..."
-            onChange={(e) => this.setState({ description: e.target.value })}
-            value={this.state.description}
-          />
-          <button
-            type="submit"
+          <p
+            className="title"
+          >New Pet Post</p>
+          <form
+            onSubmit={this.submit}
+            className="add-pet-form"
           >
-            Post
-          </button>
-        </form>
+             <p>Add an Image</p>
+            <input
+              type="file"
+              accept="image/*"
+              capture="camera"
+              onChange={(e) => this.setState({ image: e.target.files.item(0) })}
+              key={this.state.key}
+            />
+            <p>Add a Description</p>
+            <input
+              type="text"
+              placeholder="Description..."
+              onChange={(e) => this.setState({ description: e.target.value })}
+              value={this.state.description}
+            />
+            <button
+              type="submit"
+            >
+              Post
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

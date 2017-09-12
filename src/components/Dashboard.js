@@ -28,7 +28,7 @@ export default props => (
 
 
     {
-      props.location.pathname === '/shelter/dashboard/messages' ? null :
+      props.location.pathname === '/shelter/dashboard/messages' || props.location.pathname === '/user/dashboard/messages' ? null :
       <div
           className="dash-header"
         >
@@ -52,7 +52,7 @@ export default props => (
               </div>
             </Link>
             <Link
-              to={`${props.match.url}`}
+              to={`${props.location.pathname}`}
             >
               <div>
                 Starred: {props.profile.myStars ? Object.keys(props.profile.myStars).length : '0'}

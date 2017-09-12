@@ -38,54 +38,108 @@ const ShelterProfile = class extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>{this.state.profile.displayName}</h3>
-        <div>
-          {this.props.profile.owner ?
-            <Link to={`${this.props.match.url}/edit`}>
-              <button>
-              Edit Profile
-              </button>
-            </Link>
-            :
-            null
-          }
-          <Route
-            path={`${this.props.match.path}/edit`}
-            render={renderProps => (
-              <EditProfile
-                {...renderProps}
-                authorized={this.props.profile.owner}
-              />
-            )}
-          />
-        </div>
-        <div>
-          <img
-            src={this.state.profile.profPic || '/images/edit-profile.png'}
-            style={{
-              height: '200px',
-              width: '200px',
-            }}
-          />
-          <p>Address: {this.state.profile.address}</p>
-          <p>Email: {this.state.profile.email}</p>
-          <IfRender
-            if={this.state.profile.phone}
-            ifTrue={() => <p>Phone: {this.state.profile.phone}</p>}
-          />
-          {this.props.profile.owner ?
-            null
-            :
-            <button onClick={()=> { setCurrChat(this.state.profile.profPic, this.state.profile.displayName, this.state.profile.uid)} }>
-            Message {this.state.profile.acctType}
-            </button>
-          }
-        </div>
-        <ProfilePetList
-          petData={this.state.profile.pets || {}}
+      <div
+        className="col-box-center"
+      >
+        {console.log(this.props)}
+        <div
+          className="gen-box"
         >
-        </ProfilePetList>
+          <h3
+            className="title"
+          >{this.state.profile.displayName}</h3>
+          <div
+            className="row-box-space"
+            style={{ marginBottom: '30px', width: '700px' }}
+          >
+            <img
+              src={this.state.profile.profPic || '/images/edit-profile.png'}
+              style={{
+                height: '200px',
+                width: '200px',
+                imagePosition: 'center',
+                objectFit: 'cover',
+                border: '1px solid lightgrey',
+                borderRadius: '50%',
+              }}
+            />
+            <div
+              className="col-box"
+              style={{
+                justifyContent: 'space-around'
+              }}
+            >
+              <div>
+                <div
+                  className="row-box"
+                  style={{ alignItems: 'flex-end', margin: '20px', marginTop: '0px' }}
+                >
+                  <img style={{ height: '20px', width: '20px', marginRight: '10px' }} src="/images/apartment.svg" alt="" />
+                  <p>{this.state.profile.address}</p>
+                </div>
+                <div
+                  className="row-box"
+                  style={{ alignItems: 'flex-end', margin: '20px' }}
+                >
+                  <img style={{ height: '20px', width: '20px', marginRight: '10px' }} src="/images/mail.svg" alt="" />
+                  <p>{this.state.profile.email}</p>
+                </div>
+                <IfRender
+                  if={this.state.profile.phone}
+                  ifTrue={() =>
+                    <div
+                      className="row-box"
+                      style={{ alignItems: 'flex-end', margin: '20px' }}
+                    >
+                      <img style={{ height: '20px', width: '20px', marginRight: '10px' }} src="/images/smartphone.svg" alt="" />
+                      <p>{this.state.profile.phone}</p>
+                    </div>
+                  }
+                />
+              </div>
+              <p
+                style={{
+                  marginBottom: '20px',
+                  padding: '10px',
+                  boxShadow: '0px 0px 0px 1px #d8d8d8',
+                }}
+              >{this.state.profile.blurb}</p>
+              <div
+                className="row-box-center"
+              >
+                {this.props.profile.owner && this.props.location.pathname.split('/').pop() !== 'edit' ?
+                  <Link to={`${this.props.match.url}/edit`}>
+                    <button>
+                    Edit Profile
+                    </button>
+                  </Link>
+                  :
+                  null
+                }
+                {this.props.profile.owner ?
+                  null
+                  :
+                  <button onClick={()=> { setCurrChat(this.state.profile.profPic, this.state.profile.displayName, this.state.profile.uid)} }>
+                  Message {this.state.profile.acctType}
+                  </button>
+                }
+                <Route
+                  path={`${this.props.match.path}/edit`}
+                  render={renderProps => (
+                    <EditProfile
+                      {...renderProps}
+                      authorized={this.props.profile.owner}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+          </div>
+          <ProfilePetList
+            petData={this.state.profile.pets || {}}
+          >
+          </ProfilePetList>
+        </div>
       </div>
     );
   }

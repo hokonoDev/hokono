@@ -94,6 +94,34 @@ a {
 }
 
 
+  /////////////////
+ // --- HOME -- //
+/////////////////
+.home-box {
+	@extend .col-box-center;
+
+	p {
+		margin: 50px;
+		font-size: 20px;
+	}
+
+	img {
+		margin-bottom: 50px;
+	}
+
+	.interactions-box {
+		a {
+			@extend button;
+		}
+
+		a:hover {
+			background-color: darkgrey;
+			color: white;
+		}
+	}
+}
+
+
   //////////////////////
  // --- LOGO BAR --- //
 //////////////////////
@@ -499,6 +527,90 @@ a {
 		margin-top: 0px;
 		margin-bottom: 0px;
 	}
+}
 
 
+  /////////////////////////
+ // --- PET PROFILE --- //
+/////////////////////////
+
+.pet-profile-header {
+	@extend .row-box-space;
+
+	margin-bottom: 30px;
+	width: 700px;
+
+	.pet-side-box {
+		@extend .col-box;
+		width: 400px;
+		flex-wrap: wrap;
+
+		.info-box {
+			.info{
+				@extend .row-box;
+				align-items: flex-end;
+				margin: 20px;
+				margin-left: 0px;
+
+				img{
+					width: 20px;
+				    height: 20px;
+				    image-position: center;
+					object-fit: cover;
+					margin-right: 10px;
+				}
+			}
+		}
+
+		.interaction-box {
+			@extend .row-box;
+			justify-content: space-around;
+			margin-top: 10px;
+
+			.star-button {
+				@extend .col-box-center;
+				border: none;
+				box-shadow: none;
+				padding: 0px;
+
+				img {
+					height: 25px;
+					width: 25px;
+				}
+			}
+		}
+
+		.description {
+			margin: 20px;
+			padding: 10px;
+			box-shadow: 0px 0px 0px 1px #d8d8d8;
+		}
+	}
+}
+
+
+  ////////////////////////////
+ // --- ADOPT REQUESTS --- //
+////////////////////////////
+
+.req-box {
+	@extend .col-box-center;
+
+	border: 1px solid lightgrey;
+	box-shadow: 0px 0px 5px -2px grey;
+	width: 600px;
+	margin: 20px;
+
+	.req-title {
+		margin: 10px;
+	}
+
+	.req-status {
+		margin: 10px;
+		font-size: 20px;
+	}
+
+	.req-interactions {
+		margin: 10px;
+	}
 }

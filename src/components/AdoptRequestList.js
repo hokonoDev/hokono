@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 import {
   SentRequest,
   ReceivedRequest,
@@ -11,7 +12,27 @@ export default props => (
   >
     <p
       className="title"
-    >Request List</p>
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >{`Request List`}
+    {
+      props.match.path.split('/')[1] === 'user' ? null :
+      <Link to={'/shelter/data'}>
+        <img
+          src="/images/chart.svg"
+          style={{
+            height: '25px',
+            width: 'auto',
+            marginLeft: '10px',
+          }}
+        />
+      </Link>
+    }
+    </p>
+
     {
       Object.entries(props.requests)
       .reduce((accum, req) =>

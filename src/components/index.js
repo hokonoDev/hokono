@@ -38,6 +38,7 @@ import LogoBar from './LogoBar';
 import Chat from './Chat';
 import MessagesList from './MessagesList';
 import MessageWithUser from './MessageWithUser';
+import DataVis from './DataVis';
 
 export {
   AddPet,
@@ -80,5 +81,6 @@ export {
   Chat,
   MessagesList,
   MessageWithUser,
+  DataVis,
 };
 

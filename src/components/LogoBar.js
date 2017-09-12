@@ -17,7 +17,7 @@ export default props => (
       >
         <img
           className="logo"
-          src="/images/hokono-logo-v1.0.png"
+          src="/images/hokono-logo-v1.0.svg"
           alt=""
         />
       </div>

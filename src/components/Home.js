@@ -18,11 +18,10 @@ class Home extends React.Component {
   // accounts for first time login with facebook
 
   componentDidMount() {
-    setInterval(() => this.getGifNumber(), 4000);
+    this.gifInterval = setInterval(() => this.getGifNumber(), 4000);
   }
 
   getGifNumber() {
-    console.log('new gif');
     this.setState({ gif: 1 + Math.floor(Math.random() * 14) });
   }
 
@@ -35,6 +34,10 @@ class Home extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.gifInterval);
+  }
+
   render () {
     return (
       <div
@@ -44,27 +47,14 @@ class Home extends React.Component {
           src={`/images/home-gif-${this.state.gif}.gif`}
           alt=""
         />
-        <div
-          className="interactions-box"
-        >
-          <IfRender
-            if={this.props.auth.loggedIn}
-            ifFalse={()=> (
-              <div>
-                <Link to="/auth/login">Login</Link>
-                <Link to="/global/allpets" onClick={getAllPets}>Continue as a Guest</Link>
-              </div>
-            )}
-          />
-          <IfRedirect
-            if={this.props.profile.acctType && this.props.profile.acctType === 'user'}
-            ifTrue="/user/dashboard"
-          />
-          <IfRedirect
-            if={this.props.profile.acctType && this.props.profile.acctType === 'shelter'}
-            ifTrue="/shelter/dashboard"
-          />
-        </div>
+        <IfRedirect
+          if={this.props.profile.acctType && this.props.profile.acctType === 'user'}
+          ifTrue="/user/dashboard"
+        />
+        <IfRedirect
+          if={this.props.profile.acctType && this.props.profile.acctType === 'shelter'}
+          ifTrue="/shelter/dashboard"
+        />
       </div>
     );
   }

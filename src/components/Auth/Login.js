@@ -39,34 +39,66 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
-        Login
-        <form
-          onSubmit={this.submit}
+      <div
+        className="col-box-center"
+      >
+        <div
+          className="gen-box"
         >
-          <input
-            type="text"
-            placeholder="Email"
-            value={this.state.email}
-            name="email"
-            onChange={this.change}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            name="password"
-            onChange={this.change}
-          />
-          <button
-            type="submit"
+          <p
+            className="title"
+          >Login</p>
+          <form
+            className="col-box-center"
+            onSubmit={this.submit}
           >
-            Login
+            <input
+              type="text"
+              placeholder="Email"
+              value={this.state.email}
+              name="email"
+              onChange={this.change}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              name="password"
+              onChange={this.change}
+            />
+            <button
+              type="submit"
+            >
+              Login
+            </button>
+          </form>
+          <p>{ this.state.error || this.props.error.message }</p>
+          <button
+            className="row-box-center"
+            style={{
+              backgroundColor: '#3b5998',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              fontSize: '15px',
+              alignItems: 'center',
+              margin: '10px',
+            }}
+            onClick={this.props.fblogin}
+          >
+            <img
+              src="/images/facebook-logo.svg"
+              alt=""
+              style={{
+                height: '20px',
+                width: 'auto',
+                padding: '5px',
+                marginRight: '5px',
+              }}
+            />
+            <p>Login With Facebook</p>
           </button>
-        </form>
-        <p>{ this.state.error || this.props.error.message }</p>
-       <button class="loginBtn loginBtn--facebook" onClick={this.props.fblogin}>Continue with facebook</button>
-
+        </div>
       </div>
     );
   }

@@ -73,15 +73,31 @@ export default class extends React.Component {
             </button>
           </form>
           <p>{ this.state.error || this.props.error.message }</p>
-          <img
-            src="/images/facebook-login.png"
-            alt=""
-            onClick={this.props.fblogin}
+          <button
+            className="row-box-center"
             style={{
-              height: 'auto',
-              width: '150px',
+              backgroundColor: '#3b5998',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              fontSize: '15px',
+              alignItems: 'center',
+              margin: '10px',
             }}
-          />
+            onClick={this.props.fblogin}
+          >
+            <img
+              src="/images/facebook-logo.svg"
+              alt=""
+              style={{
+                height: '20px',
+                width: 'auto',
+                padding: '5px',
+                marginRight: '5px',
+              }}
+            />
+            <p>Login With Facebook</p>
+          </button>
         </div>
       </div>
     );

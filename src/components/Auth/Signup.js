@@ -83,7 +83,31 @@ export default class extends React.Component {
               Sign Up
             </button>
           </form>
-          <button onClick={this.props.fblogin}>Facebook Sign Up</button>
+          <button
+            className="row-box-center"
+            style={{
+              backgroundColor: '#3b5998',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              fontSize: '15px',
+              alignItems: 'center',
+              margin: '10px',
+            }}
+            onClick={this.props.fblogin}
+          >
+            <img
+              src="/images/facebook-logo.svg"
+              alt=""
+              style={{
+                height: '20px',
+                width: 'auto',
+                padding: '5px',
+                marginRight: '5px',
+              }}
+            />
+            <p>Sign Up With Facebook</p>
+          </button>
           <p>{ this.state.error || this.props.error.message }</p>
         </div>
       </div>

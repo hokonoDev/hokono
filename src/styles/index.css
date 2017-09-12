@@ -90,10 +90,10 @@ a {
   text-decoration: none;
   color: black; }
 
-.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
+.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
   display: flex; }
 
-.row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
+.row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
   justify-content: center; }
 
 .row-box-space, .nav-box, .pet-profile-header {
@@ -171,15 +171,21 @@ a {
 .nav-box {
   height: 40px; }
 
-.nav-item {
+.nav-item, .nav-text-item {
   width: 20px;
   height: 20px;
   padding: 10px;
   padding-left: 50px;
   padding-right: 50px; }
 
-.nav-item:hover {
+.nav-item:hover, .nav-text-item:hover {
   background-color: lightgrey; }
+
+.nav-text-item {
+  white-space: nowrap;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px; }
 
 .dash-header {
   width: 90%;

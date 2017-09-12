@@ -43,39 +43,49 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
-        Sign Up
-        <form
-          onSubmit={this.submit.bind(this)}
+      <div
+        className="col-box-center"
+      >
+        <div
+          className="gen-box"
         >
-          <input
-            type="text"
-            placeholder="Email"
-            value={this.state.email}
-            name="email"
-            onChange={this.change}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            name="password"
-            onChange={this.change}
-          />
-          <input
-            type="password"
-            placeholder="Re-enter Password"
-            value={this.state.rePassword}
-            name="rePassword"
-            onChange={this.change}
-          />
-          <button
-            type="submit"
+          <p
+            className="title"
+          >Sign Up</p>
+          <form
+            className="col-box-center"
+            onSubmit={this.submit.bind(this)}
           >
-            Sign Up
-          </button>
-        </form>
-        <p>{ this.state.error || this.props.error.message }</p>
+            <input
+              type="text"
+              placeholder="Email"
+              value={this.state.email}
+              name="email"
+              onChange={this.change}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              name="password"
+              onChange={this.change}
+            />
+            <input
+              type="password"
+              placeholder="Re-enter Password"
+              value={this.state.rePassword}
+              name="rePassword"
+              onChange={this.change}
+            />
+            <button
+              type="submit"
+            >
+              Sign Up
+            </button>
+          </form>
+          <button onClick={this.props.fblogin}>Facebook Sign Up</button>
+          <p>{ this.state.error || this.props.error.message }</p>
+        </div>
       </div>
     );
   }

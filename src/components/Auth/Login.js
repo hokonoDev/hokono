@@ -39,34 +39,50 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
-        Login
-        <form
-          onSubmit={this.submit}
+      <div
+        className="col-box-center"
+      >
+        <div
+          className="gen-box"
         >
-          <input
-            type="text"
-            placeholder="Email"
-            value={this.state.email}
-            name="email"
-            onChange={this.change}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            name="password"
-            onChange={this.change}
-          />
-          <button
-            type="submit"
+          <p
+            className="title"
+          >Login</p>
+          <form
+            className="col-box-center"
+            onSubmit={this.submit}
           >
-            Login
-          </button>
-        </form>
-        <p>{ this.state.error || this.props.error.message }</p>
-       <button onClick={this.props.fblogin}>login with facebook</button>
-
+            <input
+              type="text"
+              placeholder="Email"
+              value={this.state.email}
+              name="email"
+              onChange={this.change}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              name="password"
+              onChange={this.change}
+            />
+            <button
+              type="submit"
+            >
+              Login
+            </button>
+          </form>
+          <p>{ this.state.error || this.props.error.message }</p>
+          <img
+            src="/images/facebook-login.png"
+            alt=""
+            onClick={this.props.fblogin}
+            style={{
+              height: 'auto',
+              width: '150px',
+            }}
+          />
+        </div>
       </div>
     );
   }

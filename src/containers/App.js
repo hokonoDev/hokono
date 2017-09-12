@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Home, Chat, LogoBar } from '../components/index';
+import { Home, Chat, LogoBar, AuthNav } from '../components/index';
 import {
   AuthRouter,
   ShelterRouter,
@@ -23,11 +23,14 @@ const App = props => (
         exact
         path="/"
         render={renderProps => (
-          <Home
-            {...renderProps}
-            auth={props.auth}
-            profile={props.profile}
-          />
+          <div>
+            <AuthNav />
+            <Home
+              {...renderProps}
+              auth={props.auth}
+              profile={props.profile}
+            />
+          </div>
         )}
       />
       <Route

@@ -67,7 +67,7 @@ export default class extends React.Component {
 
   getInboundPets(map, markers) {
     const inboundPets = markers ? markers.reduce((accum, marker, i) => {
-      if (marker.getTitle() === 'home') return accum;
+      if (marker.getTitle() === 'home' || !marker.getTitle()) return accum;
       if (map.getBounds().contains(marker.getPosition())) {
         const pets = this.state.accounts[marker.getTitle()].pets;
         return pets ? { ...accum, ...pets } : accum;

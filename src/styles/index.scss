@@ -625,4 +625,36 @@ a {
 }
 
 
+  ///////////////////////////
+ // --- ACCOUNT INITS --- //
+///////////////////////////
 
+.account-init-box {
+	@extend .col-box-center;
+
+	h1 {
+		font-size: 20px;
+		margin: 10px;
+		margin-bottom: 5px;
+	}
+
+	h3 {
+		font-size: 18px;
+		margin: 15px;
+	}
+
+	h4 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 15px;
+	}
+
+	form {
+		@extend .col-box-center;
+
+		input {
+			margin: 25px;
+			margin-top: 10px;
+		}
+	}
+}

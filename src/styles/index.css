@@ -90,7 +90,7 @@ a {
   text-decoration: none;
   color: black; }
 
-.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
+.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
   display: flex; }
 
 .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
@@ -105,11 +105,11 @@ a {
 .wrap-row-box-center {
   flex-wrap: wrap; }
 
-.col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .pet-list-entry-box, .pet-profile-header .pet-side-box {
+.col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box {
   flex-direction: column;
   flex-wrap: wrap; }
 
-.col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box {
+.col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form {
   align-items: center; }
 
 .col-box-space {
@@ -430,5 +430,20 @@ a {
     font-size: 20px; }
   .req-box .req-interactions {
     margin: 10px; }
+
+.account-init-box h1 {
+  font-size: 20px;
+  margin: 10px;
+  margin-bottom: 5px; }
+.account-init-box h3 {
+  font-size: 18px;
+  margin: 15px; }
+.account-init-box h4 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 15px; }
+.account-init-box form input {
+  margin: 25px;
+  margin-top: 10px; }
 
 /*# sourceMappingURL=index.css.map */

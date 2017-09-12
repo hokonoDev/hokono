@@ -10,6 +10,7 @@ import {
   IfRedirect,
   ShelterInit,
   FollowFeed,
+  DataVis,
   } from '../components/index';
 
 const getPets = ({pets}) => {
@@ -89,6 +90,17 @@ const ShelterRouter = (props) => (
           auth={props.auth}
           posts={props.following.posts ? props.following.posts : {}}
           sort={props.following.postsSort}
+        />
+      )}
+    />
+    <Route
+      path="/shelter/data"
+      render={routerProps => (
+        <DataVis
+          {...routerProps}
+          petData={getPets(props)}
+          auth={props.auth}
+          profile={props.profile}
         />
       )}
     />

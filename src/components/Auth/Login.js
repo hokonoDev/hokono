@@ -65,7 +65,7 @@ export default class extends React.Component {
           </button>
         </form>
         <p>{ this.state.error || this.props.error.message }</p>
-       <button class="loginBtn loginBtn--facebook" onClick={this.props.fblogin}>login with facebook</button>
+       <button class="loginBtn loginBtn--facebook" onClick={this.props.fblogin}>Continue with facebook</button>
 
       </div>
     );

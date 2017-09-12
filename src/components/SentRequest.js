@@ -24,7 +24,6 @@ export default class extends React.Component {
       <div
         className="req-box"
       >
-        {console.log(this.props)}
         <h4
           className="req-title"
         >{`You're request to adopt `}

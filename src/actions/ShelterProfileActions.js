@@ -117,3 +117,22 @@ export const adoptRequestStatusAction = (status, petId, requesterUid) => {
 
   store.dispatch(action);
 };
+
+export const adoptRequestCloseAction = (petId, requesterUid) => {
+  const user = firebase.auth().currentUser;
+  const action = {
+    type: 'CLOSE_ADOPT_REQUEST',
+    payload: {
+      closed: true,
+    },
+    petId,
+    requesterUid,
+  };
+
+  firebase.database().ref().update({
+    [`accounts/${user.uid}/adoptRequests/${petId}/${requesterUid}/closed`]: true,
+    [`accounts/${requesterUid}/adoptRequests/${petId}/closed`]: true,
+  });
+
+  store.dispatch(action);
+};

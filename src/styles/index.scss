@@ -1,6 +1,6 @@
 @import 'reset';
+@import 'react-vis';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Quicksand|Muli|Lato|Baloo+Bhaijaan');
-
 
   /////////////////////
  // --- DEFAULTS -- //
@@ -612,6 +612,11 @@ a {
 
 	.req-title {
 		margin: 10px;
+	}
+
+	.close-button {
+		position: absolute;
+		transform: translateX(273px) translateY(5px);
 	}
 
 	.req-status {

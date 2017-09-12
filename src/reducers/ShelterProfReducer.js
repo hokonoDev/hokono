@@ -55,6 +55,20 @@ export default (state = { got: false }, action) => {
           }
         }
       };
+    case 'CLOSE_ADOPT_REQUEST':
+      return {
+        ...state,
+        adoptRequests: {
+          ...state.adoptRequests,
+          [action.petId]: {
+            ...state.adoptRequests[action.petId],
+            [action.requesterUid]: {
+              ...state.adoptRequests[action.petId][action.requesterUid],
+              ...action.payload,
+            }
+          }
+        }
+      };
     case 'SIGNOUT' :
       return { got: false };
     default :

@@ -54,6 +54,7 @@ const ShelterProfile = class extends React.Component {
           >
             <img
               src={this.state.profile.profPic || '/images/edit-profile.png'}
+              alt=""
               style={{
                 height: '200px',
                 width: '200px',
@@ -97,13 +98,16 @@ const ShelterProfile = class extends React.Component {
                   }
                 />
               </div>
-              <p
-                style={{
-                  marginBottom: '20px',
-                  padding: '10px',
-                  boxShadow: '0px 0px 0px 1px #d8d8d8',
-                }}
-              >{this.state.profile.blurb}</p>
+              {
+                !this.state.profile.blurb ? null :
+                <p
+                  style={{
+                    marginBottom: '20px',
+                    padding: '10px',
+                    boxShadow: '0px 0px 0px 1px #d8d8d8',
+                  }}
+                >{this.state.profile.blurb}</p>
+              }
               <div
                 className="row-box-center"
               >
@@ -116,9 +120,8 @@ const ShelterProfile = class extends React.Component {
                   :
                   null
                 }
-                {this.props.profile.owner ?
-                  null
-                  :
+                {
+                  this.props.profile.owner ? null :
                   <button onClick={()=> { setCurrChat(this.state.profile.profPic, this.state.profile.displayName, this.state.profile.uid)} }>
                   Message {this.state.profile.acctType}
                   </button>

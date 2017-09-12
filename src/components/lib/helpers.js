@@ -4,7 +4,7 @@ import firebase from '../../firebase/index';
 
 export const getDisplayNameFromUid = (uid) => {
   return firebase.database().ref(`accounts/${uid}`).once('value')
-    .then(snapshot => snapshot.val().displayName);
+    .then(snapshot => snapshot.val() ? snapshot.val().displayName : '');
 };
 
 export const getNameFromPetId = (petId) => {

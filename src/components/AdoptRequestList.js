@@ -31,17 +31,21 @@ export default props => (
             timeStamp={item.timeStamp}
             status={item.status}
             profile={props.profile}
+            closed={!!item.closed}
           />
         )],
       [])
       .sort((a, b) => {
+        const statusA = a.props.closed ? 'closed' : a.props.status;
+        const statusB = b.props.closed ? 'closed' : b.props.status;
         const statusVals = {
+          closed: -2,
           open: 1,
           pending: 2,
           denied: -1,
           accepted: props.match.path.split('/')[1] === 'user' ? 3 : 0,
         };
-        return statusVals[b.props.status] - statusVals[a.props.status];
+        return statusVals[statusB] - statusVals[statusA];
       })
     }
   </div>

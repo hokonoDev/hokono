@@ -22,7 +22,7 @@ class Home extends React.Component {
   }
 
   getGifNumber() {
-    this.setState({ gif: 1 + Math.floor(Math.random() * 15) });
+    this.setState({ gif: 1 + Math.floor(Math.random() * 20) });
   }
 
   componentDidUpdate () {

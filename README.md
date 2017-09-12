@@ -1,9 +1,9 @@
 # hokono
 
 > A place for pets
-  > Explore and follow pets from around the world
-  > Document your own pet's life
-  > Adopt from nearby shelters
+  > - Explore and follow pets from around the world
+  > - Document your own pet's life
+  > - Adopt from nearby shelters
 
 ## Team
 

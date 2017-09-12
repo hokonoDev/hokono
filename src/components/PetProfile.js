@@ -127,6 +127,7 @@ const PetProfile = class extends React.Component {
                 >
                   <img
                     src={this.props.pet.starredBy && this.props.pet.starredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+                    alt=""
                   />
                 </button>
                 <IfRender
@@ -149,7 +150,7 @@ const PetProfile = class extends React.Component {
                         onClick={() => {
                           if (this.props.auth.loggedIn) {
                             if (this.props.profile.adoptRequests && this.props.profile.adoptRequests[this.state.pet.id])
-                              alert('Your request has been sent!');
+                              this.props.history.push('/user/dashboard/adopt');
                             else
                               adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid);
                           } else
@@ -158,7 +159,7 @@ const PetProfile = class extends React.Component {
                       >{
                         this.props.profile.adoptRequests
                         && this.props.profile.adoptRequests[this.state.pet.id]
-                        ? 'Sent!'
+                        ? this.props.profile.adoptRequests[this.state.pet.id].closed ? this.props.profile.adoptRequests[this.state.pet.id].status.toUpperCase() : 'Sent!'
                         : 'Adopt Me!!!'
                       }</button>
                   }
@@ -180,9 +181,11 @@ const PetProfile = class extends React.Component {
                 {!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id] ? 'Unfollow': 'Follow'}
                 </button>
               </div>
-              <p
+              {
+                !this.state.pet.description ? null : <p
                 className="description"
-              >{this.state.pet.description || ''}</p>
+                >{this.state.pet.description || ''}</p>
+              }
               <Route
                 exact
                 path={`${this.props.match.path}/edit`}

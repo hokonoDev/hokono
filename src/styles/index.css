@@ -425,6 +425,9 @@ a {
   margin: 20px; }
   .req-box .req-title {
     margin: 10px; }
+  .req-box .close-button {
+    position: absolute;
+    transform: translateX(273px) translateY(5px); }
   .req-box .req-status {
     margin: 10px;
     font-size: 20px; }

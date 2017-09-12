@@ -614,6 +614,11 @@ a {
 		margin: 10px;
 	}
 
+	.close-button {
+		position: absolute;
+		transform: translateX(273px) translateY(5px);
+	}
+
 	.req-status {
 		margin: 10px;
 		font-size: 20px;

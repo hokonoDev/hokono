@@ -112,6 +112,7 @@ const AuthRouter = class extends React.Component {
             <Signup
               {...renderProps}
               signup={this.signup}
+              fblogin={this.fblogin}
               error={this.state.signupError}
             />
           )}

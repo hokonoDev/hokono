@@ -43,39 +43,73 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
-        Sign Up
-        <form
-          onSubmit={this.submit.bind(this)}
+      <div
+        className="col-box-center"
+      >
+        <div
+          className="gen-box"
         >
-          <input
-            type="text"
-            placeholder="Email"
-            value={this.state.email}
-            name="email"
-            onChange={this.change}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            name="password"
-            onChange={this.change}
-          />
-          <input
-            type="password"
-            placeholder="Re-enter Password"
-            value={this.state.rePassword}
-            name="rePassword"
-            onChange={this.change}
-          />
-          <button
-            type="submit"
+          <p
+            className="title"
+          >Sign Up</p>
+          <form
+            className="col-box-center"
+            onSubmit={this.submit.bind(this)}
           >
-            Sign Up
+            <input
+              type="text"
+              placeholder="Email"
+              value={this.state.email}
+              name="email"
+              onChange={this.change}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              name="password"
+              onChange={this.change}
+            />
+            <input
+              type="password"
+              placeholder="Re-enter Password"
+              value={this.state.rePassword}
+              name="rePassword"
+              onChange={this.change}
+            />
+            <button
+              type="submit"
+            >
+              Sign Up
+            </button>
+          </form>
+          <button
+            className="row-box-center"
+            style={{
+              backgroundColor: '#3b5998',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              fontSize: '15px',
+              alignItems: 'center',
+              margin: '10px',
+            }}
+            onClick={this.props.fblogin}
+          >
+            <img
+              src="/images/facebook-logo.svg"
+              alt=""
+              style={{
+                height: '20px',
+                width: 'auto',
+                padding: '5px',
+                marginRight: '5px',
+              }}
+            />
+            <p>Sign Up With Facebook</p>
           </button>
-        </form>
-        <p>{ this.state.error || this.props.error.message }</p>
+          <p>{ this.state.error || this.props.error.message }</p>
+        </div>
       </div>
     );
   }

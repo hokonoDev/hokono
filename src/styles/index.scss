@@ -202,6 +202,15 @@ a {
 	background-color: lightgrey;
 }
 
+.nav-text-item {
+	@extend .nav-item;
+	@extend .row-box-center;
+	white-space: nowrap;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
 
   ///////////////////////
  // --- DASHBOARD --- //

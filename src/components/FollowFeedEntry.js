@@ -15,7 +15,7 @@ const PetPost = props => (
     className="post-feed-entry-box"
   >
     <Link
-      to={`/pet/${props.post.petId}/post/${props.postId}`}
+      to={`/pet/${props.post.petId}/profile`}
     >
       <img
         src={props.post.image}

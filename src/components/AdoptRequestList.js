@@ -14,24 +14,35 @@ export default props => (
     >Request List</p>
     {
       Object.entries(props.requests)
-      .map(req =>
+      .reduce((accum, req) =>
         props.match.path.split('/')[1] === 'user' ?
-        <SentRequest
+        [ ...accum, <SentRequest
           key={_.uniqueId()}
           petId={req[0]}
           ownerUid={req[1].ownerUid}
           timeStamp={req[1].timeStamp}
           status={req[1].status}
-        /> :
-        <ReceivedRequest
-          key={_.uniqueId()}
-          petId={req[0]}
-          uid={Object.keys(req[1])[0]}
-          timeStamp={Object.values(req[1])[0].timeStamp}
-          status={Object.values(req[1])[0].status}
-          profile={props.profile}
-        />
-      )
+        />] :
+        [ ...accum, ...Object.values(req[1]).map((item, i) =>
+          <ReceivedRequest
+            key={_.uniqueId()}
+            petId={req[0]}
+            uid={Object.keys(req[1])[i]}
+            timeStamp={item.timeStamp}
+            status={item.status}
+            profile={props.profile}
+          />
+        )],
+      [])
+      .sort((a, b) => {
+        const statusVals = {
+          open: 1,
+          pending: 2,
+          denied: -1,
+          accepted: props.match.path.split('/')[1] === 'user' ? 3 : 0,
+        };
+        return statusVals[b.props.status] - statusVals[a.props.status];
+      })
     }
   </div>
 );

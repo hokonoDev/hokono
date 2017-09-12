@@ -50,7 +50,6 @@ export default class PetPost extends React.Component {
        className="post-feed-entry-box"
       >
         <Link to={`/pet/${this.state.petId}/post/${this.state.postId}`}>
-            {console.log(this.state.name)}
             {this.state.name}
         </Link>
         <img

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getDisplayNameFromUid, getNameFromPetId } from './lib/helpers';
 
 export default class extends React.Component {
@@ -21,11 +22,23 @@ export default class extends React.Component {
   render() {
     return (
       <div
-        style={{border: '1px solid black'}}
+        className="req-box"
       >
-        <h4>Request to adopt {this.state.pet}!</h4>
-        <p>from {this.state.owner}</p>
-        <p>Status: {this.props.status}</p>
+        {console.log(this.props)}
+        <h4
+          className="req-title"
+        >{`You're request to adopt `}
+          <Link
+            to={`/pet/${this.props.petId}/profile`}
+          >{this.state.pet.toUpperCase()}</Link> is ...
+        </h4>
+        <p
+          className="req-status"
+          style={
+            this.props.status === 'accepted' ? { color: 'darkgreen' } :
+              this.props.status === 'denied' ? { color: 'darkred' } : { color: 'black' }
+          }
+        >{this.props.status.toUpperCase()}</p>
       </div>
     );
   }

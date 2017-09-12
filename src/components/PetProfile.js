@@ -54,121 +54,153 @@ const PetProfile = class extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4>{this.state.pet.name}</h4>
-        <img
-          src={this.state.pet.filePath}
-          alt=""
-          style={{
-            height: '200px',
-            width: '200px',
-            imagePosition: 'center',
-            objectFit: 'contain',
-          }}
-        />
-        <IfRender
-          if={this.state.pet.ownerUid === this.props.auth.uid}
-          ifTrue={() =>
-            <Link
-              to={`${this.props.match.url}/edit`}
-            >
-              <button>Edit</button>
-            </Link>
-          }
-          ifFalse={() => (
-            <Link
-              to={`/${this.state.pet.adopt ? 'shelter' : 'user'}/profile/${this.state.pet.ownerUid}`}
-            >
-              <p>Owner: {this.state.pet.ownerName}</p>
-            </Link>
-          )}
-        />
-        <IfRender
-          if={
-            this.state.pet.ownerUid !== this.props.auth.uid
-            && this.state.pet.adopt
-            && this.props.profile.acctType !== 'shelter'}
-          ifTrue={() =>
-              <button
-                onClick={() => {
-                  this.props.auth.loggedIn ?
-                    this.props.profile.adoptRequests
-                    && this.props.profile.adoptRequests[this.state.pet.id] ?
-                      alert('Your request has been sent!') :
-                      adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid) :
-                    alert('Please login to adopt');
-                }}
-              >{
-                this.props.profile.adoptRequests
-                && this.props.profile.adoptRequests[this.state.pet.id]
-                ? 'Sent!'
-                : 'Adopt Me!!!'
-              }</button>
-          }
-        />
-        <Route
-          exact
-          path={`${this.props.match.path}/edit`}
-          render={routerProps => (
-            <EditPet
-              {...routerProps}
-              auth={this.props.auth}
-              pet={this.state.pet}
+      <div
+        className="col-box-center"
+      >
+        <div
+          className="gen-box"
+        >
+          <h4
+            className="title"
+          >{this.state.pet.name}</h4>
+          <div
+            className="pet-profile-header"
+          >
+            <img
+              src={this.state.pet.filePath}
+              alt=""
+              style={{
+                height: '200px',
+                width: '200px',
+                imagePosition: 'center',
+                objectFit: 'cover',
+                border: '1px solid lightgrey',
+                borderRadius: '50%',
+              }}
             />
-          )}
-        />
-        <p>{this.state.pet.description || ''}</p>
-        <p>Stars: {this.state.pet.stars}</p>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            if (this.props.auth.loggedIn) {
-              if (typeof this.props.pet.starredBy === 'undefined') {
-                userStarredPet(this.props.pet);
-              }
-              else if (this.props.pet.starredBy[this.props.auth.uid]) {
-                userUnstarredPet(this.props.pet);
-              } else {
-                userStarredPet(this.props.pet);
-              }
-            } else {
-              alert('Please login to star');
-            }
-          }}
-        >
-          <img
-            style={{
-              width: '20px',
-              height: '20px',
-            }}
-            src={this.props.pet.starredBy && this.props.pet.starredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+            <div
+              className="pet-side-box"
+            >
+              <div
+                className="info-box"
+              >
+                <Link
+                  className="info"
+                  to={`/${this.state.pet.adopt ? 'shelter' : 'user'}/profile/${this.state.pet.ownerUid}`}
+                >
+                  <img src="/images/profile.png" alt="" />
+                  <p> {this.state.pet.ownerName}</p>
+                </Link>
+                <div
+                  className="info"
+                >
+                  <img src="/images/star.png" alt="" />
+                  <p>Starred by {this.state.pet.stars}</p>
+                </div>
+                <div
+                  className="info"
+                >
+                  <img src="/images/network.svg" alt="" />
+                  <p>Followed by {this.state.pet.followersCount || 0}</p>
+                </div>
+              </div>
+              <div
+                className="interaction-box"
+              >
+                <button
+                  className="star-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (this.props.auth.loggedIn) {
+                      if (typeof this.props.pet.starredBy === 'undefined') {
+                        userStarredPet(this.props.pet);
+                      }
+                      else if (this.props.pet.starredBy[this.props.auth.uid]) {
+                        userUnstarredPet(this.props.pet);
+                      } else {
+                        userStarredPet(this.props.pet);
+                      }
+                    } else {
+                      alert('Please login to star');
+                    }
+                  }}
+                >
+                  <img
+                    src={this.props.pet.starredBy && this.props.pet.starredBy[this.props.auth.uid] ? '/images/full-star.png' : '/images/star.png'}
+                  />
+                </button>
+                <IfRender
+                  if={this.state.pet.ownerUid === this.props.auth.uid}
+                  ifTrue={() =>
+                    <Link
+                      to={`${this.props.match.url}/edit`}
+                    >
+                      <button>Edit</button>
+                    </Link>
+                  }
+                />
+                <IfRender
+                  if={
+                    this.state.pet.ownerUid !== this.props.auth.uid
+                    && this.state.pet.adopt
+                    && this.props.profile.acctType !== 'shelter'}
+                  ifTrue={() =>
+                      <button
+                        onClick={() => {
+                          if (this.props.auth.loggedIn) {
+                            if (this.props.profile.adoptRequests && this.props.profile.adoptRequests[this.state.pet.id])
+                              alert('Your request has been sent!');
+                            else
+                              adoptRequestAction(this.props.profile.adoptRequests, this.state.pet.id, this.state.pet.ownerUid);
+                          } else
+                            alert('Please login to adopt');
+                        }}
+                      >{
+                        this.props.profile.adoptRequests
+                        && this.props.profile.adoptRequests[this.state.pet.id]
+                        ? 'Sent!'
+                        : 'Adopt Me!!!'
+                      }</button>
+                  }
+                />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (this.props.auth.loggedIn) {
+                      if(!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id]) {
+                        userUnfollowedPet(this.props.pet);
+                      } else {
+                        userFollowedPet(this.props.pet);
+                      }
+                    } else {
+                      alert('Please loggin to follow');
+                    }
+                  }}
+                >
+                {!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id] ? 'Unfollow': 'Follow'}
+                </button>
+              </div>
+              <p
+                className="description"
+              >{this.state.pet.description || ''}</p>
+              <Route
+                exact
+                path={`${this.props.match.path}/edit`}
+                render={routerProps => (
+                  <EditPet
+                    {...routerProps}
+                    auth={this.props.auth}
+                    pet={this.state.pet}
+                  />
+                )}
+              />
+            </div>
+          </div>
+          <PetPostList
+            pet={this.state.pet}
+            auth={this.props.auth}
           />
-        </button>
-        <p>Followers: {this.state.pet.followersCount || 0}</p>
-        <button
-          style={{
-              width: '60px',
-              height: '20px',
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            if (this.props.auth.loggedIn) {
-              if(!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id]) {
-                userUnfollowedPet(this.props.pet);
-              } else {
-                userFollowedPet(this.props.pet);
-              }
-            } else {
-              alert('Please loggin to follow');
-            }
-          }}
-        >
-        {!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id] ? 'Unfollow': 'Follow'}
-        </button>
-        <PetPostList
-          pet={this.state.pet}
-          auth={this.props.auth}
-        />
+        </div>
       </div>
     );
   }

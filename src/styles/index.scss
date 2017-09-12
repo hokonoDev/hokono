@@ -1,0 +1,504 @@
+@import 'reset';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Quicksand|Muli|Lato|Baloo+Bhaijaan');
+
+
+  /////////////////////
+ // --- DEFAULTS -- //
+/////////////////////
+
+body {
+	font-family: Baloo Bhaijaan;
+	//background-image: url('/images/pattern.jpg');
+}
+
+.gen-box {
+	@extend .col-box-center;
+
+	width: 90%;
+	max-width: 1500px;
+	padding: 0px;
+
+	.title {
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid lightgrey;
+		width: 100%;
+		text-align: center;
+		font-size: 25px;
+	}
+}
+
+button {
+	box-shadow: 0px 0px 2px 1px lightgrey;
+	border: 1px solid black;
+	padding: 10px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+button:hover {
+	box-shadow: none;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+
+  ///////////////////////
+ // --- CONTAINERS -- //
+///////////////////////
+
+.row-box {
+	display: flex;
+}
+
+.row-box-center {
+	@extend .row-box;
+	justify-content: center;
+}
+
+.row-box-space {
+	@extend .row-box;
+	justify-content: space-around;
+}
+
+.row-box-left {
+	@extend .row-box;
+	justify-content: flex-start;
+}
+
+.wrap-row-box-center {
+	@extend .row-box-center;
+	flex-wrap: wrap;
+}
+
+.col-box {
+	@extend .row-box;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+
+.col-box-center {
+	@extend .col-box;
+	align-items: center;
+}
+
+.col-box-space {
+	@extend .row-box;
+	align-items: space-around;
+}
+
+
+  //////////////////////
+ // --- LOGO BAR --- //
+//////////////////////
+
+.logo-bar-filler {
+	height: 100px;
+}
+
+.logo-box {
+	@extend .row-box-center;
+	align-items: center;
+	height: 40px;
+	width: 100%;
+	padding: 30px;
+	background-color: white;
+	position: fixed;
+	top: 0px;
+	z-index: 10;
+}
+
+.logo {
+	height: 40px;
+}
+
+.logout-bttn {
+	@extend .row-box-center;
+	align-items: center;
+	border: 1px solid black;
+	padding: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	position: fixed;
+	left: 88vw;
+	top: 20px;
+	z-index: 11;
+}
+
+.logout-bttn:hover {
+	color: white;
+	background-color: darkgrey;
+}
+
+
+  /////////////////////
+ // --- NAV BAR --- //
+/////////////////////
+
+.nav-filler {
+	height: 71px;
+}
+
+.nav-background {
+	@extend .col-box-center;
+	position: fixed;
+	width: 100%;
+	background-color: whitesmoke;
+	margin-bottom: 30px;
+	align-items: center;
+	border-top: 0.1px grey solid;
+	box-shadow: 0px 1px 1px 0px grey;
+	z-index: 10;
+}
+
+.nav-box {
+	@extend .row-box-space;
+	height: 40px;
+}
+
+.nav-item {
+	width: 20px;
+	height: 20px;
+	padding: 10px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.nav-item:hover {
+	background-color: lightgrey;
+}
+
+
+  ///////////////////////
+ // --- DASHBOARD --- //
+///////////////////////
+
+.dash-header {
+	@extend .row-box;
+
+	width: 90%;
+	max-width: 1000px;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.dash-header>.left {
+	@extend .row-box;
+	align-items: center;
+
+	p {
+		margin-right: 20px;
+		font-size: 20px;
+	}
+
+	img {
+		height: 50px;
+	    width: 50px;
+	    image-position: center;
+	    object-fit: cover;
+	    border: 2px solid black;
+	    border-radius: 200px;
+	}
+}
+
+.dash-header>.right {
+	@extend .row-box;
+
+	width: 65%;
+	max-width: 900px;
+	justify-content: space-between;
+	align-items: center;
+	margin: 50px;
+
+	div {
+		@extend .row-box-center;
+		align-items: center;
+		padding: 20px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		min-width: 100px;
+		border: 1px solid lightgrey;
+		border-radius: 3px;
+		box-shadow: 0px 0px 2px 1px grey;
+		color: black;
+	}
+
+	div:hover {
+		background-color: darkgrey;
+		color: white;
+		box-shadow: 0px 0px 0px 0px lightgrey;;
+	}
+}
+
+.pets-box {
+	@extend .col-box-center;
+	width: 90%;
+	max-width: 1500px;
+
+	.title {
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid lightgrey;
+		width: 100%;
+		text-align: center;
+		font-size: 25px;
+	}
+}
+
+.pet-list-entry-box{
+	@extend .col-box;
+	margin: 20px;
+
+	.pet-list-name {
+		margin-bottom: 5px;
+		margin-left: 5px;
+		font-size: 18px;
+		text-decoration: none;
+		color: black;
+	}
+
+	.pet-list-pic {
+		height: 200px;
+		width: 200px;
+		image-position: center;
+	    object-fit: cover;
+	    border: 1px lightgrey solid;
+	}
+
+	.add-post-link {
+		@extend .row-box-center;
+		align-items: center;
+		visibility: hidden;
+		position: absolute;
+		transform: translateY(23px);
+		width: 202px;
+		height: 202px;
+		background-color: rgba(250,250,250,0.5);
+
+		img {
+			height: 50px;
+			width: 50px;
+		}
+	}
+
+	.pet-list-pic:hover + .add-post-link {
+		visibility: visible;
+	}
+
+	.add-post-link:hover {
+		visibility: visible;
+	}
+
+}
+
+  ////////////////////////
+ // --- FILTER BAR --- //
+////////////////////////
+
+.filter-bar-box {
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	form {
+		@extend .col-box-center;
+	}
+
+	.sort-box {
+		@extend .row-box-center;
+		align-items: center;
+	}
+
+	button {
+		border: 1px solid black;
+		padding: 10px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+	button:hover {
+		background-color: darkgrey;
+		color: white;
+	}
+
+	select {
+		padding: 0px;
+		padding-left: 10px;
+		font-family: Baloo Bhaijaan;
+		font-size: 16px;
+	}
+}
+
+
+  /////////////////////
+ // --- ADD PET --- //
+/////////////////////
+
+.add-pet-form {
+	@extend .col-box-center;
+
+	p {
+		margin-bottom: 5px;
+	}
+
+	input {
+		margin-bottom: 40px;
+	}
+
+	button {
+		margin-top: 20px;
+	}
+
+	button:hover {
+		background-color: darkgrey;
+		color: white;
+	}
+
+}
+
+
+  ////////////////////////
+ // --- POST FEEDS --- //
+////////////////////////
+
+.post-feed-entry-box {
+	height: 450px;
+    width: 350px;
+    border: 0px solid black;
+    margin: 20px;
+    box-shadow: 0px 0px 2px 1px lightgrey;
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .likes-count {
+    	font-size: 13px;
+    	width: 100%;
+    	margin-left: 50px;
+    }
+
+	.post-feed-entry-img {
+	    width: 300px;
+	    height: 300px;
+		margin: 20px;
+		margin-bottom: 10px;
+		margin-top: 0px;
+	    image-position: center;
+		object-fit: cover;
+	}
+
+	.interactions-box{
+		@extend .row-box-center;
+		align-items: center;
+
+		.like-buttton {
+			@extend .col-box-center;
+			border: none;
+			box-shadow: none;
+			margin-left: 0px;
+			padding-left: 0px;
+
+			img {
+				height: 28px;
+				width: 28px;
+			}
+		}
+
+		margin-bottom: 10px;
+	}
+
+
+	.description {
+		margin: 30px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
+
+}
+
+  ///////////////////////
+ // --- PET FEEDS --- //
+///////////////////////
+
+.pet-feed-entry-box {
+	height: 400px;
+    width: 350px;
+    border: 0px solid black;
+    margin: 20px;
+    box-shadow: 0px 0px 2px 1px lightgrey;
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .name {
+    	width: 100%;
+    	margin-left: 50px;
+    	margin-bottom: 5px;
+    	font-size: 18px;
+    }
+
+    .star-count {
+    	font-size: 13px;
+    	width: 100%;
+    	margin-left: 50px;
+    }
+
+	.pet-feed-entry-img {
+	    width: 300px;
+	    height: 300px;
+		margin: 20px;
+		margin-bottom: 10px;
+		margin-top: 0px;
+	    image-position: center;
+		object-fit: cover;
+	}
+
+	.interactions-box{
+		@extend .row-box-center;
+		align-items: center;
+		margin-top: 5px;
+
+		button {
+			margin: 0px;
+		}
+
+		.star-buttton {
+			@extend .col-box-center;
+			border: none;
+			box-shadow: none;
+			margin-right: 20px;
+			padding: 0px;
+
+			img {
+				height: 28px;
+				width: 28px;
+			}
+		}
+
+		margin-bottom: 10px;
+	}
+
+
+	.description {
+		margin: 30px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
+
+}

@@ -1,22 +1,22 @@
-import firebase from '../firebase/index.js';
+// import firebase from '../firebase/index.js';
 import petsSort from './lib/petsSort';
 
-const storage = firebase.storage();
-const database = firebase.database();
+// const storage = firebase.storage();
+// const database = firebase.database();
 
-const compressFile = (files) => {
-//base64Url the image
-}
+// const compressFile = (files) => {
+// //base64Url the image
+// }
 
 export default (state = {}, action) => {
   switch (action.type) {
     case 'ADD_PET' :
       return {...state,  ...action.pet };
     case 'EDIT_PET' :
-      return state.map(pet => (
-        pet.id === action.id ? { ...pet, ...action.edit } : pet
-      ));
-    case 'GETPETS' :
+      const copy = { ...state };
+      copy[action.petId] = { ...copy[action.petId], ...action.payload };
+      return copy;
+    case 'GET_PETS' :
       return {...state, ...action.payload};
     case 'CLEAR_PETS' :
       return {};
@@ -31,6 +31,8 @@ export default (state = {}, action) => {
       stateCopy[action.petId].posts[action.postId].likes = action.payload.likes;
       stateCopy[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
+    case 'SIGNOUT' :
+      return {};
     default :
       return state;
   }

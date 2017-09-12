@@ -61,6 +61,7 @@ export const userUnfollowedPet = (pet) => {
 
   firebase.database().ref().update(updates).then(() => {
     action.data = { following: obj1 };
+    action.petId = pet.id;
     action.payload = "success";
     store.dispatch(action);
   }, (err) => {
@@ -69,40 +70,47 @@ export const userUnfollowedPet = (pet) => {
   });
 }
 
-export const userLikedPet = (pet) => {
+export const userStarredPet = (pet) => {
   const action = {
-    type: 'LIKED_A_PET'
+    type: 'STARRED_A_PET'
   };
 
   const user = firebase.auth().currentUser;
-  const userid = user.uid;
   var updates = {};
   const owner = pet.ownerUid;
 
   var obj1 = {};
-  obj1[pet.id] = { nameDisplay: user.displayName };
+  obj1[pet.id] = { displayName: user.displayName };
   const currTime = Date.now();
 
-  updates[`/accounts/${user.uid}/myLikes/` + pet.id] = { name: pet.name };
-  updates[`/pets/${pet.id}/likedBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
-  updates[`/accounts/${owner}/pets/${pet.id}/likedBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
+  updates[`/accounts/${user.uid}/myStars/` + pet.id] = { name: pet.name };
+  updates[`/pets/${pet.id}/starredBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
+  updates[`/accounts/${owner}/pets/${pet.id}/starredBy/` + user.uid] = { displayName: user.displayName, createdAt: currTime };
 
   //counts for followers and following
-  //updates[`/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
-  //updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes + 1 || 1;
+  //updates[`/pets/${pet.id}/stars/`] = pet.stars + 1 || 1;
+  //updates[`/accounts/${owner}/pets/${pet.id}/stars/`] = pet.stars + 1 || 1;
 
   firebase.database().ref().update(updates).then(() => {
-    //updates the users likes in state/store
-    action.data = { myLikes: obj1 };
-    pet.likes = pet.likes + 1 || 1;
-    const emptyObj = {};
-    emptyObj[user.uid] = { displayName: user.displayName, createdAt: currTime };
-    pet.likedBy = emptyObj;
-    const emptyObj2 = {};
-    emptyObj2[pet.id] = pet;
+    //updates the users stars in state/store
+    action.data = {
+      [pet.id]: {
+        displayName: user.displayName
+      }
+    };
+    pet.stars = pet.stars + 1 || 1;
+    pet.starredBy = {
+      ...pet.starredBy,
+      [user.uid]: {
+        displayName: user.displayName,
+        createdAt: currTime,
+      }
+    };
 
-    //updates the globalpetfeed state/store with likes
-    action.dataPet = { emptyObj2 };
+    //updates the globalpetfeed state/store with stars
+    action.dataPet = {
+      [pet.id]: pet,
+    };
     action.payload = "success";
     store.dispatch(action);
   }, (err) => {
@@ -111,9 +119,9 @@ export const userLikedPet = (pet) => {
   });
 }
 
-export const userUnlikedPet = (pet) => {
+export const userUnstarredPet = (pet) => {
   const action = {
-    type: 'UNLIKED_A_PET'
+    type: 'UNSTARRED_A_PET'
   };
 
   const user = firebase.auth().currentUser;
@@ -123,25 +131,25 @@ export const userUnlikedPet = (pet) => {
   const obj1 = {};
   obj1[pet.id] = null;
 
-  updates[`/accounts/${user.uid}/myLikes/` + pet.id] = null;
-  updates[`/pets/${pet.id}/likedBy/` + user.uid] = null;
-  updates[`/accounts/${owner}/pets/${pet.id}/likedBy/` + user.uid] = null;
+  updates[`/accounts/${user.uid}/myStars/` + pet.id] = null;
+  updates[`/pets/${pet.id}/starredBy/` + user.uid] = null;
+  updates[`/accounts/${owner}/pets/${pet.id}/starredBy/` + user.uid] = null;
 
   //counts for followers and following
-  //updates[`/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
-  //updates[`/accounts/${owner}/pets/${pet.id}/likes/`] = pet.likes - 1 || 0;
+  //updates[`/pets/${pet.id}/stars/`] = pet.stars - 1 || 0;
+  //updates[`/accounts/${owner}/pets/${pet.id}/stars/`] = pet.stars - 1 || 0;
 
   firebase.database().ref().update(updates).then(() => {
-    //updates a users unlikes in state/store
-    action.data = { myLikes: obj1 };
-    pet.likes = pet.likes - 1 || 0;
+    //updates a users unstars in state/store
+    action.data = { myStars: obj1 };
+    pet.stars = pet.stars - 1 || 0;
     const emptyObj = {};
     emptyObj[user.uid] = null;
-    pet.likedBy = emptyObj;
+    pet.starredBy = emptyObj;
     const emptyObj2 = {};
     emptyObj2[pet.id] = pet;
 
-    //updates a pets unlikes in state/store
+    //updates a pets unstars in state/store
     action.dataPet = { emptyObj2 };
     action.payload = "success";
     store.dispatch(action);

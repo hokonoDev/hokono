@@ -41,7 +41,6 @@ const ShelterProfile = class extends React.Component {
       <div
         className="col-box-center"
       >
-        {console.log(this.props)}
         <div
           className="gen-box"
         >

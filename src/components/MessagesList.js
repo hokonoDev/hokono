@@ -36,11 +36,13 @@ class MessagesList extends React.Component {
         <p
           className="title"
         >Chats</p>
+        <div className="chatUsersButtonsContainer">
         {
           this.props.chat.chatUsers ? Object.keys(this.props.chat.chatUsers).map(keyId=> (
             <MessageWithUser userid={ keyId } username={Object.keys(this.props.chat.chatUsers[keyId])[0]}/>
           )) : null
         }
+        </div>
       </div>
     )
   }

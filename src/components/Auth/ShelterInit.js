@@ -9,6 +9,7 @@ export default class extends React.Component{
     this.state = {
       phone: '',
       address: '',
+      location: '',
       diaplayName: '',
       suggest: '',
       firstSuggest: '',
@@ -51,6 +52,7 @@ export default class extends React.Component{
       initAction({
         phoneNumber: this.state.phone,
         address: this.state.address,
+        location: this.state.location,
         displayName: this.state.displayName,
         acctType: 'shelter',
       });
@@ -64,7 +66,9 @@ export default class extends React.Component{
 
   render() {
     return (
-      <div>
+      <div
+        className="account-init-box"
+      >
         <h1>Welcome To Hokono!</h1>
         <h3>You have successfully signed up for a SHELTER account.</h3>
         <h4>
@@ -74,6 +78,7 @@ export default class extends React.Component{
         <form
           onSubmit={this.submit}
         >
+          <p>Shelter's Name *</p>
           <input
             type="text"
             name="displayName"
@@ -81,6 +86,7 @@ export default class extends React.Component{
             value={this.state.displayName}
             onChange={this.change}
           />
+          <p>Shelter's Address *</p>
           <Geosuggest
             ref={el => this._geoSuggest = el}
             placeholder="Address"
@@ -89,13 +95,14 @@ export default class extends React.Component{
             autoActivateFirstSuggest={true}
             onActivateSuggest={suggest =>
               this.state.suggest !== this.state.address ?
-                this.setState({ firstSuggest: suggest.label }) :
+                this.setState({ firstSuggest: suggest.label, firstLocation: suggest.location }) :
                 null
             }
             onSuggestSelect={suggest =>
-              this.setState({ address: suggest.label, suggest: suggest.label })
+              this.setState({ address: suggest.label, suggest: suggest.label, location: suggest.location })
             }
           />
+          <p>Shelter's Phone Number</p>
           <input
             type="text"
             name="phone"

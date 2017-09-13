@@ -18,6 +18,10 @@ export default class extends React.Component {
     this.setState(nextState);
   }
 
+  imageUpload(e) {
+    this.setState({ profPic: e.target.files.item(0) });
+  }
+
   verify() {
     return window.confirm('Are you sure you want to make these edits?');
   }
@@ -44,7 +48,7 @@ export default class extends React.Component {
           <input
             type="text"
             name="displayName"
-            placeholder="Shelter's Name"
+            placeholder="Name"
             value={this.state.displayName}
             onChange={this.change}
           />
@@ -65,9 +69,14 @@ export default class extends React.Component {
           <input
             type="text"
             name="blurb"
-            placeholder="Describe Your Shelter"
+            placeholder="Description"
             value={this.state.blurd}
             onChange={this.change}
+          />
+          <input type="file"
+            accept="image/*"
+            capture="camera"
+            onChange={this.imageUpload.bind(this)}
           />
           <button
             type="submit"

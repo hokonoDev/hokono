@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { got: false }, action) => {
   switch (action.type) {
     case 'UPDATE_PROFILE' :
       return { ...state, ...action.payload };
@@ -11,22 +11,23 @@ export default (state = {}, action) => {
       }
     case 'UNFOLLOW_A_PET' :
       if (action.payload === 'success') {
-        console.log("wdf",{ ...state, following: {...state.following, ...action.data.following} });
-        return { ...state, following: {...state.following, ...action.data.following} };
+        let copy = {...state, following: {...state.following, ...action.data.following}};
+        delete copy.following[action.petId];
+        return copy;
         //if success unfollowing, i don't need to read from db, just update store and trust that db and store will be the same
       } else {
         return { ...state };
       }
-    case 'LIKED_A_PET' :
+    case 'STARRED_A_PET' :
       if (action.payload === 'success') {
-        //this myLikes property is so user can see what pets hes liked.
-        return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
+        //this myStars property is so user can see what pets hes liked.
+        return {...state, myStars: {...state.myStars, ...action.data} };
       }
       return state;
-    case 'UNLIKED_A_PET' :
+    case 'UNSTARRED_A_PET' :
       if (action.payload === 'success') {
-        //this myLikes property is so user can see what pets hes liked.
-        return {...state, myLikes: {...state.myLikes, ...action.data.myLikes} };
+        //this myStars property is so user can see what pets hes liked.
+        return {...state, myStars: {...state.myStars, ...action.data.myStars} };
       }
       return state;
     case 'UPDATE_POSTS' :
@@ -38,6 +39,38 @@ export default (state = {}, action) => {
       stateCopy.pets[action.petId].posts[action.postId].likes = action.payload.likes;
       stateCopy.pets[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
+    case 'NEW_ADOPT_REQUEST' :
+      return {...state, adoptRequests: action.payload};
+    case 'UPDATE_ADOPT_REQUEST_STATUS':
+      return {
+        ...state,
+        adoptRequests: {
+          ...state.adoptRequests,
+          [action.petId]: {
+            ...state.adoptRequests[action.petId],
+            [action.requesterUid]: {
+              ...state.adoptRequests[action.petId][action.requesterUid],
+              ...action.payload,
+            }
+          }
+        }
+      };
+    case 'CLOSE_ADOPT_REQUEST':
+      return {
+        ...state,
+        adoptRequests: {
+          ...state.adoptRequests,
+          [action.petId]: {
+            ...state.adoptRequests[action.petId],
+            [action.requesterUid]: {
+              ...state.adoptRequests[action.petId][action.requesterUid],
+              ...action.payload,
+            }
+          }
+        }
+      };
+    case 'SIGNOUT' :
+      return { got: false };
     default :
       return state;
   }

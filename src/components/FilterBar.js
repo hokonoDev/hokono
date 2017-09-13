@@ -6,8 +6,8 @@ class FilterBar extends React.Component {
     super(props);
     this.state = {
       searchTerm: '',
-      sortDirection: 'Least',
-      filter: props.filter || 'createdSort',
+      sortDirection: props.sort ? props.sort[0] : 'Most',
+      filter: props.sort ? props.sort[1] : 'createdSort',
     };
     //handles name change into searchbar
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -15,6 +15,10 @@ class FilterBar extends React.Component {
     this.handleDropFilter = this.handleDropFilter.bind(this);
     //handles sort direction button click
     this.toggleSortDirection = this.toggleSortDirection.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.sortAction(this.state.filter, this.state.sortDirection, this.state.searchTerm);
   }
 
   handleNameChange(event) {
@@ -40,40 +44,58 @@ class FilterBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        className="filter-bar-box"
+      >
         <form>
-          Search by name:
-          <IfRender
-            if={this.props.searchBar}
-            ifTrue={() => (
-              <input
-                type="text"
-                value={this.state.searchTerm}
-                onChange={this.handleNameChange}
-              />
-            )}
-          />
-          Sort:
-          <button
-            onClick={this.toggleSortDirection}
-          >{this.state.sortDirection}</button>
-          <select
-            onChange={this.handleDropFilter}
-            value={this.state.filter}
+          <div
+            style={{
+              marginBottom: '10px',
+            }}
           >
-            <option
-              value="likeSort"
-            >likes</option>
-            <option
-              value="trendSort"
-            >Trending</option>
-            <option
-              value="popularSort"
-            >Popular</option>
-            <option
-              value="createdSort"
-            >Recent</option>
-          </select>
+            <IfRender
+              if={this.props.searchBar}
+              ifTrue={() => (
+                <div>
+                  <p>Search pets by name:</p>
+                  <input
+                    type="text"
+                    value={this.state.searchTerm}
+                    onChange={this.handleNameChange}
+                  />
+                </div>
+              )}
+            />
+          </div>
+          <div
+            className="sort-box"
+          >
+            {`Sort by `}
+            <button
+              onClick={this.toggleSortDirection}
+            >{this.state.sortDirection}</button>
+            {` `}
+            <select
+              onChange={this.handleDropFilter}
+              value={this.state.filter}
+            >
+              <option
+                value="likeSort"
+              >likes</option>
+              <option
+                value="trendSort"
+              >Trending</option>
+              <option
+                value="popularSort"
+              >Popular</option>
+              <option
+                value="createdSort"
+              >Recent</option>
+              <option
+                value="distanceSort"
+              >Distance</option>
+            </select>
+          </div>
         </form>
       </div>
     );

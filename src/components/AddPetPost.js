@@ -1,5 +1,6 @@
 import React from 'react';
 import { addPostAction } from '../actions/PostsActions';
+import { IfRedirect } from './index';
 
 export default class extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class extends React.Component {
       addPostAction({
         image: this.state.image,
         description: this.state.description,
-      }, this.props.pet.id, this.props.pet.ownerId);
+      }, this.props.pet.id, this.props.pet.ownerUid,this.props.pet.name);
 
       this.setState({
         image: '',
@@ -36,31 +37,45 @@ export default class extends React.Component {
 
   render() {
     return(
-      <div>
-        Add Pet Post:
-        <form
-          onSubmit={this.submit}
+      <div
+        className="col-box-center"
+      >
+        <div
+          className="gen-box"
         >
-           Add img from phone camera
-          <input
-            type="file"
-            accept="image/*"
-            capture="camera"
-            onChange={(e) => this.setState({ image: e.target.files.item(0) })}
-            key={this.state.key}
+          <IfRedirect
+            if={this.props.auth.loggedIn}
+            ifFalse="/"
           />
-          <input
-            type="text"
-            placeholder="Description..."
-            onChange={(e) => this.setState({ description: e.target.value })}
-            value={this.state.description}
-          />
-          <button
-            type="submit"
+          <p
+            className="title"
+          >New Pet Post</p>
+          <form
+            onSubmit={this.submit}
+            className="add-pet-form"
           >
-            Post
-          </button>
-        </form>
+             <p>Add an Image</p>
+            <input
+              type="file"
+              accept="image/*"
+              capture="camera"
+              onChange={(e) => this.setState({ image: e.target.files.item(0) })}
+              key={this.state.key}
+            />
+            <p>Add a Description</p>
+            <input
+              type="text"
+              placeholder="Description..."
+              onChange={(e) => this.setState({ description: e.target.value })}
+              value={this.state.description}
+            />
+            <button
+              type="submit"
+            >
+              Post
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

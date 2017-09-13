@@ -1,0 +1,681 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Quicksand|Muli|Lato|Baloo+Bhaijaan");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+button, .home-box .interactions-box a {
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0; }
+
+button:focus, .home-box .interactions-box a:focus {
+  outline: 0; }
+
+.rv-treemap {
+  font-size: 12px;
+  position: relative; }
+
+.rv-treemap__leaf {
+  overflow: hidden;
+  position: absolute; }
+
+.rv-treemap__leaf--circle {
+  align-items: center;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center; }
+
+.rv-treemap__leaf__content {
+  overflow: hidden;
+  padding: 10px;
+  text-overflow: ellipsis; }
+
+.rv-xy-plot {
+  color: #c3c3c3;
+  position: relative; }
+
+.rv-xy-plot canvas {
+  pointer-events: none; }
+
+.rv-xy-plot .rv-xy-canvas {
+  pointer-events: none;
+  position: absolute; }
+
+.rv-xy-plot__inner {
+  display: block; }
+
+.rv-xy-plot__axis__line {
+  fill: none;
+  stroke-width: 2px;
+  stroke: #e6e6e9; }
+
+.rv-xy-plot__axis__tick__line {
+  stroke: #e6e6e9; }
+
+.rv-xy-plot__axis__tick__text {
+  fill: #6b6b76;
+  font-size: 11px; }
+
+.rv-xy-plot__axis__title text {
+  fill: #6b6b76;
+  font-size: 11px; }
+
+.rv-xy-plot__grid-lines__line {
+  stroke: #e6e6e9; }
+
+.rv-xy-plot__circular-grid-lines__line {
+  fill-opacity: 0;
+  stroke: #e6e6e9; }
+
+.rv-xy-plot__series, .rv-xy-plot__series path {
+  pointer-events: all; }
+
+.rv-xy-plot__circular-grid-lines__line {
+  fill-opacity: 0;
+  stroke: #e6e6e9; }
+
+.rv-xy-plot__series, .rv-xy-plot__series path {
+  pointer-events: all; }
+
+.rv-xy-plot__series--line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px; }
+
+.rv-crosshair {
+  position: absolute;
+  font-size: 11px;
+  pointer-events: none; }
+
+.rv-crosshair__line {
+  background: #47d3d9;
+  width: 1px; }
+
+.rv-crosshair__inner {
+  position: absolute;
+  text-align: left;
+  top: 0; }
+
+.rv-crosshair__inner__content {
+  border-radius: 4px;
+  background: #3a3a48;
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+
+.rv-crosshair__inner--left {
+  right: 4px; }
+
+.rv-crosshair__inner--right {
+  left: 4px; }
+
+.rv-crosshair__title {
+  font-weight: bold;
+  white-space: nowrap; }
+
+.rv-crosshair__item {
+  white-space: nowrap; }
+
+.rv-hint {
+  position: absolute;
+  pointer-events: none; }
+
+.rv-hint__content {
+  border-radius: 4px;
+  padding: 7px 10px;
+  font-size: 12px;
+  background: #3a3a48;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: left;
+  white-space: nowrap; }
+
+.rv-discrete-color-legend {
+  box-sizing: border-box;
+  overflow-y: auto;
+  font-size: 12px; }
+
+.rv-discrete-color-legend.horizontal {
+  white-space: nowrap; }
+
+.rv-discrete-color-legend-item {
+  color: #3a3a48;
+  border-radius: 1px;
+  padding: 9px 10px; }
+
+.rv-discrete-color-legend-item.horizontal {
+  display: inline-block; }
+
+.rv-discrete-color-legend-item.horizontal .rv-discrete-color-legend-item__title {
+  margin-left: 0;
+  display: block; }
+
+.rv-discrete-color-legend-item__color {
+  background: #dcdcdc;
+  display: inline-block;
+  height: 2px;
+  vertical-align: middle;
+  width: 14px; }
+
+.rv-discrete-color-legend-item__title {
+  margin-left: 10px; }
+
+.rv-discrete-color-legend-item.disabled {
+  color: #b8b8b8; }
+
+.rv-discrete-color-legend-item.clickable {
+  cursor: pointer; }
+
+.rv-discrete-color-legend-item.clickable:hover {
+  background: #f9f9f9; }
+
+.rv-search-wrapper {
+  display: flex;
+  flex-direction: column; }
+
+.rv-search-wrapper__form {
+  flex: 0; }
+
+.rv-search-wrapper__form__input {
+  width: 100%;
+  color: #a6a6a5;
+  border: 1px solid #e5e5e4;
+  padding: 7px 10px;
+  font-size: 12px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  margin: 0 0 9px;
+  outline: 0; }
+
+.rv-search-wrapper__contents {
+  flex: 1;
+  overflow: auto; }
+
+.rv-continuous-color-legend {
+  font-size: 12px; }
+
+.rv-continuous-color-legend .rv-gradient {
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: 5px; }
+
+.rv-continuous-size-legend {
+  font-size: 12px; }
+
+.rv-continuous-size-legend .rv-bubbles {
+  text-align: justify;
+  overflow: hidden;
+  margin-bottom: 5px;
+  width: 100%; }
+
+.rv-continuous-size-legend .rv-bubble {
+  background: #d8d9dc;
+  display: inline-block;
+  vertical-align: bottom; }
+
+.rv-continuous-size-legend .rv-spacer {
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+  width: 100%; }
+
+.rv-legend-titles {
+  height: 16px;
+  position: relative; }
+
+.rv-legend-titles__left, .rv-legend-titles__right, .rv-legend-titles__center {
+  position: absolute;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.rv-legend-titles__center {
+  display: block;
+  text-align: center;
+  width: 100%; }
+
+.rv-legend-titles__right {
+  right: 0; }
+
+.rv-radial-chart .rv-xy-plot__series--label {
+  pointer-events: none; }
+
+body {
+  font-family: Baloo Bhaijaan; }
+
+.gen-box {
+  width: 90%;
+  max-width: 1500px;
+  padding: 0px; }
+  .gen-box .title {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+    text-align: center;
+    font-size: 25px; }
+
+button, .home-box .interactions-box a {
+  box-shadow: 0px 0px 2px 1px lightgrey;
+  border: 1px solid black;
+  padding: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-left: 5px;
+  margin-right: 5px; }
+
+button:hover, .home-box .interactions-box a:hover {
+  box-shadow: none; }
+
+a {
+  text-decoration: none;
+  color: black; }
+
+.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
+  display: flex; }
+
+.row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
+  justify-content: center; }
+
+.row-box-space, .nav-box, .pet-profile-header {
+  justify-content: space-around; }
+
+.row-box-left {
+  justify-content: flex-start; }
+
+.wrap-row-box-center {
+  flex-wrap: wrap; }
+
+.col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box {
+  flex-direction: column;
+  flex-wrap: wrap; }
+
+.col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form {
+  align-items: center; }
+
+.col-box-space {
+  align-items: space-around; }
+
+.home-box p {
+  margin: 50px;
+  font-size: 20px; }
+.home-box img {
+  margin-bottom: 50px; }
+.home-box .interactions-box a:hover {
+  background-color: darkgrey;
+  color: white; }
+
+.logo-bar-filler {
+  height: 100px; }
+
+.logo-box {
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  padding: 30px;
+  background-color: white;
+  position: fixed;
+  top: 0px;
+  z-index: 10; }
+
+.logo {
+  height: 85px; }
+
+.logout-bttn {
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  position: fixed;
+  left: 88vw;
+  top: 20px;
+  z-index: 11; }
+
+.logout-bttn:hover {
+  color: white;
+  background-color: darkgrey; }
+
+.nav-filler {
+  height: 71px; }
+
+.nav-background {
+  position: fixed;
+  width: 100%;
+  background-color: whitesmoke;
+  margin-bottom: 30px;
+  align-items: center;
+  border-top: 0.1px grey solid;
+  box-shadow: 0px 1px 1px 0px grey;
+  z-index: 10; }
+
+.nav-box {
+  height: 40px; }
+
+.nav-item, .nav-text-item {
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  padding-left: 50px;
+  padding-right: 50px; }
+
+.nav-item:hover, .nav-text-item:hover {
+  background-color: lightgrey; }
+
+.nav-text-item {
+  white-space: nowrap;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.dash-header {
+  width: 90%;
+  max-width: 1000px;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 40px;
+  margin-right: 40px; }
+
+.dash-header > .left {
+  align-items: center; }
+  .dash-header > .left p {
+    margin-right: 20px;
+    font-size: 20px; }
+  .dash-header > .left img {
+    height: 50px;
+    width: 50px;
+    image-position: center;
+    object-fit: cover;
+    border: 2px solid black;
+    border-radius: 200px; }
+
+.dash-header > .right {
+  width: 65%;
+  max-width: 900px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px; }
+  .dash-header > .right div {
+    align-items: center;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-width: 100px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    box-shadow: 0px 0px 2px 1px grey;
+    color: black; }
+  .dash-header > .right div:hover {
+    background-color: darkgrey;
+    color: white;
+    box-shadow: 0px 0px 0px 0px lightgrey; }
+
+.pets-box {
+  width: 90%;
+  max-width: 1500px; }
+  .pets-box .title {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+    text-align: center;
+    font-size: 25px; }
+
+.pet-list-entry-box {
+  margin: 20px; }
+  .pet-list-entry-box .pet-list-name {
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    color: black; }
+  .pet-list-entry-box .pet-list-pic {
+    height: 200px;
+    width: 200px;
+    image-position: center;
+    object-fit: cover;
+    border: 1px lightgrey solid; }
+  .pet-list-entry-box .add-post-link {
+    align-items: center;
+    visibility: hidden;
+    position: absolute;
+    transform: translateY(23px);
+    width: 202px;
+    height: 202px;
+    background-color: rgba(250, 250, 250, 0.5); }
+    .pet-list-entry-box .add-post-link img {
+      height: 50px;
+      width: 50px; }
+  .pet-list-entry-box .pet-list-pic:hover + .add-post-link {
+    visibility: visible; }
+  .pet-list-entry-box .add-post-link:hover {
+    visibility: visible; }
+
+.filter-bar-box {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .filter-bar-box .sort-box {
+    align-items: center; }
+  .filter-bar-box button, .filter-bar-box .home-box .interactions-box a, .home-box .interactions-box .filter-bar-box a {
+    border: 1px solid black;
+    padding: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-left: 5px;
+    margin-right: 5px; }
+  .filter-bar-box button:hover, .filter-bar-box .home-box .interactions-box a:hover, .home-box .interactions-box .filter-bar-box a:hover {
+    background-color: darkgrey;
+    color: white; }
+  .filter-bar-box select {
+    padding: 0px;
+    padding-left: 10px;
+    font-family: Baloo Bhaijaan;
+    font-size: 16px; }
+
+.add-pet-form p {
+  margin-bottom: 5px; }
+.add-pet-form input {
+  margin-bottom: 40px; }
+.add-pet-form button, .add-pet-form .home-box .interactions-box a, .home-box .interactions-box .add-pet-form a {
+  margin-top: 20px; }
+.add-pet-form button:hover, .add-pet-form .home-box .interactions-box a:hover, .home-box .interactions-box .add-pet-form a:hover {
+  background-color: darkgrey;
+  color: white; }
+
+.post-feed-entry-box {
+  height: 450px;
+  width: 350px;
+  border: 0px solid black;
+  margin: 20px;
+  box-shadow: 0px 0px 2px 1px lightgrey;
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .post-feed-entry-box .likes-count {
+    font-size: 13px;
+    width: 100%;
+    margin-left: 50px; }
+  .post-feed-entry-box .post-feed-entry-img {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    image-position: center;
+    object-fit: cover; }
+  .post-feed-entry-box .interactions-box {
+    align-items: center;
+    margin-bottom: 10px; }
+    .post-feed-entry-box .interactions-box .like-buttton {
+      border: none;
+      box-shadow: none;
+      margin-left: 0px;
+      padding-left: 0px; }
+      .post-feed-entry-box .interactions-box .like-buttton img {
+        height: 28px;
+        width: 28px; }
+  .post-feed-entry-box .description {
+    margin: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px; }
+
+.pet-feed-entry-box {
+  height: 400px;
+  width: 350px;
+  border: 0px solid black;
+  margin: 20px;
+  box-shadow: 0px 0px 2px 1px lightgrey;
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .pet-feed-entry-box .name {
+    width: 100%;
+    margin-left: 50px;
+    margin-bottom: 5px;
+    font-size: 18px; }
+  .pet-feed-entry-box .star-count {
+    font-size: 13px;
+    width: 100%;
+    margin-left: 50px; }
+  .pet-feed-entry-box .pet-feed-entry-img {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    image-position: center;
+    object-fit: cover; }
+  .pet-feed-entry-box .interactions-box {
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 10px; }
+    .pet-feed-entry-box .interactions-box button, .pet-feed-entry-box .home-box .interactions-box a, .home-box .pet-feed-entry-box .interactions-box a {
+      margin: 0px; }
+    .pet-feed-entry-box .interactions-box .star-buttton {
+      border: none;
+      box-shadow: none;
+      margin-right: 20px;
+      padding: 0px; }
+      .pet-feed-entry-box .interactions-box .star-buttton img {
+        height: 28px;
+        width: 28px; }
+  .pet-feed-entry-box .description {
+    margin: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px; }
+
+.pet-profile-header {
+  margin-bottom: 30px;
+  width: 700px; }
+  .pet-profile-header .pet-side-box {
+    width: 400px;
+    flex-wrap: wrap; }
+    .pet-profile-header .pet-side-box .info-box .info {
+      align-items: flex-end;
+      margin: 20px;
+      margin-left: 0px; }
+      .pet-profile-header .pet-side-box .info-box .info img {
+        width: 20px;
+        height: 20px;
+        image-position: center;
+        object-fit: cover;
+        margin-right: 10px; }
+    .pet-profile-header .pet-side-box .interaction-box {
+      justify-content: space-around;
+      margin-top: 10px; }
+      .pet-profile-header .pet-side-box .interaction-box .star-button {
+        border: none;
+        box-shadow: none;
+        padding: 0px; }
+        .pet-profile-header .pet-side-box .interaction-box .star-button img {
+          height: 25px;
+          width: 25px; }
+    .pet-profile-header .pet-side-box .description {
+      margin: 20px;
+      padding: 10px;
+      box-shadow: 0px 0px 0px 1px #d8d8d8; }
+
+.req-box {
+  border: 1px solid lightgrey;
+  box-shadow: 0px 0px 5px -2px grey;
+  width: 600px;
+  margin: 20px; }
+  .req-box .req-title {
+    margin: 10px; }
+  .req-box .close-button {
+    position: absolute;
+    transform: translateX(273px) translateY(5px); }
+  .req-box .req-status {
+    margin: 10px;
+    font-size: 20px; }
+  .req-box .req-interactions {
+    margin: 10px; }
+
+.account-init-box h1 {
+  font-size: 20px;
+  margin: 10px;
+  margin-bottom: 5px; }
+.account-init-box h3 {
+  font-size: 18px;
+  margin: 15px; }
+.account-init-box h4 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 15px; }
+.account-init-box form input {
+  margin: 25px;
+  margin-top: 10px; }
+
+/*# sourceMappingURL=index.css.map */

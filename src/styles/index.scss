@@ -26,6 +26,15 @@ body {
 		text-align: center;
 		font-size: 25px;
 	}
+	.chatUsersButtonsContainer {
+		@extend .col-box-center;
+		overflow: scroll;
+		max-height: 60vh;
+		.chatButtons {
+			width: 100%;
+			margin: 0;
+		}
+	}
 }
 
 button {

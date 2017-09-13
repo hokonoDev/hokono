@@ -302,6 +302,12 @@ body {
     width: 100%;
     text-align: center;
     font-size: 25px; }
+  .gen-box .chatUsersButtonsContainer {
+    overflow: scroll;
+    max-height: 60vh; }
+    .gen-box .chatUsersButtonsContainer .chatButtons {
+      width: 100%;
+      margin: 0; }
 
 button, .home-box .interactions-box a {
   box-shadow: 0px 0px 2px 1px lightgrey;
@@ -319,7 +325,7 @@ a {
   text-decoration: none;
   color: black; }
 
-.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
+.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .gen-box .chatUsersButtonsContainer, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
   display: flex; }
 
 .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
@@ -334,11 +340,11 @@ a {
 .wrap-row-box-center {
   flex-wrap: wrap; }
 
-.col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box {
+.col-box, .col-box-center, .gen-box, .gen-box .chatUsersButtonsContainer, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box {
   flex-direction: column;
   flex-wrap: wrap; }
 
-.col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form {
+.col-box-center, .gen-box, .gen-box .chatUsersButtonsContainer, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form {
   align-items: center; }
 
 .col-box-space {

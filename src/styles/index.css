@@ -307,19 +307,29 @@ body {
     max-height: 60vh; }
     .gen-box .chatUsersButtonsContainer .chatButtons {
       width: 100%;
-      margin: 0; }
+      margin: 0;
+      margin-bottom: 8px; }
 
 button, .home-box .interactions-box a {
-  box-shadow: 0px 0px 2px 1px lightgrey;
   border: 1px solid black;
   padding: 10px;
   padding-top: 0px;
   padding-bottom: 0px;
   margin-left: 5px;
-  margin-right: 5px; }
+  margin-right: 5px;
+  border-radius: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 1px 2px 5px 0px gray;
+  background-color: whitesmoke; }
 
 button:hover, .home-box .interactions-box a:hover {
-  box-shadow: none; }
+  cursor: pointer;
+  background-color: white;
+  transform: perspective(1px) translateZ(0);
+  transition-duration: 0.2s;
+  box-shadow: none;
+  transition-property: box-shadow, transform; }
 
 a {
   text-decoration: none;
@@ -385,10 +395,6 @@ a {
   left: 88vw;
   top: 20px;
   z-index: 11; }
-
-.logout-bttn:hover {
-  color: white;
-  background-color: darkgrey; }
 
 .nav-filler {
   height: 71px; }
@@ -457,12 +463,19 @@ a {
     min-width: 100px;
     border: 1px solid lightgrey;
     border-radius: 3px;
-    box-shadow: 0px 0px 2px 1px grey;
+    box-shadow: 1px 2px 5px 0px gray;
+    background-color: whitesmoke;
     color: black; }
   .dash-header > .right div:hover {
-    background-color: darkgrey;
+    /*background-color: darkgrey;
     color: white;
-    box-shadow: 0px 0px 0px 0px lightgrey; }
+    box-shadow: 0px 0px 0px 0px lightgrey;;*/
+    cursor: pointer;
+    background-color: white;
+    transform: perspective(1px) translateZ(0);
+    transition-duration: 0.2s;
+    box-shadow: none;
+    transition-property: box-shadow, transform; }
 
 .pets-box {
   width: 90%;
@@ -517,9 +530,6 @@ a {
     padding-bottom: 0px;
     margin-left: 5px;
     margin-right: 5px; }
-  .filter-bar-box button:hover, .filter-bar-box .home-box .interactions-box a:hover, .home-box .interactions-box .filter-bar-box a:hover {
-    background-color: darkgrey;
-    color: white; }
   .filter-bar-box select {
     padding: 0px;
     padding-left: 10px;
@@ -532,9 +542,6 @@ a {
   margin-bottom: 40px; }
 .add-pet-form button, .add-pet-form .home-box .interactions-box a, .home-box .interactions-box .add-pet-form a {
   margin-top: 20px; }
-.add-pet-form button:hover, .add-pet-form .home-box .interactions-box a:hover, .home-box .interactions-box .add-pet-form a:hover {
-  background-color: darkgrey;
-  color: white; }
 
 .post-feed-entry-box {
   height: 450px;

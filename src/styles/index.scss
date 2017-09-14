@@ -33,22 +33,33 @@ body {
 		.chatButtons {
 			width: 100%;
 			margin: 0;
+			margin-bottom: 8px;
 		}
 	}
 }
 
 button {
-	box-shadow: 0px 0px 2px 1px lightgrey;
+	//box-shadow: 0px 0px 2px 1px lightgrey;
 	border: 1px solid black;
 	padding: 10px;
 	padding-top: 0px;
 	padding-bottom: 0px;
 	margin-left: 5px;
 	margin-right: 5px;
+	border-radius: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	box-shadow: 1px 2px 5px 0px gray;
+	background-color: whitesmoke;
 }
 
 button:hover {
+	cursor: pointer;
+	background-color: white;
+	transform: perspective(1px) translateZ(0);
+	transition-duration: 0.2s;
 	box-shadow: none;
+	transition-property: box-shadow, transform;
 }
 
 a {
@@ -167,12 +178,6 @@ a {
 	top: 20px;
 	z-index: 11;
 }
-
-.logout-bttn:hover {
-	color: white;
-	background-color: darkgrey;
-}
-
 
   /////////////////////
  // --- NAV BAR --- //
@@ -372,11 +377,6 @@ a {
 		margin-right: 5px;
 	}
 
-	button:hover {
-		background-color: darkgrey;
-		color: white;
-	}
-
 	select {
 		padding: 0px;
 		padding-left: 10px;
@@ -384,7 +384,6 @@ a {
 		font-size: 16px;
 	}
 }
-
 
   /////////////////////
  // --- ADD PET --- //
@@ -403,11 +402,6 @@ a {
 
 	button {
 		margin-top: 20px;
-	}
-
-	button:hover {
-		background-color: darkgrey;
-		color: white;
 	}
 
 }

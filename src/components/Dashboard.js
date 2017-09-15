@@ -16,7 +16,6 @@ export default props => (
     className="col-box-center"
   >
 
-
     <IfRedirect
       if={props.auth.displayName}
       ifFalse={`/auth/init`}

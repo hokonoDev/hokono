@@ -48,7 +48,7 @@ const PetProfile = class extends React.Component {
           this.setState({ pet: { ...item.val() }})
         );
     } else {
-      this.setState({ pet: this.props.pet });
+      this.setState({ pet: { ...this.props.pet, ownerName: this.state.pet.ownerName } });
     }
   }
 
@@ -170,8 +170,10 @@ const PetProfile = class extends React.Component {
                     if (this.props.auth.loggedIn) {
                       if(!!this.props.profile.following && !!this.props.profile.following[this.props.pet.id]) {
                         userUnfollowedPet(this.props.pet);
+                        this.setState({ pet: {...this.state.pet, followersCount: ++this.state.pet.followersCount} });
                       } else {
                         userFollowedPet(this.props.pet);
+                        this.setState({ pet: {...this.state.pet, followersCount: --this.state.pet.followersCount} });
                       }
                     } else {
                       alert('Please loggin to follow');

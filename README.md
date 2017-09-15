@@ -45,12 +45,7 @@ Run ```npm start``` to start the app.
 
 ### Tech Stack
 
-- React
-- Redux
-- react-router-dom
-- react-vis
-- firebase
-- sass
+![](public/images/techstack.png)
 
 ## Development
 

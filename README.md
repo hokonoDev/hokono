@@ -12,9 +12,9 @@ A stable version of Hokono is deployed [HERE](https://hokono-90da1.firebaseapp.c
 ## Team
 
   - __Development Team Members__:
-  	- Alec Draymore: Fullstack Engineer
-  	- Michael Lam: Fullstack Engineer
-  	- Wei Chen: Fullstack Engineer
+  	- __Alec Draymore__ - Fullstack Engineer
+  	- __Michael Lam__ - Fullstack Engineer
+  	- __Wei Chen__ - Fullstack Engineer
 
 ## Table of Contents
 

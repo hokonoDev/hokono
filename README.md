@@ -1,11 +1,13 @@
-# hokono
+# Hokono
 
 > A place for pets
   > - Explore and follow pets from around the world
   > - Document your own pet's life
   > - Adopt from nearby shelters
 
-[DEMO](https://hokono-90da1.firebaseapp.com/global/allpets)
+## Live Demo
+
+A stable version of Hokono is deployed [HERE](https://hokono-90da1.firebaseapp.com).
 
 ## Team
 
@@ -53,4 +55,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Screenshot
 
-![](images/screenshot.png)
+![](public/images/screenshot.png)

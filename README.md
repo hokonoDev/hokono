@@ -7,7 +7,7 @@
 
 ## Live Demo
 
-A stable version of Hokono is deployed [HERE](https://hokono-90da1.firebaseapp.com).
+A stable version of the Hokono web client is deployed [here](https://hokono-90da1.firebaseapp.com).
 
 ## Team
 
@@ -15,6 +15,10 @@ A stable version of Hokono is deployed [HERE](https://hokono-90da1.firebaseapp.c
   	- __Alec Draymore__ - Fullstack Engineer
   	- __Michael Lam__ - Fullstack Engineer
   	- __Wei Chen__ - Fullstack Engineer
+
+## Mobile
+
+For the Hokono moblie client, please see the dedicated mobile reop [here](https://github.com/hokonoDev/ionic-hokono).
 
 ## Table of Contents
 
@@ -32,10 +36,21 @@ Run ```npm install``` to install all node modules.
 
 Run ```npm start``` to start the app.
 
-## Requirements
+## Tech
+
+### Requirements
 
 - Node 0.10.x
 - NPM
+
+### Tech Stack
+
+- React
+- Redux
+- react-router-dom
+- react-vis
+- firebase
+- sass
 
 ## Development
 

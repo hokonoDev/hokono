@@ -17,12 +17,9 @@ class MessageWithUser extends React.Component {
 
   render() {
     return (
-      <div>
-      <button onClick={()=> { setCurrChat('placeholderpic.png', this.props.username, this.props.userid)} }>
+      <button className="chatButtons" onClick={()=> { setCurrChat('placeholderpic.png', this.props.username, this.props.userid)} }>
       Messages with: {this.props.username}
       </button>
-      </div>
-
     );
   }
 }

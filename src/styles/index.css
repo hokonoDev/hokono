@@ -302,24 +302,40 @@ body {
     width: 100%;
     text-align: center;
     font-size: 25px; }
+  .gen-box .chatUsersButtonsContainer {
+    overflow: scroll;
+    max-height: 60vh; }
+    .gen-box .chatUsersButtonsContainer .chatButtons {
+      width: 100%;
+      margin: 0;
+      margin-bottom: 8px; }
 
 button, .home-box .interactions-box a {
-  box-shadow: 0px 0px 2px 1px lightgrey;
   border: 1px solid black;
   padding: 10px;
   padding-top: 0px;
   padding-bottom: 0px;
   margin-left: 5px;
-  margin-right: 5px; }
+  margin-right: 5px;
+  border-radius: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 1px 2px 5px 0px gray;
+  background-color: whitesmoke; }
 
 button:hover, .home-box .interactions-box a:hover {
-  box-shadow: none; }
+  cursor: pointer;
+  background-color: white;
+  transform: perspective(1px) translateZ(0);
+  transition-duration: 0.2s;
+  box-shadow: none;
+  transition-property: box-shadow, transform; }
 
 a {
   text-decoration: none;
   color: black; }
 
-.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
+.row-box, .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box, .row-box-space, .nav-box, .pet-profile-header, .row-box-left, .col-box, .col-box-center, .gen-box, .gen-box .chatUsersButtonsContainer, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box, .col-box-space, .dash-header, .dash-header > .left, .dash-header > .right, .pet-profile-header .pet-side-box .info-box .info, .pet-profile-header .pet-side-box .interaction-box {
   display: flex; }
 
 .row-box-center, .wrap-row-box-center, .logo-box, .logout-bttn, .nav-text-item, .dash-header > .right div, .pet-list-entry-box .add-post-link, .filter-bar-box .sort-box, .post-feed-entry-box .interactions-box, .pet-feed-entry-box .interactions-box {
@@ -334,11 +350,11 @@ a {
 .wrap-row-box-center {
   flex-wrap: wrap; }
 
-.col-box, .col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box {
+.col-box, .col-box-center, .gen-box, .gen-box .chatUsersButtonsContainer, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form, .pet-list-entry-box, .pet-profile-header .pet-side-box {
   flex-direction: column;
   flex-wrap: wrap; }
 
-.col-box-center, .gen-box, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form {
+.col-box-center, .gen-box, .gen-box .chatUsersButtonsContainer, .home-box, .nav-background, .pets-box, .filter-bar-box form, .add-pet-form, .post-feed-entry-box .interactions-box .like-buttton, .pet-feed-entry-box .interactions-box .star-buttton, .pet-profile-header .pet-side-box .interaction-box .star-button, .req-box, .account-init-box, .account-init-box form {
   align-items: center; }
 
 .col-box-space {
@@ -379,10 +395,6 @@ a {
   left: 88vw;
   top: 20px;
   z-index: 11; }
-
-.logout-bttn:hover {
-  color: white;
-  background-color: darkgrey; }
 
 .nav-filler {
   height: 71px; }
@@ -451,12 +463,19 @@ a {
     min-width: 100px;
     border: 1px solid lightgrey;
     border-radius: 3px;
-    box-shadow: 0px 0px 2px 1px grey;
+    box-shadow: 1px 2px 5px 0px gray;
+    background-color: whitesmoke;
     color: black; }
   .dash-header > .right div:hover {
-    background-color: darkgrey;
+    /*background-color: darkgrey;
     color: white;
-    box-shadow: 0px 0px 0px 0px lightgrey; }
+    box-shadow: 0px 0px 0px 0px lightgrey;;*/
+    cursor: pointer;
+    background-color: white;
+    transform: perspective(1px) translateZ(0);
+    transition-duration: 0.2s;
+    box-shadow: none;
+    transition-property: box-shadow, transform; }
 
 .pets-box {
   width: 90%;
@@ -511,9 +530,6 @@ a {
     padding-bottom: 0px;
     margin-left: 5px;
     margin-right: 5px; }
-  .filter-bar-box button:hover, .filter-bar-box .home-box .interactions-box a:hover, .home-box .interactions-box .filter-bar-box a:hover {
-    background-color: darkgrey;
-    color: white; }
   .filter-bar-box select {
     padding: 0px;
     padding-left: 10px;
@@ -526,9 +542,6 @@ a {
   margin-bottom: 40px; }
 .add-pet-form button, .add-pet-form .home-box .interactions-box a, .home-box .interactions-box .add-pet-form a {
   margin-top: 20px; }
-.add-pet-form button:hover, .add-pet-form .home-box .interactions-box a:hover, .home-box .interactions-box .add-pet-form a:hover {
-  background-color: darkgrey;
-  color: white; }
 
 .post-feed-entry-box {
   height: 450px;

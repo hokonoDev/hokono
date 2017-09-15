@@ -11,6 +11,12 @@ import {
   // IfRender,
 } from './index';
 
+const getActiveRequestsCount = (data) =>
+  Object.values(data).reduce((accum, obj) => {
+    Object.values(obj).forEach(req => req.closed ? null : accum++);
+    return accum;
+  }, 0);
+
 export default props => (
   <div
     className="col-box-center"
@@ -62,7 +68,7 @@ export default props => (
               to={`${props.match.url}/adopt`}
             >
               <div>
-                Requests: {props.profile.adoptRequests ? Object.keys(props.profile.adoptRequests).length : '0'}
+                Requests: {props.profile.adoptRequests ? getActiveRequestsCount(props.profile.adoptRequests) : '0'}
               </div>
             </Link>
           </div>

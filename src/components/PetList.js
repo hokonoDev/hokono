@@ -1,6 +1,5 @@
 import React from 'react';
 import { PetListEntry } from './index';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 //a list of redirect links to petprofile /pet/:id
@@ -11,7 +10,7 @@ const PetList = ({petData}) => {
     <div
       className="wrap-row-box-center"
     >
-      {Object.keys(petData).length > 1 ? Object.values(petData).filter(data => !!data.name).map(data => (
+      {Object.keys(petData).length >= 1 ? Object.values(petData).filter(data => !!data.name).map(data => (
         <PetListEntry
           key={_.uniqueId()}
           name={data.name}

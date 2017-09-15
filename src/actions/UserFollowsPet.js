@@ -1,7 +1,8 @@
 import firebase from '../firebase/index';
 import store from '../store';
 
-export const userFollowedPet = (pet) => {
+export const userFollowedPet = (dataFromPet) => {
+  const pet = { ...dataFromPet };
   const action = {
     type: 'FOLLOW_A_PET'
   };
@@ -38,7 +39,8 @@ export const userFollowedPet = (pet) => {
     });
 }
 
-export const userUnfollowedPet = (pet) => {
+export const userUnfollowedPet = (dataFromPet) => {
+  const pet = { ...dataFromPet };
   const action = {
     type: 'UNFOLLOW_A_PET'
   };
@@ -70,7 +72,8 @@ export const userUnfollowedPet = (pet) => {
   });
 }
 
-export const userStarredPet = (pet) => {
+export const userStarredPet = (petData) => {
+  const pet = { ...petData };
   const action = {
     type: 'STARRED_A_PET'
   };
@@ -93,17 +96,18 @@ export const userStarredPet = (pet) => {
 
   firebase.database().ref().update(updates).then(() => {
     //updates the users stars in state/store
-    action.data = {
-      [pet.id]: {
-        displayName: user.displayName
-      }
-    };
     pet.stars = pet.stars + 1 || 1;
     pet.starredBy = {
       ...pet.starredBy,
       [user.uid]: {
         displayName: user.displayName,
         createdAt: currTime,
+      }
+    };
+    action.data = {
+      [pet.id]: {
+        displayName: user.displayName,
+        ...pet,
       }
     };
 
@@ -119,7 +123,8 @@ export const userStarredPet = (pet) => {
   });
 }
 
-export const userUnstarredPet = (pet) => {
+export const userUnstarredPet = (dataFromPets) => {
+  const pet ={ ...dataFromPets };
   const action = {
     type: 'UNSTARRED_A_PET'
   };
@@ -146,11 +151,9 @@ export const userUnstarredPet = (pet) => {
     const emptyObj = {};
     emptyObj[user.uid] = null;
     pet.starredBy = emptyObj;
-    const emptyObj2 = {};
-    emptyObj2[pet.id] = pet;
 
     //updates a pets unstars in state/store
-    action.dataPet = { emptyObj2 };
+    action.dataPet = { [pet.id]: pet };
     action.payload = "success";
     store.dispatch(action);
   }, (err) => {

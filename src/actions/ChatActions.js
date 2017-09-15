@@ -6,6 +6,9 @@ export const newChatMsg = (sender, receiver, receiveruid, receiverdName) => {
   //update chat database for receiver and sender
   const uid = firebase.auth().currentUser.uid;
   const dn = firebase.auth().currentUser.displayName;
+  const chatTimeStamp = Date.now();
+  sender.timeStamp = chatTimeStamp;
+  receiver.timeStamp = chatTimeStamp;
   const key = firebase.database().ref(`/accounts/${uid}/chats/${receiveruid}/${receiverdName}`).push().key;
   const key2 = firebase.database().ref(`accounts/${receiveruid}/chats/${uid}/${dn}`).push().key
   var updates = {};

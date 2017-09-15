@@ -9,16 +9,16 @@
 
 A stable version of the Hokono web client is deployed [here](https://hokono-90da1.firebaseapp.com).
 
+## Mobile
+
+For the Hokono moblie client, please see the dedicated mobile repo [here](https://github.com/hokonoDev/ionic-hokono).
+
 ## Team
 
   - __Development Team Members__:
   	- __Alec Draymore__ - Fullstack Engineer
   	- __Michael Lam__ - Fullstack Engineer
   	- __Wei Chen__ - Fullstack Engineer
-
-## Mobile
-
-For the Hokono moblie client, please see the dedicated mobile reop [here](https://github.com/hokonoDev/ionic-hokono).
 
 ## Table of Contents
 

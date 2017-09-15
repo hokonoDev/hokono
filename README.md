@@ -5,6 +5,8 @@
   > - Document your own pet's life
   > - Adopt from nearby shelters
 
+[DEMO](https://hokono-90da1.firebaseapp.com/global/allpets)
+
 ## Team
 
   - __Development Team Members__: Alec Draymore, Michael Lam, Wei Chen
@@ -51,4 +53,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Screenshot
 
-![](images/halfwaze.png?raw=true)
+![](images/screenshot.png)

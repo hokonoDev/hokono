@@ -81,7 +81,7 @@ class FilterBar extends React.Component {
             >
               <option
                 value="likeSort"
-              >likes</option>
+              >Likes</option>
               <option
                 value="trendSort"
               >Trending</option>

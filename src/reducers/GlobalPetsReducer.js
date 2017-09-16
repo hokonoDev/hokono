@@ -11,7 +11,7 @@ export default (state = {}, action) => {
     case 'SORT_GLOBAL_PETS' :
       return petsSort(state, action.sortType, action.lToG, action.searchTerm);
     case 'STARRED_A_PET' :
-      const nextState = {...state, ...action.petData};
+      const nextState = {...state, ...action.dataPet};
       return nextState;
     case 'UNSTARRED_A_PET' :
       return {...state, ...action.dataPet};

@@ -7,9 +7,20 @@ Live version [here](https://hokono-90da1.firebaseapp.com/)
   > - Document your own pet's life
   > - Adopt from nearby shelters
 
+## Live Demo
+
+A stable version of the Hokono web client is deployed [here](https://hokono-90da1.firebaseapp.com).
+
+## Mobile
+
+For the Hokono moblie client, please see the dedicated mobile repo [here](https://github.com/hokonoDev/ionic-hokono).
+
 ## Team
 
-  - __Development Team Members__: Alec Draymore, Michael Lam, Wei Chen
+  - __Development Team Members__:
+  	- __Alec Draymore__ - Fullstack Engineer
+  	- __Michael Lam__ - Fullstack Engineer
+  	- __Wei Chen__ - Fullstack Engineer
 
 ## Table of Contents
 
@@ -27,10 +38,16 @@ Run ```npm install``` to install all node modules.
 
 Run ```npm start``` to start the app.
 
-## Requirements
+## Tech
+
+### Requirements
 
 - Node 0.10.x
 - NPM
+
+### Tech Stack
+
+![](public/images/techstack.png)
 
 ## Development
 
@@ -49,8 +66,8 @@ View the project roadmap [here](https://github.com/hokonoDev/hokono/issues)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See ![CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Screenshot
 
-![](images/halfwaze.png?raw=true)
+![](public/images/screenshot.png)

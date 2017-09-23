@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   XYPlot,
   XAxis,
@@ -7,6 +7,7 @@ import {
   HorizontalGridLines,
   VerticalBarSeries,
   LineSeries,
+  ArcSeries,
 } from 'react-vis';
 
 const organizeStatusData = (data) => {
@@ -21,6 +22,13 @@ const organizeStatusData = (data) => {
   return res ;
 };
 
+const getDeniedRatio = (data) => {
+  let accepted = 0;
+  let denied = 0;
+  Object.values(data).forEach(pet => Object.values(pet).forEach(req => req.status === 'accepted' ? accepted ++ : req.status === 'denied' ? denied++ : null));
+  return denied / (accepted + denied);
+};
+
 const organizeTimeData = (data) => {
   let res = [];
   let store = {};
@@ -30,9 +38,12 @@ const organizeTimeData = (data) => {
     const day = today - Math.floor(req.timeStamp / oneDay);
     store[day] ? store[day]++ : store[day] = 1;
   }));
-  for(let key in store) {
+  if (Object.keys(store).indexOf(0) < 0)
+    res.push({ x: 0, y: 0 });
+  for (let key in store) {
     res.push({ x: key, y: store[key] });
   }
+  res.push({ x: Math.max(...Object.keys(store)) + 1, y: 0 });
   return res;
 };
 
@@ -54,6 +65,7 @@ export default props => (
         <Link to={'/shelter/dashboard/adopt'}>
           <img
             src="/images/bullets.svg"
+            alt=""
             style={{
               height: '20px',
               width: 'auto',
@@ -62,50 +74,91 @@ export default props => (
           />
         </Link>
       </p>
-      <h3
-        style={{ marginTop: '30px' }}
-      >Current Request Statuses</h3>
-      <XYPlot
-        width={800}
-        height={300}
-        xType="ordinal"
-        yType="linear"
-      >
-        <HorizontalGridLines />
-        <VerticalBarSeries
-          data={props.profile.got ? organizeStatusData(props.profile.adoptRequests) : [{ x: '', y: 0 }]}
-        />
-        <XAxis />
-        <YAxis />
-      </XYPlot>
 
-      <h3
-        style={{ marginTop: '50px' }}
-      >Request Volume Over Time</h3>
-      <XYPlot
-        width={800}
-        height={300}
-      >
-        <HorizontalGridLines />
-        <LineSeries
-          data={props.profile.got ? organizeTimeData(props.profile.adoptRequests) : [{ x: 0, y: 0 }]}
-          curve={'curveMonotoneX'}
+      {
+        !props.profile.got || !props.profile.adoptRequests ? 'There is no data on your requests!' :
+        <div>
+        <h3
+          style={{ marginTop: '30px' }}
+        >Request Volume Over Time</h3>
+        <XYPlot
+          width={800}
+          height={300}
+        >
+          <HorizontalGridLines />
+          <LineSeries
+            data={props.profile.got ? organizeTimeData(props.profile.adoptRequests) : [{ x: 0, y: 0 }]}
+            curve={'curveMonotoneX'}
+          />
+          <XAxis/>
+          <XAxis
+            top={302}
+            left={-300}
+            title="Days Ago"
+            tickSize={0}
+          />
+          <YAxis/>
+          <YAxis
+            title="Request Volume"
+            left={-45}
+            top={100}
+            tickSize={0}
+          />
+        </XYPlot>
+
+        <h3
+          style={{ marginTop: '50px' }}
+        >Current Request Statuses</h3>
+        <XYPlot
+          width={800}
+          height={300}
+          xType="ordinal"
+          yType="linear"
+        >
+          <HorizontalGridLines />
+          <VerticalBarSeries
+            data={props.profile.got ? organizeStatusData(props.profile.adoptRequests) : [{ x: '', y: 0 }]}
+          />
+          <XAxis />
+          <YAxis />
+        </XYPlot>
+
+        <h3
+          style={{ marginTop: '50px' }}
+        >Accepted/Denied Ratio</h3>
+        <XYPlot
+          xDomain={[-3.5, 0]}
+          yDomain={[0, 5]}
+          width={260}
+          height={260}>
+          <ArcSeries
+            animation
+            radiusType={'literal'}
+            center={{x: -2, y: 2}}
+            data={[
+              {
+                angle0: 0,
+                angle: 2 * Math.PI * (props.profile.got ? getDeniedRatio(props.profile.adoptRequests) : 0),
+                opacity: 0.2,
+                radius: 100,
+                radius0: 120,
+                color: 'red'
+              },
+              {
+                angle0: 2 * Math.PI * (props.profile.got ? getDeniedRatio(props.profile.adoptRequests) : 0),
+                angle: 2 * Math.PI,
+                radius: 100,
+                radius0: 120,
+                color: 'lightgreen',
+              },
+            ]}
+            colorType={'literal'}/>
+        </XYPlot>
+        <span
+          style={{ marginBottom: '50px' }}
         />
-        <XAxis/>
-        <XAxis
-          top={302}
-          left={-300}
-          title="Days Ago"
-          tickSize={0}
-        />
-        <YAxis/>
-        <YAxis
-          title="Request Volume"
-          left={-45}
-          top={100}
-          tickSize={0}
-        />
-      </XYPlot>
+        </div>
+      }
     </div>
   </div>
 )
